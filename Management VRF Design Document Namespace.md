@@ -8,15 +8,15 @@ SONiC places each module in independent docker containers to keep high cohesion 
 
 As of today, SONiC breaks its main functional components into the following docker containers:
 
-•	Dhcp-relay
-•	Pmon
-•	Snmp
-•	Lldp
-•	Bgp
-•	Teamd
-•	Database
-•	Swss
-•	Syncd
+1.	Dhcp-relay
+2.	Pmon
+3.	Snmp
+4.	Lldp
+5.	Bgp
+6.	Teamd
+7.	Database
+8.	Swss
+9.	Syncd
 The following diagram displays a high-level view of the functionality enclosed within each docker-container, and how these containers interact among themselves. Notice that not all SONiC applications interact with other SONiC components, as some of these collect their state from external entities. We are making use of blue-arrows to represent the interactions with the centralized redis-engine, and black-arrows for all the others (netlink, /sys file-system, etc).
 
 Even though most of SONiC’s main components are held within docker containers, there are some key modules seating within the linux-host system itself. That is the case of SONiC’s configuration module (sonic-cfggen) and SONiC’s CLI. 
@@ -35,7 +35,7 @@ The design for Management VRF leverages Linux Stretch kernel(4.9) Namespace conc
 ## 1.1 Requirements
 | # | Document Title                                                                                                | Document Identifier & Link | Comments |
 |---:     |---                                                                                                         |---       |---       |
-| 1       | SONiC official wiki | GiveHRef
+| 1       | SONiC official wiki | https://github.com/Azure/SONiC/wiki
 | 2       | Management VRF should be associated with a separate L3 Routing table and the management interface
 | 3       | Management VRF and Default VRF should support IP services like `ping` and `traceroute` in its context
 | 4       | Management VRF should provide the ability to be polled via SNMP both via Default VRF and Management VRF
