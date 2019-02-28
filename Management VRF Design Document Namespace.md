@@ -8,8 +8,10 @@ SONiC places each module in independent docker containers to keep high cohesion 
 
 As of today, SONiC breaks its main functional components into the following docker containers:
 
--	Dhcp-relay
--	Pmon
+* Dhcp-relay
+  * dhcp11
+  * dhcp12
+*	Pmon
 3.	Snmp
 4.	Lldp
 5.	Bgp
