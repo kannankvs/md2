@@ -8,8 +8,8 @@ SONiC places each module in independent docker containers to keep high cohesion 
 
 As of today, SONiC breaks its main functional components into the following docker containers:
 
-1.	Dhcp-relay
-2.	Pmon
+-	Dhcp-relay
+-	Pmon
 3.	Snmp
 4.	Lldp
 5.	Bgp
@@ -17,6 +17,7 @@ As of today, SONiC breaks its main functional components into the following dock
 7.	Database
 8.	Swss
 9.	Syncd
+
 The following diagram displays a high-level view of the functionality enclosed within each docker-container, and how these containers interact among themselves. Notice that not all SONiC applications interact with other SONiC components, as some of these collect their state from external entities. We are making use of blue-arrows to represent the interactions with the centralized redis-engine, and black-arrows for all the others (netlink, /sys file-system, etc).
 
 Even though most of SONiC’s main components are held within docker containers, there are some key modules seating within the linux-host system itself. That is the case of SONiC’s configuration module (sonic-cfggen) and SONiC’s CLI. 
