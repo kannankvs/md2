@@ -293,7 +293,7 @@ providing CLI functionality and system configuration capabilities.
     configuration changes or any action requiring config-related
     interactions with SONiC modules. [ ]{.underline}
 
-## SONiC Subsystems Interactions
+ SONiC Subsystems Interactions
 -----------------------------
 
 This section aims to provide reader with a detailed understanding of the
