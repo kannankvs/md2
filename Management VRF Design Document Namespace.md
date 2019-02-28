@@ -1,5 +1,31 @@
 
-# 1. Management VRF Design Document
+# SONiC System Architecture
+SONiC system’s architecture comprises of various modules that interact among each other through a centralized and scalable infrastructure. This infrastructure relies on the use of a redis-database engine: a key-value database to provide a language independent interface, a method for data persistence, replication and multi-process communication among all SONiC subsystems.
+
+By relying on the publisher/subscriber messaging paradigm offered by the redis-engine infrastructure, applications can subscribe only to the data-views that they require, and avoid implementation details that are irrelevant to their functionality.
+
+SONiC places each module in independent docker containers to keep high cohesion among semantically-affine components, while reducing coupling between disjointed ones. Each of these components are written to be entirely independent of the platform-specific details required to interact with lower-layer abstractions. 
+
+As of today, SONiC breaks its main functional components into the following docker containers:
+
+•	Dhcp-relay
+•	Pmon
+•	Snmp
+•	Lldp
+•	Bgp
+•	Teamd
+•	Database
+•	Swss
+•	Syncd
+The following diagram displays a high-level view of the functionality enclosed within each docker-container, and how these containers interact among themselves. Notice that not all SONiC applications interact with other SONiC components, as some of these collect their state from external entities. We are making use of blue-arrows to represent the interactions with the centralized redis-engine, and black-arrows for all the others (netlink, /sys file-system, etc).
+
+Even though most of SONiC’s main components are held within docker containers, there are some key modules seating within the linux-host system itself. That is the case of SONiC’s configuration module (sonic-cfggen) and SONiC’s CLI. 
+
+A more complete picture of all the possible component interactions and the associated state being transferred, will be covered in subsequent sections of this document.
+
+![Sec4Img1](section4_image1.png "Give Image Heading Here") 
+
+
 
 ## 1.1 Introduction
 Management VRF is a subset of Virtual Routing and Forwarding (VRF), and provides a separation between the management network traffic and the data plane network traffic. For all VRFs the main routing table is the default table for all data plane ports. With management VRF a second routing table "management", is used for routing through the management ethernet ports of the switch. 
@@ -7,9 +33,9 @@ Management VRF is a subset of Virtual Routing and Forwarding (VRF), and provides
 The design for Management VRF leverages Linux Stretch kernel(4.9) Namespace concept for implementing management VRF on SONiC. 
 
 ## 1.1 Requirements
-| Req. No | Description                                                                                                | Priority | Comments |
+| # | Document Title                                                                                                | Document Identifier & Link | Comments |
 |---:     |---                                                                                                         |---       |---       |
-| 1       | Develop and implement a separate Management VRF that provide management plane and Data Plane Isolation
+| 1       | SONiC official wiki | GiveHRef
 | 2       | Management VRF should be associated with a separate L3 Routing table and the management interface
 | 3       | Management VRF and Default VRF should support IP services like `ping` and `traceroute` in its context
 | 4       | Management VRF should provide the ability to be polled via SNMP both via Default VRF and Management VRF
