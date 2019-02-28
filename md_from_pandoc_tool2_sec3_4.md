@@ -15,16 +15,15 @@
 Referenced Documents
 ====================
 
-  ---- --------------------------- -----------------------------------------------------------------------
-  \#   Document Title              Document Identifier & Link
-  1    SONiC official wiki         <https://github.com/Azure/SONiC/wiki>
-  2    SONiC architecture          <https://github.com/Azure/SONiC/wiki/Architecture>
-  3    SAI API                     <https://github.com/opencomputeproject/SAI>
-  4    Redis documentation         <https://redis.io/documentation>
-  5    Click module                <http://click.pocoo.org/5/>
-  6    JSON introduction           <https://www.json.org/>
-  7    SONiC supported platforms   <https://github.com/Azure/SONiC/wiki/Supported-Devices-and-Platforms>
-  ---- --------------------------- -----------------------------------------------------------------------
+| # | Document Title | Document Identifier &amp; Link |
+| --- | --- | --- |
+| 1 | SONiC official wiki | [https://github.com/Azure/SONiC/wiki](https://github.com/Azure/SONiC/wiki) |
+| 2 | SONiC architecture | [https://github.com/Azure/SONiC/wiki/Architecture](https://github.com/Azure/SONiC/wiki/Architecture) |
+| 3 | SAI API | [https://github.com/opencomputeproject/SAI](https://github.com/opencomputeproject/SAI) |
+| 4 | Redis documentation | [https://redis.io/documentation](https://redis.io/documentation) |
+| 5 | Click module | [http://click.pocoo.org/5/](http://click.pocoo.org/5/) |
+| 6 | JSON introduction | [https://www.json.org/](https://www.json.org/) |
+| 7 | SONiC supported platforms | [https://github.com/Azure/SONiC/wiki/Supported-Devices-and-Platforms](https://github.com/Azure/SONiC/wiki/Supported-Devices-and-Platforms) |
 
 SONiC System Architecture
 =========================
@@ -85,7 +84,7 @@ A more complete picture of all the possible component interactions and
 the associated state being transferred, will be covered in subsequent
 sections of this document.
 
-![](media/image2.png){width="6.5in" height="4.655555555555556in"}
+![Sec4Img1](section4_high_level_pic_1.png "High Level Component Interactions") 
 
 SONiC Subsystems Description
 ----------------------------
@@ -96,7 +95,7 @@ operate from the linux-host system. The goal here is to provide the
 reader with a high-level introduction; a more graphical and (hopefully)
 intuitive approach will be followed in subsequent sections.
 
-**[Teamd container]{.underline}**: Runs Link Aggregation functionality
+__**Teamd container**__: Runs Link Aggregation functionality
 (LAG) in SONiC devices. "teamd" is a linux-based open-source
 implementation of LAG protocol. "teamsyncd" process allows the
 interaction between "teamd" and south-bound subsystems.
