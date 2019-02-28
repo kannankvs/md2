@@ -15,16 +15,15 @@
 Referenced Documents
 ====================
 
-  ---- --------------------------- -----------------------------------------------------------------------
-  \#   Document Title              Document Identifier & Link
-  1    SONiC official wiki         <https://github.com/Azure/SONiC/wiki>
-  2    SONiC architecture          <https://github.com/Azure/SONiC/wiki/Architecture>
-  3    SAI API                     <https://github.com/opencomputeproject/SAI>
-  4    Redis documentation         <https://redis.io/documentation>
-  5    Click module                <http://click.pocoo.org/5/>
-  6    JSON introduction           <https://www.json.org/>
-  7    SONiC supported platforms   <https://github.com/Azure/SONiC/wiki/Supported-Devices-and-Platforms>
-  ---- --------------------------- -----------------------------------------------------------------------
+| # | Document Title | Document Identifier &amp; Link |
+| --- | --- | --- |
+| 1 | SONiC official wiki | [https://github.com/Azure/SONiC/wiki](https://github.com/Azure/SONiC/wiki) |
+| 2 | SONiC architecture | [https://github.com/Azure/SONiC/wiki/Architecture](https://github.com/Azure/SONiC/wiki/Architecture) |
+| 3 | SAI API | [https://github.com/opencomputeproject/SAI](https://github.com/opencomputeproject/SAI) |
+| 4 | Redis documentation | [https://redis.io/documentation](https://redis.io/documentation) |
+| 5 | Click module | [http://click.pocoo.org/5/](http://click.pocoo.org/5/) |
+| 6 | JSON introduction | [https://www.json.org/](https://www.json.org/) |
+| 7 | SONiC supported platforms | [https://github.com/Azure/SONiC/wiki/Supported-Devices-and-Platforms](https://github.com/Azure/SONiC/wiki/Supported-Devices-and-Platforms) |
 
 SONiC System Architecture
 =========================
