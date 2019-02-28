@@ -95,18 +95,18 @@ operate from the linux-host system. The goal here is to provide the
 reader with a high-level introduction; a more graphical and (hopefully)
 intuitive approach will be followed in subsequent sections.
 
-__**Teamd container**__: Runs Link Aggregation functionality
+**[Teamd container]**: Runs Link Aggregation functionality
 (LAG) in SONiC devices. "teamd" is a linux-based open-source
 implementation of LAG protocol. "teamsyncd" process allows the
 interaction between "teamd" and south-bound subsystems.
 
-**[Pmon container]{.underline}**: In charge of running "sensord", a
+**[Pmon container]**: In charge of running "sensord", a
 daemon used to periodically log sensor readings from hardware components
 and to alert when an alarm is signaled. Pmon container also hosts
 "fancontrol" process to collect fan-related state from the corresponding
 platform drivers.
 
-**[Snmp container]{.underline}**: Hosts snmp features. There are two
+**[Snmp container]**: Hosts snmp features. There are two
 relevant processes within this container:
 
 -   Snmpd: Actual snmp server in charge of handling incoming snmp polls
