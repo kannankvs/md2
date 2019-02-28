@@ -12,6 +12,8 @@ As of today, SONiC breaks its main functional components into the following dock
   * dhcp11
   * dhcp12
 *	Pmon
+  * pmon21
+  * pmon222
 3.	Snmp
 4.	Lldp
 5.	Bgp
