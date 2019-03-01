@@ -117,7 +117,7 @@ this container:
     process establishing lldp connections with external peers to
     advertise/receive system capabilities.
 
--   Lldp\_syncd: Process in charge of uploading lldp's discovered state
+-   Lldp_syncd: Process in charge of uploading lldp's discovered state
     to the centralized system's message infrastructure (redis-engine).
     By doing so, lldp state will be delivered to applications interested
     in consuming this information (e.g. snmp).
