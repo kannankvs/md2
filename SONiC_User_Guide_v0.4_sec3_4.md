@@ -487,7 +487,7 @@ their internal operations.
     valid entry is found in STATE\_DB for a particular port, no
     application will be able to make use of it.
 
-    **Note**: As of today, these are the applications actively
+    ** Note **: As of today, these are the applications actively
     listening to the changes in STATE\_DB: teamsyncd, intfmgrd, vlanmgrd
     and lldpmgr. We will cover all these components in subsequent
     sections \-- lldpmgr has been already tackled above.
