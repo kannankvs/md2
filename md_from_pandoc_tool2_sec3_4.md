@@ -72,7 +72,7 @@ A more complete picture of all the possible component interactions and
 the associated state being transferred, will be covered in subsequent
 sections of this document.
 
-![Sec4Img1](sonic_user_guide_images/section4_images/section4_high_level_pic_1.png "High Level Component Interactions") 
+![Sec4Img1](/sonic_user_guide_images/section4_images/section4_high_level_pic_1.png "High Level Component Interactions") 
 
 SONiC Subsystems Description
 ----------------------------
