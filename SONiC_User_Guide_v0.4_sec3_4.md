@@ -83,7 +83,7 @@ operate from the linux-host system. The goal here is to provide the
 reader with a high-level introduction; a more graphical and (hopefully)
 intuitive approach will be followed in subsequent sections.
 
-**Teamd container**: Runs Link Aggregation functionality
+**1  Teamd container**: Runs Link Aggregation functionality
 (LAG) in SONiC devices. "teamd" is a linux-based open-source
 implementation of LAG protocol. "teamsyncd" process allows the
 interaction between "teamd" and south-bound subsystems.
