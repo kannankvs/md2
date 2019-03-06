@@ -127,8 +127,7 @@ this container:
     redis-engine. See further below for details in this topic.
 
 **Bgp container**: Runs one of the supported
-routing-stacks: Quagga or FRR. In LNOS case, we have opted for FRR
-suite. Even though the container is named after the routing-protocol
+routing-stacks: Quagga or FRR. Even though the container is named after the routing-protocol
 being used (bgp), in reality, these routing-stacks can run various other
 protocols (such as ospf, isis, ldp, etc).
 
