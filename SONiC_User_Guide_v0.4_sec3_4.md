@@ -308,7 +308,7 @@ LLDP-state transfer episodes. In this particular example we are
 iterating through the sequence of steps that take place upon the arrival
 of an LLDP message carrying state changes.
 
-![Sec4Img2](https://github.com/kannankvsmd2/sonic_user_guide_images/section4_images/section4_pic2_lldp_state_interactions.png "LLDP State Interactions")
+![Sec4Img2](https://github.com/kannankvs/md2/sonic_user_guide_images/section4_images/section4_pic2_lldp_state_interactions.png "LLDP State Interactions")
 
 (1) During lldp container initialization, lldpmgrd subscribes to
     STATE\_DB to get a life-feed of the state of the physical ports in
