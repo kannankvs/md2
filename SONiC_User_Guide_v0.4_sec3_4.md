@@ -308,7 +308,7 @@ LLDP-state transfer episodes. In this particular example we are
 iterating through the sequence of steps that take place upon the arrival
 of an LLDP message carrying state changes.
 
-![Sec4Img2](section4_lldp_state_interactions_pic_2.png "LLDP State Interactions")
+![Sec4Img2](https://github.com/kannankvsmd2/sonic_user_guide_images/section4_images/section4_pic2_lldp_state_interactions.png "LLDP State Interactions")
 
 (1) During lldp container initialization, lldpmgrd subscribes to
     STATE\_DB to get a life-feed of the state of the physical ports in
@@ -355,7 +355,7 @@ The following diagram depicts a typical interaction among various SONiC
 components during the time an incoming snmp query is processed by the
 system.
 
-![Sec4Img3](section4_snmp_sonic_interactions_pic_3.png "SNMP Query Interactions")
+![Sec4Img3](https://github.com/kannankvs/md2/blob/master/sonic_user_guide_images/section4_images/section4_pic3_snmp_sonic_interactions.png "SNMP Query Interactions")
 
 (1) During the initialization of the different MIB subcomponents
     supported in snmp-subagent process, this one establishes
@@ -388,7 +388,7 @@ The following figure displays the elements involved in this process.
 Notice that I'm deliberately obviating details that are not relevant to
 this SONiC's architectural description.
 
-![Sec4Img4](section4_routing_sonic_interactions_pic_4.png "Route Processing Sequence")
+![Sec4Img4](https://github.com/kannankvs/md2/blob/master/sonic_user_guide_images/section4_images/section4_pic4_routing_sonic_interactions.png "Route Processing Sequence")
 
 (1) During bgp's container initialization, zebra connects to fpmsyncd
     through a regular TCP socket. In a stable/non-transient conditions,
@@ -442,7 +442,7 @@ the reader through a graphical example of how the STATE\_DB is used in
 the system, and how different applications rely on its information for
 their internal operations.
 
-![Sec4Img5](section4_portstate_interactions_pic_5.png "Port State Interactions")
+![Sec4Img5](https://github.com/kannankvs/md2/blob/master/sonic_user_guide_images/section4_images/section4_pic5_portstate_interactions.png "Port State Interactions")
 
 (1) During initialization, portsyncd establishes communication channels
     with the main databases in the redis-engine. Portsyncd declares its
@@ -495,7 +495,7 @@ their internal operations.
 Let's know iterate through the sequence of steps that take place when a
 physical port goes down:
 
-![Sec4Img6](section4_portdown_sequence_pic_6.png "Port Down Sequence")
+![Sec4Img6](https://github.com/kannankvs/md2/blob/master/sonic_user_guide_images/section4_images/section4_pic6_portdown_sequence.png "Port Down Sequence")
 
 (1) As previously mentioned in the overview section, syncd performs both
     as a publisher and as a subscriber within the context of ASIC\_DB.
