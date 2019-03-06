@@ -317,20 +317,18 @@ of an LLDP message carrying state changes.
     aware of changes in the system's port-state and any configuration
     change affecting its operation.
 
-<!-- -->
-
-(1) At certain point a new LLDP packet arrives at lldp's socket in
+(2) At certain point a new LLDP packet arrives at lldp's socket in
     kernel space. Kernel's network-stack eventually delivers the
     associated payload to lldp process.
 
-(2) Lldp parses and digests this new state, which is eventually picked
+(3) Lldp parses and digests this new state, which is eventually picked
     up by lldp\_syncd during its execution of lldpctl cli command \--
     which typically runs every 10 seconds.
 
-(3) Lldp\_syncd pushes this new state into APPL\_DB, concretely to table
+(4) Lldp\_syncd pushes this new state into APPL\_DB, concretely to table
     LLDP\_ENTRY\_TABLE.
 
-(4) From this moment on, all entities subscribed to this table should
+(5) From this moment on, all entities subscribed to this table should
     receive a copy of the new state (currently, snmp is the only
     interested listener).
 
@@ -488,9 +486,9 @@ their internal operations.
     application will be able to make use of it.
 
     NOTE : As of today, these are the applications actively
-    listening to the changes in STATE\_DB: teamsyncd, intfmgrd, vlanmgrd
+    listening to the changes in STATE_DB: teamsyncd, intfmgrd, vlanmgrd
     and lldpmgr. We will cover all these components in subsequent
-    sections \-- lldpmgr has been already tackled above.
+    sections -- lldpmgr has been already tackled above.
 
 Let's know iterate through the sequence of steps that take place when a
 physical port goes down:
