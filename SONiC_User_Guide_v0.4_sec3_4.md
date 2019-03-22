@@ -12,6 +12,7 @@ Referenced Documents
 | 5 | Click module | [http://click.pocoo.org/5/](http://click.pocoo.org/5/) |
 | 6 | JSON introduction | [https://www.json.org/](https://www.json.org/) |
 | 7 | SONiC supported platforms | [https://github.com/Azure/SONiC/wiki/Supported-Devices-and-Platforms](https://github.com/Azure/SONiC/wiki/Supported-Devices-and-Platforms) |
+| 8 | SONiC Software Architecture  | [Videos](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DwU-j68wYB0Q%26feature%3Dyoutu.be&data=02%7C01%7Cxinxliu%40microsoft.com%7Ca6c96a222ffd47b0d34b08d6aef206f7%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C636888751855614656&sdata=rtV%2BadcQZLBz1mtX6kiTE2EfiezabsmiMdn2WBIilPs%3D&reserved=0) [Slides] (https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Ff990335bdbb4aebc3131-b23f11c2c6da826ceb51b46551bfafdc.ssl.cf2.rackcdn.com%2Fimages%2F1d66e872946c15dc71031301994daba0cf21512f.pdf&data=02%7C01%7Cxinxliu%40microsoft.com%7Ca6c96a222ffd47b0d34b08d6aef206f7%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C636888751855624664&sdata=xPEb2EvivG8zLaddD8r9f0GSftjgUklScFTwrs8oSZc%3D&reserved=0)|
 
 SONiC System Architecture
 =========================
