@@ -445,7 +445,7 @@ MODULE:aaa
                fallback
                login
  COMMAND:
- ========
+
  config aaa authentication failthrough [OPTIONS] OPTION
 
  Allow AAA fail-through [enable | disable | default]
@@ -454,7 +454,7 @@ MODULE:aaa
  --help  Show this message and exit.
 
  COMMAND:
- ========
+
  config aaa authentication fallback [OPTIONS] OPTION
 
  Allow AAA fallback [enable | disable | default]
