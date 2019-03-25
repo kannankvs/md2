@@ -421,6 +421,56 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
   ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
+# AAA Configuration And Show
+This section captures the various show commands & configuration commands that are applicable for the AAA (Authentication, Authorization, and Accounting) module.
+Admins can configure the type of authentication (local or remote tacacs based) required for the users and also the authentication failthrough and fallback options.
+Following show command displays the current running configuration related to the AAA.
+
+## show AAA
+- Syntax: show aaa
+- Example:
+```
+admin@sonic:~$ show aaa
+AAA authentication login local (default)
+AAA authentication failthrough True (default)
+AAA authentication fallback True (default)
+```
+
+## config aaa
+This sub-section explains all the possible CLI based configuration options for the AAA module.
+MODULE:aaa
+           authentication
+               failthrough
+               fallback
+               login
+ COMMAND:
+ ========
+ config aaa authentication failthrough [OPTIONS] OPTION
+
+ Allow AAA fail-through [enable | disable | default]
+
+ Options:
+ --help  Show this message and exit.
+
+ COMMAND:
+ ========
+ config aaa authentication fallback [OPTIONS] OPTION
+
+ Allow AAA fallback [enable | disable | default]
+
+ Options:
+ --help  Show this message and exit.
+
+ COMMAND:
+ ========
+ config aaa authentication login [OPTIONS] [AUTH_PROTOCOL]...
+
+ Switch login authentication [ {tacacs+, local} | default ]
+
+ Options:
+ --help  Show this message and exit.
+
+
 ## Layer 2 Configuration & Show
 #### ARP
 
