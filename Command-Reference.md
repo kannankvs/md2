@@ -44,7 +44,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 - By default, the management interface (eth0) is configured to use DHCP to get the IP address from the DHCP server. Connect the management interface to the same network in which your DHCP server is connected and get the IP address from DHCP server.
 - Verify the IP address obtained from DHCP server using the "/sbin/ifconfig eth0" linux command.
 - In case if you want to use static IP for the interface, SONiC does not provide a CLI for this. There are few ways in which the IP address can be configured.
-   (1) use "ifconfig eth0" command (example: ifconfig eth0 10.12.13.14/24). This configuration won't be preserved across reboot.
+   (1) use "ifconfig eth0" command (example: ifconfig eth0 10.11.12.13/24). This configuration won't be preserved across reboot.
    (2) use config_db.jsob and configure the MGMT_INTERFACE key with the appropriate values. Refer [here](https://github.com/Azure/SONiC/wiki/Configuration#Management-Interface) 
    (3) use minigraph.xml and configure "ManagementIPInterfaces" tag inside "DpgDesc" tag as given at the [page](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
 - Once if the IP address is configured, verify the same using "/sbin/ifconfig eth0" linux command.
@@ -54,7 +54,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 ```
 admin@sonic:~$ /sbin/ifconfig eth0
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 10.11.162.42  netmask 255.255.255.0  broadcast 10.11.162.255
+        inet 10.11.11.13  netmask 255.255.255.0  broadcast 10.11.12.255
 ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
@@ -219,32 +219,49 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
   - Example:
   ```
   admin@sonic:~$ show clock
-  Thu Jun 28 21:55:19 UTC 2018
+  Mon Mar 25 20:25:16 UTC 2019
+
   ```
   
 - `show environment`
   - Display platform environmentals, such as voltages, temperatures and fan speeds
-  - Example:
+  - Example: Note that the show output has got lot of information; only the sample output is given in the below example
   ```
   admin@sonic:~$ show environment
-  max6620-i2c-11-29
-  Adapter: i2c-2-mux (chan_id 1)
-  fan1:        15360 RPM  (div = 2)
-  fan2:        14894 RPM  (div = 2)
-  fan3:        15855 RPM  (div = 2)
-  fan4:        15855 RPM  (div = 2)
+  coretemp-isa-0000
+  Adapter: ISA adapter
+  Core 0:       +28.0 C  (high = +98.0 C, crit = +98.0 C)
+  Core 1:       +28.0 C  (high = +98.0 C, crit = +98.0 C)
+  Core 2:       +28.0 C  (high = +98.0 C, crit = +98.0 C)
+  Core 3:       +28.0 C  (high = +98.0 C, crit = +98.0 C)
+  SMF_Z9100_ON-isa-0000
+  Adapter: ISA adapter
+  CPU XP3R3V_EARLY:              +3.22 V  
+  <... few more things ...>
+  
+  Onboard Temperature Sensors:
+  CPU:                             30 C
+  BCM56960 (PSU side):             35 C
+  <... few more things ...>
+  
+  Onboard Voltage Sensors:
+    CPU XP3R3V_EARLY                 3.22 V
+  <... few more things ...>
+  
+  Fan Trays:
+  Fan Tray 1:
+    Fan1 Speed:     6192 RPM
+    Fan2 Speed:     6362 RPM
+    Fan1 State:        Normal
+    Fan2 State:        Normal
+    Air Flow:            F2B
+  <... few more things ...>
+  
+PSUs:
+  PSU 1:
+    Input:           AC
+ <... few more things ...>
 
-  tmp75-i2c-11-4c
-  Adapter: i2c-2-mux (chan_id 1)
-  temp1:        +31.6 C  (high = +50.0 C, hyst = +25.0 C)
-
-  tmp75-i2c-11-4d
-  Adapter: i2c-2-mux (chan_id 1)
-  temp1:        +29.4 C  (high = +50.0 C, hyst = +25.0 C)
-
-  tmp75-i2c-11-4e
-  Adapter: i2c-2-mux (chan_id 1)
-  temp1:        +27.4 C  (high = +50.0 C, hyst = +25.0 C)
   ```
 
 - `show reboot-cause`
@@ -252,7 +269,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
   - Example:
   ```
   admin@sonic:~$ show reboot-cause
-  User issued reboot command [User: admin, Time: Sat Jun 23 01:30:43 UTC 2018]
+  User issued reboot command [User: admin, Time: Mon Mar 25 01:02:03 UTC 2019]
   ```
  
 - `show uptime`
@@ -260,7 +277,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
   - Example:
   ```
   admin@sonic:~$ show uptime
-  up 8 weeks, 6 days, 14 hours, 16 minutes
+  up 2 days, 21 hours, 30 minutes
   ```
 
 - `show logging ([<process-name>] [-l lines] | [-f])`
@@ -295,10 +312,14 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 - `show users`
   - Display a list of users currently logged in to the device
-  - Example:
+  - Examples:
   ```
   admin@sonic:~$ show users
-  admin    pts/9        May 11 22:32 (100.127.20.23)
+  admin    pts/9        Mar 25 20:31 (100.127.20.23)
+  
+  admin@sonic:~$ show users
+  admin    ttyS1        2019-03-25 20:31
+
   ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
