@@ -457,6 +457,7 @@ If this 'failthrough' is disabled and if remote authentication fails, login is d
 - Usage:
 
 	config aaa authentication failthrough [OPTIONS] OPTION
+		   
 		   Allow AAA fail-through [enable | disable | default]
            enable - this allows the AAA module to process with local authentication if remote authentication fails.
 		   disbale - this disallows the AAA module to proceed further if remote authentication fails.
@@ -474,7 +475,8 @@ This command is not used at the moment. TBD - Need to reconfirm
 - Usage:
 
     config aaa authentication fallback [OPTIONS] OPTION
-       Allow AAA fallback [enable | disable | default]
+       
+	   Allow AAA fallback [enable | disable | default]
 
 - Example:
   ```
@@ -494,7 +496,11 @@ If the authentication fails, AAA will check the "failthrough" configuration and 
 - Usage: 
 
     config aaa authentication login [OPTIONS] [AUTH_PROTOCOL]...
-      Switch login authentication [ {tacacs+, local} | default ]
+      
+	  Switch login authentication [ {tacacs+, local} | default ]
+	  tacacs+ - This enables remote authentication based on tacacs+
+	  local - this disables remote authentication and uses local authentication
+	  default - reset back to default value, which is nothing but the "local" authentication
 
 - Example:
   ```
