@@ -429,7 +429,7 @@ This section captures the various show commands & configuration commands that ar
 Admins can configure the type of authentication (local or remote tacacs based) required for the users and also the authentication failthrough and fallback options.
 Following show command displays the current running configuration related to the AAA.
 
-## show AAA
+## show aaa
 - Syntax: show aaa
 - Example:
 ```
@@ -443,6 +443,7 @@ AAA authentication fallback True (default)
 
 This sub-section explains all the possible CLI based configuration options for the AAA module. The list of commands/sub-commands possible for aaa is given below.
 Note that the "aaa" commands need root privileges that is obtained using "sudo -i".
+
 	Command: aaa authentication
 			 sub-commands:
                aaa authentication failthrough
