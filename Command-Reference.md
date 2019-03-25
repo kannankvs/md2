@@ -437,6 +437,7 @@ AAA authentication fallback True (default)
 ```
 
 ## config aaa
+
 This sub-section explains all the possible CLI based configuration options for the AAA module.
 MODULE:aaa
            authentication
