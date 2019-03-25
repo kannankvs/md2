@@ -1,12 +1,12 @@
 # SONiC COMMAND LINE INTERFACE GUIDE
 
-#Introduction
+# Introduction
 SONiC is an open source network operating system based on Linux that runs on switches from multiple vendors and ASICs. SONiC offers a full-suite of network functionality, like BGP and RDMA, that has been production-hardened in the data centers of some of the largest cloud-service providers. It offers teams the flexibility to create the network solutions they need while leveraging the collective strength of a large ecosystem and community.
 
 SONiC software can be configured in following three methods.
  1) Command Line Interface (CLI)
- 2) [config_db.json] (https://github.com/Azure/SONiC/wiki/Configuration) 
- 3) [minigraph.xml]  (https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
+ 2) [config_db.json](https://github.com/Azure/SONiC/wiki/Configuration) 
+ 3) [minigraph.xml](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
 
 This document explains the first method and gives the complete list of commands that are supported in SONiC 201811 version (build#32).
 Note that the command list is just a subset of the configurations that are possible in SONiC. 
@@ -160,14 +160,17 @@ Commands:
   lldp                  LLDP (Link Layer Discovery Protocol)...
   logging               Show system log
   mac                   Show MAC (FDB) entries
-  mirror                Show mirroring (Everflow) information
+  mirror_session        Show existing everflow sessions
+  mmu                   Show mmu configuration
   ndp                   Show IPv6 Neighbour table
   ntp                   Show NTP information
   pfc                   Show details of the priority-flow-control...
   platform              Show platform-specific hardware info
+  priority-group        Show details of the PGs
   processes             Display process information
   queue                 Show details of the queues
   reboot-cause          Show cause of most recent reboot
+  route-map             show route-map
   runningconfiguration  Show current running configuration...
   services              Show all daemon services
   startupconfiguration  Show startup configuration information
@@ -179,6 +182,8 @@ Commands:
   version               Show version information
   vlan                  Show VLAN information
   warm_restart          Show warm restart configuration and state
+  watermark             Show details of watermark
+
 ```
 
 The same syntax applies to all subgroups of `show` which themselves contain subcommands, and subcommands which accept options/arguments.
