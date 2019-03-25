@@ -38,6 +38,9 @@ Password: YourPaSsWoRd
 user@debug:~$ ssh admin@sonic (TBD)
 admin@sonic's password:
 ```
+
+By default, login takes the user the default prompt from which most of the show commands and few configuration commands work. Some commands like "aaa" need root level privileges that can be obtained using "sudo -i" for the "admin" user.
+
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## Configuring Management Interface
@@ -438,38 +441,60 @@ AAA authentication fallback True (default)
 
 ## config aaa
 
-This sub-section explains all the possible CLI based configuration options for the AAA module.
-MODULE:aaa
-           authentication
-               failthrough
-               fallback
-               login
-**COMMAND:**
+This sub-section explains all the possible CLI based configuration options for the AAA module. The list of commands/sub-commands possible for aaa is given below.
+Note that the "aaa" commands need root privileges that is obtained using "sudo -i".
+	Command: aaa authentication
+			 sub-commands:
+               aaa authentication failthrough
+               aaa authentication fallback
+               aaa authentication login
 
- config aaa authentication failthrough [OPTIONS] OPTION
+**aaa authentication failthrough**
+This command is used to either enable or disable the failthrough option. When user selects remote authentication using tacacs+ and if the authentication fails, this "failthrough" configuration allows for further authentication using LOCAL database or not.
+If this 'failthrough' is disabled and if remote authentication fails, login is disallowed.
+- Usage:
+	config aaa authentication failthrough [OPTIONS] OPTION
+		   Allow AAA fail-through [enable | disable | default]
+           enable - this allows the AAA module to process with local authentication if remote authentication fails.
+		   disbale - this disallows the AAA module to proceed further if remote authentication fails.
+		   default - this reconfigures the default value, which is "enable". TBD - Need to be verified.
 
- Allow AAA fail-through [enable | disable | default]
+- Example:
+  ```
+  admin@sonic:~$ sudo -i
+  root@sonic:~# config aaa authentication failthrough enable
+  root@sonic:~# 
+  ```
+**aaa authentication fallback**
+This command is not used at the moment. TBD - Need to reconfirm
+- Usage:
+    config aaa authentication fallback [OPTIONS] OPTION
+       Allow AAA fallback [enable | disable | default]
 
- Options:
- --help  Show this message and exit.
- 
-**COMMAND:**
+- Example:
+  ```
+  root@sonic:~# config aaa authentication fallback enable
+  root@sonic:~# 
+  ```
 
- config aaa authentication fallback [OPTIONS] OPTION
+**aaa authentication login**
+This command is used to either configure whether AAA should use local database or remote tacacs+ database for user authentication. 
+By default, AAA uses local database for authentication. New users can be added/deleted using the linux commands (note that the configuration done using linux commands are not preserved during reboot).
+Admin can enable remote tacacs+ server based authentication by selecting the AUTH_PROTOCOL as tacacs+ in this command.
+Admins need to configure the tacacs+ server accordingly and ensure that the connectivity to tacacas+ server is available via the management interface.
+Once if the admins choose the remote authentication based on tacacs+ server, all user logins will be authenticated by the tacacs+ server.
+If the authentication fails, AAA will check the "failthrough" configuration and authenticates the user based on local database if failthrough is enabled.
 
- Allow AAA fallback [enable | disable | default]
+- Usage: 
+    config aaa authentication login [OPTIONS] [AUTH_PROTOCOL]...
+      Switch login authentication [ {tacacs+, local} | default ]
 
- Options:
- --help  Show this message and exit.
+- Example:
+  ```
+  root@sonic:~# config aaa authentication login tacacs+
+  root@sonic:~# 
+  ```
 
-**COMMAND:**
-
- config aaa authentication login [OPTIONS] [AUTH_PROTOCOL]...
-
- Switch login authentication [ {tacacs+, local} | default ]
-
- Options:
- --help  Show this message and exit.
 
 
 ## Layer 2 Configuration & Show
