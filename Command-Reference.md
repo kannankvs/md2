@@ -257,10 +257,10 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
     Air Flow:            F2B
   <... few more things ...>
   
-PSUs:
-  PSU 1:
-    Input:           AC
- <... few more things ...>
+  PSUs:
+    PSU 1:
+      Input:           AC
+  <... few more things ...>
 
   ```
 
