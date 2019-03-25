@@ -56,6 +56,7 @@ admin@sonic:~$ /sbin/ifconfig eth0
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 10.11.162.42  netmask 255.255.255.0  broadcast 10.11.162.255
 ```
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## Config Help
 - List all the possible configuration commands at the top level. The exact command syntax is as follows; all commands are case sensitive
@@ -94,6 +95,7 @@ Commands:
   watermark              Configure watermark
 
 ```
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## Show Versions
 - `show version`
@@ -133,6 +135,7 @@ docker-fpm-quagga          HEAD.32-21ea29a     546036fe6838        282MB
 docker-fpm-quagga          latest              546036fe6838        282MB
 
 ```
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## Show Help
 
@@ -207,7 +210,7 @@ Commands:
   transceiver  Show SFP Transceiver information
 ```
 
-
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
   
 ## Show System Status
 
@@ -297,6 +300,7 @@ Commands:
   admin@sonic:~$ show users
   admin    pts/9        May 11 22:32 (100.127.20.23)
   ```
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## Show Hardware Platform
 
@@ -394,6 +398,7 @@ Commands:
   -----------  ----------
   Ethernet100  Present
   ```
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## Layer 2 Configuration & Show
 #### ARP
