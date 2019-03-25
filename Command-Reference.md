@@ -445,15 +445,17 @@ This sub-section explains all the possible CLI based configuration options for t
 Note that the "aaa" commands need root privileges that is obtained using "sudo -i".
 
 	Command: aaa authentication
-			 sub-commands:
+             sub-commands:
                aaa authentication failthrough
                aaa authentication fallback
                aaa authentication login
 
 **aaa authentication failthrough**
+
 This command is used to either enable or disable the failthrough option. When user selects remote authentication using tacacs+ and if the authentication fails, this "failthrough" configuration allows for further authentication using LOCAL database or not.
 If this 'failthrough' is disabled and if remote authentication fails, login is disallowed.
 - Usage:
+
 	config aaa authentication failthrough [OPTIONS] OPTION
 		   Allow AAA fail-through [enable | disable | default]
            enable - this allows the AAA module to process with local authentication if remote authentication fails.
@@ -467,8 +469,10 @@ If this 'failthrough' is disabled and if remote authentication fails, login is d
   root@sonic:~# 
   ```
 **aaa authentication fallback**
+
 This command is not used at the moment. TBD - Need to reconfirm
 - Usage:
+
     config aaa authentication fallback [OPTIONS] OPTION
        Allow AAA fallback [enable | disable | default]
 
@@ -479,6 +483,7 @@ This command is not used at the moment. TBD - Need to reconfirm
   ```
 
 **aaa authentication login**
+
 This command is used to either configure whether AAA should use local database or remote tacacs+ database for user authentication. 
 By default, AAA uses local database for authentication. New users can be added/deleted using the linux commands (note that the configuration done using linux commands are not preserved during reboot).
 Admin can enable remote tacacs+ server based authentication by selecting the AUTH_PROTOCOL as tacacs+ in this command.
@@ -487,6 +492,7 @@ Once if the admins choose the remote authentication based on tacacs+ server, all
 If the authentication fails, AAA will check the "failthrough" configuration and authenticates the user based on local database if failthrough is enabled.
 
 - Usage: 
+
     config aaa authentication login [OPTIONS] [AUTH_PROTOCOL]...
       Switch login authentication [ {tacacs+, local} | default ]
 
