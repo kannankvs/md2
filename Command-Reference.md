@@ -38,6 +38,7 @@ Password: YourPaSsWoRd
 user@debug:~$ ssh admin@sonic (TBD)
 admin@sonic's password:
 ```
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## Configuring Management Interface
 - By default, the management interface (eth0) is configured to use DHCP to get the IP address from the DHCP server. Connect the management interface to the same network in which your DHCP server is connected and get the IP address from DHCP server.
