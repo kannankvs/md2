@@ -444,7 +444,7 @@ MODULE:aaa
                failthrough
                fallback
                login
-** COMMAND: **
+**COMMAND: **
 
  config aaa authentication failthrough [OPTIONS] OPTION
 
@@ -453,7 +453,7 @@ MODULE:aaa
  Options:
  --help  Show this message and exit.
  
-** COMMAND: **
+**COMMAND: **
 
  config aaa authentication fallback [OPTIONS] OPTION
 
@@ -462,7 +462,7 @@ MODULE:aaa
  Options:
  --help  Show this message and exit.
 
-** COMMAND: **
+**COMMAND: **
 
  config aaa authentication login [OPTIONS] [AUTH_PROTOCOL]...
 
