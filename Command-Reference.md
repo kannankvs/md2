@@ -581,11 +581,11 @@ In order to create acl tables, either follow the config_db.json method or minigr
 
 After creating tables, either the config_db.json method or the minigraph method or the CLI method (explained here) can be used to populate the rules in those ACL tables. 
 
-This command will not disturb the list of tables; i.e. the output of "show acl table" is not alterted by using this command; only the output of "show acl rule" will be changed after this command.
+This command updates only the ACL rules and it does not disturb the ACL tables; i.e. the output of "show acl table" is not alterted by using this command; only the output of "show acl rule" will be changed after this command.
 		
 - Usage: 
 
-  config acl update full [OPTIONS] FILE_NAME
+    config acl update full [OPTIONS] FILE_NAME
 	Some of the possible options are
 	1) --table_name <table_name>, Example: config acl update full " --table_name DT_ACL_T1  /etc/sonic/acl_table_1.json "
 	2) --session_name <session_name>, Example: config acl update full " --session_name mirror_ses1 /etc/sonic/acl_table_1.json "
@@ -596,13 +596,14 @@ This command will not disturb the list of tables; i.e. the output of "show acl t
 	
 
 - Example:
-  
+  ```  
   admin@sonic:~$ config acl update full /etc/sonic/acl_full_snmp_r2.json
   
   This command will remove all rules from all the ACL tables and insert all the rules present in this input file.
   Refer an example for json file [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/files/helpers/config_service_acls.sh)
   Refer another example [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/tasks/acl/acltb_test_rules_part_1.json)
-
+  ```
+  
 **COMMAND:**
         Perform incremental ACL rules configuration update. Get existing rules from
         Config DB. Compare with rules specified in file and perform corresponding
