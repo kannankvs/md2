@@ -513,7 +513,7 @@ If the authentication fails, AAA will check the "failthrough" configuration and 
 This section explains the various show commands and configuration commands available for users.
 
 ## show acl table
-This command displays the various tables configured in the ACL.
+This command displays the ACL tables that are configured in the device. Each table has got a name, type, the list of interface(s) to which the table is bound and the description about the table.
 
 - Example:
   ```
@@ -530,6 +530,14 @@ This command displays the various tables configured in the ACL.
   ```
 
 ## show acl rule
+This command displays all the ACL rules present in all the ACL tables that are configured in the device. 
+Each ACL rule gives the following information.
+1) Table name - ACL table name to which the rule belongs to.
+2) Rule name - ACL rule name
+3) Priority - Priority for this rule.
+4) Action - Action to be performed if the packet matches with this ACL rule. It could be either Drop or Permit. Users can choose to have a default permit rule or default deny rule. In case of default "deny all" rule, add the permitted rules on top of the deny rule. In case of the default "permit all" rule, users can add the deny rules on top of it. If users have not confgured any rule, SONiC allows all traffic (which is "permit all").
+5) Match  - The fields from the packet header that need to be matched against the same present in the incoming traffic. 
+
 
 - Example:
 
