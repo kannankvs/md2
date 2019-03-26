@@ -571,12 +571,16 @@ Existing ACL tables and ACL rules can be updated by specifying the ACL rules in 
                  incremental
 
 
-** config acl update full **
+**config acl update full**
 
 This command is to update the rules in all the tables or in one specific table in full. If a table_name is provided, the operation will be restricted in the specified table. All existing rules in the specified table or all tables will be removed. New rules loaded from file will be installed. If the table_name is specified, only rules within that table will be removed and new rules in that table will be installed. If the table_name is not specified, all rules from all tables will be removed and only the rules present in the input file will be added.
+
 The command does not modify anything in the list of acl tables. It modifies only the rules present in those pre-existing tables.
+
 In order to create acl tables, either follow the config_db.json method or minigraph method to populate the list of ACL tables.
+
 After creating tables, either the config_db.json method or the minigraph method or the CLI method (explained here) can be used to populate the rules in those ACL tables. 
+
 This command will not disturb the list of tables; i.e. the output of "show acl table" is not alterted by using this command; only the output of "show acl rule" will be changed after this command.
 		
 - Usage: 
