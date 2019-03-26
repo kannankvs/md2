@@ -513,7 +513,12 @@ If the authentication fails, AAA will check the "failthrough" configuration and 
 This section explains the various show commands and configuration commands available for users.
 
 ## show acl table
-This command displays the ACL tables that are configured in the device. Each table has got a name, type, the list of interface(s) to which the table is bound and the description about the table.
+This command displays either all the ACL tables that are configured or only the specified "TABLE_NAME". 
+Output from the command displays the table name, type of the table, the list of interface(s) to which the table is bound and the description about the table.
+
+- Usage: 
+  show acl table [OPTIONS] [TABLE_NAME]
+
 
 - Example:
   ```
@@ -536,18 +541,23 @@ This command displays the ACL tables that are configured in the device. Each tab
   ```
 
 ## show acl rule
-This command displays all the ACL rules present in all the ACL tables that are configured in the device. 
-Each ACL rule gives the following information.
+
+This command displays all the ACL rules present in all the ACL tables or only the rules present in specified table "TABLE_NAME" or only the rule matching the RULE_ID option.
+Output from the command gives the following information about the rules
 1) Table name - ACL table name to which the rule belongs to.
 2) Rule name - ACL rule name
 3) Priority - Priority for this rule.
 4) Action - Action to be performed if the packet matches with this ACL rule. It could be either Drop or Permit. Users can choose to have a default permit rule or default deny rule. In case of default "deny all" rule, add the permitted rules on top of the deny rule. In case of the default "permit all" rule, users can add the deny rules on top of it. If users have not confgured any rule, SONiC allows all traffic (which is "permit all").
 5) Match  - The fields from the packet header that need to be matched against the same present in the incoming traffic. 
 
+- Usage:
+  show acl rule [OPTIONS] [TABLE_NAME] [RULE_ID]
+  
 
 - Example:
-
+  
   ```
+  admin@sonic:~$ show acl rule
 	Table     Rule          Priority    Action    Match
 	--------  ------------  ----------  --------  ------------------
 	SNMP_ACL  RULE_1        9999        ACCEPT    IP_PROTOCOL: 17
@@ -604,7 +614,7 @@ This command updates only the ACL rules and it does not disturb the ACL tables; 
   Refer another example [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/tasks/acl/acltb_test_rules_part_1.json)
   ```
   
-**COMMAND:**
+**config acl update incremental:**
         Perform incremental ACL rules configuration update. Get existing rules from
         Config DB. Compare with rules specified in file and perform corresponding
         modifications.
