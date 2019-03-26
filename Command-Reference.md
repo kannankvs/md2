@@ -3,7 +3,11 @@
 # Introduction
 SONiC is an open source network operating system based on Linux that runs on switches from multiple vendors and ASICs. SONiC offers a full-suite of network functionality, like BGP and RDMA, that has been production-hardened in the data centers of some of the largest cloud-service providers. It offers teams the flexibility to create the network solutions they need while leveraging the collective strength of a large ecosystem and community.
 
-SONiC software can be configured in following three methods.
+SONiC software shall be loaded in these [supported devices](https://github.com/Azure/SONiC/wiki/Supported-Devices-and-Platforms) and this CLI guide shall be used to configure the devices as well as to display the configuration, state and status.
+
+Follow the [Quick Start Guide](https://github.com/Azure/SONiC/wiki/Quick-Start) to boot the device in ONIE mode, install the SONiC software using the steps specified in the document and login to the device using the default username and password.
+
+After logging into the device, SONiC software can be configured in following three methods.
  1) Command Line Interface (CLI)
  2) [config_db.json](https://github.com/Azure/SONiC/wiki/Configuration) 
  3) [minigraph.xml](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
@@ -507,6 +511,7 @@ If the authentication fails, AAA will check the "failthrough" configuration and 
   root@sonic:~# config aaa authentication login tacacs+
   root@sonic:~# 
   ```
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#AAA-Configuration-And-Show)
 
 # ACL Configuration And Show
 
@@ -675,6 +680,7 @@ When the optional argument "max_priority"  is specified, each rule’s priority 
   ```
 TBD: Need to create these example input files, test them using the above examples, upload them in github and reference them from here.  
 
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#ACL-Configuration-And-Show)
 
 # BGP Configuration And Show Commands
 
@@ -888,7 +894,7 @@ This command is to start up the particular IPv4 or IPv6 BGP neighbor using eithe
   admin@sonic:~$ sudo config bgp startup neighbor SONIC02SPINE
   ```
 
-
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#BGP-Configuration-And-Show-Commands)
 
 
 ## Layer 2 Configuration & Show
