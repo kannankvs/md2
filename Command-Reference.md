@@ -512,7 +512,10 @@ If the authentication fails, AAA will check the "failthrough" configuration and 
 
 This section explains the various show commands and configuration commands available for users.
 
-## show acl table
+## show acl 
+
+**show acl table**
+
 This command displays either all the ACL tables that are configured or only the specified "TABLE_NAME". 
 Output from the command displays the table name, type of the table, the list of interface(s) to which the table is bound and the description about the table.
 
@@ -540,7 +543,7 @@ Output from the command displays the table name, type of the table, the list of 
 				   
   ```
 
-## show acl rule
+**show acl rule**
 
 This command displays all the ACL rules present in all the ACL tables or only the rules present in specified table "TABLE_NAME" or only the rule matching the RULE_ID option.
 Output from the command gives the following information about the rules
@@ -569,7 +572,7 @@ Output from the command gives the following information about the rules
 
   ```
 
-## show mirror_session
+**show mirror_session**
 
 This command displays all the mirror sessions that are configured. 
 
@@ -607,6 +610,10 @@ In order to create acl tables, either follow the config_db.json method or minigr
 After creating tables, either the config_db.json method or the minigraph method or the CLI method (explained here) can be used to populate the rules in those ACL tables. 
 
 This command updates only the ACL rules and it does not disturb the ACL tables; i.e. the output of "show acl table" is not alterted by using this command; only the output of "show acl rule" will be changed after this command.
+
+When "--session_name" optional argument is specified, command sets the session_name for the ACL table with this mirror session name. It fails if the specified mirror session name does not exist.
+
+When the optional argument "max_priority"  is specified, each rule’s priority is calculated by subtracting its “sequence_id” value from the “max_priority”. If this value is not passed, the default “max_priority” 10000 is used.
 		
 - Usage: 
 
@@ -614,7 +621,7 @@ This command updates only the ACL rules and it does not disturb the ACL tables; 
 	Some of the possible options are
 	1) --table_name <table_name>, Example: config acl update full " --table_name DT_ACL_T1  /etc/sonic/acl_table_1.json "
 	2) --session_name <session_name>, Example: config acl update full " --session_name mirror_ses1 /etc/sonic/acl_table_1.json "
-	3) --max-priority <priority_value>, Example: config acl update full " --max-priority 100  /etc/sonic/acl_table_1.json "
+	3) --max_priority <priority_value>, Example: config acl update full " --max-priority 100  /etc/sonic/acl_table_1.json "
 	
 	NOTE: All these optional parameters should be inside the double quotes. If none of the options are provided, double quotes is not required for specifying filename alone.
 	Any number of optional parameters can be configured in the same command.
@@ -646,6 +653,9 @@ If we assume that "file1.json" is the already loaded ACL rules file and if "file
 
 NOTE: If any ACL rule that is already available in file1.json is required even after this command execution, such rules should remain unalterted in file2.json. Don't remove them.
 
+When "--session_name" optional argument is specified, command sets the session_name for the ACL table with this mirror session name. It fails if the specified mirror session name does not exist.
+
+When the optional argument "max_priority"  is specified, each rule’s priority is calculated by subtracting its “sequence_id” value from the “max_priority”. If this value is not passed, the default “max_priority” 10000 is used.
 
 - Usage:		
    config acl update incremental [OPTIONS] FILE_NAME
@@ -670,7 +680,10 @@ TBD: Need to create these example input files, test them using the above example
 
 This section explains all the BGP show commands and BGP configuation commands that are supported in SONiC.
 
-## show ip bgp summary 
+## show bgp
+
+**show ip bgp summary**
+
 This command displays the summary of all IPv4 bgp neighbors that are configured and the corresponding states.
 
 - Usage:
@@ -690,8 +703,15 @@ This command displays the summary of all IPv4 bgp neighbors that are configured 
   Total number of neighbors 2
   ```
 
-## show ip bgp neighbors
-This command displays all the details of IPv4 Border Gateway Protocol (BGP) neighbors. Command has options to display the same for one specific neighbor or for all neighbors. Option is also available to display only the advertised routes, or the received routes, or all routes.
+**show ip bgp neighbors**
+
+This command displays all the details of IPv4 & IPv6 (TBD: Is it expected to show IPv6 also? ) BGP neighbors when no optional argument is specified. 
+
+When the optional argument IPv4_address is specified, it displays the detailed neighbor information about that specific IPv4 neighbor.
+
+Command has got additional optional arguments to display only the advertised routes, or the received routes, or all routes.
+
+In order to get details for an IPv6 neigbor, use "show ipv6 bgp neighbor <ipv6_address>" command.
 
 - Usage:
     show ip bgp neighbors [<ipv4-address> [advertised-routes | received-routes | routes]]
@@ -757,7 +777,7 @@ This command displays all the details of IPv4 Border Gateway Protocol (BGP) neig
   admin@sonic:~$ show ip bgp neighbors 192.168.1.161 routes
   ```
 
-## show ipv6 bgp summary
+**show ipv6 bgp summary**
 
 This command displays the summary of all IPv4 bgp neighbors that are configured and the corresponding states.
 
@@ -780,7 +800,7 @@ This command displays the summary of all IPv4 bgp neighbors that are configured 
   Total number of neighbors 4
   ```
 
-## show ipv6 bgp neighbors
+**show ipv6 bgp neighbors**
 This command displays all the details of IPv6 Border Gateway Protocol (BGP) neighbors. Command has options to display the same for one specific neighbor or for all neighbors. Option is also available to display only the advertised routes, or the received routes, or all routes.
 
 
@@ -797,8 +817,25 @@ This command displays all the details of IPv6 Border Gateway Protocol (BGP) neig
   admin@sonic:~$ show ipv6 bgp neighbors fc00::72 routes
   ```
 
-## config bgp shut down all
-This command is used to shutdown all the BGP IPv4 & IPv6 sessions
+## config bgp 
+
+This sub-section explains the list of configuration options available for BGP module for both IPv4 and IPv6 BGP neighbors.
+All BGP config commands need root privileges to execute. Either use "sudo config bgp" or go to root prompt using "sudo -i" and then use the "config bgp" without "sudo".
+
+The list of possible BGP config commands are given below.
+
+	bgp
+        shutdown
+            all
+            neighbor
+        startup
+            all
+            neighbor
+
+**config bgp shut down all**
+
+This command is used to shutdown all the BGP IPv4 & IPv6 sessions.
+When the session is shutdown using this command, BGP state in "show ip bgp summary" is displayed as "Idle (Admin)"
   
   - Usage:
       sudo config bgp shutdown all
@@ -808,7 +845,7 @@ This command is used to shutdown all the BGP IPv4 & IPv6 sessions
   admin@sonic:~$ sudo config bgp shutdown all
   ```
 
-## config bgp shutdown <neighbor> 
+**config bgp shutdown <neighbor>**
 
 This command is to shut down a BGP session with a neighbor by that neighbor's IP address or hostname
 
@@ -824,20 +861,25 @@ This command is to shut down a BGP session with a neighbor by that neighbor's IP
   ```
  
 
-## config bgp startup all 
+**config bgp startup all**
+
+This command is to start up all the IPv4 & IPv6 BGP neighbors
+
+  - Usage:
+    sudo config bgp startup all`
   
-- `sudo config bgp startup all`
-  - Start up all BGP sessions
   - Examples:
   ```
   admin@sonic:~$ sudo config bgp startup all
   ```
  
  
-#### Start up Neighbor
+**config bgp startup <neighbor>**
+This command is to start up the particular IPv4 or IPv6 BGP neighbor using either the IP address or hostname.
 
-- `sudo config bgp startup (<ip-address> | <hostname>)`
-  - Start up a BGP session with a neighbor by that neighbor's IP address or hostname
+  - Usage:
+     sudo config bgp startup (<ip-address> | <hostname>)`
+
   - Examples:
   ```
   admin@sonic:~$ sudo config bgp startup neighbor 192.168.1.124
@@ -846,7 +888,6 @@ This command is to shut down a BGP session with a neighbor by that neighbor's IP
   admin@sonic:~$ sudo config bgp startup neighbor SONIC02SPINE
   ```
 
-  
 
 
 
