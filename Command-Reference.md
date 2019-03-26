@@ -662,7 +662,8 @@ When "--session_name" optional argument is specified, command sets the session_n
 
 When the optional argument "max_priority"  is specified, each rule’s priority is calculated by subtracting its “sequence_id” value from the “max_priority”. If this value is not passed, the default “max_priority” 10000 is used.
 
-- Usage:		
+- Usage:	
+	
    config acl update incremental [OPTIONS] FILE_NAME
 	Some of the possible options are
 	1) --session_name <session_name>, Example: config acl update full " --session_name mirror_ses1 /etc/sonic/acl_table_1.json "
@@ -693,6 +694,7 @@ This section explains all the BGP show commands and BGP configuation commands th
 This command displays the summary of all IPv4 bgp neighbors that are configured and the corresponding states.
 
 - Usage:
+
    show ip bgp summary
   
 - Example:
@@ -720,6 +722,7 @@ Command has got additional optional arguments to display only the advertised rou
 In order to get details for an IPv6 neigbor, use "show ipv6 bgp neighbor <ipv6_address>" command.
 
 - Usage:
+
     show ip bgp neighbors [<ipv4-address> [advertised-routes | received-routes | routes]]
 
 - Example:
@@ -788,6 +791,7 @@ In order to get details for an IPv6 neigbor, use "show ipv6 bgp neighbor <ipv6_a
 This command displays the summary of all IPv4 bgp neighbors that are configured and the corresponding states.
 
   - Usage:
+  
      show ipv6 bgp summary
 
   - Example:
@@ -807,13 +811,13 @@ This command displays the summary of all IPv4 bgp neighbors that are configured 
   ```
 
 **show ipv6 bgp neighbors**
-This command displays all the details of IPv6 Border Gateway Protocol (BGP) neighbors. Command has options to display the same for one specific neighbor or for all neighbors. Option is also available to display only the advertised routes, or the received routes, or all routes.
-
+This command displays all the details of one particular IPv6 Border Gateway Protocol (BGP) neighbor. Option is also available to display only the advertised routes, or the received routes, or all routes.
 
   - Usage:
+  
      show ipv6 bgp neighbors <ipv6-address> (advertised-routes | received-routes | routes)`
 
-  -  In this mode, you must specify the IPv6 address of a neighbor and choose whether you want to display all routes advertised to the specified neighbor, all routes received from the specified neighbor or all received and accepted routes from the specified neighbor.
+
   - Example:
   ```
   admin@sonic:~$ show ipv6 bgp neighbors fc00::72 advertised-routes
@@ -844,6 +848,7 @@ This command is used to shutdown all the BGP IPv4 & IPv6 sessions.
 When the session is shutdown using this command, BGP state in "show ip bgp summary" is displayed as "Idle (Admin)"
   
   - Usage:
+  
       sudo config bgp shutdown all
 
   - Examples:
@@ -856,6 +861,7 @@ When the session is shutdown using this command, BGP state in "show ip bgp summa
 This command is to shut down a BGP session with a neighbor by that neighbor's IP address or hostname
 
   - Usage: 
+  
      sudo config bgp shutdown (<ip-address> | <hostname>)
 
   - Examples:
@@ -872,6 +878,7 @@ This command is to shut down a BGP session with a neighbor by that neighbor's IP
 This command is to start up all the IPv4 & IPv6 BGP neighbors
 
   - Usage:
+  
     sudo config bgp startup all`
   
   - Examples:
@@ -884,6 +891,7 @@ This command is to start up all the IPv4 & IPv6 BGP neighbors
 This command is to start up the particular IPv4 or IPv6 BGP neighbor using either the IP address or hostname.
 
   - Usage:
+  
      sudo config bgp startup (<ip-address> | <hostname>)`
 
   - Examples:
@@ -909,6 +917,7 @@ This sub-section contains the show commands that are supported in ECN.
 This command displays all the WRED profiles that are configured in the device.
 
   - Usage:
+  
       show ecn
 	  
   - Example:
@@ -949,13 +958,11 @@ This command need root privileges. Either use "sudo config ecn" or go into root 
 The list of the WRED profile fields that are configurable is listed in the below "Usage".
 
   - Usage:
+  
+        config ecn [OPTIONS]
   ```
-      config ecn [OPTIONS]
-
-	  ECN-related configuration tasks
-
-	  Options:
-	  -profile <profile_name>       Profile name  [required]
+    ECN Config OPTIONS:
+	  -profile <profile_name>       Profile name  [required] - Even though the profile_name is specified as optional parameter, it is a mandatory parameter.
 	  -rmax <red threshold max>     Set red max threshold
 	  -rmin <red threshold min>     Set red min threshold
 	  -ymax <yellow threshold max>  Set yellow max threshold
