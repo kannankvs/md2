@@ -568,7 +568,22 @@ Output from the command gives the following information about the rules
 	SSH_ONLY  DEFAULT_RULE  1           DROP      ETHER_TYPE: 2048
 
   ```
+
+## show mirror_session
+
+This command displays all the mirror sessions that are configured. 
+
+- Usage: 
+    show mirror_session
   
+- Example:
+  ```
+  admin@sonic:~$ show mirror session
+  Name       Status    SRC IP     DST IP    GRE    DSCP    TTL    Queue
+  ---------  --------  ---------  --------  -----  ------  -----  -------
+  everflow0  active    10.1.0.32  10.0.0.7
+                  
+  ```  
 
 ## config acl
 This sub-section explains the list of configuration options available for ACL module.
@@ -601,32 +616,237 @@ This command updates only the ACL rules and it does not disturb the ACL tables; 
 	2) --session_name <session_name>, Example: config acl update full " --session_name mirror_ses1 /etc/sonic/acl_table_1.json "
 	3) --max-priority <priority_value>, Example: config acl update full " --max-priority 100  /etc/sonic/acl_table_1.json "
 	
-	NOTE: All these optional parameters go inside the double quotes. If none of the options are provided, double quotes is not required for specifying filename alone.
-	Any number of optional parameters can be configured in the command.
+	NOTE: All these optional parameters should be inside the double quotes. If none of the options are provided, double quotes is not required for specifying filename alone.
+	Any number of optional parameters can be configured in the same command.
 	
 
 - Example:
   ```  
   admin@sonic:~$ config acl update full /etc/sonic/acl_full_snmp_r2.json
+  admin@sonic:~$ config acl update full " --table_name SNMP-ACL /etc/sonic/acl_full_snmp_r2.json "
+  admin@sonic:~$ config acl update full " --session_name everflow0 /etc/sonic/acl_full_snmp_r2.json "
   
   This command will remove all rules from all the ACL tables and insert all the rules present in this input file.
-  Refer an example for json file [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/files/helpers/config_service_acls.sh)
+  Refer an example for input file format [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/files/helpers/config_service_acls.sh)
   Refer another example [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/tasks/acl/acltb_test_rules_part_1.json)
   ```
+TBD: Need to create these example input files, test them using the above examples, upload them in github and reference them from here.
   
 **config acl update incremental:**
-        Perform incremental ACL rules configuration update. Get existing rules from
-        Config DB. Compare with rules specified in file and perform corresponding
-        modifications.
-		        # TODO: Until we test ASIC behavior, we cannot assume that we can insert
-        # dataplane ACLs and shift existing ACLs. Therefore, we perform a full
-        # update on dataplane ACLs, and only perform an incremental update on
-        # control plane ACLs.
-		
- config acl update incremental [OPTIONS] FILE_NAME
 
- Incremental update of ACL rule configuration.
+This command is to perform incremental update of ACL rule table. This command gets existing rules from Config DB and compares with rules specified in input file and performs corresponding modifications.
 
+With respect to DATA ACLs, the command does not assume that new dataplane ACLs can be inserted in betweeen by shifting existing ACLs in all ASICs. Therefore, this command performs a full update on dataplane ACLs. 
+With respect to control plane ACLs, this command performs an incremental update.
+If we assume that "file1.json" is the already loaded ACL rules file and if "file2.json" is the input file that is passed as parameter for this command, the following requirements are valid for the input file.
+1) First copy the file1.json to file2.json.
+2) Remove the unwanted ACL rules from file2.json
+3) Add the newly required ACL rules into file2.json.
+4) Modify the existing ACL rules (that require changes) in file2.json.
+
+NOTE: If any ACL rule that is already available in file1.json is required even after this command execution, such rules should remain unalterted in file2.json. Don't remove them.
+
+
+- Usage:		
+   config acl update incremental [OPTIONS] FILE_NAME
+	Some of the possible options are
+	1) --session_name <session_name>, Example: config acl update full " --session_name mirror_ses1 /etc/sonic/acl_table_1.json "
+	2) --max-priority <priority_value>, Example: config acl update full " --max-priority 100  /etc/sonic/acl_table_1.json "
+	
+	NOTE: All these optional parameters should be inside the double quotes. If none of the options are provided, double quotes is not required for specifying filename alone.
+	Any number of optional parameters can be configured in the same command.
+
+
+- Example:
+  ```  
+  admin@sonic:~$ config acl update incremental /etc/sonic/acl_incremental_snmp_r2.json
+  admin@sonic:~$ config acl update incremental " --session_name everflow0 /etc/sonic/acl_incremental_snmp_r2.json "
+
+  ```
+TBD: Need to create these example input files, test them using the above examples, upload them in github and reference them from here.  
+
+
+# BGP Configuration And Show Commands
+
+This section explains all the BGP show commands and BGP configuation commands that are supported in SONiC.
+
+## show ip bgp summary 
+This command displays the summary of all IPv4 bgp neighbors that are configured and the corresponding states.
+
+- Usage:
+   show ip bgp summary
+  
+- Example:
+  ```
+  admin@sonic:~$ show ip bgp summary
+  BGP router identifier 1.2.3.4, local AS number 65061
+  RIB entries 6124, using 670 KiB of memory
+  Peers 2, using 143 KiB of memory
+  
+  Neighbor        V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+  192.168.1.161    4 65501   88698  102781        0    0    0 08w5d14h        2
+  192.168.1.163    4 65502   88698  102780        0    0    0 08w5d14h        2
+  
+  Total number of neighbors 2
+  ```
+
+## show ip bgp neighbors
+This command displays all the details of IPv4 Border Gateway Protocol (BGP) neighbors. Command has options to display the same for one specific neighbor or for all neighbors. Option is also available to display only the advertised routes, or the received routes, or all routes.
+
+- Usage:
+    show ip bgp neighbors [<ipv4-address> [advertised-routes | received-routes | routes]]
+
+- Example:
+  ```
+  admin@sonic:~$ show ip bgp neighbors
+  BGP neighbor is 192.168.1.161, remote AS 65501, local AS 65061, external link
+   Description: ARISTA01T0
+    BGP version 4, remote router ID 1.2.3.4
+    BGP state = Established, up for 08w5d14h
+    Last read 00:00:46, hold time is 180, keepalive interval is 60 seconds
+    Neighbor capabilities:
+      4 Byte AS: advertised and received
+      Dynamic: received
+      Route refresh: advertised and received(old & new)
+      Address family IPv4 Unicast: advertised and received
+      Graceful Restart Capabilty: advertised and received
+        Remote Restart timer is 120 seconds
+        Address families by peer:
+          IPv4 Unicast(not preserved)
+    Graceful restart informations:
+      End-of-RIB send: IPv4 Unicast
+      End-of-RIB received: IPv4 Unicast
+    Message statistics:
+      Inq depth is 0
+      Outq depth is 0
+                           Sent       Rcvd
+      Opens:                  1          1
+      Notifications:          0          0
+      Updates:            14066          3
+      Keepalives:         88718      88698
+      Route Refresh:          0          0
+      Capability:             0          0
+      Total:             102785      88702
+    Minimum time between advertisement runs is 30 seconds
+  
+   For address family: IPv4 Unicast
+    Community attribute sent to this neighbor(both)
+    2 accepted prefixes
+  
+    Connections established 1; dropped 0
+    Last reset never
+  Local host: 192.168.1.160, Local port: 32961
+  Foreign host: 192.168.1.161, Foreign port: 179
+  Nexthop: 192.168.1.160
+  Nexthop global: fe80::f60f:1bff:fe89:bc00
+  Nexthop local: ::
+  BGP connection: non shared network
+  Read thread: on  Write thread: off
+  ```
+  
+  - Optionally, you can specify an IP address in order to display only that particular neighbor. In this mode, you can optionally specify whether you want to display all routes advertised to the specified neighbor, all routes received from the specified neighbor or all routes (received and accepted) from the specified neighbor.
+  
+  - Example:
+  ```
+  admin@sonic:~$ show ip bgp neighbors 192.168.1.161
+
+  admin@sonic:~$ show ip bgp neighbors 192.168.1.161 advertised-routes
+
+  admin@sonic:~$ show ip bgp neighbors 192.168.1.161 received-routes
+
+  admin@sonic:~$ show ip bgp neighbors 192.168.1.161 routes
+  ```
+
+## show ipv6 bgp summary
+
+This command displays the summary of all IPv4 bgp neighbors that are configured and the corresponding states.
+
+  - Usage:
+     show ipv6 bgp summary
+
+  - Example:
+  ```
+  admin@sonic:~$ show ipv6 bgp summary
+  BGP router identifier 10.1.0.32, local AS number 65100
+  RIB entries 12809, using 1401 KiB of memory
+  Peers 8, using 36 KiB of memory
+
+  Neighbor        V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+  fc00::72        4 64600   12588   12591        0    0    0 06:51:17     6402
+  fc00::76        4 64600   12587    6190        0    0    0 06:51:28     6402
+  fc00::7a        4 64600   12587    9391        0    0    0 06:51:23     6402
+  fc00::7e        4 64600   12589   12592        0    0    0 06:51:25     6402
+
+  Total number of neighbors 4
+  ```
+
+## show ipv6 bgp neighbors
+This command displays all the details of IPv6 Border Gateway Protocol (BGP) neighbors. Command has options to display the same for one specific neighbor or for all neighbors. Option is also available to display only the advertised routes, or the received routes, or all routes.
+
+
+  - Usage:
+     show ipv6 bgp neighbors <ipv6-address> (advertised-routes | received-routes | routes)`
+
+  -  In this mode, you must specify the IPv6 address of a neighbor and choose whether you want to display all routes advertised to the specified neighbor, all routes received from the specified neighbor or all received and accepted routes from the specified neighbor.
+  - Example:
+  ```
+  admin@sonic:~$ show ipv6 bgp neighbors fc00::72 advertised-routes
+
+  admin@sonic:~$ show ipv6 bgp neighbors fc00::72 received-routes
+
+  admin@sonic:~$ show ipv6 bgp neighbors fc00::72 routes
+  ```
+
+## config bgp shut down all
+This command is used to shutdown all the BGP IPv4 & IPv6 sessions
+  
+  - Usage:
+      sudo config bgp shutdown all
+
+  - Examples:
+  ```
+  admin@sonic:~$ sudo config bgp shutdown all
+  ```
+
+## config bgp shutdown <neighbor> 
+
+This command is to shut down a BGP session with a neighbor by that neighbor's IP address or hostname
+
+  - Usage: 
+     sudo config bgp shutdown (<ip-address> | <hostname>)
+
+  - Examples:
+  ```
+  admin@sonic:~$ sudo config bgp shutdown neighbor 192.168.1.124
+  ```
+  ```
+  admin@sonic:~$ sudo config bgp shutdown neighbor SONIC02SPINE
+  ```
+ 
+
+## config bgp startup all 
+  
+- `sudo config bgp startup all`
+  - Start up all BGP sessions
+  - Examples:
+  ```
+  admin@sonic:~$ sudo config bgp startup all
+  ```
+ 
+ 
+#### Start up Neighbor
+
+- `sudo config bgp startup (<ip-address> | <hostname>)`
+  - Start up a BGP session with a neighbor by that neighbor's IP address or hostname
+  - Examples:
+  ```
+  admin@sonic:~$ sudo config bgp startup neighbor 192.168.1.124
+  ```
+  ```
+  admin@sonic:~$ sudo config bgp startup neighbor SONIC02SPINE
+  ```
+
+  
 
 
 
@@ -1101,189 +1321,10 @@ root@sonic:~# sonic-clear priority-group persistent-watermark headroom
   admin@sonic:~$ show route 10.0.0.12
   ```
 
-#### ACL
 
-- `show acl table`
-  - Show existing ACL tables
-  - Example:
-  ```
-  admin@sonic:~$ show acl table
-  Name      Type       Binding          Description
-  --------  ---------  ---------------  -------------
-  EVERFLOW  MIRROR     Ethernet64       EVERFLOW
-                       Ethernet68
-                       Ethernet72
-                       Ethernet76
-                       Ethernet80
-                       Ethernet84
-                       Ethernet88
-                       Ethernet92
-                       Ethernet96
-                       Ethernet100
-                       Ethernet104
-                       Ethernet108
-                       Ethernet112
-                       Ethernet116
-                       Ethernet120
-                       Ethernet124
-  SNMP_ACL  CTRLPLANE  SNMP             SNMP_ACL
-  SSH_ONLY  CTRLPLANE  SSH              SSH_ONLY
-  DATAACL   L3         Ethernet64       DATAACL
-                       Ethernet68
-                       Ethernet72
-                       Ethernet76
-                       Ethernet80
-                       Ethernet84
-                       Ethernet88
-                       Ethernet92
-                       Ethernet96
-                       Ethernet100
-                   
-  ```
 
-- `show acl rule`
-  - Show existing ACL rule
-  - Example:
-  ```
-  admin@sonic:~$ show acl rule
-  Table    Rule    Priority    Action    Match
-  -------  ------  ----------  --------  -------
-                  
-  ```
 
-- `show mirror session`
-  - Show existing everflow sessions
-  - Example:
-  ```
-  admin@sonic:~$ show mirror session
-  Name       Status    SRC IP     DST IP    GRE    DSCP    TTL    Queue
-  ---------  --------  ---------  --------  -----  ------  -----  -------
-  everflow0  active    10.1.0.32  10.0.0.7
-                  
-  ```
 
-#### BGP
-
-- `show ip bgp summary`
-  - Display a summary of the status of all IPv4 Border Gateway Protocol (BGP) sessions
-  - Example:
-  ```
-  admin@sonic:~$ show ip bgp summary
-  BGP router identifier 1.2.3.4, local AS number 65061
-  RIB entries 6124, using 670 KiB of memory
-  Peers 16, using 143 KiB of memory
-  
-  Neighbor        V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
-  192.168.1.161    4 65501   88698  102781        0    0    0 08w5d14h        2
-  192.168.1.163    4 65502   88698  102780        0    0    0 08w5d14h        2
-  192.168.1.165    4 65503   88699  102781        0    0    0 08w5d14h        2
-  192.168.1.167    4 65504   88698  102780        0    0    0 08w5d14h        2
-  192.168.1.169    4 65505   88698  102781        0    0    0 08w5d14h        2
-  192.168.1.171    4 65506   88698  102780        0    0    0 08w5d14h        2
-  192.168.1.173    4 65507   88698  102780        0    0    0 08w5d14h        2
-  192.168.1.175    4 65508   88698  102780        0    0    0 08w5d14h        2
-  192.168.1.177    4 65509   88698  102781        0    0    0 08w5d14h        2
-  192.168.1.179    4 65510   88698  102780        0    0    0 08w5d14h        2
-  192.168.1.181    4 65511   88698  102780        0    0    0 08w5d14h        2
-  192.168.1.183    4 65512   88698  102780        0    0    0 08w5d14h        2
-  192.168.1.185    4 65513   88698  102781        0    0    0 08w5d14h        2
-  192.168.1.187    4 65514   88698  102781        0    0    0 08w5d14h        2
-  192.168.1.189    4 65515   88698  102781        0    0    0 08w5d14h        2
-  192.168.1.191    4 65516   88698  102781        0    0    0 08w5d14h        2
-  
-  Total number of neighbors 16
-  ```
-
-- `show ip bgp neighbors [<ipv4-address> [advertised-routes | received-routes | routes]]`
-  - Display details of IPv4 Border Gateway Protocol (BGP) neighbors
-  - Example:
-  ```
-  admin@sonic:~$ show ip bgp neighbors
-  BGP neighbor is 192.168.1.161, remote AS 65501, local AS 65061, external link
-   Description: ARISTA01T0
-    BGP version 4, remote router ID 1.2.3.4
-    BGP state = Established, up for 08w5d14h
-    Last read 00:00:46, hold time is 180, keepalive interval is 60 seconds
-    Neighbor capabilities:
-      4 Byte AS: advertised and received
-      Dynamic: received
-      Route refresh: advertised and received(old & new)
-      Address family IPv4 Unicast: advertised and received
-      Graceful Restart Capabilty: advertised and received
-        Remote Restart timer is 120 seconds
-        Address families by peer:
-          IPv4 Unicast(not preserved)
-    Graceful restart informations:
-      End-of-RIB send: IPv4 Unicast
-      End-of-RIB received: IPv4 Unicast
-    Message statistics:
-      Inq depth is 0
-      Outq depth is 0
-                           Sent       Rcvd
-      Opens:                  1          1
-      Notifications:          0          0
-      Updates:            14066          3
-      Keepalives:         88718      88698
-      Route Refresh:          0          0
-      Capability:             0          0
-      Total:             102785      88702
-    Minimum time between advertisement runs is 30 seconds
-  
-   For address family: IPv4 Unicast
-    Community attribute sent to this neighbor(both)
-    2 accepted prefixes
-  
-    Connections established 1; dropped 0
-    Last reset never
-  Local host: 192.168.1.160, Local port: 32961
-  Foreign host: 192.168.1.161, Foreign port: 179
-  Nexthop: 192.168.1.160
-  Nexthop global: fe80::f60f:1bff:fe89:bc00
-  Nexthop local: ::
-  BGP connection: non shared network
-  Read thread: on  Write thread: off
-  ```
-  - Optionally, you can specify an IP address in order to display only that particular neighbor. In this mode, you can optionally specify whether you want to display all routes advertised to the specified neighbor, all routes received from the specified neighbor or all routes (received and accepted) from the specified neighbor.
-  - Example:
-  ```
-  admin@sonic:~$ show ip bgp neighbors 192.168.1.161
-
-  admin@sonic:~$ show ip bgp neighbors 192.168.1.161 advertised-routes
-
-  admin@sonic:~$ show ip bgp neighbors 192.168.1.161 received-routes
-
-  admin@sonic:~$ show ip bgp neighbors 192.168.1.161 routes
-  ```
-
-- `show ipv6 bgp summary`
-  - Display a summary of the status of all IPv6 Border Gateway Protocol (BGP) sessions
-  - Example:
-  ```
-  admin@sonic:~$ show ipv6 bgp summary
-  BGP router identifier 10.1.0.32, local AS number 65100
-  RIB entries 12809, using 1401 KiB of memory
-  Peers 8, using 36 KiB of memory
-
-  Neighbor        V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
-  fc00::72        4 64600   12588   12591        0    0    0 06:51:17     6402
-  fc00::76        4 64600   12587    6190        0    0    0 06:51:28     6402
-  fc00::7a        4 64600   12587    9391        0    0    0 06:51:23     6402
-  fc00::7e        4 64600   12589   12592        0    0    0 06:51:25     6402
-
-  Total number of neighbors 4
-  ```
-
-- `show ipv6 bgp neighbors <ipv6-address> (advertised-routes | received-routes | routes)`
-  - Display details of IPv6 Border Gateway Protocol (BGP) neighbors
-  -  In this mode, you must specify the IPv6 address of a neighbor and choose whether you want to display all routes advertised to the specified neighbor, all routes received from the specified neighbor or all received and accepted routes from the specified neighbor.
-  - Example:
-  ```
-  admin@sonic:~$ show ipv6 bgp neighbors fc00::72 advertised-routes
-
-  admin@sonic:~$ show ipv6 bgp neighbors fc00::72 received-routes
-
-  admin@sonic:~$ show ipv6 bgp neighbors fc00::72 routes
-  ```
 
 ### Application Layer
 
