@@ -524,7 +524,7 @@ This command displays the various tables configured in the ACL.
                    Ethernet4
                    Ethernet8
                    Ethernet12
- DATAACL2  l3      Ethernet1   data_acl_table2
+  DATAACL2  l3     Ethernet1   data_acl_table2
                    Ethernet4
 				   
   ```
@@ -532,6 +532,7 @@ This command displays the various tables configured in the ACL.
 ## show acl rule
 
 - Example:
+
   ```
   Table    Rule          Priority    Action    Match
   -------  ------------  ----------  --------  -----------------------
