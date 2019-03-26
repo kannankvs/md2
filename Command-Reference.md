@@ -508,6 +508,89 @@ If the authentication fails, AAA will check the "failthrough" configuration and 
   root@sonic:~# 
   ```
 
+# ACL Configuration And Show
+
+This section explains the various show commands and configuration commands available for users.
+
+## show acl table
+This command displays the various tables configured in the ACL.
+
+- Example:
+  ```
+  admin@sonic:~$ show acl table
+  Name     Type    Binding     Description
+  -------  ------  ----------  -------------
+  DATAACL  l3      Ethernet0   data_acl
+                   Ethernet4
+                   Ethernet8
+                   Ethernet12
+ DATAACL2  l3      Ethernet1   data_acl_table2
+                   Ethernet4
+				   
+  ```
+
+## show acl rule
+
+- Example:
+  ```
+  Table    Rule          Priority    Action    Match
+  -------  ------------  ----------  --------  -----------------------
+  DATAACL  RULE_1        9999        DROP      SRC_IP: 10.0.0.2/32
+  DATAACL  RULE_2        9998        DROP      DST_IP: 192.168.0.16/32
+  DATAACL  RULE_3        9997        DROP      L4_SRC_PORT: 4661
+  DATAACL  RULE_4        9996        DROP      IP_PROTOCOL: 126
+  DATAACL  RULE_13       9987        DROP      IP_PROTOCOL: 1
+                                               SRC_IP: 10.0.0.2/32
+  DATAACL  RULE_14       9986        DROP      IP_PROTOCOL: 17
+                                               SRC_IP: 10.0.0.2/32
+  DATAACL  DEFAULT_RULE  1           DROP      ETHER_TYPE: 2048
+  ```
+  
+
+## config acl
+This sub-section explains the list of configuration options available for ACL module.
+Note that there is no command to 
+	Command :acl
+           update
+               full
+               incremental
+
+
+**COMMAND:**
+    Full update of ACL rules configuration.
+    If a table_name is provided, the operation will be restricted in the specified table.
+        Perform full update of ACL rules configuration. All existing rules
+        will be removed. New rules loaded from file will be installed. If
+        the current_table is not empty, only rules within that table will
+        be removed and new rules in that table will be installed.
+		
+		
+ config acl update full [OPTIONS] FILE_NAME
+ @click.argument('filename', type=click.Path(exists=True))
+@click.option('--table_name', type=click.STRING, required=False)
+@click.option('--session_name', type=click.STRING, required=False)
+@click.option('--max_priority', type=click.INT, required=False)
+
+ Full update of ACL rules configuration.
+
+ Options:
+ --help  Show this message and exit.
+
+
+**COMMAND:**
+        Perform incremental ACL rules configuration update. Get existing rules from
+        Config DB. Compare with rules specified in file and perform corresponding
+        modifications.
+		        # TODO: Until we test ASIC behavior, we cannot assume that we can insert
+        # dataplane ACLs and shift existing ACLs. Therefore, we perform a full
+        # update on dataplane ACLs, and only perform an incremental update on
+        # control plane ACLs.
+		
+ config acl update incremental [OPTIONS] FILE_NAME
+
+ Incremental update of ACL rule configuration.
+
+
 
 
 ## Layer 2 Configuration & Show
