@@ -897,6 +897,82 @@ This command is to start up the particular IPv4 or IPv6 BGP neighbor using eithe
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#BGP-Configuration-And-Show-Commands)
 
 
+# ECN Configuration And Show Commands
+
+This section explains all the Explicit Congestion Notification (ECN) show commands and ECN configuation options that are supported in SONiC.
+
+## show ecn
+This sub-section contains the show commands that are supported in ECN.
+
+**show ecn**
+
+This command displays all the WRED profiles that are configured in the device.
+
+  - Usage:
+      show ecn
+	  
+  - Example:
+  ```
+	show ecn
+	Profile: **AZURE_LOSSLESS**
+	-----------------------  -------
+	red_max_threshold        2097152
+	red_drop_probability     5
+	yellow_max_threshold     2097152
+	ecn                      ecn_all
+	green_min_threshold      1048576
+	red_min_threshold        1048576
+	wred_yellow_enable       true
+	yellow_min_threshold     1048576
+	green_max_threshold      2097152
+	green_drop_probability   5
+	wred_green_enable        true
+	yellow_drop_probability  5
+	wred_red_enable          true
+	-----------------------  -------
+
+	Profile: **wredprofileabcd**
+	-----------------  ---
+	red_max_threshold  100
+	-----------------  ---
+	
+  ```
+
+## config ecn
+
+This sub-section contains the configuration commands that can configure the WRED profiles.
+
+**config ecn**
+
+This command configures the possible fields in a particular WRED profile that is specified using "-profile <profilename>" argument. 
+This command need root privileges. Either use "sudo config ecn" or go into root mode using "sudo -i".
+The list of the WRED profile fields that are configurable is listed in the below "Usage".
+
+  - Usage:
+  ```
+      config ecn [OPTIONS]
+
+	  ECN-related configuration tasks
+
+	  Options:
+	  -profile <profile_name>       Profile name  [required]
+	  -rmax <red threshold max>     Set red max threshold
+	  -rmin <red threshold min>     Set red min threshold
+	  -ymax <yellow threshold max>  Set yellow max threshold
+	  -ymin <yellow threshold min>  Set yellow min threshold
+	  -gmax <green threshold max>   Set green max threshold
+	  -gmin <green threshold min>   Set green min threshold
+	  -v, --verbose                 Enable verbose output
+	  --help                        Show this message and exit.
+  ```
+  
+  - Example:
+  ```
+  root@T1-2:~# config ecn -profile wredprofileabcd -rmax 100
+     This command configures the "red max threshold" for the WRED profile name "wredprofileabcd". It will create the WRED profile if it does not exist.
+  ```
+
+
 ## Layer 2 Configuration & Show
 #### ARP
 
