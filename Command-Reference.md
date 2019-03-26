@@ -518,14 +518,20 @@ This command displays the ACL tables that are configured in the device. Each tab
 - Example:
   ```
   admin@sonic:~$ show acl table
-  Name     Type    Binding     Description
-  -------  ------  ----------  -------------
-  DATAACL  l3      Ethernet0   data_acl
-                   Ethernet4
-                   Ethernet8
-                   Ethernet12
-  DATAACL2  l3     Ethernet1   data_acl_table2
-                   Ethernet4
+	Name      Type       Binding          Description
+	--------  ---------  ---------------  -------------
+	EVERFLOW  MIRROR     Ethernet16       EVERFLOW
+						 Ethernet96
+						 Ethernet108
+						 Ethernet112
+						 PortChannel0001
+						 PortChannel0002
+	SNMP_ACL  CTRLPLANE  SNMP             SNMP_ACL
+	DT_ACL_T1 L3         Ethernet0        DATA_ACL_TABLE_1
+						 Ethernet4
+						 Ethernet112
+						 Ethernet116
+	SSH_ONLY  CTRLPLANE  SSH              SSH_ONLY
 				   
   ```
 
@@ -542,49 +548,56 @@ Each ACL rule gives the following information.
 - Example:
 
   ```
-  Table    Rule          Priority    Action    Match
-  -------  ------------  ----------  --------  -----------------------
-  DATAACL  RULE_1        9999        DROP      SRC_IP: 10.0.0.2/32
-  DATAACL  RULE_2        9998        DROP      DST_IP: 192.168.0.16/32
-  DATAACL  RULE_3        9997        DROP      L4_SRC_PORT: 4661
-  DATAACL  RULE_4        9996        DROP      IP_PROTOCOL: 126
-  DATAACL  RULE_13       9987        DROP      IP_PROTOCOL: 1
-                                               SRC_IP: 10.0.0.2/32
-  DATAACL  RULE_14       9986        DROP      IP_PROTOCOL: 17
-                                               SRC_IP: 10.0.0.2/32
-  DATAACL  DEFAULT_RULE  1           DROP      ETHER_TYPE: 2048
+	Table     Rule          Priority    Action    Match
+	--------  ------------  ----------  --------  ------------------
+	SNMP_ACL  RULE_1        9999        ACCEPT    IP_PROTOCOL: 17
+												  SRC_IP: 1.1.1.1/32
+	SSH_ONLY  RULE_1        9999        ACCEPT    IP_PROTOCOL: 6
+												  SRC_IP: 1.1.1.1/32
+	SNMP_ACL  DEFAULT_RULE  1           DROP      ETHER_TYPE: 2048
+	SSH_ONLY  DEFAULT_RULE  1           DROP      ETHER_TYPE: 2048
+
   ```
   
 
 ## config acl
 This sub-section explains the list of configuration options available for ACL module.
-Note that there is no command to 
+Note that there is no direct command to add or delete or modify the ACL table and ACL rule. 
+Existing ACL tables and ACL rules can be updated by specifying the ACL rules in json file formats and configure those files using this CLI command.
+
 	Command :acl
-           update
-               full
-               incremental
+              update
+                 full
+                 incremental
 
 
-**COMMAND:**
-    Full update of ACL rules configuration.
-    If a table_name is provided, the operation will be restricted in the specified table.
-        Perform full update of ACL rules configuration. All existing rules
-        will be removed. New rules loaded from file will be installed. If
-        the current_table is not empty, only rules within that table will
-        be removed and new rules in that table will be installed.
+** config acl update full **
+
+This command is to update the rules in all the tables or in one specific table in full. If a table_name is provided, the operation will be restricted in the specified table. All existing rules in the specified table or all tables will be removed. New rules loaded from file will be installed. If the table_name is specified, only rules within that table will be removed and new rules in that table will be installed. If the table_name is not specified, all rules from all tables will be removed and only the rules present in the input file will be added.
+The command does not modify anything in the list of acl tables. It modifies only the rules present in those pre-existing tables.
+In order to create acl tables, either follow the config_db.json method or minigraph method to populate the list of ACL tables.
+After creating tables, either the config_db.json method or the minigraph method or the CLI method (explained here) can be used to populate the rules in those ACL tables. 
+This command will not disturb the list of tables; i.e. the output of "show acl table" is not alterted by using this command; only the output of "show acl rule" will be changed after this command.
 		
-		
- config acl update full [OPTIONS] FILE_NAME
- @click.argument('filename', type=click.Path(exists=True))
-@click.option('--table_name', type=click.STRING, required=False)
-@click.option('--session_name', type=click.STRING, required=False)
-@click.option('--max_priority', type=click.INT, required=False)
+- Usage: 
 
- Full update of ACL rules configuration.
+  config acl update full [OPTIONS] FILE_NAME
+	Some of the possible options are
+	1) --table_name <table_name>, Example: config acl update full " --table_name DT_ACL_T1  /etc/sonic/acl_table_1.json "
+	2) --session_name <session_name>, Example: config acl update full " --session_name mirror_ses1 /etc/sonic/acl_table_1.json "
+	3) --max-priority <priority_value>, Example: config acl update full " --max-priority 100  /etc/sonic/acl_table_1.json "
+	
+	NOTE: All these optional parameters go inside the double quotes. If none of the options are provided, double quotes is not required for specifying filename alone.
+	Any number of optional parameters can be configured in the command.
+	
 
- Options:
- --help  Show this message and exit.
-
+- Example:
+  
+  admin@sonic:~$ config acl update full /etc/sonic/acl_full_snmp_r2.json
+  
+  This command will remove all rules from all the ACL tables and insert all the rules present in this input file.
+  Refer an example for json file [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/files/helpers/config_service_acls.sh)
+  Refer another example [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/tasks/acl/acltb_test_rules_part_1.json)
 
 **COMMAND:**
         Perform incremental ACL rules configuration update. Get existing rules from
