@@ -983,6 +983,9 @@ The list of the WRED profile fields that are configurable is listed in the below
 
 ## Interface Show Commands
 
+This sub-section lists all the possible show commands for the interfaces available in the device. Following example gives the list of possible shows on interfaces.
+Subsequent pages explain each of these commands in detail.
+
 - Example:
 ```
 user@debug:~$ show interfaces -?
@@ -1004,15 +1007,18 @@ Commands:
 
 **show interfaces counters**
 
-- Usage:
+This show command displays packet counters for all interfaces since the last time the counters were cleared. There is no facility to display counters for one specific interface. Optional argument "-a" does not have any significance in this command.
+Optional argument "-c" can be used to clear the counters for all interfaces.
+Optional argument "-p" specify a period (in seconds) with which to gather counters over.
 
-  show interfaces counters [OPTIONS]
-    OPTIONS:
-    -a, --printall
-    -c, --clear
-    -p, --period TEXT
+  - Usage:
 
-  - Display packet counters for all interfaces since the last time the counters were cleared
+    show interfaces counters [OPTIONS]
+      OPTIONS:
+      -a, --printall
+      -c, --clear
+      -p, --period TEXT
+
   - Example:
   ```
   admin@sonic:~$ show interfaces counters
@@ -1026,6 +1032,7 @@ Commands:
    Ethernet20        U   47,983,339,172   35.89 MB/s      0.70%         0     2,174         0   58,986,354,359   51.83 MB/s      1.01%         0         0         0
    Ethernet24        U   33,543,533,441   36.59 MB/s      0.71%         0     1,613         0   43,066,076,370   49.92 MB/s      0.97%         0         0         0
   ```
+  
   - Optionally, you can specify a period (in seconds) with which to gather counters over. Note that this function will take `<period>` seconds to execute.
   - Example:
   ```
@@ -1044,9 +1051,11 @@ Commands:
 
 **show interfaces description**
 
-- Usage: 
-   show interfaces description [OPTIONS] [INTERFACENAME]
-   OPTIONS - --verbose & -h/--help
+This command displays the key fields of the interfaces such as Operational Status, Administrative Status, Alias and Description.
+
+  - Usage: 
+    show interfaces description [INTERFACENAME]
+  
    
   - Example:
   ```
@@ -1069,26 +1078,13 @@ Commands:
 
 
 **show interfaces naming_mode**
-This command displays the current interface naming mode. Interface naming mode originally set to 'default'. Interfaces are referenced by default SONiC interface names. 
-Users can change the naming_mode using "config interface_naming_mode" command. 
 
-- Usage: 
-   show interfaces naming_mode [OPTIONS]
-   OPTIONS - --verbose & -h/--help
-   
-  - Example:
-  ```
-  admin@sonic:~$ show interfaces naming_mode 
-  **default**
-  - "default" is the name of the default naming_mode since users have not modified it in this example.
-  
-  Following example shows the modified interface_naming_mode
-  admin@sonic:~$ show interfaces naming_mode 
-  **alias**
-  ```
+Refer sub-section [Interface-Naming-Mode](#Interface-Naming-Mode)
+
 
 **show interfaces neighbor**
- This command is to display the list of expected neighbors for all interfaces (or for a particular interface) that is configured.
+
+This command is to display the list of expected neighbors for all interfaces (or for a particular interface) that is configured.
  
 - Usage: 
  
@@ -1106,8 +1102,12 @@ Users can change the naming_mode using "config interface_naming_mode" command.
   ```
 
 **show interfaces portchannel**
-- `show interfaces portchannel`
-  - Display information regarding port-channel interfaces
+
+This command displays information regarding port-channel interfaces
+  
+  - Usage:
+     show interfaces portchannel
+
   - Example:
   ```
   admin@sonic:~$ show interfaces portchannel
@@ -1123,7 +1123,10 @@ Users can change the naming_mode using "config interface_naming_mode" command.
   
 **show interface status**
 
+This command displays some more fields such as Lanes, Speed, MTU, Type, Asymmetric PFC status and also the operational and administrative status of the interfaces 
+
 - Usage: 
+
    show interfaces status [OPTIONS] [INTERFACENAME]
 
   - Example:
@@ -1151,7 +1154,118 @@ Users can change the naming_mode using "config interface_naming_mode" command.
   ```
 
 **show interfaces transceiver**
-This command is explained already [here](#Transceivers)
+
+This command is already explained [here](#Transceivers)
+
+# Interface Naming Mode
+
+## show interface naming mode
+This command displays the current interface naming mode. Interface naming mode originally set to 'default'. Interfaces are referenced by default SONiC interface names. 
+Users can change the naming_mode using "config interface_naming_mode" command. 
+
+  - Usage: 
+     show interfaces naming_mode [OPTIONS]
+     OPTIONS - --verbose & -h/--help
+   
+  - Example:
+  ```
+  admin@sonic:~$ show interfaces naming_mode 
+  **default**
+  - "default" is the name of the default naming_mode since users have not modified it in this example.
+  
+  Following example shows the modified interface_naming_mode
+  admin@sonic:~$ show interfaces naming_mode 
+  **alias**
+  ```
+
+
+## config interface naming mode
+
+This command changes the interface naming mode. This command needs to be excuted in root mode either using "sudo" or "sudo -i".
+Users can select between default mode (SONiC interface names) or alias mode (Hardware vendor names). 
+The user must log out and log back in for changes to take effect. Note that the newly-applied interface mode will affect all interface-related show/config commands.
+
+NOTE: Some platforms do not support alias mapping. In such cases, this command is not applicable. Such platforms always use the same SONiC interface names.
+
+  - Usage:
+     config interface_naming_mode (default | alias)
+
+  - Example:
+    - Interface naming mode originally set to 'default'. Interfaces are referenced by default SONiC interface names:
+    ```
+    admin@sonic:~$ show interfaces naming_mode 
+    default
+
+    admin@sonic:~$ show interface status Ethernet0
+      Interface     Lanes    Speed    MTU            Alias    Oper    Admin
+    -----------  --------  -------  -----   --------------  ------  -------
+      Ethernet0   101,102      40G   9100   fortyGigE1/1/1      up       up
+
+    admin@sonic:~$ sudo config interface_naming_mode alias
+    Please logout and log back in for changes take effect.
+    ```
+
+    - After user logs out and back in again, interfaces now referenced by hardware vendor aliases:
+    ```
+    admin@sonic:~$ show interfaces naming_mode 
+    alias
+
+    admin@sonic:~$ sudo config interface fortyGigE1/1/1 shutdown
+    admin@sonic:~$ show interface status fortyGigE1/1/1
+      Interface     Lanes    Speed    MTU            Alias    Oper    Admin
+    -----------  --------  -------  -----   --------------  ------  -------
+      Ethernet0   101,102      40G   9100   fortyGigE1/1/1    down     down
+    ```
+
+# Loading Configuration
+
+This section explains the commands that are used to load the configuration from either the ConfigDB or from the minigraph.
+
+## config load
+
+This command is used to load the configuration from configDB. This command needs root privileges.
+If the optional parameter FILENAME is not specified, it loads the /etc/sonic/config_db.json that exists in the device. 
+If user wants to load a different configuration database file, users shall copy the file into the device and loads it using the optional argument FILENAME.
+When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
+If the argument is not specified, it prompts the user to confirm whether user really wants to load this configuration file.
+
+- Usage: 
+
+   config load [OPTIONS] [FILENAME]
+   OPTIONS : -y, --yes
+
+  - Example:
+   ```
+   root@T1-2:~# config load
+	Load config from the file /etc/sonic/config_db.json? [y/N]: y
+	Running command: /usr/local/bin/sonic-cfggen -j /etc/sonic/config_db.json --write-to-db
+	root@T1-2:~# 
+   ```
+
+## config load_minigraph
+
+This command is used to load the configuration from /etc/sonic/minigraph.xml. This command needs root privileges.
+When users do not want to use configuration from config_db.json, they can copy the minigraph.xml configuration file to the device and load it using this command.
+This command restarts various services running in the device and it takes some time to complete the command.
+NOTE: If the user had logged in using SSH, users may (TBD) get disconnected. Users need to reconnect their SSH sessions.
+NOTE: Management interface IP address and default route (or specific route) may require reconfiguration in case if those parameters are not part of the minigraph.xml.
+
+When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
+If the argument is not specified, it prompts the user to confirm whether user really wants to load this configuration file.
+
+  - Usage: 
+
+   config load_minigraph [OPTIONS]
+   OPTIONS : -y, --yes
+
+  - Example:
+   ```
+   root@T1-2:~# config load_minigraph
+	Reload config from minigraph? [y/N]: y
+	Running command: /usr/local/bin/sonic-cfggen -j /etc/sonic/config_db.json --write-to-db
+	root@T1-2:~# 
+   ```
+
 
 
 ## Layer 2 Configuration & Show
