@@ -979,6 +979,180 @@ The list of the WRED profile fields that are configurable is listed in the below
      This command configures the "red max threshold" for the WRED profile name "wredprofileabcd". It will create the WRED profile if it does not exist.
   ```
 
+# Interface Configuration And Show-Commands
+
+## Interface Show Commands
+
+- Example:
+```
+user@debug:~$ show interfaces -?
+
+  Show details of the network interfaces
+
+Options:
+  -?, -h, --help  Show this message and exit.
+
+Commands:
+  counters     Show interface counters
+  description  Show interface status, protocol and...
+  naming_mode  Show interface naming_mode status
+  neighbor     Show neighbor related information
+  portchannel  Show PortChannel information
+  status       Show Interface status information
+  transceiver  Show SFP Transceiver information
+```
+
+**show interfaces counters**
+
+- Usage:
+
+  show interfaces counters [OPTIONS]
+    OPTIONS:
+    -a, --printall
+    -c, --clear
+    -p, --period TEXT
+
+  - Display packet counters for all interfaces since the last time the counters were cleared
+  - Example:
+  ```
+  admin@sonic:~$ show interfaces counters
+        IFACE    STATE            RX_OK       RX_BPS    RX_UTIL    RX_ERR    RX_DRP    RX_OVR            TX_OK       TX_BPS    TX_UTIL    TX_ERR    TX_DRP    TX_OVR
+  -----------  -------  ---------------  -----------  ---------  --------  --------  --------  ---------------  -----------  ---------  --------  --------  --------
+    Ethernet0        U  471,729,839,997  653.87 MB/s     12.77%         0    18,682         0  409,682,385,925  556.84 MB/s     10.88%         0         0         0
+    Ethernet4        U  453,838,006,636  632.97 MB/s     12.36%         0     1,636         0  388,299,875,056  529.34 MB/s     10.34%         0         0         0
+    Ethernet8        U  549,034,764,539  761.15 MB/s     14.87%         0    18,274         0  457,603,227,659  615.20 MB/s     12.02%         0         0         0
+   Ethernet12        U  458,052,204,029  636.84 MB/s     12.44%         0    17,614         0  388,341,776,615  527.37 MB/s     10.30%         0         0         0
+   Ethernet16        U   16,679,692,972   13.83 MB/s      0.27%         0    17,605         0   18,206,586,265   17.51 MB/s      0.34%         0         0         0
+   Ethernet20        U   47,983,339,172   35.89 MB/s      0.70%         0     2,174         0   58,986,354,359   51.83 MB/s      1.01%         0         0         0
+   Ethernet24        U   33,543,533,441   36.59 MB/s      0.71%         0     1,613         0   43,066,076,370   49.92 MB/s      0.97%         0         0         0
+  ```
+  - Optionally, you can specify a period (in seconds) with which to gather counters over. Note that this function will take `<period>` seconds to execute.
+  - Example:
+  ```
+  admin@sonic:~$ show interfaces counters -p 5
+        IFACE    STATE    RX_OK       RX_BPS    RX_UTIL    RX_ERR    RX_DRP    RX_OVR    TX_OK       TX_BPS    TX_UTIL    TX_ERR    TX_DRP    TX_OVR
+  -----------  -------  -------  -----------  ---------  --------  --------  --------  -------  -----------  ---------  --------  --------  --------
+  Ethernet0         U      515   59.14 KB/s      0.00%         0         0         0    1,305  127.60 KB/s      0.00%         0         0         0
+  Ethernet4         U      305   26.54 KB/s      0.00%         0         0         0      279   39.12 KB/s      0.00%         0         0         0
+  Ethernet8         U      437   42.96 KB/s      0.00%         0         0         0      182   18.37 KB/s      0.00%         0         0         0
+  Ethernet12        U      284   40.79 KB/s      0.00%         0         0         0      160   13.03 KB/s      0.00%         0         0         0
+  Ethernet16        U      377   32.64 KB/s      0.00%         0         0         0      214   18.01 KB/s      0.00%         0         0         0
+  Ethernet20        U      284   36.81 KB/s      0.00%         0         0         0      138  8758.25 B/s      0.00%         0         0         0
+  Ethernet24        U      173   16.09 KB/s      0.00%         0         0         0      169   11.39 KB/s      0.00%         0         0         0
+  ```
+
+
+**show interfaces description**
+
+- Usage: 
+   show interfaces description [OPTIONS] [INTERFACENAME]
+   OPTIONS - --verbose & -h/--help
+   
+  - Example:
+  ```
+  admin@sonic:~$ show interfaces description 
+  Interface    Oper    Admin            Alias           Description
+  -----------  ------  -------  ---------------  --------------------
+  Ethernet0    down       up   hundredGigE1/1  T0-1:hundredGigE1/30
+  Ethernet4    down       up   hundredGigE1/2  T0-2:hundredGigE1/30
+  Ethernet8    down     down   hundredGigE1/3        hundredGigE1/3
+  Ethernet12    down     down   hundredGigE1/4        hundredGigE1/4
+  ```
+  ```
+  show the description for one particular interface.
+  admin@sonic:~$ show interfaces description Ethernet4
+  Interface    Oper    Admin           Alias           Description
+  -----------  ------  -------  --------------  --------------------
+  Ethernet4    down       up  hundredGigE1/2  T0-2:hundredGigE1/30
+
+  ```
+
+
+**show interfaces naming_mode**
+This command displays the current interface naming mode. Interface naming mode originally set to 'default'. Interfaces are referenced by default SONiC interface names. 
+Users can change the naming_mode using "config interface_naming_mode" command. 
+
+- Usage: 
+   show interfaces naming_mode [OPTIONS]
+   OPTIONS - --verbose & -h/--help
+   
+  - Example:
+  ```
+  admin@sonic:~$ show interfaces naming_mode 
+  **default**
+  - "default" is the name of the default naming_mode since users have not modified it in this example.
+  
+  Following example shows the modified interface_naming_mode
+  admin@sonic:~$ show interfaces naming_mode 
+  **alias**
+  ```
+
+**show interfaces neighbor**
+ This command is to display the list of expected neighbors for all interfaces (or for a particular interface) that is configured.
+ 
+- Usage: 
+ 
+   show interfaces neighbor expected [OPTIONS] [INTERFACENAME]
+   
+  - Example:
+  ```
+  admin@sonic:~$ show interfaces neighbor expected
+	LocalPort    Neighbor    NeighborPort     NeighborLoopback    NeighborMgmt    NeighborType
+	-----------  ----------  ---------------  ------------------  --------------  --------------
+	Ethernet0    T0-1        hundredGigE1/30  None                10.11.162.45    ToRRouter
+	Ethernet4    T0-2        hundredGigE1/30  None                10.11.162.44    ToRRouter
+	Ethernet112  T2-1        hundredGigE1/2   None                10.11.150.201   SpineRouter
+	Ethernet116  T2-2        hundredGigE1/2   None                10.11.150.202   SpineRouter
+  ```
+
+**show interfaces portchannel**
+- `show interfaces portchannel`
+  - Display information regarding port-channel interfaces
+  - Example:
+  ```
+  admin@sonic:~$ show interfaces portchannel
+  Flags: A - active, I - inactive, Up - up, Dw - Down, N/A - not available, S - selected, D - deselected
+    No.  Team Dev       Protocol     Ports
+  -----  -------------  -----------  ---------------------------
+     24  PortChannel24  LACP(A)(Up)  Ethernet28(S) Ethernet24(S)
+     48  PortChannel48  LACP(A)(Up)  Ethernet52(S) Ethernet48(S)
+     40  PortChannel40  LACP(A)(Up)  Ethernet44(S) Ethernet40(S)
+      0  PortChannel0   LACP(A)(Up)  Ethernet0(S) Ethernet4(S)
+      8  PortChannel8   LACP(A)(Up)  Ethernet8(S) Ethernet12(S)
+  ```
+  
+**show interface status**
+
+- Usage: 
+   show interfaces status [OPTIONS] [INTERFACENAME]
+
+  - Example:
+  ```
+  show interface status of all interfaces
+  
+  admin@sonic:~$ show interfaces status
+  Interface            Lanes    Speed    MTU            Alias    Oper    Admin    Type    Asym PFC
+  -----------  ---------------  -------  -----  ---------------  ------  -------  ------  ----------
+  Ethernet0      49,50,51,52     100G   9100   hundredGigE1/1    down       up     N/A         off
+  Ethernet4      53,54,55,56     100G   9100   hundredGigE1/2    down       up     N/A         off
+  Ethernet8      57,58,59,60     100G   9100   hundredGigE1/3    down     down     N/A         off
+  <contiues to display all the interfaces>
+  
+  ```
+  
+  ```
+  show interface status for one particular interface
+  
+  admin@sonic:~$ show interface status Ethernet0
+  Interface     Lanes    Speed    MTU            Alias    Oper    Admin
+  -----------  --------  -------  -----   --------------  ------  -------
+  Ethernet0   101,102      40G   9100   fortyGigE1/1/1      up       up
+
+  ```
+
+**show interfaces transceiver**
+This command is explained already [here](#Transceivers)
+
 
 ## Layer 2 Configuration & Show
 #### ARP
