@@ -1333,7 +1333,7 @@ The command "config platform" is obsoleted. TBD.
 This command is to display all the port channels that are configured in the device and its current status.
 
   - Usage:
-   show interfaces portchanne
+   show interfaces portchannel
 
   - Example:
   ```
@@ -1350,10 +1350,42 @@ This command is to display all the port channels that are configured in the devi
 
 ## PortChannel Configuration
 
+This sub-section explains how to configure the portchannel and its member ports.
 
-Always use portchannel names in the format "PortChannelxxxx", where "xxxx" is the number. Ex: "PortChannel0002".
-If users give any other name like "pc99", the name is not printed in the "show interface portchannel".
-When any port is already member of any other portchannel and if user tries to add the same port in some other portchannel (without deleting it from the current portchannel), the command fails internally. But, it does not print any error message. In such cases, remove the member from current portchannel and then add it to new portchannel.
+**config portchannel add/del <portchannel_name>**
+
+This command is used to add or delete the portchannel. This command needs root privileges. 
+It is recommended to use portchannel names in the format "PortChannelxxxx", where "xxxx" is the number. Ex: "PortChannel0002".
+
+NOTE: If users specify any other name like "pc99", command will succeed, but the name is not printed properly in the "show interface portchannel" command.
+
+TBD: When any port is already member of any other portchannel and if user tries to add the same port in some other portchannel (without deleting it from the current portchannel), the command fails internally. But, it does not print any error message. In such cases, remove the member from current portchannel and then add it to new portchannel.
+
+Command takes two optional arguements given below.
+1) min-links  - minimum number of links required to bring up the portchannel
+2) fallback - true/false. LACP fallback feature can be enabled / disabled.  When it is set to true, only one member port will be selected as active per portchannel during fallback mode. Refer https://github.com/Azure/SONiC/blob/master/doc/lag/LACP%20Fallback%20Feature%20for%20SONiC_v0.5.md for more details about fallback feature.
+
+  - Usage:
+   config portchannel add/del <portchannel_name> [min-links INTEGER] [fallback true/false]
+
+  - Example:
+  ```
+  admin@sonic:~$ sudo config portchannel add PortChannel0011
+  This command will create the portchannel with name "PortChannel0011".
+  ```
+
+**config portchannel member add/del <portchannel_name> <member_port>**
+
+This command is to add or delete a member port into the already created portchannel.
+
+  - Usage:
+   config portchannel member add/del <portchannel_name> <member_port>
+
+  - Example:
+  ```
+  admin@sonic:~$ sudo config portchannel member add PortChannel0011 Ethernet4
+  This command will add Ethernet4 as member of the portchannel "PortChannel0011".
+  ```
 
 ## Layer 2 Configuration & Show
 #### ARP
