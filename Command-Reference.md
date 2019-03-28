@@ -1374,17 +1374,75 @@ Command takes two optional arguements given below.
   This command will create the portchannel with name "PortChannel0011".
   ```
 
-**config portchannel member add/del <portchannel_name> <member_port>**
+**config portchannel member add/del <portchannel_name> <member_portname>**
 
 This command is to add or delete a member port into the already created portchannel.
 
   - Usage:
-   config portchannel member add/del <portchannel_name> <member_port>
+   config portchannel member add/del <portchannel_name> <member_portname>
 
   - Example:
   ```
   admin@sonic:~$ sudo config portchannel member add PortChannel0011 Ethernet4
   This command will add Ethernet4 as member of the portchannel "PortChannel0011".
+  ```
+
+# QoS Configuration And Show
+
+# QoS Show
+
+
+# QoS Configuration
+
+**config qos clear**
+
+This command clears all the QoS configuration from all the following QOS Tables in ConfigDB. This command needs root privileges.
+
+1) TC_TO_PRIORITY_GROUP_MAP,
+2) MAP_PFC_PRIORITY_TO_QUEUE,
+3) TC_TO_QUEUE_MAP,
+4) DSCP_TO_TC_MAP,
+5) SCHEDULER,
+6) PFC_PRIORITY_TO_PRIORITY_GROUP_MAP,
+7) PORT_QOS_MAP,
+8) WRED_PROFILE,
+9) QUEUE,
+10) CABLE_LENGTH,
+11) BUFFER_POOL,
+12) BUFFER_PROFILE,
+13) BUFFER_PG,
+14) BUFFER_QUEUE
+
+   - Usage:
+
+      config qos clear 
+
+  - Example:
+  ```
+  admin@sonic:~$ sudo config qos clear 
+  
+  ```
+
+**config qos reload**
+
+This command reloads the QoS configuration. It uses the platform specific buffers.json.j2 file & qos.json.j2 file and it generates new QOS configuration.
+It internally uses the various other configuration present in running configuration (TBD: Is it based on ConfigDB or RunningDB?) and it internally uses the sonic-cfggen utility to do this job.
+From this command perspective, user need not know these internals. 
+TBD: Is this command resetting all the QOS configuration to DEFAULT values? or to Startup QOS values? or is it getting generated based on various other running configurations from running DB?
+
+   - Usage:
+
+      config qos reload 
+	  
+  - Example:
+  ```
+	root@T1-2:~# config qos reload 
+	Running command: /usr/local/bin/sonic-cfggen -d -t /usr/share/sonic/device/x86_64-dell_z9100_c2538-r0/Force10-Z9100-C32/buffers.json.j2 >/tmp/buffers.json
+	Running command: /usr/local/bin/sonic-cfggen -d -t /usr/share/sonic/device/x86_64-dell_z9100_c2538-r0/Force10-Z9100-C32/qos.json.j2 -y /etc/sonic/sonic_version.yml >/tmp/qos.json
+	Running command: /usr/local/bin/sonic-cfggen -j /tmp/buffers.json --write-to-db
+	Running command: /usr/local/bin/sonic-cfggen -j /tmp/qos.json --write-to-db
+	root@T1-2:~# 
+	In this example, it uses the buffers.json.j2 file 
   ```
 
 ## Layer 2 Configuration & Show
