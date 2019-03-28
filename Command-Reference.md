@@ -1242,6 +1242,29 @@ If the argument is not specified, it prompts the user to confirm whether user re
 	root@T1-2:~# 
    ```
 
+## config load_mgmt_config
+
+This command is used to reconfigure hostname and mgmt interface based on device description file. This command needs root privileges.
+This command either uses the optional file specified as arguement or looks for the file "/etc/sonic/device_desc.xml". 
+If the file does not exist or if the file does not have valid fields for "hostname" and "ManagementAddress", it fails.
+
+When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
+If the argument is not specified, it prompts the user to confirm whether user really wants to load this configuration file.
+
+  - Usage: 
+
+   config load_mgmt_config [OPTIONS] [FILENAME]
+   OPTIONS : -y, --yes
+
+  - Example:
+   ```
+   root@T1-2:~# config load_mgmt_config
+	Reload config from minigraph? [y/N]: y
+	Running command: /usr/local/bin/sonic-cfggen -M /etc/sonic/device_desc.xml --write-to-db
+	root@T1-2:~# 
+   ```
+
+
 ## config load_minigraph
 
 This command is used to load the configuration from /etc/sonic/minigraph.xml. This command needs root privileges.
@@ -1266,7 +1289,71 @@ If the argument is not specified, it prompts the user to confirm whether user re
 	root@T1-2:~# 
    ```
 
+# Mirroring Configuration And Show
 
+# Mirroring Show
+
+#Mirroring Config
+
+This command is used to add or remove mirroring sessions. Mirror session is identified by "session_name". 
+While adding a new session, users need to configure the following fields that are used while forwarding the mirrored packets.
+
+1) source IP address, 
+2) destination IP address, 
+3) DSCP (QoS) value with which mirrored packets are forwarded
+4) TTL value
+5) optional - GRE Type in case if user wants to send the packet via GRE tunnel. TBD. Valid values/type need to be filled in.
+6) optional - Queue in which packets shall be sent out of the device.TBD. Valid values/type need to be filled in.
+
+- Usage: 
+    config mirror_session add <session_name> <src_ip> <dst_ip>
+                                 <dscp> <ttl> [gre_type] [queue]
+
+  - Example:
+  ```
+	root@T1-2:~# config mirror_session add mrr_abcd 1.2.3.4 20.21.22.23 8 100 0x6558 0
+	root@T1-2:~# show mirror_session 
+	Name       Status    SRC IP       DST IP       GRE     DSCP    TTL    Queue
+	---------  --------  -----------  -----------  ------  ------  -----  -------
+	mrr_abcd   inactive  1.2.3.4      20.21.22.23  0x6558  8       100    0
+	root@T1-2:~#
+
+  ```
+
+# Platform
+
+The command "config platform" is obsoleted. TBD.
+
+# PortChannel Configuration And Show
+
+## PortChannel Show
+
+**show interfaces portchannel**
+
+This command is to display all the port channels that are configured in the device and its current status.
+
+  - Usage:
+   show interfaces portchanne
+
+  - Example:
+  ```
+  admin@sonic:~$ show interfaces portchannel
+  Flags: A - active, I - inactive, Up - up, Dw - Down, N/A - not available, S - selected, D - deselected
+    No.  Team Dev       Protocol     Ports
+  -----  -------------  -----------  ---------------------------
+     24  PortChannel24  LACP(A)(Up)  Ethernet28(S) Ethernet24(S)
+     48  PortChannel48  LACP(A)(Up)  Ethernet52(S) Ethernet48(S)
+     40  PortChannel40  LACP(A)(Up)  Ethernet44(S) Ethernet40(S)
+      0  PortChannel0   LACP(A)(Up)  Ethernet0(S) Ethernet4(S)
+      8  PortChannel8   LACP(A)(Up)  Ethernet8(S) Ethernet12(S)
+  ```
+
+## PortChannel Configuration
+
+
+Always use portchannel names in the format "PortChannelxxxx", where "xxxx" is the number. Ex: "PortChannel0002".
+If users give any other name like "pc99", the name is not printed in the "show interface portchannel".
+When any port is already member of any other portchannel and if user tries to add the same port in some other portchannel (without deleting it from the current portchannel), the command fails internally. But, it does not print any error message. In such cases, remove the member from current portchannel and then add it to new portchannel.
 
 ## Layer 2 Configuration & Show
 #### ARP
@@ -1387,23 +1474,7 @@ If the argument is not specified, it prompts the user to confirm whether user re
 
 #### LAG
 
-- `show interfaces portchannel`
-  - Display information regarding port-channel interfaces
-  - Example:
-  ```
-  admin@sonic:~$ show interfaces portchannel
-  Flags: A - active, I - inactive, Up - up, Dw - Down, N/A - not available, S - selected, D - deselected
-    No.  Team Dev       Protocol     Ports
-  -----  -------------  -----------  ---------------------------
-     24  PortChannel24  LACP(A)(Up)  Ethernet28(S) Ethernet24(S)
-     48  PortChannel48  LACP(A)(Up)  Ethernet52(S) Ethernet48(S)
-     16  PortChannel16  LACP(A)(Up)  Ethernet20(S) Ethernet16(S)
-     32  PortChannel32  LACP(A)(Up)  Ethernet32(S) Ethernet36(S)
-     56  PortChannel56  LACP(A)(Up)  Ethernet60(S) Ethernet56(S)
-     40  PortChannel40  LACP(A)(Up)  Ethernet44(S) Ethernet40(S)
-      0  PortChannel0   LACP(A)(Up)  Ethernet0(S) Ethernet4(S)
-      8  PortChannel8   LACP(A)(Up)  Ethernet8(S) Ethernet12(S)
-  ```
+
 
 #### LLDP
 
