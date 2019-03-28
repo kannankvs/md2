@@ -1798,7 +1798,7 @@ This command is to reset the global value for authtype or passkey or timeout to 
 Default for authtype is "pap", default for passkey is EMPTY_STRING and default for timeout is 5 seconds.
 
    - Usage: 
-     config tacacs default authtype|passkey|timeout
+     config tacacs default authtype\|passkey\|timeout
 
   - Example:
   ```
@@ -1812,7 +1812,7 @@ This command is to modify the global value for the TACACS+ passkey.
 When user has not configured server specific passkey, this global value shall be used for that server.
 
    - Usage: 
-     config tacacs passkey <passkey>
+     config tacacs passkey <pass_key>
 
   - Example:
   ```
