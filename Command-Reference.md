@@ -1428,7 +1428,11 @@ This command clears all the QoS configuration from all the following QOS Tables 
 This command reloads the QoS configuration. It uses the platform specific buffers.json.j2 file & qos.json.j2 file and it generates new QOS configuration.
 It internally uses the various other configuration present in running configuration (TBD: Is it based on ConfigDB or RunningDB?) and it internally uses the sonic-cfggen utility to do this job.
 From this command perspective, user need not know these internals. 
-TBD: Is this command resetting all the QOS configuration to DEFAULT values? or to Startup QOS values? or is it getting generated based on various other running configurations from running DB?
+**TBD:** 
+1) Is this command resetting all the QOS configuration to DEFAULT values? or to Startup QOS values? or is it getting generated based on various other running configurations from running DB?
+2) Can users create a different buffers.json.j2 file or qos.json.j2 file? 
+3) Should we explain about "/usr/share/sonic/templates/buffers_config.j2" and "/usr/share/sonic/templates/qos_config.j2" ?
+4) What all changes can users do on the QOS configuration?
 
    - Usage:
 
@@ -1442,7 +1446,8 @@ TBD: Is this command resetting all the QOS configuration to DEFAULT values? or t
 	Running command: /usr/local/bin/sonic-cfggen -j /tmp/buffers.json --write-to-db
 	Running command: /usr/local/bin/sonic-cfggen -j /tmp/qos.json --write-to-db
 	root@T1-2:~# 
-	In this example, it uses the buffers.json.j2 file 
+	In this example, it uses the buffers.json.j2 file and qos.json.j2 file from platform specific folders. 
+	These platform specific j2 files internall use the file "/usr/share/sonic/templates/buffers_config.j2" and "/usr/share/sonic/templates/qos_config.j2" to generate the configuration.
   ```
 
 ## Layer 2 Configuration & Show
