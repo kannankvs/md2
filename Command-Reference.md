@@ -1217,7 +1217,7 @@ NOTE: Some platforms do not support alias mapping. In such cases, this command i
       Ethernet0   101,102      40G   9100   fortyGigE1/1/1    down     down
     ```
 
-# Loading Configuration
+# Loading, Reloading And Saving Configuration
 
 This section explains the commands that are used to load the configuration from either the ConfigDB or from the minigraph.
 
@@ -1226,6 +1226,7 @@ This section explains the commands that are used to load the configuration from 
 This command is used to load the configuration from configDB. This command needs root privileges.
 If the optional parameter FILENAME is not specified, it loads the /etc/sonic/config_db.json that exists in the device. 
 If user wants to load a different configuration database file, users shall copy the file into the device and loads it using the optional argument FILENAME.
+TBD: To be verified. This command does not clear the running configuration. If users had done configuration changes on top of the already saved config_db.json, those configuration shall remain in running configuration even after loading the new configuration. Since configuration loading is always incremental, this command shall apply only the additional configuration present in the input file (or config_db.json) on top of running configuration. 
 When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
 If the argument is not specified, it prompts the user to confirm whether user really wants to load this configuration file.
 
@@ -1287,6 +1288,57 @@ If the argument is not specified, it prompts the user to confirm whether user re
 	Reload config from minigraph? [y/N]: y
 	Running command: /usr/local/bin/sonic-cfggen -j /etc/sonic/config_db.json --write-to-db
 	root@T1-2:~# 
+   ```
+
+## config reload
+
+This command is used to clear current configuration and import new configurationn from the input file or from /etc/sonic/config_db.json.
+This command shall stop all services before clearing the configuration and it then restarts those services.
+
+This command restarts various services running in the device and it takes some time to complete the command.
+NOTE: If the user had logged in using SSH, users may (TBD) get disconnected. Users need to reconnect their SSH sessions.
+NOTE: Management interface IP address and default route (or specific route) may require reconfiguration in case if those parameters are not part of the minigraph.xml.
+
+When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
+If the argument is not specified, it prompts the user to confirm whether user really wants to load this configuration file.
+
+  - Usage: 
+
+   config reload [-y|--yes] [-l | --load-sysinfo] [FILENAME]
+
+  - Example:
+   ```
+   root@T1-2:~# config reload
+	Clear current config and reload config from the file /etc/sonic/config_db.json? [y/N]: y
+	Running command: systemctl stop dhcp_relay
+	Running command: systemctl stop swss
+	Running command: systemctl stop snmp
+	Warning: Stopping snmp.service, but it can still be activated by:
+	  snmp.timer
+	Running command: systemctl stop lldp
+	Running command: systemctl stop pmon
+	Running command: systemctl stop bgp
+	Running command: systemctl stop teamd
+	Running command: /usr/local/bin/sonic-cfggen -H -k Force10-Z9100-C32 --write-to-db
+	Running command: /usr/local/bin/sonic-cfggen -j /etc/sonic/config_db.json --write-to-db
+	Running command: systemctl restart hostname-config
+	Running command: systemctl restart interfaces-config
+	Timeout, server 10.11.162.42 not responding.
+	root@T1-2:~# 
+   ```
+
+## config save
+
+This command is to save the config DB configuration into the user-specified filename or into the default /etc/sonic/config_db.json. This saves the configuration into the disk which is available even after reboots.
+Saved file can be transferred to remote machines for debugging. If users wants to load the configuration from this new file at any point of time, they can use "config load" command and provide this newly generated file as input. If users wants this newly generated file to be used during reboot, they need to copy this file to /etc/sonic/config_db.json.
+
+  - Usage: 
+     config save [OPTIONS] [FILENAME]
+
+  - Example:
+   ```
+   root@T1-2:~# config save -y /etc/sonic/config2.json - this saves to the filename specified.
+   root@T1-2:~# config save -y - this saves to /etc/sonic/config_db.json.
    ```
 
 # Mirroring Configuration And Show
@@ -1391,6 +1443,189 @@ This command is to add or delete a member port into the already created portchan
 
 # QoS Show
 
+### PFC
+
+**show pfc counters**
+
+This command displays the details of the Rx & Tx priority-flow-control (pfc) for all ports. This command can be used to clear the counters using -c option.
+
+  - Usage: 
+     show pfc counters [-c or --clear]
+
+  - Example:
+   ```
+   admin@sonic:~$ show pfc counters
+      Port Rx    PFC0    PFC1    PFC2    PFC3    PFC4    PFC5    PFC6    PFC7
+    -----------  ------  ------  ------  ------  ------  ------  ------  ------
+    Ethernet0       0       0       0       0       0       0       0       0
+    Ethernet4       0       0       0       0       0       0       0       0
+    Ethernet8       0       0       0       0       0       0       0       0
+   Ethernet12       0       0       0       0       0       0       0       0
+
+      Port Tx    PFC0    PFC1    PFC2    PFC3    PFC4    PFC5    PFC6    PFC7
+    -----------  ------  ------  ------  ------  ------  ------  ------  ------
+    Ethernet0       0       0       0       0       0       0       0       0
+    Ethernet4       0       0       0       0       0       0       0       0
+    Ethernet8       0       0       0       0       0       0       0       0
+   Ethernet12       0       0       0       0       0       0       0       0
+   ```
+
+### Queue And Priority-Group
+
+This sub-section explains the following queue parameters that can be displayed using "show queue" command.
+1) queue counters
+2) queue watermark
+3) priority-group  watermark
+4) queue persistent-watermark
+
+
+**show queue counters**
+
+This command displays packet and byte counters for all queues of all ports or one specific-port given as arguement.
+This command can be used to clear the counters for all queues of all ports. Note that port specific clear is not supported (TBD: Need to reconfirm).
+ 
+  - Usage:
+     show queue counters [-c or --clear] [<interface-name>] 
+
+  - Example:
+  ```
+    This example gives the sample output from two ports Ethernet0 and Ethernet4.
+	
+    admin@sonic:~$ show queue counters 
+         Port    TxQ    Counter/pkts    Counter/bytes    Drop/pkts    Drop/bytes
+    ---------  -----  --------------  ---------------  -----------  ------------
+    Ethernet0    UC0               0                0            0             0
+    Ethernet0    UC1               0                0            0             0
+    Ethernet0    UC2               0                0            0             0
+    Ethernet0    UC3               0                0            0             0
+    Ethernet0    UC4               0                0            0             0
+    Ethernet0    UC5               0                0            0             0
+    Ethernet0    UC6               0                0            0             0
+    Ethernet0    UC7               0                0            0             0
+    Ethernet0    UC8               0                0            0             0
+    Ethernet0    UC9               0                0            0             0
+    Ethernet0    MC0               0                0            0             0
+    Ethernet0    MC1               0                0            0             0
+    Ethernet0    MC2               0                0            0             0
+    Ethernet0    MC3               0                0            0             0
+    Ethernet0    MC4               0                0            0             0
+    Ethernet0    MC5               0                0            0             0
+    Ethernet0    MC6               0                0            0             0
+    Ethernet0    MC7               0                0            0             0
+    Ethernet0    MC8               0                0            0             0
+    Ethernet0    MC9               0                0            0             0
+
+         Port    TxQ    Counter/pkts    Counter/bytes    Drop/pkts    Drop/bytes
+    ---------  -----  --------------  ---------------  -----------  ------------
+    Ethernet4    UC0               0                0            0             0
+    Ethernet4    UC1               0                0            0             0
+    Ethernet4    UC2               0                0            0             0
+    Ethernet4    UC3               0                0            0             0
+    Ethernet4    UC4               0                0            0             0
+    Ethernet4    UC5               0                0            0             0
+    Ethernet4    UC6               0                0            0             0
+    Ethernet4    UC7               0                0            0             0
+    Ethernet4    UC8               0                0            0             0
+    Ethernet4    UC9               0                0            0             0
+    Ethernet4    MC0               0                0            0             0
+    Ethernet4    MC1               0                0            0             0
+    Ethernet4    MC2               0                0            0             0
+    Ethernet4    MC3               0                0            0             0
+    Ethernet4    MC4               0                0            0             0
+    Ethernet4    MC5               0                0            0             0
+    Ethernet4    MC6               0                0            0             0
+    Ethernet4    MC7               0                0            0             0
+    Ethernet4    MC8               0                0            0             0
+    Ethernet4    MC9               0                0            0             0
+  ```
+  - Optionally, you can specify an interface name in order to display only that particular interface
+  - Example:
+  ```
+  admin@sonic:~$ show queue counters Ethernet72
+  ```
+  
+**show queue watermark**
+
+This command displays the user watermark for the queues (Egress shared pool occupancy per queue) for either the unicast queues or multicast queues for all ports
+
+  - Usage: 
+     show queue watermark <multicast|unicast>
+
+  - Example:
+  ```
+  admin@sonic:~$ show queue  watermark unicast
+  Egress shared pool occupancy per unicast queue:
+         Port    UC0    UC1    UC2    UC3    UC4    UC5    UC6    UC7
+  -----------  -----  -----  -----  -----  -----  -----  -----  -----
+    Ethernet0      0      0      0      0      0      0      0      0
+    Ethernet4      0      0      0      0      0      0      0      0
+    Ethernet8      0      0      0      0      0      0      0      0
+    Ethernet12     0      0      0      0      0      0      0      0
+	
+  admin@sonic:~$ show queue  watermark multicast (Egress shared pool occupancy per multicast queue)
+  
+  ```
+
+**show priority-group watermark|persistent-watermark**
+
+  - Usage: 
+
+     show priority-group <watermark|persistent-watermark> <headroom|shared>
+
+
+  - Example:
+  ```
+  admin@sonic:~$ show priority-group  watermark shared
+  Ingress shared pool occupancy per PG:
+         Port    PG0    PG1    PG2    PG3    PG4    PG5    PG6    PG7
+  -----------  -----  -----  -----  -----  -----  -----  -----  -----
+    Ethernet0      0      0      0      0      0      0      0      0
+    Ethernet4      0      0      0      0      0      0      0      0
+    Ethernet8      0      0      0      0      0      0      0      0
+    Ethernet12     0      0      0      0      0      0      0      0
+
+  admin@sonic:~$ show priority-group watermark headroom	(Ingress headroom per PG)
+  admin@sonic:~$ show priority-group persistent-watermark shared (Ingress shared pool occupancy per PG)
+  admin@sonic:~$ show priority-group persistent-watermark headroom (Ingress headroom per PG)
+  ```
+
+In addition to user watermark("show queue|priority-group watermark ..."), a persistent watermark is available.
+It hold values independently of user watermark. This way user can use "user watermark" for debugging, clear it, etc, but the "persistent watermark" will not be affected. 
+
+**show queue persistent-watermark**
+
+  - Usage: 
+
+     show queue persistent-watermark <unicast|multicast>
+
+
+  - Example:
+
+  ```
+  admin@sonic:~$ show queue persistent-watermark unicast
+  Egress shared pool occupancy per unicast queue:
+         Port    UC0    UC1    UC2    UC3    UC4    UC5    UC6    UC7
+  -----------  -----  -----  -----  -----  -----  -----  -----  -----
+    Ethernet0    N/A    N/A    N/A    N/A    N/A    N/A    N/A    N/A
+    Ethernet4    N/A    N/A    N/A    N/A    N/A    N/A    N/A    N/A
+    Ethernet8    N/A    N/A    N/A    N/A    N/A    N/A    N/A    N/A
+    Ethernet12   N/A    N/A    N/A    N/A    N/A    N/A    N/A    N/A
+
+  admin@sonic:~$ show queue persistent-watermark multicast (Egress shared pool occupancy per multicast queue)
+
+  ```
+  
+  Both "user watermark" and "persistent watermark" can be cleared by user: 
+  ```
+  root@sonic:~# sonic-clear queue persistent-watermark unicast
+
+  root@sonic:~# sonic-clear queue persistent-watermark multicast
+
+  root@sonic:~# sonic-clear priority-group persistent-watermark shared
+
+  root@sonic:~# sonic-clear priority-group persistent-watermark headroom
+  ```
+
 
 # QoS Configuration
 
@@ -1425,14 +1660,33 @@ This command clears all the QoS configuration from all the following QOS Tables 
 
 **config qos reload**
 
-This command reloads the QoS configuration. It uses the platform specific buffers.json.j2 file & qos.json.j2 file and it generates new QOS configuration.
-It internally uses the various other configuration present in running configuration (TBD: Is it based on ConfigDB or RunningDB?) and it internally uses the sonic-cfggen utility to do this job.
-From this command perspective, user need not know these internals. 
-**TBD:** 
-1) Is this command resetting all the QOS configuration to DEFAULT values? or to Startup QOS values? or is it getting generated based on various other running configurations from running DB?
-2) Can users create a different buffers.json.j2 file or qos.json.j2 file? 
-3) Should we explain about "/usr/share/sonic/templates/buffers_config.j2" and "/usr/share/sonic/templates/qos_config.j2" ?
-4) What all changes can users do on the QOS configuration?
+This command reloads the QoS configuration. 
+QoS configuration has got two sets of configurations.
+1) Generic QOS Configuration - This gives complete list of all possible QOS configuration. Its given in the file /usr/share/sonic/templates/qos_config.j2 in the device.
+   Reference: https://github.com/Azure/sonic-buildimage/blob/master/files/build_templates/qos_config.j2
+   Users have flexibility to have platform specific qos configuration by placing the qos_config.j2 file at /usr/share/sonic/device/<platform>/<hwsku>/.
+   If users want to modify any of this loaded QOS configuration, they can modify this file in the device and then issue the "config qos reload" command.
+   
+2) Platform specific buffer configuration. Every platform has got platform specific and topology specific (T0 or T1 or T2) buffer configuration at /usr/share/sonic/device/<platform>/<hwsku>/buffers_defaults_tx.j2
+   In addition to platform specific configuration file, a generic configuration file is also present at /usr/share/sonic/templates/buffers_config.j2.
+   Reference: https://github.com/Azure/sonic-buildimage/blob/master/files/build_templates/buffers_config.j2
+   Users can either modify the platform specific configuration file, or the generic configuration file and then issue this "config qos reload" command.
+
+These configuration files are already loaded in the device as part of the reboot process. In case if users wants to modify any of these configurations, they need to modify the appropriate QOS tables and fields in these files and then use this reload command.
+This command uses those modified buffers.json.j2 file & qos.json.j2 file and reloads the new QOS configuration.
+If users have not made any changes in these configuration files, this command need not be executed.
+
+Some of the example QOS configurations that users can modify are given below.
+1) TC_TO_PRIORITY_GROUP_MAP
+2) MAP_PFC_PRIORITY_TO_QUEUE
+3) TC_TO_QUEUE_MAP
+4) DSCP_TO_TC_MAP
+5) SCHEDULER
+6) PFC_PRIORITY_TO_PRIORITY_GROUP_MAP
+7) PORT_QOS_MAP
+8) WRED_PROFILE
+9) CABLE_LENGTH
+10) BUFFER_QUEUE
 
    - Usage:
 
@@ -1447,8 +1701,141 @@ From this command perspective, user need not know these internals.
 	Running command: /usr/local/bin/sonic-cfggen -j /tmp/qos.json --write-to-db
 	root@T1-2:~# 
 	In this example, it uses the buffers.json.j2 file and qos.json.j2 file from platform specific folders. 
-	These platform specific j2 files internall use the file "/usr/share/sonic/templates/buffers_config.j2" and "/usr/share/sonic/templates/qos_config.j2" to generate the configuration.
+	When there are no changes in the platform specific configutation files, they internally use the file "/usr/share/sonic/templates/buffers_config.j2" and "/usr/share/sonic/templates/qos_config.j2" to generate the configuration.
   ```
+
+# TACACS+ Configuration And Show
+
+## TACACS+ show
+
+**show tacacs**
+This command displays the global configuration fields and the list of all tacacs servers and their correponding configurations.
+
+  - Usage:
+	show tacacs 
+  
+  - Example:
+  ```  
+	TACPLUS global auth_type pap (default)
+	TACPLUS global timeout 99
+	TACPLUS global passkey <EMPTY_STRING> (default)
+
+	TACPLUS_SERVER address 10.11.12.14
+				   priority 9
+				   tcp_port 50
+				   auth_type mschap
+				   timeout 10
+				   passkey testing789
+
+	TACPLUS_SERVER address 10.0.0.9
+				   priority 1
+				   tcp_port 49
+  ```
+
+## TACACS+ Congiguration
+
+This sub-section explains the command "config tacacs" and its sub-commands that are used to configure the following tacacs+ parameters.
+Some of the parameters like authtype, passkey and timeout can be either configured at per server level or at global level (global value will be applied if there no server level configuration)
+
+1) Add/Delete the tacacs+ server details.
+2) authtype - global configuration that is applied to all servers if there is no server specific configuration.
+3) default - reset the authtype or passkey or timeout to the default values.
+4) passkey - global configuration that is applied to all servers if there is no server specific configuration.
+5) timeout - global configuration that is applied to all servers if there is no server specific configuration.
+
+**config tacacs add**
+This command is to add a TACACS+ server to the tacacs server list.
+Note that more than one tacacs+ (maximum of seven) can be added in the device. When user tries to login, tacacs client shall contact the servers one by one. When any server times out, device will try the next server one by one.
+
+   - Usage: 
+     config tacacs add <ip_address> [-t|--timeout SECOND] [-k|--key SECRET] [-a|--type TYPE] [-o|--port PORT] [-p|--pri PRIORITY] [-m|--use-mgmt-vrf]
+	 
+	 **Arguements:**
+	 ip_address - TACACS+ server IP address.
+	 timeout - Transmission timeout interval in seconds, range 1 to 1000 (TBD - no clarity), default 5
+	 key - Shared secret
+	 type - Authentication type, "chap" or "pap" or "mschap" or "login", default is "pap".
+	 port - TCP port range is 1 to 65535, default 49
+	 pri - Priority, priority range 1 to 64, default 1.
+	 use-mgmt-vrf - this means that the server is part of Management vrf, default is "no vrf"
+	 
+  - Example:
+  ```
+  root@T1-2:~# config tacacs add 10.11.12.13 -t 10 -k testing789 -a mschap -o 50 -p 9
+  root@T1-2:~#
+  ```
+
+**config tacacs delete**
+
+This command is to delete the tacacs+ servers configured.
+
+   - Usage: 
+     config tacacs delete <ip_address>
+
+  - Example:
+  ```
+  root@T1-2:~# config tacacs delete 10.11.12.13
+  root@T1-2:~#
+  ```
+
+**config tacacs authtype**
+
+This command is to modify the global value for the TACACS+ authtype.
+When user has not configured server specific authtype, this global value shall be used for that server.
+
+   - Usage: 
+     config tacacs authtype  chap|pap||mschap|login
+
+  - Example:
+  ```
+  root@T1-2:~# config tacacs authtype mschap
+  root@T1-2:~#
+  ```
+  
+**config tacacs default**  
+
+This command is to reset the global value for authtype or passkey or timeout to default value. 
+Default for authtype is "pap", default for passkey is EMPTY_STRING and default for timeout is 5 seconds.
+
+   - Usage: 
+     config tacacs default authtype|passkey|timeout
+
+  - Example:
+  ```
+  root@T1-2:~# config tacacs default authtype
+  This will reset the global authtype back to the default value "pap".
+  ```
+
+**config tacacs passkey**
+
+This command is to modify the global value for the TACACS+ passkey.
+When user has not configured server specific passkey, this global value shall be used for that server.
+
+   - Usage: 
+     config tacacs passkey <passkey>
+
+  - Example:
+  ```
+  root@T1-2:~# config tacacs passkey testing123
+  root@T1-2:~#
+  ```
+
+**config tacacs timeout**
+
+This command is to modify the global value for the TACACS+ timeout.
+When user has not configured server specific timeout, this global value shall be used for that server.
+
+
+   - Usage: 
+     config tacacs timeout <timeout_value_in_seconds>
+
+  - Example:
+  ```
+  root@T1-2:~# config tacacs timeout 99
+  root@T1-2:~#
+  ```
+
+
 
 ## Layer 2 Configuration & Show
 #### ARP
@@ -1646,161 +2033,6 @@ From this command perspective, user need not know these internals.
   fe80::268a:7ff:fe32:76e6  24:8a:07:32:76:e6  eth0     -
   Total number of entries 3 
 
-#### PFC
-- `show pfc counters`
-  - Show details of the priority-flow-control (pfc).
-  - Example:
-   ```
-   admin@sonic:~$ show pfc counters
-      Port Rx    PFC0    PFC1    PFC2    PFC3    PFC4    PFC5    PFC6    PFC7
-    -----------  ------  ------  ------  ------  ------  ------  ------  ------
-    Ethernet0       0       0       0       0       0       0       0       0
-    Ethernet4       0       0       0       0       0       0       0       0
-    Ethernet8       0       0       0       0       0       0       0       0
-   Ethernet12       0       0       0       0       0       0       0       0
-
-      Port Tx    PFC0    PFC1    PFC2    PFC3    PFC4    PFC5    PFC6    PFC7
-    -----------  ------  ------  ------  ------  ------  ------  ------  ------
-    Ethernet0       0       0       0       0       0       0       0       0
-    Ethernet4       0       0       0       0       0       0       0       0
-    Ethernet8       0       0       0       0       0       0       0       0
-   Ethernet12       0       0       0       0       0       0       0       0
-   ```
-
-#### Queue
-  
-- `show queue counters [<interface-name>]`
-  - Show details of the queues
-  - Example:
-  ```
-    admin@sonic:~$ show queue counters 
-         Port    TxQ    Counter/pkts    Counter/bytes    Drop/pkts    Drop/bytes
-    ---------  -----  --------------  ---------------  -----------  ------------
-    Ethernet0    UC0               0                0            0             0
-    Ethernet0    UC1               0                0            0             0
-    Ethernet0    UC2               0                0            0             0
-    Ethernet0    UC3               0                0            0             0
-    Ethernet0    UC4               0                0            0             0
-    Ethernet0    UC5               0                0            0             0
-    Ethernet0    UC6               0                0            0             0
-    Ethernet0    UC7               0                0            0             0
-    Ethernet0    UC8               0                0            0             0
-    Ethernet0    UC9               0                0            0             0
-    Ethernet0    MC0               0                0            0             0
-    Ethernet0    MC1               0                0            0             0
-    Ethernet0    MC2               0                0            0             0
-    Ethernet0    MC3               0                0            0             0
-    Ethernet0    MC4               0                0            0             0
-    Ethernet0    MC5               0                0            0             0
-    Ethernet0    MC6               0                0            0             0
-    Ethernet0    MC7               0                0            0             0
-    Ethernet0    MC8               0                0            0             0
-    Ethernet0    MC9               0                0            0             0
-
-         Port    TxQ    Counter/pkts    Counter/bytes    Drop/pkts    Drop/bytes
-    ---------  -----  --------------  ---------------  -----------  ------------
-    Ethernet4    UC0               0                0            0             0
-    Ethernet4    UC1               0                0            0             0
-    Ethernet4    UC2               0                0            0             0
-    Ethernet4    UC3               0                0            0             0
-    Ethernet4    UC4               0                0            0             0
-    Ethernet4    UC5               0                0            0             0
-    Ethernet4    UC6               0                0            0             0
-    Ethernet4    UC7               0                0            0             0
-    Ethernet4    UC8               0                0            0             0
-    Ethernet4    UC9               0                0            0             0
-    Ethernet4    MC0               0                0            0             0
-    Ethernet4    MC1               0                0            0             0
-    Ethernet4    MC2               0                0            0             0
-    Ethernet4    MC3               0                0            0             0
-    Ethernet4    MC4               0                0            0             0
-    Ethernet4    MC5               0                0            0             0
-    Ethernet4    MC6               0                0            0             0
-    Ethernet4    MC7               0                0            0             0
-    Ethernet4    MC8               0                0            0             0
-    Ethernet4    MC9               0                0            0             0
-  ```
-  - Optionally, you can specify an interface name in order to display only that particular interface
-  - Example:
-  ```
-  admin@sonic:~$ show queue counters Ethernet72
-  ```
-#### Queue watermarks
-```
-show queue  watermark -h
-Usage: show queue watermark [OPTIONS] COMMAND [ARGS]...
-
-  Show queue user WM
-
-Options:
-  -?, -h, --help  Show this message and exit.
-
-Commands:
-  multicast  Show user WM for multicast queues
-  unicast    Show user WM for unicast queues
-```
-
-Example:
-```
-admin@sonic:~$ show queue  watermark unicast
-Egress shared pool occupancy per unicast queue:
-       Port    UC0    UC1    UC2    UC3    UC4    UC5    UC6    UC7
------------  -----  -----  -----  -----  -----  -----  -----  -----
-  Ethernet0      0      0      0      0      0      0      0      0
-  Ethernet4      0      0      0      0      0      0      0      0
-  Ethernet8      0      0      0      0      0      0      0      0
- Ethernet12      0      0      0      0      0      0      0      0
-```
-
-#### Priority Group watermarks
-```
-show priority-group  watermark -h
-Usage: show priority-group watermark [OPTIONS] COMMAND [ARGS]...
-
-  Show priority_group user WM
-
-Options:
-  -?, -h, --help  Show this message and exit.
-
-Commands:
-  headroom  Show user headroom WM for pg
-  shared    Show user shared WM for pg
-```
-Example:
-```
-admin@sonic:~$ show priority-group  watermark shared
-Ingress shared pool occupancy per PG:
-       Port    PG0    PG1    PG2    PG3    PG4    PG5    PG6    PG7
------------  -----  -----  -----  -----  -----  -----  -----  -----
-  Ethernet0      0      0      0      0      0      0      0      0
-  Ethernet4      0      0      0      0      0      0      0      0
-  Ethernet8      0      0      0      0      0      0      0      0
- Ethernet12      0      0      0      0      0      0      0      0
-```
-
-In addition to user watermark("show queue|priority-group watermark ..."), a persistent watermark is available.
-It hold values independently of user watermark. This way user can use "user watermark" for debugging, clear it, etc, but the "persistent watermark" will not be affected. 
-
-Show persistent watermark example:
-```
-admin@sonic:~$ show queue persistent-watermark unicast
-
-admin@sonic:~$ show queue persistent-watermark multicast
-
-admin@sonic:~$ show priority-group persistent-watermark shared
-
-admin@sonic:~$ show priority-group persistent-watermark headroom
-```
-Both "user watermark" and "persistent watermark" can be cleared by user: 
-```
-root@sonic:~# sonic-clear queue persistent-watermark unicast
-
-root@sonic:~# sonic-clear queue persistent-watermark multicast
-
-root@sonic:~# sonic-clear priority-group persistent-watermark shared
-
-root@sonic:~# sonic-clear priority-group persistent-watermark headroom
-```
 #### VLAN
 
 - `config vlan`
