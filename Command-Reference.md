@@ -2256,118 +2256,168 @@ This command displays the MAC (FDB) entries either in full or partial as given b
   FDB entries are cleared.
   ```
 
-#### LAG
 
+# LLDP
 
+## LLDP Show
 
-#### LLDP
+**show lldp table**
+This command displays the brief summary of all LLDP neighbors.
 
-- `show lldp table`
-  - Display a summary of all LLDP neighbors in a pretty one-shot command.
+  - Usage:
+  
+     show lldp table`
+   
   - Example:
   ```
-  admin@sonic:~$ show lldp table
-  Capability codes: (R) Router, (B) Bridge, (O) Other
-  LocalPort    RemoteDevice            RemotePortID    Capability    RemotePortDescr
-  -----------  ----------------------  --------------  ------------  ----------------------------------------
-  Ethernet0    SONIC01MS               Ethernet1       BR            Ethernet0
-  Ethernet4    SONIC02MS               Ethernet1       BR            Ethernet4
-  Ethernet8    SONIC03MS               Ethernet1       BR            Ethernet8
-  Ethernet12   SONIC04MS               Ethernet1       BR            Ethernet12
-  --------------------------------------------------
-  Total entries displayed:  4
+	admin@sonic:~$ show lldp table
+	Capability codes: (R) Router, (B) Bridge, (O) Other
+	LocalPort    RemoteDevice       RemotePortID         Capability    RemotePortDescr
+	-----------  -----------------  -------------------  ------------  --------------------
+	Ethernet112  T1-1               hundredGigE1/2       BR            T0-2:hundredGigE1/29
+	Ethernet116  T1-2               hundredGigE1/2       BR            T0-2:hundredGigE1/30
+	eth0         swtor-b2lab2-1610  GigabitEthernet 0/2  OBR
+	--------------------------------------------------
+	Total entries displayed:  3
   ```
 
-- `show lldp neighbors [<interface-name>]`
-  - Display more detail about all LLDP neighbors
+**show lldp neighbors**
+
+This command displays more details about all LLDP neighbors or only the neighbors connected to a specific interface. 
+
+  - Usage:
+
+    show lldp neighbors [<interface-name>]
+
   - Example:
   ```
-  admin@sonic:~$ show lldp neighbors
-  -------------------------------------------------------------------------------
-  LLDP neighbors:
-   -------------------------------------------------------------------------------
-  Interface:    Ethernet96, via: LLDP, RID: 36, Time: 12 days, 00:30:13
-    Chassis:     
-      ChassisID:    mac 00:1c:73:3c:e1:36
-      SysName:      SONIC01SPINE
-      SysDescr:     Arista Networks EOS version 4.16.6M running on an Arista Networks DCS-7508
-      TTL:          120
-      MgmtIP:       192.168.1.139
-      Capability:   Bridge, on
-      Capability:   Router, on
-    Port:        
-      PortID:       ifname Ethernet4/24/1
-      PortDescr:    SONIC01LEAF:Ethernet1/25
-      MFS:          9236
-  -------------------------------------------------------------------------------
-  Interface:    Ethernet72, via: LLDP, RID: 42, Time: 10 days, 13:41:27
-    Chassis:     
-      ChassisID:    mac 00:1c:73:3c:e1:51
-      SysName:      SONIC02SPINE
-      SysDescr:     Arista Networks EOS version 4.16.6M running on an Arista Networks DCS-7508
-      TTL:          120
-      MgmtIP:       192.168.1.133
-      Capability:   Bridge, on
-      Capability:   Router, on
-    Port:        
-      PortID:       ifname Ethernet4/24/1
-      PortDescr:    SONIC01LEAF:Ethernet1/19
-      MFS:          9236
-  -------------------------------------------------------------------------------
+	admin@sonic:~$ show lldp neighbors
+	-------------------------------------------------------------------------------
+	LLDP neighbors:
+	-------------------------------------------------------------------------------
+	Interface:    eth0, via: LLDP, RID: 1, Time: 0 day, 12:21:21
+	  Chassis:     
+		ChassisID:    mac 00:01:e8:81:e3:45
+		SysName:      swtor-b2lab2-1610
+		SysDescr:     Dell Force10 Networks Real Time Operating System Software. Dell Force10 Operating System Version: 1.0. Dell Force10 Application Software Version: 8.3.3.10d. Copyright (c) 1999-2012 by Dell Inc. All Rights Reserved.Build Time: Tue Sep 22 11:21:54 PDT 2015
+		TTL:          20
+		Capability:   Repeater, on
+		Capability:   Bridge, on
+		Capability:   Router, on
+	  Port:        
+		PortID:       ifname GigabitEthernet 0/2
+	  VLAN:         162, pvid: yes
+	-------------------------------------------------------------------------------
+	Interface:    Ethernet116, via: LLDP, RID: 3, Time: 0 day, 12:20:49
+	  Chassis:     
+		ChassisID:    mac 4c:76:25:e7:f0:c0
+		SysName:      T1-2
+		SysDescr:     Debian GNU/Linux 8 (jessie) Linux 4.9.0-8-amd64 #1 SMP Debian 4.9.110-3+deb9u6 (2015-12-19) x86_64
+		TTL:          120
+		MgmtIP:       10.11.162.40
+		Capability:   Bridge, on
+		Capability:   Router, on
+		Capability:   Wlan, off
+		Capability:   Station, off
+	  Port:        
+		PortID:       local hundredGigE1/2
+		PortDescr:    T0-2:hundredGigE1/30
+	-------------------------------------------------------------------------------
+	Interface:    Ethernet112, via: LLDP, RID: 2, Time: 0 day, 12:20:49
+	  Chassis:     
+		ChassisID:    mac 4c:76:25:e5:e6:c0
+		SysName:      T1-1
+		SysDescr:     Debian GNU/Linux 8 (jessie) Linux 4.9.0-8-amd64 #1 SMP Debian 4.9.110-3+deb9u6 (2015-12-19) x86_64
+		TTL:          120
+		MgmtIP:       10.11.162.41
+		Capability:   Bridge, on
+		Capability:   Router, on
+		Capability:   Wlan, off
+		Capability:   Station, off
+	  Port:        
+		PortID:       local hundredGigE1/2
+		PortDescr:    T0-2:hundredGigE1/29
+	-------------------------------------------------------------------------------	
   ```
   - Optionally, you can specify an interface name in order to display only that particular interface
   - Example:
   ```
-  admin@sonic:~$ show lldp neighbors Ethernet72
+  admin@sonic:~$ show lldp neighbors Ethernet112
+	show lldp neighbors Ethernet112
+	-------------------------------------------------------------------------------
+	LLDP neighbors:
+	-------------------------------------------------------------------------------
+	Interface:    Ethernet112, via: LLDP, RID: 2, Time: 0 day, 19:24:17
+	  Chassis:     
+		ChassisID:    mac 4c:76:25:e5:e6:c0
+		SysName:      T1-1
+		SysDescr:     Debian GNU/Linux 8 (jessie) Linux 4.9.0-8-amd64 #1 SMP Debian 4.9.110-3+deb9u6 (2015-12-19) x86_64
+		TTL:          120
+		MgmtIP:       10.11.162.41
+		Capability:   Bridge, on
+		Capability:   Router, on
+		Capability:   Wlan, off
+		Capability:   Station, off
+	  Port:        
+		PortID:       local hundredGigE1/2
+		PortDescr:    T0-2:hundredGigE1/29
+	-------------------------------------------------------------------------------
+  
   ```
 
-#### NDP
+# NDP
 
-- `show ndp [OPTIONS] [IP6ADDRESS]`
-  - Show IPv6 Neighbour table
+## NDP Show
+
+**show ndp**
+This command displays either all the IPv6 neighbor mac addresses, or for a particular IPv6 neighbor, or for all IPv6 neighbors reachable via a specific interface.
+
+  - Usage:
+
+     show ndp [-if|--iface <interface-name.] [IP6ADDRESS]
+
   - Example:
   ```
-  admin@sonic:~$ show ndp
-  Address                   MacAddress         Iface    Vlan
-  ------------------------  -----------------  -------  ------
-  fe80::268a:7ff:fe07:ad88  24:8a:07:07:ad:88  eth0     -
-  fe80::268a:7ff:fe16:c4a4  24:8a:07:16:c4:a4  eth0     -
-  fe80::268a:7ff:fe32:76e6  24:8a:07:32:76:e6  eth0     -
-  Total number of entries 3 
+    **ALL IPv6 NEIGHBORS:**
+	admin@sonic:~$ show ndp
+	Address                   MacAddress         Iface    Vlan    Status
+	------------------------  -----------------  -------  ------  ---------
+	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
+	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
+	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
+	Total number of entries 3 
+	
+	**SPECIFIC IPv6 NEIGHBOR**
+	admin@sonic:~$ show ndp fe80::20c:29ff:feb8:b11e
+	Address                   MacAddress         Iface    Vlan    Status
+	------------------------  -----------------  -------  ------  ---------
+	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
+	Total number of entries 1 
+	
+	**SPECIFIC INTERFACE**
+	admin@sonic:~$ show ndp -if eth0
+	Address                   MacAddress         Iface    Vlan    Status
+	------------------------  -----------------  -------  ------  ---------
+	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
+	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
+	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
+	Total number of entries 3 
 
    ```
 
-### Layer 3
+# IP 
 
-- `show interfaces counters [-p <period>]`
-  - Display packet counters for all interfaces since the last time the counters were cleared
-  - Example:
-  ```
-  admin@sonic:~$ show interfaces counters
-        IFACE    STATE            RX_OK       RX_BPS    RX_UTIL    RX_ERR    RX_DRP    RX_OVR            TX_OK       TX_BPS    TX_UTIL    TX_ERR    TX_DRP    TX_OVR
-  -----------  -------  ---------------  -----------  ---------  --------  --------  --------  ---------------  -----------  ---------  --------  --------  --------
-    Ethernet0        U  471,729,839,997  653.87 MB/s     12.77%         0    18,682         0  409,682,385,925  556.84 MB/s     10.88%         0         0         0
-    Ethernet4        U  453,838,006,636  632.97 MB/s     12.36%         0     1,636         0  388,299,875,056  529.34 MB/s     10.34%         0         0         0
-    Ethernet8        U  549,034,764,539  761.15 MB/s     14.87%         0    18,274         0  457,603,227,659  615.20 MB/s     12.02%         0         0         0
-   Ethernet12        U  458,052,204,029  636.84 MB/s     12.44%         0    17,614         0  388,341,776,615  527.37 MB/s     10.30%         0         0         0
-   Ethernet16        U   16,679,692,972   13.83 MB/s      0.27%         0    17,605         0   18,206,586,265   17.51 MB/s      0.34%         0         0         0
-   Ethernet20        U   47,983,339,172   35.89 MB/s      0.70%         0     2,174         0   58,986,354,359   51.83 MB/s      1.01%         0         0         0
-   Ethernet24        U   33,543,533,441   36.59 MB/s      0.71%         0     1,613         0   43,066,076,370   49.92 MB/s      0.97%         0         0         0
-  ```
-  - Optionally, you can specify a period (in seconds) with which to gather counters over. Note that this function will take `<period>` seconds to execute.
-  - Example:
-  ```
-  admin@sonic:~$ show interfaces counters -p 5
-        IFACE    STATE    RX_OK       RX_BPS    RX_UTIL    RX_ERR    RX_DRP    RX_OVR    TX_OK       TX_BPS    TX_UTIL    TX_ERR    TX_DRP    TX_OVR
-  -----------  -------  -------  -----------  ---------  --------  --------  --------  -------  -----------  ---------  --------  --------  --------
-  Ethernet0         U      515   59.14 KB/s      0.00%         0         0         0    1,305  127.60 KB/s      0.00%         0         0         0
-  Ethernet4         U      305   26.54 KB/s      0.00%         0         0         0      279   39.12 KB/s      0.00%         0         0         0
-  Ethernet8         U      437   42.96 KB/s      0.00%         0         0         0      182   18.37 KB/s      0.00%         0         0         0
-  Ethernet12        U      284   40.79 KB/s      0.00%         0         0         0      160   13.03 KB/s      0.00%         0         0         0
-  Ethernet16        U      377   32.64 KB/s      0.00%         0         0         0      214   18.01 KB/s      0.00%         0         0         0
-  Ethernet20        U      284   36.81 KB/s      0.00%         0         0         0      138  8758.25 B/s      0.00%         0         0         0
-  Ethernet24        U      173   16.09 KB/s      0.00%         0         0         0      169   11.39 KB/s      0.00%         0         0         0
-  ```
+## show ip
+
+This sub-section explains the various IP protocol specific show commands that are used to display the following.
+1) routes
+2) bgp details - Explained in the [bgp section](#show-bgp)
+3) IP interfaces
+4) prefix-list
+5) protocol
+
+**show ip route**
+This command is used to display either all the route entries from the routing table or a specific route.
 
 - `show ip route [<ip-address>]`
   - Display the IP routing table
@@ -2377,34 +2427,57 @@ This command displays the MAC (FDB) entries either in full or partial as given b
   Codes: K - kernel route, C - connected, S - static, R - RIP,
          O - OSPF, I - IS-IS, B - BGP, P - PIM, A - Babel,
          > - selected route, * - FIB route
-  
-  C>* 10.0.0.0/31 is directly connected, Ethernet0
-  C>* 10.0.0.2/31 is directly connected, Ethernet4
-  C>* 10.0.0.4/31 is directly connected, Ethernet8
-  C>* 10.0.0.6/31 is directly connected, Ethernet12
-  C>* 10.0.0.8/31 is directly connected, Ethernet16
-  C>* 10.0.0.10/31 is directly connected, Ethernet20
-  C>* 10.0.0.12/31 is directly connected, Ethernet24
-  C>* 10.0.0.14/31 is directly connected, Ethernet28
-  C>* 10.0.0.16/31 is directly connected, Ethernet32
-  C>* 10.0.0.18/31 is directly connected, Ethernet36
-  C>* 10.0.0.20/31 is directly connected, Ethernet40
-  C>* 10.0.0.22/31 is directly connected, Ethernet44
-  C>* 10.0.0.24/31 is directly connected, Ethernet48
-  C>* 10.0.0.26/31 is directly connected, Ethernet52
-  C>* 10.0.0.28/31 is directly connected, Ethernet56
-  C>* 10.0.0.30/31 is directly connected, Ethernet60
-  C>* 10.0.0.32/31 is directly connected, Ethernet64
+	S>* 0.0.0.0/0 [200/0] via 10.11.162.254, eth0
+	C>* 1.1.0.0/16 is directly connected, Vlan100
+	C>* 10.1.0.1/32 is directly connected, lo
+	C>* 10.1.0.32/32 is directly connected, lo
+	C>* 10.1.1.0/31 is directly connected, Ethernet112
+	C>* 10.1.1.2/31 is directly connected, Ethernet116
+	C>* 10.11.162.0/24 is directly connected, eth0
+	C>* 10.12.0.102/32 is directly connected, lo
+	C>* 127.0.0.0/8 is directly connected, lo
+	C>* 240.127.1.0/24 is directly connected, docker0
+
   ```
  - Optionally, you can specify an IP address in order to display only routes to that particular IP address
   - Example:
   ```
-  admin@sonic:~$ show route 10.0.0.12
+	admin@sonic:~$ show ip route 10.1.1.0
+	Routing entry for 10.1.1.0/31
+	  Known via "connected", distance 0, metric 0, best
+	  * directly connected, Ethernet112
   ```
 
+**show ip interfaces**
+This command displays the details about all the Layer3 IP interfaces in the device for which IP address has been assigned. 
+The type of interfaces include the following.
+1) Front panel physical ports.
+2) PortChannel.
+3) VLAN interface.
+4) Loopback interfaces
+5) docker interface and
+6) management interface
 
-
-
+  - Usage:
+    show ip interfaces
+  
+  - Example:
+  ```
+	admin@sonic:~$ show ip interfaces
+	Interface        IPv4 address/mask    Admin/Oper
+	---------------  -------------------  ------------
+	Ethernet112      10.1.1.0/31          up/up
+	Ethernet116      10.1.1.2/31          up/up
+	PortChannel0001  10.0.1.1/31          up/down
+	PortChannel0002  10.0.1.3/31          up/down
+	Vlan100          1.1.2.2/16           up/down
+	docker0          240.127.1.1/24       up/down
+	eth0             10.11.162.42/24      up/up
+	lo               127.0.0.1/8          up/up
+					 10.1.0.1/32
+					 10.1.0.32/32
+					 10.12.0.102/32	
+  ```
 
 
 ### Application Layer
