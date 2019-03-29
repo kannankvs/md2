@@ -1712,6 +1712,7 @@ Some of the example QOS configurations that users can modify are given below.
 This command displays the global configuration fields and the list of all tacacs servers and their correponding configurations.
 
   - Usage:
+  
 	show tacacs 
   
   - Example:
@@ -1748,6 +1749,7 @@ This command is to add a TACACS+ server to the tacacs server list.
 Note that more than one tacacs+ (maximum of seven) can be added in the device. When user tries to login, tacacs client shall contact the servers one by one. When any server times out, device will try the next server one by one.
 
    - Usage: 
+   
      config tacacs add <ip_address> [-t|--timeout SECOND] [-k|--key SECRET] [-a|--type TYPE] [-o|--port PORT] [-p|--pri PRIORITY] [-m|--use-mgmt-vrf]
 	 
 	 **Arguements:**
@@ -1770,6 +1772,7 @@ Note that more than one tacacs+ (maximum of seven) can be added in the device. W
 This command is to delete the tacacs+ servers configured.
 
    - Usage: 
+   
      config tacacs delete <ip_address>
 
   - Example:
@@ -1784,6 +1787,7 @@ This command is to modify the global value for the TACACS+ authtype.
 When user has not configured server specific authtype, this global value shall be used for that server.
 
    - Usage: 
+   
      config tacacs authtype  chap|pap||mschap|login
 
   - Example:
@@ -1798,7 +1802,8 @@ This command is to reset the global value for authtype or passkey or timeout to 
 Default for authtype is "pap", default for passkey is EMPTY_STRING and default for timeout is 5 seconds.
 
    - Usage: 
-     config tacacs default authtype\|passkey\|timeout
+   
+     config tacacs default authtype|passkey|timeout
 
   - Example:
   ```
@@ -1812,6 +1817,7 @@ This command is to modify the global value for the TACACS+ passkey.
 When user has not configured server specific passkey, this global value shall be used for that server.
 
    - Usage: 
+   
      config tacacs passkey <pass_key>
 
   - Example:
@@ -1827,6 +1833,7 @@ When user has not configured server specific timeout, this global value shall be
 
 
    - Usage: 
+   
      config tacacs timeout <timeout_value_in_seconds>
 
   - Example:
@@ -1834,6 +1841,262 @@ When user has not configured server specific timeout, this global value shall be
   root@T1-2:~# config tacacs timeout 99
   root@T1-2:~#
   ```
+
+
+# VLAN Configuration And Show
+
+## VLAN Show
+
+**show vlan brief**
+
+This command is to display brief information about all the vlans configured in the device. It displays the vlan ID, IP address (if configured for the vlan), list of vlan member ports, whether the port is tagged or in untagged mode and the DHCP Helper Address.
+
+  - Usage:
+  
+   show vlan brief
+
+  - Example:
+  ```
+  admin@sonic:~$ show vlan brief 
+
+	+-----------+--------------+-----------+----------------+-----------------------+
+	|   VLAN ID | IP Address   | Ports     | Port Tagging   | DHCP Helper Address   |
+	+===========+==============+===========+================+=======================+
+	|       100 | 1.1.2.2/16   | Ethernet0 | tagged         | 192.0.0.1             |
+	|           |              | Ethernet4 | tagged         | 192.0.0.2             |
+	|           |              |           |                | 192.0.0.3             |
+	+-----------+--------------+-----------+----------------+-----------------------+
+
+  ```
+
+**show vlan config**
+
+This command is to display all the vlan configuration.
+
+  - Usage:
+  
+   show vlan config
+
+  - Example:
+  ```
+  admin@sonic:~$ show vlan config 
+	Name       VID  Member     Mode
+	-------  -----  ---------  ------
+	Vlan100    100  Ethernet0  tagged
+	Vlan100    100  Ethernet4  tagged
+
+  ```
+
+
+## VLAN Configuration
+
+This sub-section explains how to configure the vlan and its member ports.
+
+**config vlan add/del**
+
+This command is used to add or delete the vlan. This command needs root privileges. 
+
+  - Usage:
+  
+   config vlan add/del <vlan__id> 
+
+  - Example:
+  ```
+  admin@sonic:~$ sudo config vlan add 100
+  This command will create the vlan 100 if not exists.
+  ```
+
+**config vlan member add/del**
+
+This command is to add or delete a member port into the already created vlan.
+
+  - Usage:
+   
+   config vlan member add/del [-u or --untagged] <vlan_id> <member_portname>
+   
+   -u will set the port in untagged mode.
+
+  - Example:
+  ```
+  admin@sonic:~$ sudo config vlan member add 100 Ethernet0
+  This command will add Ethernet0 as member of the vlan 100
+  
+  admin@sonic:~$ sudo config vlan member add 100 Ethernet4
+  This command will add Ethernet4 as member of the vlan 100.
+  ```
+
+# Warm Restart
+
+## Warm Restart Show
+
+**show warm_restart config**
+
+This command displays all the configuration related to warm_restart.
+
+  - Usage:
+  
+    show warm_restart config
+
+  - Example:
+  ```
+	admin@sonic:~$ show warm_restart config
+	name    enable    timer_name        timer_duration
+	------  --------  ----------------  ----------------
+	bgp     true      bgp_timer         100
+	teamd   false     teamsyncd_timer   300
+	swss    false     neighsyncd_timer  200
+	system  true      NULL              NULL
+  ```
+
+**show warm_restart state**
+
+This command displays the warm_restart state.
+
+  - Usage:
+  
+    show warm_restart state
+
+  - Example:
+  ```
+	name          restore_count  state
+	----------  ---------------  ----------
+	orchagent                 0
+	vlanmgrd                  0
+	bgp                       1  reconciled
+	portsyncd                 0
+	teammgrd                  1
+	neighsyncd                0
+	teamsyncd                 1
+	syncd                     0
+
+  ```
+
+## Warm Restart Configuration
+
+This sub-section explains the various configuration related to warm restart feature. Following parameters can be configured using this command.
+1) bgp_timer
+2) disable
+3) enable
+4) neighsyncd_timer
+5) teamsyncd_timer
+Each of these sub-commands are explained in the following section.
+
+Users can use an optional parameter "-s" to use the unix domain socket for communicating with the RedisDB which will be faster when compared to using the default network sockets. 
+All these commands have the following option.
+
+Options:
+  -s, --redis-unix-socket-path TEXT
+       unix socket path for redis connection
+
+
+**config warm_restart bgp_timer**
+
+This command sets the bgp_timer value for warm_restart of BGP service. When BGP service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
+
+  - Usage: 
+  
+    config warm_restart bgp_timer <seconds>
+	seconds range 1 to 3600.
+
+  - Example:
+  ```
+	admin@sonic:~$ sudo config warm_restart bgp_timer 1000
+  ```
+
+**config warm_restart enable/disable**
+
+This command is used to enable or disable the warm_restart for a particular service that supports warm reboot.
+Following four services support warm reboot. When user restarts the particular service using "systemctl restart <service_name>", this configured value will be checked for whether it is enabled or disabled.
+If this configuration is enabled for that service, it will perform warm reboot for that service. Otherwise, it will do cold restart of the service.
+
+  - Usage: 
+  
+    config warm_restart enable [<module_name>]
+
+       module_name can be either system or swss or bgp or teamd.
+	   If "module_name" argument is not specified, it will enable "system" module.
+
+  - Example:
+  ```
+	admin@sonic:~$ sudo config warm_restart enable
+	The above command will set warm_restart as "enable" for the "system" service.
+	
+	admin@sonic:~$ sudo config warm_restart enable swss
+	The above command will set warm_restart as "enable" for the "swss" service. When user does "systemctl restart swss", it will perform warm reboot instead of cold reboot.
+	
+	admin@sonic:~$ sudo config warm_restart enable teamd
+	The above command will set warm_restart as "enable" for the "teamd" service. When user does "systemctl restart teamd", it will perform warm reboot instead of cold reboot.
+	
+	
+  ```
+
+
+**config warm_restart neighsyncd_timer**
+
+TBD: This command sets the neighsyncd_timer value for warm_restart of "swss" service. When swss service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
+
+  - Usage: 
+  
+    config warm_restart bgp_timerneighsyncd_timer <seconds>
+	seconds range 1 to 9999.
+
+  - Example:
+  ```
+	admin@sonic:~$ sudo config warm_restart neighsyncd_timer 2000
+  ```
+
+
+**config warm_restart teamsyncd_timer**
+
+TBD: This command sets the teamsyncd_timer value for warm_restart of teamd service. When teamd service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
+
+  - Usage: 
+  
+    config warm_restart teamsyncd_timer <seconds>
+	seconds range 1 to 3600.
+
+  - Example:
+  ```
+	admin@sonic:~$ sudo config warm_restart teamsyncd_timer 3000
+  ```
+
+# Watermark Configuration And Show
+
+## Watermark Show
+
+**show watermark telemetry interval**
+
+This command displays the configured interval for the telemetry. 
+
+  - Usage:
+      show watermark telemetry interval
+
+  - Example:
+  ```
+	admin@sonic:~$ show watermark telemetry interval
+	
+      Telemetry interval 120 second(s)
+
+  ```
+
+
+## Watermark Config
+
+**config watermark telemetry interval**
+
+This command configures the interval for telemetry. 
+
+  - Usage:
+      config watermark telemetry interval <value>
+	  interval can be any integer value from 1.
+	  TBD: Is there no maximum limit on this value?
+
+  - Example:
+  ```
+	admin@sonic:~$ sudo config watermark telemetry interval 999
+
+  ```
+
 
 
 
