@@ -2335,43 +2335,6 @@ This command displays the MAC (FDB) entries either in full or partial as given b
   fe80::268a:7ff:fe32:76e6  24:8a:07:32:76:e6  eth0     -
   Total number of entries 3 
 
-#### VLAN
-
-- `config vlan`
-  - Add/del vlan
-  - Add/del vlan member 
-  - Example:
-  ```
-  root@sonic:/# config vlan 
-  Usage: config vlan [OPTIONS] COMMAND [ARGS]...
- 
-    VLAN-related configuration tasks
-
-  Options:
-    -s, --redis-unix-socket-path TEXT
-                                    unix socket path for redis connection
-    --help                          Show this message and exit.
-
-  Commands:
-    add
-    del
-    member
-
-  root@sonic:/# config vlan add 1200
-  root@sonic:/# config vlan member add 1200 Ethernet1
-  root@sonic:/# config vlan member add 1200 Ethernet9 -u
-  root@sonic:/# config vlan member add 1200 Ethernet8
-  ```
-- `show vlan config`
-  - Show vlan and vlan member configuration
-  - Example:
-  ```
-  admin@sonic:/$ show vlan config
-  Name        VID  Member     Mode
-  --------  -----  ---------  --------
-  Vlan1200   1200  Ethernet1  tagged
-  Vlan1200   1200  Ethernet9  untagged
-  Vlan1200   1200  Ethernet8  tagged
    ```
 
 ### Layer 3
@@ -2685,52 +2648,9 @@ This command displays the MAC (FDB) entries either in full or partial as given b
   admin@sonic:~$ sudo config bgp startup all
   ```
 
-#### AAA Authentication Configuration
 
-- `show aaa`
-  - Display AAA authentication configuration
-  - Example:
-  ```
-  admin@sonic:~$ show aaa
-  AAA authentication login local (default)
-  AAA authentication failthrough True (default)
-  AAA authentication fallback True (default)
-  ```
 
-#### Interface Naming Mode
 
-- `sudo config interface_naming_mode (default | alias)`
-  - Change the interface naming mode. Select between default mode (SONiC interface names) or alias mode (Hardware vendor names). The user must log out and log back in for changes to take effect. Note that the newly-applied interface mode will affect all interface-related show/config commands.
-
-- `show interfaces naming_mode`
-  - Display the current interface naming mode
-
-  - Example:
-    - Interface naming mode originally set to 'default'. Interfaces are referenced by default SONiC interface names:
-    ```
-    admin@sonic:~$ show interfaces naming_mode 
-    default
-
-    admin@sonic:~$ show interface status Ethernet0
-      Interface     Lanes    Speed    MTU            Alias    Oper    Admin
-    -----------  --------  -------  -----   --------------  ------  -------
-      Ethernet0   101,102      40G   9100   fortyGigE1/1/1      up       up
-
-    admin@sonic:~$ sudo config interface_naming_mode alias
-    Please logout and log back in for changes take effect.
-    ```
-
-    - After user logs out and back in again, interfaces now referenced by hardware vendor aliases:
-    ```
-    admin@sonic:~$ show interfaces naming_mode 
-    alias
-
-    admin@sonic:~$ sudo config interface fortyGigE1/1/1 shutdown
-    admin@sonic:~$ show interface status fortyGigE1/1/1
-      Interface     Lanes    Speed    MTU            Alias    Oper    Admin
-    -----------  --------  -------  -----   --------------  ------  -------
-      Ethernet0   101,102      40G   9100   fortyGigE1/1/1    down     down
-    ```
 
 ### Troubleshooting
 
