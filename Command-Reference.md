@@ -2101,38 +2101,77 @@ This command configures the interval for telemetry.
 
 
 ## Layer 2 Configuration & Show
-#### ARP
 
-- `show arp [<ip-address>]`
-  - Display the entire ARP table
+### ARP
+
+**show arp**
+This command displays the ARP entries in the device with following options.
+1) Display the entire table.
+2) Display the ARP entries learnt on a specific interface.
+3) Display the ARP of a specific ip-address.
+
+- Usage:
+
+    show arp [-if <ifname>] [<ip-address>]
+	
+	show arp - displays all entries
+	show arp -if <ifname> - displays the ARP specific to the specified interface.
+	show arp <ip-address> - displays the ARP specific to the specicied ip-address.
+
   - Example:
   ```
   admin@sonic:~$ show arp
-  Address                  HWtype  HWaddress           Flags Mask            Iface
-  192.168.1.183            ether   88:5a:92:fb:bf:41   C                     Ethernet44
-  192.168.1.175            ether   88:5a:92:fc:95:81   C                     Ethernet28
-  192.168.1.181            ether   e4:c7:22:c1:07:7c   C                     Ethernet40
-  192.168.1.179            ether   88:5a:92:de:a8:bc   C                     Ethernet36
-  192.168.1.118            ether   00:1c:73:3c:de:43   C                     Ethernet64
-  192.168.1.11             ether   00:1c:73:3c:e1:38   C                     Ethernet88
-  192.168.1.161            ether   24:e9:b3:71:3a:01   C                     Ethernet0
-  192.168.1.189            ether   24:e9:b3:9d:57:41   C                     Ethernet56
-  192.168.1.187            ether   74:26:ac:8b:8f:c1   C                     Ethernet52
-  192.168.1.165            ether   88:5a:92:de:a0:7c   C                     Ethernet8
+   Address          MacAddress            Iface         Vlan
+  -------------     -----------------     -------       ------
+  192.168.1.183     88:5a:92:fb:bf:41     Ethernet44    -
+  192.168.1.175     88:5a:92:fc:95:81     Ethernet28    -
+  192.168.1.181     e4:c7:22:c1:07:7c     Ethernet40    -
+  192.168.1.179     88:5a:92:de:a8:bc     Ethernet36    -
+  192.168.1.118     00:1c:73:3c:de:43     Ethernet64    -
+  192.168.1.11      00:1c:73:3c:e1:38     Ethernet88    -
+  192.168.1.161     24:e9:b3:71:3a:01     Ethernet0     -
+  192.168.1.189     24:e9:b3:9d:57:41     Ethernet56    -
+  192.168.1.187     74:26:ac:8b:8f:c1     Ethernet52    -
+  192.168.1.165     88:5a:92:de:a0:7c     Ethernet8     -
+
+  Total number of entries 10
   ```
 
+  - Optionally, you can specify the interface in order to display the ARPs learnt on that particular interface
+  - Example:
+  ```
+  admin@sonic:~$ show arp -if Ethernet40
+  Address          MacAddress          Iface        Vlan
+  -------------    -----------------   ----------   ------
+  192.168.1.181    e4:c7:22:c1:07:7c   Ethernet40   -
+  Total number of entries 1 
+
+  ```
+  
   - Optionally, you can specify an IP address in order to display only that particular entry
   - Example:
   ```
   admin@sonic:~$ show arp 192.168.1.181
-  Address                  HWtype  HWaddress           Flags Mask            Iface
-  192.168.1.181            ether   e4:c7:22:c1:07:7c   C                     Ethernet40
+  Address          MacAddress          Iface        Vlan
+  -------------    -----------------   ----------   ------
+  192.168.1.181    e4:c7:22:c1:07:7c   Ethernet40   -
+  Total number of entries 1 
+
   ```
 
-#### FDB
+### FDB
 
-- `show mac [OPTIONS]`
-  - Show MAC (FDB) entries
+**show mac**
+
+This command displays the MAC (FDB) entries either in full or partial as given below.
+1) show mac - displays the full table
+2) show mac -v <vlanid> - displays the MACs learnt on the particular VLAN ID.
+3) show mac -p <port>  - displays the MACs learnt on the particular port.
+
+
+  - Usage:
+      show mac [-v vlan_id] [-p port_name]
+
   - Example:
   ```
   admin@sonic:~$ show mac
