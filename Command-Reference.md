@@ -1157,6 +1157,89 @@ This command displays some more fields such as Lanes, Speed, MTU, Type, Asymmetr
 
 This command is already explained [here](#Transceivers)
 
+## Interface Config Commands
+This sub-section explains the following list of configuration on the interfaces.
+1) ip - To add or remove IP address for the interface
+2) pfc - to set the PFC configuration for the interface
+3) shutdown - to administratively shut down the interface
+4) speed - to set the interface speed
+5) startup - to bring up the administratively shutdown interface
+
+**config interface ip add/remove**
+This command is for adding or removing the IP address for an interface.
+IP address for either physical interface or for portchannel or for VLAN interface can be configured using this command.
+
+  - Usage:
+
+    config interface <interface-name> ip add [OPTIONS] <ip_addr>
+	
+  - Examples:
+  ```
+  **Adding IP Address**
+  admin@sonic:~$ sudo config interface Vlan100 ip add 10.11.12.13/24 
+  
+  **Removing IP Address**
+  admin@sonic:~$ sudo config interface Vlan100 ip remove 10.11.12.13/24 
+  ```
+  
+**config interface pfc**
+This command is for setting the asymmetric PFC for an interface to either "on" or "off".
+TBD: This command is not used by the module until the module is restarted. "show interfaces status" can be used to check the currently used value by the module.
+
+  - Usage:
+
+    config interface <interface-name> pfc asymmetric on/off
+	
+  - Examples:
+  ```
+  admin@sonic:~$ sudo config interface Ethernet0 pfc asymmetric on 
+  
+  ```
+
+**config interface shutdown**
+
+This command is for administratively shut down the either the Physical interface or port channel interface.
+TBD: What should user do to make it effective? "show interfaces status" still shows as UP even after executing this command.
+
+  - Usage:
+  
+      config interface <interface-name> shutdown
+
+  - Example:
+  ```
+  admin@sonic:~$ sudo config interface Ethernet0 shutdown
+  ```
+
+**config interface startup**
+
+This command is for administratively bringing up the Physical interface or port channel interface.
+TBD: What should user do to make it effective? "show interfaces status" still shows as down even after executing this command.
+
+  - Usage:
+  
+      config interface <interface-name> startup
+
+  - Example:
+  ```
+  admin@sonic:~$ sudo config interface Ethernet0 startup
+  ```
+
+**config interface speed**
+
+This command is to configure the speed  administratively bringing up the Physical interface or port channel interface.
+TBD: What should user do to make it effective? "show interfaces status" still shows as down even after executing this command.
+
+  - Usage:
+  
+      config interface <interface-name> startup
+
+  - Example:
+  ```
+  admin@sonic:~$ sudo config interface Ethernet0 startup
+  ```
+
+
+
 # Interface Naming Mode
 
 ## show interface naming mode
@@ -2419,8 +2502,10 @@ This sub-section explains the various IP protocol specific show commands that ar
 **show ip route**
 This command is used to display either all the route entries from the routing table or a specific route.
 
-- `show ip route [<ip-address>]`
-  - Display the IP routing table
+  - Usage:
+
+    show ip route [<ip-address>]`
+
   - Example:
   ```
   admin@sonic:~$ show ip route
@@ -2479,18 +2564,160 @@ The type of interfaces include the following.
 					 10.12.0.102/32	
   ```
 
+**show ip protocol**
+TBD: Fill details.
 
-### Application Layer
+  - Usage:
+    show ip protocol
+  
+  - Example:
+  ```
+	show ip protocol
+	Protocol    : route-map 
+	------------------------
+	system      : none
+	kernel      : none
+	connected   : none
+	static      : none
+	rip         : none
+	ripng       : none
+	ospf        : none
+	ospf6       : none
+	isis        : none
+	bgp         : RM_SET_SRC
+	pim         : none
+	hsls        : none
+	olsr        : none
+	babel       : none
+	any         : none
+  ```
 
-#### NTP
-- `show ntp`
-  - Display a list of NTP peers known to the server as well as a summary of their state
+## show ipv6
+
+This sub-section explains the various IPv6 protocol specific show commands that are used to display the following.
+1) routes
+2) IPv6 bgp details - Explained in the [bgp section](#show-bgp)
+3) IP interfaces
+4) protocol
+
+**show ipv6 route**
+This command is used to display either all the IPv6 route entries from the routing table or a specific IPv6 route.
+
+  - Usage: 
+  
+     show ipv6 route [<ipv6-address>]
+	 
+  - Example:
+  ```
+  admin@sonic:~$ show ipv6 route 
+	Codes: K - kernel route, C - connected, S - static, R - RIPng,
+		   O - OSPFv6, I - IS-IS, B - BGP, A - Babel,
+		   > - selected route, * - FIB route
+
+	C>* ::1/128 is directly connected, lo
+	C>* 2018:2001::/126 is directly connected, Ethernet112
+	C>* 2018:2002::/126 is directly connected, Ethernet116
+	C>* fc00:1::32/128 is directly connected, lo
+	C>* fc00:1::102/128 is directly connected, lo
+	C>* fc00:2::102/128 is directly connected, eth0
+	C * fe80::/64 is directly connected, Vlan100
+	C * fe80::/64 is directly connected, Ethernet112
+	C * fe80::/64 is directly connected, Ethernet116
+	C * fe80::/64 is directly connected, Bridge
+	C * fe80::/64 is directly connected, PortChannel0011
+	C>* fe80::/64 is directly connected, eth0
+
+  ```
+ - Optionally, you can specify an IPv6 address in order to display only routes to that particular IPv6 address
+  - Example:
+  ```
+	admin@sonic:~$ show ipv6 route  fc00:1::32
+	Routing entry for fc00:1::32/128
+	  Known via "connected", distance 0, metric 0, best
+	  * directly connected, lo
+  ```
+
+**show ipv6 interfaces**
+This command displays the details about all the Layer3 IPv6 interfaces in the device for which IPv6 address has been assigned. 
+The type of interfaces include the following.
+1) Front panel physical ports.
+2) PortChannel.
+3) VLAN interface.
+4) Loopback interfaces
+5) management interface
+
+  - Usage:
+    show ipv6 interfaces
+  
+  - Example:
+  ```
+	admin@sonic:~$ show ipv6 interfaces
+	Interface        IPv6 address/mask                            Admin/Oper
+	---------------  -------------------------------------------  ------------
+	Bridge           fe80::d494:dcff:fe37:535e%Bridge/64          up/down
+	Ethernet112      2018:2001::1/126                             up/up
+					 fe80::3617:ebff:fe38:100%Ethernet112/64
+	Ethernet116      2018:2002::1/126                             up/up
+					 fe80::3617:ebff:fe38:100%Ethernet116/64
+	PortChannel0001  2018:1002::2/126                             up/down
+	PortChannel0002  2018:1002::6/126                             up/down
+	PortChannel0011  fe80::3617:ebff:fe38:100%PortChannel0011/64  up/up
+	Vlan100          fe80::3617:ebff:fe38:100%Vlan100/64          up/down
+	eth0             fc00:2::102/128                              up/up
+					 fe80::3617:ebff:fe38:100%eth0/64
+	lo               fc00:1::102/128                              up/up
+					 fc00:1::32/128
+					 ::1/128
+
+  ```
+
+**show ipv6 protocol**
+TBD: Need to fill details.
+
+  - Usage:
+    show ipv6 protocol
+  
+  - Example:
+  ```
+	show ipv6 protocol
+	Protocol    : route-map 
+	------------------------
+	system      : none
+	kernel      : none
+	connected   : none
+	static      : none
+	rip         : none
+	ripng       : none
+	ospf        : none
+	ospf6       : none
+	isis        : none
+	bgp         : RM_SET_SRC6
+	pim         : none
+	hsls        : none
+	olsr        : none
+	babel       : none
+	any         : none
+  ```
+
+
+# Application Layer
+
+## NTP
+
+**show ntp**
+This command displays a list of NTP peers known to the server as well as a summary of their state.
+
+  - Usage: 
+  
+    show ntp
+  
   - Example:
   ```
   admin@sonic:~$ show ntp
-       remote           refid      st t when poll reach   delay   offset  jitter
-  ==============================================================================
-  *ns2.example.com 10.193.2.20      2 u  936 1024  377   31.234    3.353   3.096
+		 remote           refid      st t when poll reach   delay   offset  jitter
+	==============================================================================
+	 23.92.29.245    .XFAC.          16 u    - 1024    0    0.000    0.000   0.000
+	*204.2.134.164   46.233.231.73    2 u  916 1024  377    3.079    0.394   0.128
   ```
 
 #### CRM
@@ -2609,11 +2836,24 @@ The type of interfaces include the following.
 
 ```
 
-### System State
+# System State
 
-#### Processes
-- `show processes cpu`
-  - Display the current CPU usage by process
+## Processes
+
+This sub-section explains the various "processes" specific data that includes the following.
+1) cpu      Show processes CPU info
+2) memory   Show processes memory info
+3) summary  Show processes info
+
+
+**show processes cpu**
+
+This command displays the current CPU usage by process
+
+  - Usage:
+
+    show processes cpu
+
   - Example:
   ```
   admin@SONiC:~$ show processes cpu
@@ -2633,109 +2873,192 @@ The type of interfaces include the following.
       5 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/0:0H
   ```
 
-### Configuration
-#### Startup Configuration
+**show processes memory**
 
-- `show startupconfiguration bgp`
-  - Display the startup configuration for BGP
+This command displays the current memory usage by processes
+
+  - Usage:
+
+    show processes memory
+
   - Example:
   ```
-  admin@sonic:~$ show startupconfiguration bgp
+	admin@SONiC:~$  show processes memory 
+	top - 23:41:24 up 7 days, 39 min,  2 users,  load average: 1.21, 1.19, 1.18
+	Tasks: 191 total,   2 running, 189 sleeping,   0 stopped,   0 zombie
+	%Cpu(s):  2.8 us, 20.7 sy,  0.0 ni, 76.3 id,  0.0 wa,  0.0 hi,  0.2 si,  0.0 st
+	KiB Mem :  8162264 total,  5720412 free,   945516 used,  1496336 buff/cache
+	KiB Swap:        0 total,        0 free,        0 used.  6855632 avail Mem 
+
+	  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+	18051 root      20   0  851540 274784   8344 S   0.0  3.4   0:02.77 syncd
+	17760 root      20   0 1293428 259212  58732 S   5.9  3.2  96:46.22 syncd
+	  508 root      20   0  725364  76244  38220 S   0.0  0.9   4:54.49 dockerd
+	30853 root      20   0   96348  56824   7880 S   0.0  0.7   0:00.98 show
+	17266 root      20   0  509876  49772  30640 S   0.0  0.6   0:06.36 docker
+	24891 admin     20   0  515864  49560  30644 S   0.0  0.6   0:05.54 docker
+	17643 admin     20   0  575668  49428  30628 S   0.0  0.6   0:06.29 docker
+	23885 admin     20   0  369552  49344  30840 S   0.0  0.6   0:05.57 docker
+	18055 root      20   0  509076  49260  30296 S   0.0  0.6   0:06.36 docker
+	17268 root      20   0  371120  49052  30372 S   0.0  0.6   0:06.45 docker
+	 1227 root      20   0  443284  48640  30100 S   0.0  0.6   0:41.91 docker
+	23785 admin     20   0  443796  48552  30128 S   0.0  0.6   0:05.58 docker
+	17820 admin     20   0  435088  48144  29480 S   0.0  0.6   0:06.33 docker
+	  506 root      20   0 1151040  43140  23964 S   0.0  0.5   8:51.08 containerd
+	18437 root      20   0   84852  26388   7380 S   0.0  0.3  65:59.76 python3.6
   ```
 
-#### Running Configuration
 
-- `show runningconfiguration bgp`
-  - Display the current running configuration for BGP
+**show processes summary**
+
+This command displays the current summary information about all the processes
+
+  - Usage:
+
+    show processes summary
+
+  - Example:
+  ```
+	admin@SONiC:~$  show processes summary 
+	  PID  PPID CMD                         %MEM %CPU
+		1     0 /sbin/init                   0.0  0.0
+		2     0 [kthreadd]                   0.0  0.0
+		3     2 [ksoftirqd/0]                0.0  0.0
+		5     2 [kworker/0:0H]               0.0  0.0
+  ```
+  
+
+# Startup & Running Configuration
+
+## Startup Configuration
+
+** show startupconfiguration bgp**
+
+This command is used to display the startup configuration for the BGP module. 
+
+  - Usage:
+
+    show startupconfiguration bgp`
+
+  - Example:
+  ```
+	admin@sonic:~$ show startupconfiguration bgp
+	Routing-Stack is: quagga
+	!
+	! =========== Managed by sonic-cfggen DO NOT edit manually! ====================
+	! generated by templates/quagga/bgpd.conf.j2 with config DB data
+	! file: bgpd.conf
+	!
+	!
+	hostname T1-2
+	password zebra
+	log syslog informational
+	log facility local4
+	! enable password !
+	!
+	! bgp multiple-instance
+	!
+	route-map FROM_BGP_SPEAKER_V4 permit 10
+	!
+	route-map TO_BGP_SPEAKER_V4 deny 10
+	!
+	router bgp 65000
+	  bgp log-neighbor-changes
+	  bgp bestpath as-path multipath-relax
+	  no bgp default ipv4-unicast
+	  bgp graceful-restart restart-time 180  
+	  
+	  <Only the partial output is shown here. In actual command, more configuration information will be displayed> 
+  ```
+
+## Running Configuration
+This sub-section explains the show commands for displaying the running configuration for the following modules.
+1) bgp 
+2) interfaces
+3) ntp
+4) snmp
+5) all 
+
+**show runningconfiguration all**
+This command displays the entire running configuration.
+  - Usage:
+
+    show runningconfiguration all
+	
+  - Example:
+  ```
+  admin@sonic:~$ show runningconfiguration all
+  ```
+
+**show runningconfiguration bgp**
+This command displays the running configuration of the BGP module.
+
+  - Usage:
+
+    show runningconfiguration bgp
+	
   - Example:
   ```
   admin@sonic:~$ show runningconfiguration bgp
   ```
 
-- `show runningconfiguration interfaces`
-  - Display the current running configuration for the interfaces
+**show runningconfiguration interfaces**
+This command displays the running configuration for the "interfaces".
+
+  - Usage:
+
+     show runningconfiguration interfaces
+
   - Example:
   ```
   admin@sonic:~$ show runningconfiguration interfaces
   ```
 
-- `show runningconfiguration ntp`
-  - Display the current running configuration for NTP
+**show runningconfiguration ntp**
+
+This command displays the running configuration of the ntp module. 
+
+  - Usage:
+
+     show runningconfiguration ntp
+	 
   - Example:
   ```
   admin@sonic:~$ show runningconfiguration ntp
   ```
 
-- `show runningconfiguration snmp`
-  - Display the current running configuration for SNMP
+**show runningconfiguration snmp**
+
+This command displays the running configuration of the snmp module. 
+
+  - Usage:
+
+     show runningconfiguration snmp
+
   - Example:
   ```
   admin@sonic:~$ show runningconfiguration snmp
   ```
 
-- `sudo config interface shutdown <interface-name>`
-  - Shut down the interface specified by \<interface-name\>
-  - Examples:
-  ```
-  admin@sonic:~$ sudo config interface shutdown Ethernet0
-  ```
-
-- `sudo config interface startup <interface-name>`
-  - Bring up the interface specified by \<interface-name\>
-  - Examples:
-  ```
-  admin@sonic:~$ sudo config interface startup Ethernet0
-  ```
-
-- `sudo config bgp shutdown (<ip-address> | <hostname>)`
-  - Shut down a BGP session with a neighbor by that neighbor's IP address or hostname
-  - Examples:
-  ```
-  admin@sonic:~$ sudo config bgp shutdown neighbor 192.168.1.124
-  ```
-  ```
-  admin@sonic:~$ sudo config bgp shutdown neighbor SONIC02SPINE
-  ```
-
-- `sudo config bgp shutdown all`
-  - Shut down all BGP sessions
-  - Examples:
-  ```
-  admin@sonic:~$ sudo config bgp shutdown all
-  ```
-
-- `sudo config bgp startup (<ip-address> | <hostname>)`
-  - Start up a BGP session with a neighbor by that neighbor's IP address or hostname
-  - Examples:
-  ```
-  admin@sonic:~$ sudo config bgp startup neighbor 192.168.1.124
-  ```
-  ```
-  admin@sonic:~$ sudo config bgp startup neighbor SONIC02SPINE
-  ```
-
-- `sudo config bgp startup all`
-  - Start up all BGP sessions
-  - Examples:
-  ```
-  admin@sonic:~$ sudo config bgp startup all
-  ```
 
 
 
+# Troubleshooting Commands
+This command gathers pertinent information about the state of the device and compresses it into an archive file. This archive file can be sent to the SONiC development team for examination.
+Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS.tar.gz`
 
+- Usage:
 
-### Troubleshooting
-
-- `show techsupport`
-  - Gathers pertinent information about the state of the device and compresses it into an archive file. This archive file can be sent to the SONiC development team for examination.
-  - Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS.tar.gz`
+    show techsupport
+	
   - Example:
   ```
   admin@sonic:~$ show techsupport
   ```
 
-### SONiC Installer
+# Software Installation Commands
+
+**SONiC Installer**
 
 - `sonic_installer install`
   - Takes a path to an installable SONiC image or URL and installs the image.
