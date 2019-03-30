@@ -1,5 +1,89 @@
 # SONiC COMMAND LINE INTERFACE GUIDE
 
+Table of Contents
+=================
+
+   * [SONiC COMMAND LINE INTERFACE GUIDE](#sonic-command-line-interface-guide)
+   * [Introduction](#introduction)
+   * [Basic Configuration And Show](#basic-configuration-and-show)
+      * [SSH Login](#ssh-login)
+      * [Configuring Management Interface](#configuring-management-interface)
+      * [Config Help](#config-help)
+      * [Show Versions](#show-versions)
+      * [Show Help](#show-help)
+      * [Show System Status](#show-system-status)
+      * [Show Hardware Platform](#show-hardware-platform)
+         * [Transceivers](#transceivers)
+   * [AAA Configuration And Show](#aaa-configuration-and-show)
+      * [show aaa](#show-aaa)
+      * [config aaa](#config-aaa)
+   * [ACL Configuration And Show](#acl-configuration-and-show)
+      * [show acl](#show-acl)
+      * [config acl](#config-acl)
+   * [BGP Configuration And Show Commands](#bgp-configuration-and-show-commands)
+      * [show bgp](#show-bgp)
+      * [config bgp](#config-bgp)
+   * [ECN Configuration And Show Commands](#ecn-configuration-and-show-commands)
+      * [show ecn](#show-ecn)
+      * [config ecn](#config-ecn)
+   * [Interface Configuration And Show-Commands](#interface-configuration-and-show-commands)
+      * [Interface Show Commands](#interface-show-commands)
+      * [Interface Config Commands](#interface-config-commands)
+   * [Interface Naming Mode](#interface-naming-mode)
+      * [show interface naming mode](#show-interface-naming-mode)
+      * [config interface naming mode](#config-interface-naming-mode)
+   * [Loading, Reloading And Saving Configuration](#loading-reloading-and-saving-configuration)
+      * [config load](#config-load)
+      * [config load_mgmt_config](#config-load_mgmt_config)
+      * [config load_minigraph](#config-load_minigraph)
+      * [config reload](#config-reload)
+      * [config save](#config-save)
+   * [Mirroring Configuration And Show](#mirroring-configuration-and-show)
+   * [Mirroring Show](#mirroring-show)
+   * [Platform](#platform)
+   * [PortChannel Configuration And Show](#portchannel-configuration-and-show)
+      * [PortChannel Show](#portchannel-show)
+      * [PortChannel Configuration](#portchannel-configuration)
+   * [QoS Configuration And Show](#qos-configuration-and-show)
+   * [QoS Show](#qos-show)
+         * [PFC](#pfc)
+         * [Queue And Priority-Group](#queue-and-priority-group)
+   * [QoS Configuration](#qos-configuration)
+   * [TACACS  Configuration And Show](#tacacs-configuration-and-show)
+      * [TACACS  show](#tacacs-show)
+      * [TACACS  Congiguration](#tacacs-congiguration)
+   * [VLAN Configuration And Show](#vlan-configuration-and-show)
+      * [VLAN Show](#vlan-show)
+      * [VLAN Configuration](#vlan-configuration)
+   * [Warm Restart](#warm-restart)
+      * [Warm Restart Show](#warm-restart-show)
+      * [Warm Restart Configuration](#warm-restart-configuration)
+   * [Watermark Configuration And Show](#watermark-configuration-and-show)
+      * [Watermark Show](#watermark-show)
+      * [Watermark Config](#watermark-config)
+      * [Layer 2 Configuration &amp; Show](#layer-2-configuration--show)
+         * [ARP](#arp)
+         * [FDB](#fdb)
+   * [LLDP](#lldp)
+      * [LLDP Show](#lldp-show)
+   * [NDP](#ndp)
+      * [NDP Show](#ndp-show)
+   * [IP](#ip)
+      * [show ip](#show-ip)
+      * [show ipv6](#show-ipv6)
+   * [Application Layer](#application-layer)
+      * [NTP](#ntp)
+            * [CRM](#crm)
+   * [System State](#system-state)
+      * [Processes](#processes)
+   * [Startup &amp; Running Configuration](#startup--running-configuration)
+      * [Startup Configuration](#startup-configuration)
+      * [Running Configuration](#running-configuration)
+   * [Troubleshooting Commands](#troubleshooting-commands)
+   * [Software Installation Commands](#software-installation-commands)
+
+
+
 # Introduction
 SONiC is an open source network operating system based on Linux that runs on switches from multiple vendors and ASICs. SONiC offers a full-suite of network functionality, like BGP and RDMA, that has been production-hardened in the data centers of some of the largest cloud-service providers. It offers teams the flexibility to create the network solutions they need while leveraging the collective strength of a large ecosystem and community.
 
@@ -1226,19 +1310,17 @@ TBD: What should user do to make it effective? "show interfaces status" still sh
 
 **config interface speed**
 
-This command is to configure the speed  administratively bringing up the Physical interface or port channel interface.
-TBD: What should user do to make it effective? "show interfaces status" still shows as down even after executing this command.
+This command is to configure the speed for the Physical interface.
+TBD: What are the acceptable values for speed (40000 for 40G, 100000 for 100G?) ? what should user do to make it effective? "show interfaces status" still the previous value even after this command is executed.
 
   - Usage:
   
-      config interface <interface-name> startup
+      config interface <interface-name> speed <value>
 
   - Example:
   ```
-  admin@sonic:~$ sudo config interface Ethernet0 startup
+  admin@sonic:~$ sudo config interface Ethernet0 speed 40000
   ```
-
-
 
 # Interface Naming Mode
 
@@ -2720,121 +2802,6 @@ This command displays a list of NTP peers known to the server as well as a summa
 	*204.2.134.164   46.233.231.73    2 u  916 1024  377    3.079    0.394   0.128
   ```
 
-#### CRM
-- `crm config polling interval <value>`
-  - Configure CRM polling interval in seconds
-  - Example:
-```
-  admin@sonic:~$ crm config polling interval 120
-```
-- `crm config thresholds [ipv4|ipv6] [route|neighbor|nexthop] type [percentage|used|free]`
-- `crm config thresholds nexthop group [object|member] type [percentage|used|free]`
-- `crm config thresholds acl [table|group [entry|counter]] type [percentage|used|free]`
-- `crm config thresholds fdb type [percentage|used|free]`
-  - Configure thresholds  type for each CRM resource
-  - Example:
-```
-  admin@sonic:~$ crm config thresholds ipv4 route type percentage
-  admin@sonic:~$ crm config thresholds acl table type used
-  admin@sonic:~$ crm config thresholds fdb type free
-```
-- `crm config thresholds [ipv4|ipv6] [route|neighbor|nexthop] [low|high] <value>`
-- `crm config thresholds nexthop group [object|member] [low|high] <value>`
-- `crm config thresholds acl [table|group [entry|counter]] [low|high] <value>`
-- `crm config thresholds fdb type [low|high] <value>`
-  - Configure low and high threshold values for each CRM resource
-  - Example:
-```
-  admin@sonic:~$ crm config thresholds ipv4 route low 60
-  admin@sonic:~$ crm config thresholds ipv4 route high 80
-```
-- `crm show summary`
-  - Show CRM general information
-  - Example:
-```
-  admin@sonic:~$  crm show summary
-  
-  Polling Interval: 300 second(s)
-
-```
-- `crm show thresholds all`
-- `crm show thresholds [ipv4|ipv6] [route|neighbor|nexthop]`
-- `crm show thresholds nexthop group [member|object]`
-- `crm show thresholds acl [table|group [entry|counter]]`
-- `crm show thresholds fdb`
-  - Show thresholds types and values for CRM resources
-  - Example:
-```
-  admin@sonic:~$  crm show thresholds all
-  
-  Resource Name         Threshold Type      Low Threshold    High Threshold
-  --------------------  ----------------  ---------------  ----------------
-  ipv4_route            percentage                     70                85
-  ipv6_route            percentage                     70                85
-  ipv4_nexthop          percentage                     70                85
-  ipv6_nexthop          percentage                     70                85
-  ipv4_neighbor         percentage                     70                85
-  ipv6_neighbor         percentage                     70                85
-  nexthop_group_member  percentage                     70                85
-  nexthop_group         percentage                     70                85
-  acl_table             percentage                     70                85
-  acl_group             percentage                     70                85
-  acl_entry             percentage                     70                85
-  acl_counter           percentage                     70                85
-  fdb_entry             percentage                     70                85
-
-```
-- `crm show resources all`
-- `crm show resources [ipv4|ipv6] [route|neighbor|nexthop]`
-- `crm show resources nexthop group [member|object]`
-- `crm show resources acl [table|group [entry|counter]]`
-- `crm show resources fdb`
-  - Show counter values for CRM resources
-  - Example:
-```
-  admin@sonic:~$  crm show resources all
-  
-  Resource Name           Used Count    Available Count
-  --------------------  ------------  -----------------
-  ipv4_route                    6555              93342
-  ipv6_route                    6554              93342
-  ipv4_nexthop                    24              57218
-  ipv6_nexthop                    24              57218
-  ipv4_neighbor                   48              93342
-  ipv6_neighbor                   48              22094
-  nexthop_group_member            18              57218
-  nexthop_group                    3              57218
-  fdb_entry                        0              93342
-
-
-  Stage    Bind Point    Resource Name      Used Count    Available Count
-  -------  ------------  ---------------  ------------  -----------------
-  INGRESS  PORT          acl_group                   0                368
-  INGRESS  PORT          acl_table                   1                391
-  INGRESS  LAG           acl_group                   0                368
-  INGRESS  LAG           acl_table                   0                391
-  INGRESS  VLAN          acl_group                   0                368
-  INGRESS  VLAN          acl_table                   0                391
-  INGRESS  RIF           acl_group                   0                368
-  INGRESS  RIF           acl_table                   0                391
-  INGRESS  SWITCH        acl_group                   0                368
-  INGRESS  SWITCH        acl_table                   0                391
-  EGRESS   PORT          acl_group                  32                368
-  EGRESS   PORT          acl_table                   2                391
-  EGRESS   LAG           acl_group                   0                368
-  EGRESS   LAG           acl_table                   0                391
-  EGRESS   RIF           acl_group                   0                368
-  EGRESS   RIF           acl_table                   0                391
-  EGRESS   SWITCH        acl_group                   0                368
-  EGRESS   SWITCH        acl_table                   0                391
-
-
-  Table ID         Resource Name      Used Count    Available Count
-  ---------------  ---------------  ------------  -----------------
-  0x70000000002bd  acl_entry                   1              13813
-  0x70000000002bd  acl_counter                 1              13813
-
-```
 
 # System State
 
@@ -3042,7 +3009,6 @@ This command displays the running configuration of the snmp module.
 
 
 
-
 # Troubleshooting Commands
 This command gathers pertinent information about the state of the device and compresses it into an archive file. This archive file can be sent to the SONiC development team for examination.
 Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS.tar.gz`
@@ -3136,3 +3102,118 @@ Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS
 
   Image removed
   ```
+# CRM
+- `crm config polling interval <value>`
+  - Configure CRM polling interval in seconds
+  - Example:
+```
+  admin@sonic:~$ crm config polling interval 120
+```
+- `crm config thresholds [ipv4|ipv6] [route|neighbor|nexthop] type [percentage|used|free]`
+- `crm config thresholds nexthop group [object|member] type [percentage|used|free]`
+- `crm config thresholds acl [table|group [entry|counter]] type [percentage|used|free]`
+- `crm config thresholds fdb type [percentage|used|free]`
+  - Configure thresholds  type for each CRM resource
+  - Example:
+```
+  admin@sonic:~$ crm config thresholds ipv4 route type percentage
+  admin@sonic:~$ crm config thresholds acl table type used
+  admin@sonic:~$ crm config thresholds fdb type free
+```
+- `crm config thresholds [ipv4|ipv6] [route|neighbor|nexthop] [low|high] <value>`
+- `crm config thresholds nexthop group [object|member] [low|high] <value>`
+- `crm config thresholds acl [table|group [entry|counter]] [low|high] <value>`
+- `crm config thresholds fdb type [low|high] <value>`
+  - Configure low and high threshold values for each CRM resource
+  - Example:
+```
+  admin@sonic:~$ crm config thresholds ipv4 route low 60
+  admin@sonic:~$ crm config thresholds ipv4 route high 80
+```
+- `crm show summary`
+  - Show CRM general information
+  - Example:
+```
+  admin@sonic:~$  crm show summary
+  
+  Polling Interval: 300 second(s)
+
+```
+- `crm show thresholds all`
+- `crm show thresholds [ipv4|ipv6] [route|neighbor|nexthop]`
+- `crm show thresholds nexthop group [member|object]`
+- `crm show thresholds acl [table|group [entry|counter]]`
+- `crm show thresholds fdb`
+  - Show thresholds types and values for CRM resources
+  - Example:
+```
+  admin@sonic:~$  crm show thresholds all
+  
+  Resource Name         Threshold Type      Low Threshold    High Threshold
+  --------------------  ----------------  ---------------  ----------------
+  ipv4_route            percentage                     70                85
+  ipv6_route            percentage                     70                85
+  ipv4_nexthop          percentage                     70                85
+  ipv6_nexthop          percentage                     70                85
+  ipv4_neighbor         percentage                     70                85
+  ipv6_neighbor         percentage                     70                85
+  nexthop_group_member  percentage                     70                85
+  nexthop_group         percentage                     70                85
+  acl_table             percentage                     70                85
+  acl_group             percentage                     70                85
+  acl_entry             percentage                     70                85
+  acl_counter           percentage                     70                85
+  fdb_entry             percentage                     70                85
+
+```
+- `crm show resources all`
+- `crm show resources [ipv4|ipv6] [route|neighbor|nexthop]`
+- `crm show resources nexthop group [member|object]`
+- `crm show resources acl [table|group [entry|counter]]`
+- `crm show resources fdb`
+  - Show counter values for CRM resources
+  - Example:
+```
+  admin@sonic:~$  crm show resources all
+  
+  Resource Name           Used Count    Available Count
+  --------------------  ------------  -----------------
+  ipv4_route                    6555              93342
+  ipv6_route                    6554              93342
+  ipv4_nexthop                    24              57218
+  ipv6_nexthop                    24              57218
+  ipv4_neighbor                   48              93342
+  ipv6_neighbor                   48              22094
+  nexthop_group_member            18              57218
+  nexthop_group                    3              57218
+  fdb_entry                        0              93342
+
+
+  Stage    Bind Point    Resource Name      Used Count    Available Count
+  -------  ------------  ---------------  ------------  -----------------
+  INGRESS  PORT          acl_group                   0                368
+  INGRESS  PORT          acl_table                   1                391
+  INGRESS  LAG           acl_group                   0                368
+  INGRESS  LAG           acl_table                   0                391
+  INGRESS  VLAN          acl_group                   0                368
+  INGRESS  VLAN          acl_table                   0                391
+  INGRESS  RIF           acl_group                   0                368
+  INGRESS  RIF           acl_table                   0                391
+  INGRESS  SWITCH        acl_group                   0                368
+  INGRESS  SWITCH        acl_table                   0                391
+  EGRESS   PORT          acl_group                  32                368
+  EGRESS   PORT          acl_table                   2                391
+  EGRESS   LAG           acl_group                   0                368
+  EGRESS   LAG           acl_table                   0                391
+  EGRESS   RIF           acl_group                   0                368
+  EGRESS   RIF           acl_table                   0                391
+  EGRESS   SWITCH        acl_group                   0                368
+  EGRESS   SWITCH        acl_table                   0                391
+
+
+  Table ID         Resource Name      Used Count    Available Count
+  ---------------  ---------------  ------------  -----------------
+  0x70000000002bd  acl_entry                   1              13813
+  0x70000000002bd  acl_counter                 1              13813
+
+```
