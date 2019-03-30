@@ -1,86 +1,5 @@
 # SONiC COMMAND LINE INTERFACE GUIDE
 
-Table of Contents
-=================
-
-   * [SONiC COMMAND LINE INTERFACE GUIDE](#sonic-command-line-interface-guide)
-   * [Introduction](#introduction)
-   * [Basic Configuration And Show](#basic-configuration-and-show)
-      * [SSH Login](#ssh-login)
-      * [Configuring Management Interface](#configuring-management-interface)
-      * [Config Help](#config-help)
-      * [Show Versions](#show-versions)
-      * [Show Help](#show-help)
-      * [Show System Status](#show-system-status)
-      * [Show Hardware Platform](#show-hardware-platform)
-         * [Transceivers](#transceivers)
-   * [AAA Configuration And Show](#aaa-configuration-and-show)
-      * [show aaa](#show-aaa)
-      * [config aaa](#config-aaa)
-   * [ACL Configuration And Show](#acl-configuration-and-show)
-      * [show acl](#show-acl)
-      * [config acl](#config-acl)
-   * [BGP Configuration And Show Commands](#bgp-configuration-and-show-commands)
-      * [show bgp](#show-bgp)
-      * [config bgp](#config-bgp)
-   * [ECN Configuration And Show Commands](#ecn-configuration-and-show-commands)
-      * [show ecn](#show-ecn)
-      * [config ecn](#config-ecn)
-   * [Interface Configuration And Show-Commands](#interface-configuration-and-show-commands)
-      * [Interface Show Commands](#interface-show-commands)
-      * [Interface Config Commands](#interface-config-commands)
-   * [Interface Naming Mode](#interface-naming-mode)
-      * [show interface naming mode](#show-interface-naming-mode)
-      * [config interface naming mode](#config-interface-naming-mode)
-   * [Loading, Reloading And Saving Configuration](#loading-reloading-and-saving-configuration)
-      * [config load](#config-load)
-      * [config load_mgmt_config](#config-load_mgmt_config)
-      * [config load_minigraph](#config-load_minigraph)
-      * [config reload](#config-reload)
-      * [config save](#config-save)
-   * [Mirroring Configuration And Show](#mirroring-configuration-and-show)
-   * [Mirroring Show](#mirroring-show)
-   * [Platform](#platform)
-   * [PortChannel Configuration And Show](#portchannel-configuration-and-show)
-      * [PortChannel Show](#portchannel-show)
-      * [PortChannel Configuration](#portchannel-configuration)
-   * [QoS Configuration And Show](#qos-configuration-and-show)
-   * [QoS Show](#qos-show)
-         * [PFC](#pfc)
-         * [Queue And Priority-Group](#queue-and-priority-group)
-   * [QoS Configuration](#qos-configuration)
-   * [TACACS  Configuration And Show](#tacacs-configuration-and-show)
-      * [TACACS  show](#tacacs-show)
-      * [TACACS  Congiguration](#tacacs-congiguration)
-   * [VLAN Configuration And Show](#vlan-configuration-and-show)
-      * [VLAN Show](#vlan-show)
-      * [VLAN Configuration](#vlan-configuration)
-   * [Warm Restart](#warm-restart)
-      * [Warm Restart Show](#warm-restart-show)
-      * [Warm Restart Configuration](#warm-restart-configuration)
-   * [Watermark Configuration And Show](#watermark-configuration-and-show)
-      * [Watermark Show](#watermark-show)
-      * [Watermark Config](#watermark-config)
-      * [Layer 2 Configuration &amp; Show](#layer-2-configuration--show)
-         * [ARP](#arp)
-         * [FDB](#fdb)
-   * [LLDP](#lldp)
-      * [LLDP Show](#lldp-show)
-   * [NDP](#ndp)
-      * [NDP Show](#ndp-show)
-   * [IP](#ip)
-      * [show ip](#show-ip)
-      * [show ipv6](#show-ipv6)
-   * [Application Layer](#application-layer)
-      * [NTP](#ntp)
-            * [CRM](#crm)
-   * [System State](#system-state)
-      * [Processes](#processes)
-   * [Startup &amp; Running Configuration](#startup--running-configuration)
-      * [Startup Configuration](#startup-configuration)
-      * [Running Configuration](#running-configuration)
-   * [Troubleshooting Commands](#troubleshooting-commands)
-   * [Software Installation Commands](#software-installation-commands)
 
 
 
@@ -189,6 +108,10 @@ Commands:
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## Show Versions
+
+** show version **
+This command displays relevant information as the SONiC and Linux kernel version being utilized, as well as the commit-id used to build the SONiC image. The second section of the output displays the various docker images and their associated id’s. 
+
 - `show version`
   - Display software component versions of the currently running SONiC image. This includes the SONiC image version as well as Docker image versions. You can find details of the SONiC image version format [here](sonic-version).
   - Example:
@@ -414,7 +337,9 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
   ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
-## Show Hardware Platform
+## Show Platform
+
+The information displayed in this set of commands partially overlaps with the one generated by “show envinronment” instruction. In this case though, the information is presented in a more succinct fashion. In the future these two CLI stanzas may end up getting combined.
 
 - `show platform summary`
   - Display a summary of the device's hardware platform
@@ -2812,14 +2737,18 @@ This sub-section explains the various "processes" specific data that includes th
 2) memory   Show processes memory info
 3) summary  Show processes info
 
+“show processes” commands provide a wrapper over linux’s “top” command. “show process cpu” sorts the processes being displayed by cpu-utilization, whereas “show process memory” does it attending to processes’ memory-utilization.
 
 **show processes cpu**
 
-This command displays the current CPU usage by process
+This command displays the current CPU usage by process. This command uses linux's "top -bn 1 -o %CPU" command to display the output.
 
   - Usage:
 
     show processes cpu
+	
+	Note that pipe option can be used using " | head -n" to display only the "n" number of lines.
+	TBD: Do we support all options of "top" command?
 
   - Example:
   ```
@@ -2842,11 +2771,13 @@ This command displays the current CPU usage by process
 
 **show processes memory**
 
-This command displays the current memory usage by processes
+This command displays the current memory usage by processes. This command uses linux's "top -bn 1 -o %MEM" command to display the output.
 
   - Usage:
 
     show processes memory
+	
+	Note that pipe option can be used using " | head -n" to display only the "n" number of lines.
 
   - Example:
   ```
@@ -3007,10 +2938,9 @@ This command displays the running configuration of the snmp module.
   admin@sonic:~$ show runningconfiguration snmp
   ```
 
-
-
 # Troubleshooting Commands
-This command gathers pertinent information about the state of the device and compresses it into an archive file. This archive file can be sent to the SONiC development team for examination.
+
+For troubleshooting and debugging purposes, this command gathers pertinent information about the state of the device; information is as diverse as syslog entries, database state, routing-stack state, etc., It then compresses it into an archive file. This archive file can be sent to the SONiC development team for examination.
 Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS.tar.gz`
 
 - Usage:
@@ -3024,10 +2954,20 @@ Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS
 
 # Software Installation Commands
 
-**SONiC Installer**
+SONiC software can be installed in two methods, viz, "using sonic_installer tool", "ONIE Installer".
 
-- `sonic_installer install`
-  - Takes a path to an installable SONiC image or URL and installs the image.
+
+## SONiC Installer
+This is a command line tool available as part of the SONiC software; I=if the device is already running the SONiC software, this tool can be used. 
+This tool has facility to install an alternate image, list the available images and to set the next reboot image.
+
+**sonic_installer install**
+This command is to install a new image on the alternate image partition.  This command takes a path to an installable SONiC image or URL and installs the image.
+
+  - Usage: 
+     sonic_installer install <path>
+	 
+  - 
   - Example:
   ```
   admin@sonic:~$ sonic_installer install https://sonic-jenkins.westus.cloudapp.azure.com/job/xxxx/job/buildimage-xxxx-all/xxx/artifact/target/sonic-xxxx.bin
@@ -3062,8 +3002,14 @@ Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS
   Done
   ```
 
-- `sonic_installer list`
-  - Display information about currently installed images. It displays a list of installed images, currently running image and image set to be loaded after reboot.
+**sonic_installer list**
+
+This command displays information about currently installed images. It displays a list of installed images, currently running image and image set to be loaded in next reboot.
+
+  - Usage: 
+  
+    sonic_installer list
+
   - Example:
   ```
   admin@sonic:~$ sonic_installer list 
@@ -3074,22 +3020,40 @@ Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS
   SONiC-OS-HEAD.YYYY
   ```
 
-- `sonic_installer set_default`
-  - Changes which image will be loaded by default after all subsequent reboots
+**sonic_installer set_default**
+
+This command can be used to change which image to be loaded by default in all the subsequent reboots.
+
+  - Usage:
+  
+     sonic_installer set_default <image_name>
+   
   - Example:
   ```
   admin@sonic:~$ sonic_installer set_default SONiC-OS-HEAD.XXXX
   ```
 
-- `sonic_installer set_next_boot`
-  - Changes which image will be loaded after the *next* reboot only
+**sonic_installer set_next_boot**
+
+This command can be used to change which image to be in the *next* reboot only. Note that it will fallback to current image in all other subsequent reboots after the next reboot.
+
+  - Usage:
+  
+     sonic_installer set_next_boot <image_name>
+
   - Example:
   ```
   admin@sonic:~$ sonic_installer set_next_boot SONiC-OS-HEAD.XXXX
   ```
 
-- `sonic_installer remove`
-  - Removes an unused SONiC image from the disk. Note that it's *not* allowed to remove currently running image.
+**sonic_installer remove**
+
+This command can be used to remove the unused SONiC image from the disk. Note that it's *not* allowed to remove currently running image.
+
+  - Usage: 
+  
+      sonic_installer remove <image_name>
+
   - Example:
   ```
   admin@sonic:~$ sonic_installer remove SONiC-OS-HEAD.YYYY
@@ -3102,118 +3066,113 @@ Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS
 
   Image removed
   ```
-# CRM
-- `crm config polling interval <value>`
-  - Configure CRM polling interval in seconds
-  - Example:
-```
-  admin@sonic:~$ crm config polling interval 120
-```
-- `crm config thresholds [ipv4|ipv6] [route|neighbor|nexthop] type [percentage|used|free]`
-- `crm config thresholds nexthop group [object|member] type [percentage|used|free]`
-- `crm config thresholds acl [table|group [entry|counter]] type [percentage|used|free]`
-- `crm config thresholds fdb type [percentage|used|free]`
-  - Configure thresholds  type for each CRM resource
-  - Example:
-```
-  admin@sonic:~$ crm config thresholds ipv4 route type percentage
-  admin@sonic:~$ crm config thresholds acl table type used
-  admin@sonic:~$ crm config thresholds fdb type free
-```
-- `crm config thresholds [ipv4|ipv6] [route|neighbor|nexthop] [low|high] <value>`
-- `crm config thresholds nexthop group [object|member] [low|high] <value>`
-- `crm config thresholds acl [table|group [entry|counter]] [low|high] <value>`
-- `crm config thresholds fdb type [low|high] <value>`
-  - Configure low and high threshold values for each CRM resource
-  - Example:
-```
-  admin@sonic:~$ crm config thresholds ipv4 route low 60
-  admin@sonic:~$ crm config thresholds ipv4 route high 80
-```
-- `crm show summary`
-  - Show CRM general information
-  - Example:
-```
-  admin@sonic:~$  crm show summary
   
-  Polling Interval: 300 second(s)
+# More System Show Commands
 
-```
-- `crm show thresholds all`
-- `crm show thresholds [ipv4|ipv6] [route|neighbor|nexthop]`
-- `crm show thresholds nexthop group [member|object]`
-- `crm show thresholds acl [table|group [entry|counter]]`
-- `crm show thresholds fdb`
-  - Show thresholds types and values for CRM resources
-  - Example:
-```
-  admin@sonic:~$  crm show thresholds all
+## show services
+
+**show services**
+
+This command displays the state of all the SONiC processes running inside a docker container. This helps to identify the status of SONiC’s critical processes.
+
+  - Usage: 
   
-  Resource Name         Threshold Type      Low Threshold    High Threshold
-  --------------------  ----------------  ---------------  ----------------
-  ipv4_route            percentage                     70                85
-  ipv6_route            percentage                     70                85
-  ipv4_nexthop          percentage                     70                85
-  ipv6_nexthop          percentage                     70                85
-  ipv4_neighbor         percentage                     70                85
-  ipv6_neighbor         percentage                     70                85
-  nexthop_group_member  percentage                     70                85
-  nexthop_group         percentage                     70                85
-  acl_table             percentage                     70                85
-  acl_group             percentage                     70                85
-  acl_entry             percentage                     70                85
-  acl_counter           percentage                     70                85
-  fdb_entry             percentage                     70                85
+      sonic_installer remove <image_name>
 
-```
-- `crm show resources all`
-- `crm show resources [ipv4|ipv6] [route|neighbor|nexthop]`
-- `crm show resources nexthop group [member|object]`
-- `crm show resources acl [table|group [entry|counter]]`
-- `crm show resources fdb`
-  - Show counter values for CRM resources
   - Example:
-```
-  admin@sonic:~$  crm show resources all
+  ```
+	admin@lnos-x1-a-asw02:~$ show services
+	dhcp_relay      docker
+	---------------------------
+	UID        PID  PPID  C STIME TTY          TIME CMD
+	root         1     0  0 05:26 ?        00:00:12 /usr/bin/python /usr/bin/supervi
+	root        24     1  0 05:26 ?        00:00:00 /usr/sbin/rsyslogd -n
+
+	snmp    docker
+	---------------------------
+	UID        PID  PPID  C STIME TTY          TIME CMD
+	root         1     0  0 05:26 ?        00:00:16 /usr/bin/python /usr/bin/supervi
+	root        24     1  0 05:26 ?        00:00:02 /usr/sbin/rsyslogd -n
+	Debian-+    29     1  0 05:26 ?        00:00:04 /usr/sbin/snmpd -f -LS4d -u Debi
+	root        31     1  1 05:26 ?        00:15:10 python3.6 -m sonic_ax_impl
+
+	syncd   docker
+	---------------------------
+	UID        PID  PPID  C STIME TTY          TIME CMD
+	root         1     0  0 05:26 ?        00:00:13 /usr/bin/python /usr/bin/supervi
+	root        12     1  0 05:26 ?        00:00:00 /usr/sbin/rsyslogd -n
+	root        17     1  0 05:26 ?        00:00:00 /usr/bin/dsserve /usr/bin/syncd
+	root        27    17 22 05:26 ?        04:09:30 /usr/bin/syncd --diag -p /usr/sh
+	root        51    27  0 05:26 ?        00:00:01 /usr/bin/syncd --diag -p /usr/sh
+
+	swss    docker
+	---------------------------
+	UID        PID  PPID  C STIME TTY          TIME CMD
+	root         1     0  0 05:26 ?        00:00:29 /usr/bin/python /usr/bin/supervi
+	root        25     1  0 05:26 ?        00:00:00 /usr/sbin/rsyslogd -n
+	root        30     1  0 05:26 ?        00:00:13 /usr/bin/orchagent -d /var/log/s
+	root        42     1  1 05:26 ?        00:12:40 /usr/bin/portsyncd -p /usr/share
+	root        45     1  0 05:26 ?        00:00:00 /usr/bin/intfsyncd
+	root        48     1  0 05:26 ?        00:00:03 /usr/bin/neighsyncd
+	root        59     1  0 05:26 ?        00:00:01 /usr/bin/vlanmgrd
+	root        92     1  0 05:26 ?        00:00:01 /usr/bin/intfmgrd
+	root      3606     1  0 23:36 ?        00:00:00 bash -c /usr/bin/arp_update; sle
+	root      3621  3606  0 23:36 ?        00:00:00 sleep 300
+  ```
+
+## show system-memory
+
+**show system-memory**
+
+This command displays the system-wide memory utilization information – just a wrapper over linux native “free” command
+
+  - Usage: 
   
-  Resource Name           Used Count    Available Count
-  --------------------  ------------  -----------------
-  ipv4_route                    6555              93342
-  ipv6_route                    6554              93342
-  ipv4_nexthop                    24              57218
-  ipv6_nexthop                    24              57218
-  ipv4_neighbor                   48              93342
-  ipv6_neighbor                   48              22094
-  nexthop_group_member            18              57218
-  nexthop_group                    3              57218
-  fdb_entry                        0              93342
+      sonic_installer remove <image_name>
+
+  - Example:
+  ```
+	admin@lnos-x1-a-asw02:~$ show system-memory
+	Command: free -m -h
+				 total       used       free     shared    buffers     cached
+	Mem:          3.9G       2.0G       1.8G        33M       324M       791M
+	-/+ buffers/cache:       951M       2.9G
+	Swap:           0B         0B         0B
+  ```
 
 
-  Stage    Bind Point    Resource Name      Used Count    Available Count
-  -------  ------------  ---------------  ------------  -----------------
-  INGRESS  PORT          acl_group                   0                368
-  INGRESS  PORT          acl_table                   1                391
-  INGRESS  LAG           acl_group                   0                368
-  INGRESS  LAG           acl_table                   0                391
-  INGRESS  VLAN          acl_group                   0                368
-  INGRESS  VLAN          acl_table                   0                391
-  INGRESS  RIF           acl_group                   0                368
-  INGRESS  RIF           acl_table                   0                391
-  INGRESS  SWITCH        acl_group                   0                368
-  INGRESS  SWITCH        acl_table                   0                391
-  EGRESS   PORT          acl_group                  32                368
-  EGRESS   PORT          acl_table                   2                391
-  EGRESS   LAG           acl_group                   0                368
-  EGRESS   LAG           acl_table                   0                391
-  EGRESS   RIF           acl_group                   0                368
-  EGRESS   RIF           acl_table                   0                391
-  EGRESS   SWITCH        acl_group                   0                368
-  EGRESS   SWITCH        acl_table                   0                391
+## show uptime
 
+**show uptime**
+This command displays the system uptime.
 
-  Table ID         Resource Name      Used Count    Available Count
-  ---------------  ---------------  ------------  -----------------
-  0x70000000002bd  acl_entry                   1              13813
-  0x70000000002bd  acl_counter                 1              13813
+  - Usage:
+  
+     show uptime
+	 
+  - Example:
+  ```  
+	admin@lnos-x1-a-asw02:~$ show uptime
+	Command: uptime -p
+	up 1 day, 8 hours, 15 minutes
 
-```
+  ```
+
+## show users
+
+**show users**
+This command is a simple wrapper over “who” linux native command – displays current users logged in the system.
+
+  - Usage:
+  
+     show users
+	 
+  - Example:
+  ```  
+	admin@lnos-x1-a-asw02:~$ show users
+	Command: who
+	admin    ttyS0        Mar 19 17:56
+	admin    pts/10       Mar 19 18:07 (172.29.120.222:S.0)
+	admin    pts/11       Mar 19 18:07 (172.29.120.222:S.1)
+	admin    pts/12       Mar 19 18:18 (172.29.120.222:S.2)
+  ```
