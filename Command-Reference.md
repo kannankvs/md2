@@ -51,7 +51,7 @@ Table of Contents
    * [QoS Configuration](#qos-configuration)
    * [TACACS  Configuration And Show](#tacacs-configuration-and-show)
       * [TACACS  show](#tacacs-show)
-      * [TACACS  Congiguration](#tacacs-congiguration)
+      * [TACACS  Configuration](#tacacs-configuration)
    * [VLAN Configuration And Show](#vlan-configuration-and-show)
       * [VLAN Show](#vlan-show)
       * [VLAN Configuration](#vlan-configuration)
