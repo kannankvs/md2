@@ -3477,4 +3477,4 @@ This command displays the routing policy that takes precedence over the other ro
 		Exit routemap
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#more-system-show-commands)
+Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#more-system-show-Commands)
