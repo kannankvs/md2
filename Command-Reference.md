@@ -136,7 +136,7 @@ admin@sonic's password:
 
 By default, login takes the user the default prompt from which most of the show commands and few configuration commands work. Some commands like "aaa" need root level privileges that can be obtained using "sudo -i" for the "admin" user.
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
 
 ## Configuring Management Interface
 - By default, the management interface (eth0) is configured to use DHCP to get the IP address from the DHCP server. Connect the management interface to the same network in which your DHCP server is connected and get the IP address from DHCP server.
@@ -154,7 +154,7 @@ admin@sonic:~$ /sbin/ifconfig eth0
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 10.11.11.13  netmask 255.255.255.0  broadcast 10.11.12.255
 ```
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
 
 ## Config Help
 - List all the possible configuration commands at the top level. The exact command syntax is as follows; all commands are case sensitive
@@ -193,7 +193,7 @@ Commands:
   watermark              Configure watermark
 
 ```
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
 
 ## Show Versions
 
@@ -237,7 +237,7 @@ docker-fpm-quagga          HEAD.32-21ea29a     546036fe6838        282MB
 docker-fpm-quagga          latest              546036fe6838        282MB
 
 ```
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
 
 ## Show Help
 
@@ -312,7 +312,7 @@ Commands:
   transceiver  Show SFP Transceiver information
 ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
   
 ## Show System Status
 
@@ -423,7 +423,7 @@ Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
   admin    ttyS1        2019-03-25 20:31
 
   ```
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
 
 ## Show Platform
 
@@ -523,7 +523,7 @@ The information displayed in this set of commands partially overlaps with the on
   -----------  ----------
   Ethernet100  Present
   ```
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Basic-Configuration-And-Show)
 
 # AAA Configuration And Show
 This section captures the various show commands & configuration commands that are applicable for the AAA (Authentication, Authorization, and Accounting) module.
@@ -608,7 +608,7 @@ If the authentication fails, AAA will check the "failthrough" configuration and 
   root@sonic:~# config aaa authentication login tacacs+
   root@sonic:~# 
   ```
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#AAA-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#AAA-Configuration-And-Show)
 
 # ACL Configuration And Show
 
@@ -778,7 +778,7 @@ When the optional argument "max_priority"  is specified, each rule’s priority 
   ```
 TBD: Need to create these example input files, test them using the above examples, upload them in github and reference them from here.  
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#ACL-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#ACL-Configuration-And-Show)
 
 # BGP Configuration And Show Commands
 
@@ -999,7 +999,7 @@ This command is to start up the particular IPv4 or IPv6 BGP neighbor using eithe
   admin@sonic:~$ sudo config bgp startup neighbor SONIC02SPINE
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#BGP-Configuration-And-Show-Commands)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#BGP-Configuration-And-Show-Commands)
 
 
 # ECN Configuration And Show Commands
@@ -1076,7 +1076,7 @@ The list of the WRED profile fields that are configurable is listed in the below
      This command configures the "red max threshold" for the WRED profile name "wredprofileabcd". It will create the WRED profile if it does not exist.
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#ECN-Configuration-And-Show-Commands)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#ECN-Configuration-And-Show-Commands)
 
 # Interface Configuration And Show-Commands
 
@@ -1337,7 +1337,7 @@ TBD: What are the acceptable values for speed (40000 for 40G, 100000 for 100G?) 
   admin@sonic:~$ sudo config interface Ethernet0 speed 40000
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Interface-Configuration-And-Show-Commands)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Interface-Configuration-And-Show-Commands)
 
 # Interface Naming Mode
 
@@ -1399,7 +1399,7 @@ NOTE: Some platforms do not support alias mapping. In such cases, this command i
       Ethernet0   101,102      40G   9100   fortyGigE1/1/1    down     down
     ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Interface-Naming-Mode)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Interface-Naming-Mode)
 
 # Loading, Reloading And Saving Configuration
 
@@ -1525,7 +1525,7 @@ Saved file can be transferred to remote machines for debugging. If users wants t
    root@T1-2:~# config save -y - this saves to /etc/sonic/config_db.json.
    ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#loading-reloading-and-saving-configuration)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#loading-reloading-and-saving-configuration)
 
 
 # Mirroring Configuration And Show
@@ -1559,7 +1559,7 @@ While adding a new session, users need to configure the following fields that ar
 
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Mirroring-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Mirroring-Show)
 
 # Platform
 
@@ -1628,7 +1628,7 @@ This command is to add or delete a member port into the already created portchan
   This command will add Ethernet4 as member of the portchannel "PortChannel0011".
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#PortChannel-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#PortChannel-Configuration-And-Show)
 
 # QoS Configuration And Show
 
@@ -1895,7 +1895,7 @@ Some of the example QOS configurations that users can modify are given below.
 	When there are no changes in the platform specific configutation files, they internally use the file "/usr/share/sonic/templates/buffers_config.j2" and "/usr/share/sonic/templates/qos_config.j2" to generate the configuration.
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#QoS-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#QoS-Configuration-And-Show)
 
 # TACACS+ Configuration And Show
 
@@ -2035,7 +2035,7 @@ When user has not configured server specific timeout, this global value shall be
   root@T1-2:~#
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#TACACS-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#TACACS-Configuration-And-Show)
 
 
 # VLAN Configuration And Show
@@ -2166,7 +2166,7 @@ This command displays the warm_restart state.
 
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#VLAN-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#VLAN-Configuration-And-Show)
 
 ## Warm Restart Configuration
 
@@ -2257,7 +2257,7 @@ TBD: This command sets the teamsyncd_timer value for warm_restart of teamd servi
 	admin@sonic:~$ sudo config warm_restart teamsyncd_timer 3000
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Warm-Restart)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Warm-Restart)
 
 
 # Watermark Configuration And Show
@@ -2456,7 +2456,7 @@ This command displays the MAC (FDB) entries either in full or partial as given b
   FDB entries are cleared.
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Watermark-Configuration-And-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Watermark-Configuration-And-Show)
 
 # LLDP
 
@@ -2566,7 +2566,7 @@ This command displays more details about all LLDP neighbors or only the neighbor
   
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#LLDP)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#LLDP)
 
 # NDP
 
@@ -2608,7 +2608,7 @@ This command displays either all the IPv6 neighbor mac addresses, or for a parti
 
    ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#NDP)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#NDP)
 
 # IP 
 
@@ -2822,7 +2822,7 @@ TBD: Need to fill details.
   ```
 
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#IP)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#IP)
 
 # Application Layer
 
@@ -2844,7 +2844,7 @@ This command displays a list of NTP peers known to the server as well as a summa
 	*204.2.134.164   46.233.231.73    2 u  916 1024  377    3.079    0.394   0.128
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Application-Layer)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Application-Layer)
 
 
 # System State
@@ -2945,7 +2945,7 @@ This command displays the current summary information about all the processes
   ```
  
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#System-State)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#System-State)
  
 
 # Startup & Running Configuration
@@ -3060,7 +3060,7 @@ This command displays the running configuration of the snmp module.
   admin@sonic:~$ show runningconfiguration snmp
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Startup--Running-Configuration)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Startup--Running-Configuration)
 
 
 
@@ -3078,7 +3078,7 @@ Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS
   admin@sonic:~$ show techsupport
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Troubleshooting-commands)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Troubleshooting-commands)
 
 
 # Software Installation Commands
@@ -3196,7 +3196,7 @@ This command can be used to remove the unused SONiC image from the disk. Note th
   Image removed
   ```
  
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Software-Installation-Commands)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Software-Installation-Commands)
 
  
 # More System Show Commands
@@ -3477,4 +3477,4 @@ This command displays the routing policy that takes precedence over the other ro
 		Exit routemap
   ```
 
-Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#more-system-show-Commands)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#more-system-show-Commands)
