@@ -3199,7 +3199,7 @@ This command can be used to remove the unused SONiC image from the disk. Note th
 Go Back To [Beginning-of-the-document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning-of-this-section](#Software-Installation-Commands)
 
  
-# Other System Show Commands
+# More System Show Commands
 
 ## show services
 
