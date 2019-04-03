@@ -924,6 +924,57 @@ This command displays all the details of one particular IPv6 Border Gateway Prot
   admin@sonic:~$ show ipv6 bgp neighbors fc00::72 routes
   ```
 
+**show route-map**
+This command displays the routing policy that takes precedence over the other route processes that are configured.
+
+  - Usage:
+  
+     show route-map
+ 
+  - Example:
+  ```
+	admin@T1-2:~$ show route-map
+	ZEBRA:
+	route-map RM_SET_SRC, permit, sequence 10
+	  Match clauses:
+	  Set clauses:
+		src 10.12.0.102
+	  Call clause:
+	  Action:
+		Exit routemap
+	ZEBRA:
+	route-map RM_SET_SRC6, permit, sequence 10
+	  Match clauses:
+	  Set clauses:
+		src fc00:1::102
+	  Call clause:
+	  Action:
+		Exit routemap
+	BGP:
+	route-map FROM_BGP_SPEAKER_V4, permit, sequence 10
+	  Match clauses:
+	  Set clauses:
+	  Call clause:
+	  Action:
+	    Exit routemap
+	BGP:
+	route-map TO_BGP_SPEAKER_V4, deny, sequence 10
+	  Match clauses:
+	  Set clauses:
+	  Call clause:
+	  Action:
+	    Exit routemap
+	BGP:
+	route-map ISOLATE, permit, sequence 10
+	  Match clauses:
+	  Set clauses:
+		as-path prepend 65000
+	  Call clause:
+	  Action:
+		Exit routemap
+  ```
+
+
 ## config bgp 
 
 This sub-section explains the list of configuration options available for BGP module for both IPv4 and IPv6 BGP neighbors.
@@ -2943,6 +2994,185 @@ This command displays the current summary information about all the processes
 		3     2 [ksoftirqd/0]                0.0  0.0
 		5     2 [kworker/0:0H]               0.0  0.0
   ```
+
+**show services**
+
+This command displays the state of all the SONiC processes running inside a docker container. This helps to identify the status of SONiC’s critical processes.
+
+  - Usage: 
+  
+      sonic_installer remove <image_name>
+
+  - Example:
+  ```
+	admin@lnos-x1-a-asw02:~$ show services
+	dhcp_relay      docker
+	---------------------------
+	UID        PID  PPID  C STIME TTY          TIME CMD
+	root         1     0  0 05:26 ?        00:00:12 /usr/bin/python /usr/bin/supervi
+	root        24     1  0 05:26 ?        00:00:00 /usr/sbin/rsyslogd -n
+
+	snmp    docker
+	---------------------------
+	UID        PID  PPID  C STIME TTY          TIME CMD
+	root         1     0  0 05:26 ?        00:00:16 /usr/bin/python /usr/bin/supervi
+	root        24     1  0 05:26 ?        00:00:02 /usr/sbin/rsyslogd -n
+	Debian-+    29     1  0 05:26 ?        00:00:04 /usr/sbin/snmpd -f -LS4d -u Debi
+	root        31     1  1 05:26 ?        00:15:10 python3.6 -m sonic_ax_impl
+
+	syncd   docker
+	---------------------------
+	UID        PID  PPID  C STIME TTY          TIME CMD
+	root         1     0  0 05:26 ?        00:00:13 /usr/bin/python /usr/bin/supervi
+	root        12     1  0 05:26 ?        00:00:00 /usr/sbin/rsyslogd -n
+	root        17     1  0 05:26 ?        00:00:00 /usr/bin/dsserve /usr/bin/syncd
+	root        27    17 22 05:26 ?        04:09:30 /usr/bin/syncd --diag -p /usr/sh
+	root        51    27  0 05:26 ?        00:00:01 /usr/bin/syncd --diag -p /usr/sh
+
+	swss    docker
+	---------------------------
+	UID        PID  PPID  C STIME TTY          TIME CMD
+	root         1     0  0 05:26 ?        00:00:29 /usr/bin/python /usr/bin/supervi
+	root        25     1  0 05:26 ?        00:00:00 /usr/sbin/rsyslogd -n
+	root        30     1  0 05:26 ?        00:00:13 /usr/bin/orchagent -d /var/log/s
+	root        42     1  1 05:26 ?        00:12:40 /usr/bin/portsyncd -p /usr/share
+	root        45     1  0 05:26 ?        00:00:00 /usr/bin/intfsyncd
+	root        48     1  0 05:26 ?        00:00:03 /usr/bin/neighsyncd
+	root        59     1  0 05:26 ?        00:00:01 /usr/bin/vlanmgrd
+	root        92     1  0 05:26 ?        00:00:01 /usr/bin/intfmgrd
+	root      3606     1  0 23:36 ?        00:00:00 bash -c /usr/bin/arp_update; sle
+	root      3621  3606  0 23:36 ?        00:00:00 sleep 300
+  ```
+
+**show system-memory**
+
+This command displays the system-wide memory utilization information – just a wrapper over linux native “free” command
+
+  - Usage: 
+  
+      sonic_installer remove <image_name>
+
+  - Example:
+  ```
+	admin@lnos-x1-a-asw02:~$ show system-memory
+	Command: free -m -h
+				 total       used       free     shared    buffers     cached
+	Mem:          3.9G       2.0G       1.8G        33M       324M       791M
+	-/+ buffers/cache:       951M       2.9G
+	Swap:           0B         0B         0B
+  ```
+ 
+**show mmu**
+This command displays virtual address to the physical address translation status of the Memory Management Unit (MMU).
+
+  - Usage:
+  
+     show mmu
+  
+  - Example:
+  ```
+	admin@T1-2:~$ show mmu
+	Pool: ingress_lossless_pool
+	----  --------
+	xoff  4194112
+	type  ingress
+	mode  dynamic
+	size  10875072
+	----  --------
+
+	Pool: egress_lossless_pool
+	----  --------
+	type  egress
+	mode  static
+	size  15982720
+	----  --------
+
+	Pool: egress_lossy_pool
+	----  -------
+	type  egress
+	mode  dynamic
+	size  9243812
+	----  -------
+
+	Profile: egress_lossy_profile
+	----------  -------------------------------
+	dynamic_th  3
+	pool        [BUFFER_POOL|egress_lossy_pool]
+	size        1518
+	----------  -------------------------------
+
+	Profile: pg_lossless_100000_300m_profile
+	----------  -----------------------------------
+	xon_offset  2288
+	dynamic_th  -3
+	xon         2288
+	xoff        268736
+	pool        [BUFFER_POOL|ingress_lossless_pool]
+	size        1248
+	----------  -----------------------------------
+
+	Profile: egress_lossless_profile
+	---------  ----------------------------------
+	static_th  3995680
+	pool       [BUFFER_POOL|egress_lossless_pool]
+	size       1518
+	---------  ----------------------------------
+
+	Profile: pg_lossless_100000_40m_profile
+	----------  -----------------------------------
+	xon_offset  2288
+	dynamic_th  -3
+	xon         2288
+	xoff        177632
+	pool        [BUFFER_POOL|ingress_lossless_pool]
+	size        1248
+	----------  -----------------------------------
+
+	Profile: ingress_lossy_profile
+	----------  -----------------------------------
+	dynamic_th  3
+	pool        [BUFFER_POOL|ingress_lossless_pool]
+	size        0
+	----------  -----------------------------------
+
+	Profile: pg_lossless_40000_40m_profile
+	----------  -----------------------------------
+	xon_offset  2288
+	dynamic_th  -3
+	xon         2288
+	xoff        71552
+	pool        [BUFFER_POOL|ingress_lossless_pool]
+	size        1248
+	----------  -----------------------------------
+   ```
+   
+**show line**
+This command displays serial port or a virtual network connection status.
+
+  - Usage:
+  
+     show line
+  
+  - Example: TBD: This command is not working. It crashes as follows. Need more information.
+  ```
+  admin@T1-2:~$ show line
+  Traceback (most recent call last):
+	File "/usr/bin/show", line 9, in <module>
+	  load_entry_point('sonic-utilities==1.2', 'console_scripts', 'show')()
+   File "/usr/lib/python2.7/dist-packages/click/core.py", line 722, in __call__
+      return self.main(*args, **kwargs)
+   File "/usr/lib/python2.7/dist-packages/click/core.py", line 697, in main
+      rv = self.invoke(ctx)
+	File "/usr/lib/python2.7/dist-packages/click/core.py", line 1066, in invoke
+      return _process_result(sub_ctx.command.invoke(sub_ctx))
+	File "/usr/lib/python2.7/dist-packages/click/core.py", line 895, in invoke
+      return ctx.invoke(self.callback, **ctx.params)
+	File "/usr/lib/python2.7/dist-packages/click/core.py", line 535, in invoke
+      return callback(*args, **kwargs)
+	File "/usr/lib/python2.7/dist-packages/show/main.py", line 1659, in line
+      run_command(cmd, display_cmd=verbose)
+  NameError: global name 'verbose' is not defined
+  ```
  
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#System-State)
@@ -3198,283 +3428,9 @@ This command can be used to remove the unused SONiC image from the disk. Note th
  
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Software-Installation-Commands)
 
- 
-# More System Show Commands
-
-## show services
-
-**show services**
-
-This command displays the state of all the SONiC processes running inside a docker container. This helps to identify the status of SONiC’s critical processes.
-
-  - Usage: 
-  
-      sonic_installer remove <image_name>
-
-  - Example:
-  ```
-	admin@lnos-x1-a-asw02:~$ show services
-	dhcp_relay      docker
-	---------------------------
-	UID        PID  PPID  C STIME TTY          TIME CMD
-	root         1     0  0 05:26 ?        00:00:12 /usr/bin/python /usr/bin/supervi
-	root        24     1  0 05:26 ?        00:00:00 /usr/sbin/rsyslogd -n
-
-	snmp    docker
-	---------------------------
-	UID        PID  PPID  C STIME TTY          TIME CMD
-	root         1     0  0 05:26 ?        00:00:16 /usr/bin/python /usr/bin/supervi
-	root        24     1  0 05:26 ?        00:00:02 /usr/sbin/rsyslogd -n
-	Debian-+    29     1  0 05:26 ?        00:00:04 /usr/sbin/snmpd -f -LS4d -u Debi
-	root        31     1  1 05:26 ?        00:15:10 python3.6 -m sonic_ax_impl
-
-	syncd   docker
-	---------------------------
-	UID        PID  PPID  C STIME TTY          TIME CMD
-	root         1     0  0 05:26 ?        00:00:13 /usr/bin/python /usr/bin/supervi
-	root        12     1  0 05:26 ?        00:00:00 /usr/sbin/rsyslogd -n
-	root        17     1  0 05:26 ?        00:00:00 /usr/bin/dsserve /usr/bin/syncd
-	root        27    17 22 05:26 ?        04:09:30 /usr/bin/syncd --diag -p /usr/sh
-	root        51    27  0 05:26 ?        00:00:01 /usr/bin/syncd --diag -p /usr/sh
-
-	swss    docker
-	---------------------------
-	UID        PID  PPID  C STIME TTY          TIME CMD
-	root         1     0  0 05:26 ?        00:00:29 /usr/bin/python /usr/bin/supervi
-	root        25     1  0 05:26 ?        00:00:00 /usr/sbin/rsyslogd -n
-	root        30     1  0 05:26 ?        00:00:13 /usr/bin/orchagent -d /var/log/s
-	root        42     1  1 05:26 ?        00:12:40 /usr/bin/portsyncd -p /usr/share
-	root        45     1  0 05:26 ?        00:00:00 /usr/bin/intfsyncd
-	root        48     1  0 05:26 ?        00:00:03 /usr/bin/neighsyncd
-	root        59     1  0 05:26 ?        00:00:01 /usr/bin/vlanmgrd
-	root        92     1  0 05:26 ?        00:00:01 /usr/bin/intfmgrd
-	root      3606     1  0 23:36 ?        00:00:00 bash -c /usr/bin/arp_update; sle
-	root      3621  3606  0 23:36 ?        00:00:00 sleep 300
-  ```
-
-## show system-memory
-
-**show system-memory**
-
-This command displays the system-wide memory utilization information – just a wrapper over linux native “free” command
-
-  - Usage: 
-  
-      sonic_installer remove <image_name>
-
-  - Example:
-  ```
-	admin@lnos-x1-a-asw02:~$ show system-memory
-	Command: free -m -h
-				 total       used       free     shared    buffers     cached
-	Mem:          3.9G       2.0G       1.8G        33M       324M       791M
-	-/+ buffers/cache:       951M       2.9G
-	Swap:           0B         0B         0B
-  ```
 
 
-## show uptime
 
-**show uptime**
-This command displays the system uptime.
 
-  - Usage:
-  
-     show uptime
-	 
-  - Example:
-  ```  
-	admin@lnos-x1-a-asw02:~$ show uptime
-	Command: uptime -p
-	up 1 day, 8 hours, 15 minutes
 
-  ```
 
-## show users
-
-**show users**
-This command is a simple wrapper over “who” linux native command – displays current users logged in the system.
-
-  - Usage:
-  
-     show users
-	 
-  - Example:
-  ```  
-	admin@lnos-x1-a-asw02:~$ show users
-	Command: who
-	admin    ttyS0        Mar 19 17:56
-	admin    pts/10       Mar 19 18:07 (172.29.120.222:S.0)
-	admin    pts/11       Mar 19 18:07 (172.29.120.222:S.1)
-	admin    pts/12       Mar 19 18:18 (172.29.120.222:S.2)
-  ```
-
-## Show line  
-
-**show line**
-This command displays serial port or a virtual network connection status.
-
-  - Usage:
-  
-     show line
-  
-  - Example:
-  ```
-  admin@T1-2:~$ show line
-  Traceback (most recent call last):
-	File "/usr/bin/show", line 9, in <module>
-	  load_entry_point('sonic-utilities==1.2', 'console_scripts', 'show')()
-   File "/usr/lib/python2.7/dist-packages/click/core.py", line 722, in __call__
-      return self.main(*args, **kwargs)
-   File "/usr/lib/python2.7/dist-packages/click/core.py", line 697, in main
-      rv = self.invoke(ctx)
-	File "/usr/lib/python2.7/dist-packages/click/core.py", line 1066, in invoke
-      return _process_result(sub_ctx.command.invoke(sub_ctx))
-	File "/usr/lib/python2.7/dist-packages/click/core.py", line 895, in invoke
-      return ctx.invoke(self.callback, **ctx.params)
-	File "/usr/lib/python2.7/dist-packages/click/core.py", line 535, in invoke
-      return callback(*args, **kwargs)
-	File "/usr/lib/python2.7/dist-packages/show/main.py", line 1659, in line
-      run_command(cmd, display_cmd=verbose)
-  NameError: global name 'verbose' is not defined
-  ```
-
-## Show mmu
-
-**show mmu**
-This command displays virtual address to the physical address translation status of the Memory Management Unit (MMU).
-
-  - Usage:
-  
-     show mmu
-  
-  - Example:
-  ```
-	admin@T1-2:~$ show mmu
-	Pool: ingress_lossless_pool
-	----  --------
-	xoff  4194112
-	type  ingress
-	mode  dynamic
-	size  10875072
-	----  --------
-
-	Pool: egress_lossless_pool
-	----  --------
-	type  egress
-	mode  static
-	size  15982720
-	----  --------
-
-	Pool: egress_lossy_pool
-	----  -------
-	type  egress
-	mode  dynamic
-	size  9243812
-	----  -------
-
-	Profile: egress_lossy_profile
-	----------  -------------------------------
-	dynamic_th  3
-	pool        [BUFFER_POOL|egress_lossy_pool]
-	size        1518
-	----------  -------------------------------
-
-	Profile: pg_lossless_100000_300m_profile
-	----------  -----------------------------------
-	xon_offset  2288
-	dynamic_th  -3
-	xon         2288
-	xoff        268736
-	pool        [BUFFER_POOL|ingress_lossless_pool]
-	size        1248
-	----------  -----------------------------------
-
-	Profile: egress_lossless_profile
-	---------  ----------------------------------
-	static_th  3995680
-	pool       [BUFFER_POOL|egress_lossless_pool]
-	size       1518
-	---------  ----------------------------------
-
-	Profile: pg_lossless_100000_40m_profile
-	----------  -----------------------------------
-	xon_offset  2288
-	dynamic_th  -3
-	xon         2288
-	xoff        177632
-	pool        [BUFFER_POOL|ingress_lossless_pool]
-	size        1248
-	----------  -----------------------------------
-
-	Profile: ingress_lossy_profile
-	----------  -----------------------------------
-	dynamic_th  3
-	pool        [BUFFER_POOL|ingress_lossless_pool]
-	size        0
-	----------  -----------------------------------
-
-	Profile: pg_lossless_40000_40m_profile
-	----------  -----------------------------------
-	xon_offset  2288
-	dynamic_th  -3
-	xon         2288
-	xoff        71552
-	pool        [BUFFER_POOL|ingress_lossless_pool]
-	size        1248
-	----------  -----------------------------------
-   ```
-   
-## Show route-map
-
-**show route-map**
-This command displays the routing policy that takes precedence over the other route processes that are configured.
-
-  - Usage:
-  
-     show route-map
- 
-  - Example:
-  ```
-	admin@T1-2:~$ show route-map
-	ZEBRA:
-	route-map RM_SET_SRC, permit, sequence 10
-	  Match clauses:
-	  Set clauses:
-		src 10.12.0.102
-	  Call clause:
-	  Action:
-		Exit routemap
-	ZEBRA:
-	route-map RM_SET_SRC6, permit, sequence 10
-	  Match clauses:
-	  Set clauses:
-		src fc00:1::102
-	  Call clause:
-	  Action:
-		Exit routemap
-	BGP:
-	route-map FROM_BGP_SPEAKER_V4, permit, sequence 10
-	  Match clauses:
-	  Set clauses:
-	  Call clause:
-	  Action:
-	    Exit routemap
-	BGP:
-	route-map TO_BGP_SPEAKER_V4, deny, sequence 10
-	  Match clauses:
-	  Set clauses:
-	  Call clause:
-	  Action:
-	    Exit routemap
-	BGP:
-	route-map ISOLATE, permit, sequence 10
-	  Match clauses:
-	  Set clauses:
-		as-path prepend 65000
-	  Call clause:
-	  Action:
-		Exit routemap
-  ```
-
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#more-system-show-Commands)
