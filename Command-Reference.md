@@ -1926,7 +1926,7 @@ This command displays the global configuration fields and the list of all tacacs
 				   tcp_port 49
   ```
 
-## TACACS+ Congiguration
+## TACACS+ Configuration
 
 This sub-section explains the command "config tacacs" and its sub-commands that are used to configure the following tacacs+ parameters.
 Some of the parameters like authtype, passkey and timeout can be either configured at per server level or at global level (global value will be applied if there no server level configuration)
