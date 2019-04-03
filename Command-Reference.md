@@ -165,7 +165,6 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 ```
 admin@sonic:~$ config --help
 Usage: config [OPTIONS] COMMAND [ARGS]...
-
   SONiC command line - 'config' command
 
 Options:
