@@ -584,7 +584,7 @@ Following show command displays the current running configuration related to the
 ## show aaa  
 This command is used to view the Authentication, Authorization & Accounting settings that are configured in the network node.
 
-**show aaa**
+**show aaa**  
 Display the AAA settings currently present in the network node
 
 - Usage:  
@@ -1584,6 +1584,9 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 This command displays the current interface naming mode. Interface naming mode originally set to 'default'. Interfaces are referenced by default SONiC interface names. 
 Users can change the naming_mode using "config interface_naming_mode" command. 
 
+**show interfce naming mode**  
+To display the current interface naming mode
+
   - Usage:  
     show interfaces naming_mode [OPTIONS]
     OPTIONS - --verbose & -h/--help
@@ -1605,6 +1608,9 @@ Users can change the naming_mode using "config interface_naming_mode" command.
 This command changes the interface naming mode. This command needs to be excuted in root mode either using "sudo" or "sudo -i".
 Users can select between default mode (SONiC interface names) or alias mode (Hardware vendor names). 
 The user must log out and log back in for changes to take effect. Note that the newly-applied interface mode will affect all interface-related show/config commands.
+
+**config interface naming mode**  
+This command is executed in super user/root mode to configure the interface naming mode
 
 NOTE: Some platforms do not support alias mapping. In such cases, this command is not applicable. Such platforms always use the same SONiC interface names.
 
