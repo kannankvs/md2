@@ -318,7 +318,6 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
   ```
   admin@sonic:~$ show clock
   Mon Mar 25 20:25:16 UTC 2019
-
   ```
   
 - `show environment`
@@ -420,7 +419,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 - `show users`
   - Display a list of users currently logged in to the device
 
-  - Examples:
+- Examples:
   ```
   admin@sonic:~$ show users
   admin    pts/9        Mar 25 20:31 (100.127.20.23)
@@ -1323,11 +1322,14 @@ IP address for either physical interface or for portchannel or for VLAN interfac
     config interface <interface-name> ip add [OPTIONS] <ip_addr>
 
 - Examples:  
-  ```	
+  
   **Adding IP Address**
+  ```	
   admin@sonic:~$ sudo config interface Vlan100 ip add 10.11.12.13/24 
+  ```
   
   **Removing IP Address**
+  ```
   admin@sonic:~$ sudo config interface Vlan100 ip remove 10.11.12.13/24 
   ```
   
@@ -1420,7 +1422,7 @@ NOTE: Some platforms do not support alias mapping. In such cases, this command i
   - Interface naming mode originally set to 'default'. Interfaces are referenced by default SONiC interface names:
 
 - Example:    
-	  ```
+  ```
     admin@sonic:~$ show interfaces naming_mode 
     default
 
@@ -1431,10 +1433,11 @@ NOTE: Some platforms do not support alias mapping. In such cases, this command i
 
     admin@sonic:~$ sudo config interface_naming_mode alias
     Please logout and log back in for changes take effect.
-    ```
+  ```
 
-    - After user logs out and back in again, interfaces now referenced by hardware vendor aliases:
-	  ```
+    - After user logs out and back in again, interfaces now referenced by hardware vendor aliases:  
+	
+  ```
     admin@sonic:~$ show interfaces naming_mode 
     alias
 
@@ -1443,7 +1446,7 @@ NOTE: Some platforms do not support alias mapping. In such cases, this command i
       Interface     Lanes    Speed    MTU            Alias    Oper    Admin
     -----------  --------  -------  -----   --------------  ------  -------
       Ethernet0   101,102      40G   9100   fortyGigE1/1/1    down     down
-    ```
+  ```
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Interface-Naming-Mode)
 
