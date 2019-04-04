@@ -621,7 +621,7 @@ If this 'failthrough' is disabled and if remote authentication fails, login is d
 		   Allow AAA fail-through [enable | disable | default]
            enable - this allows the AAA module to process with local authentication if remote authentication fails.
 		   disbale - this disallows the AAA module to proceed further if remote authentication fails.
-		   default - this reconfigures the default value, which is "enable". TBD - Need to be verified.
+		   default - this reconfigures the default value, which is "enable". TBD1 - Need to be verified. Lets ask Xin to find the right person to answer this.
 
 
 - Example:
@@ -632,7 +632,7 @@ If this 'failthrough' is disabled and if remote authentication fails, login is d
   ```
 **aaa authentication fallback**
 
-This command is not used at the moment. TBD - Need to reconfirm - Lets ask Xin to find the right person to answer this.
+This command is not used at the moment. TBD2 - Need to reconfirm - Lets ask Xin to find the right person to answer this.
 
 - Usage:  
   config aaa authentication fallback [OPTIONS] OPTION
@@ -721,7 +721,7 @@ Note that more than one tacacs+ (maximum of seven) can be added in the device. W
 	 **Arguements:**
 	 
 	 ip_address - TACACS+ server IP address.
-	 timeout - Transmission timeout interval in seconds, range 1 to 1000 (TBD - no clarity, lets ask Xin for right person to answer this too), default 5
+	 timeout - Transmission timeout interval in seconds, range 1 to 1000 (TBD3 - no clarity, lets ask Xin for right person to answer this too), default 5
 	 key - Shared secret
 	 type - Authentication type, "chap" or "pap" or "mschap" or "login", default is "pap".
 	 port - TCP port range is 1 to 65535, default 49
@@ -938,7 +938,7 @@ When the optional argument "max_priority"  is specified, each rule’s priority 
   Refer an example for input file format [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/files/helpers/config_service_acls.sh)
   Refer another example [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/tasks/acl/acltb_test_rules_part_1.json)
   ```
-TBD: Need to create these example input files, test them using the above examples, upload them in github and reference them from here.
+TBD4: Need to create these example input files, test them using the above examples, upload them in github and reference them from here.
 AI: KVSK will create a sample file. Will send it for review to Shuotian & Joe to confirm.
   
 **config acl update incremental:**
@@ -974,7 +974,7 @@ When the optional argument "max_priority"  is specified, each rule’s priority 
   admin@sonic:~$ config acl update incremental " --session_name everflow0 /etc/sonic/acl_incremental_snmp_r2.json "
 
   ```
-TBD: Need to create these example input files, test them using the above examples, upload them in github and reference them from here.  
+TBD5: Need to create these example input files, test them using the above examples, upload them in github and reference them from here.  
 AI: Same as above.
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#ACL-Configuration-And-Show)
@@ -1008,7 +1008,7 @@ This command displays the summary of all IPv4 bgp neighbors that are configured 
 
 **show ip bgp neighbors**
 
-This command displays all the details of IPv4 & IPv6 (TBD: Is it expected to show IPv6 also? Lets document as it is and raise ImprovementTicket to repo) BGP neighbors when no optional argument is specified. 
+This command displays all the details of IPv4 & IPv6 (TBD6: Is it expected to show IPv6 also? Lets document as it is and raise ImprovementTicket to repo) BGP neighbors when no optional argument is specified. 
 
 When the optional argument IPv4_address is specified, it displays the detailed neighbor information about that specific IPv4 neighbor.
 
@@ -1529,7 +1529,7 @@ IP address for either physical interface or for portchannel or for VLAN interfac
   
 **config interface pfc**
 This command is for setting the asymmetric PFC for an interface to either "on" or "off".
-TBD: This command is not used by the module until the module is restarted. "show interfaces status" can be used to check the currently used value by the module.
+TBD7: This command is not used by the module until the module is restarted. "show interfaces status" can be used to check the currently used value by the module.
 AI: Lets check with Xin if Wenda can handle this.
 
   - Usage:  
@@ -1543,7 +1543,7 @@ AI: Lets check with Xin if Wenda can handle this.
 **config interface shutdown**
 
 This command is for administratively shut down the either the Physical interface or port channel interface.
-TBD: What should user do to make it effective? "show interfaces status" still shows as UP even after executing this command.  
+TBD8: What should user do to make it effective? "show interfaces status" still shows as UP even after executing this command.  
 AI: It works in other DUT. Not an issue.
 
   - Usage:   
@@ -1557,7 +1557,7 @@ AI: It works in other DUT. Not an issue.
 **config interface startup**
 
 This command is for administratively bringing up the Physical interface or port channel interface.
-TBD: What should user do to make it effective? "show interfaces status" still shows as down even after executing this command.
+TBD9: What should user do to make it effective? "show interfaces status" still shows as down even after executing this command.
 AI: It works in other DUT. Not an issue.
 
   - Usage:   
@@ -1571,7 +1571,7 @@ AI: It works in other DUT. Not an issue.
 **config interface speed**
 
 This command is to configure the speed for the Physical interface.
-TBD: What are the acceptable values for speed (40000 for 40G, 100000 for 100G?) ? what should user do to make it effective? "show interfaces status" still the previous value even after this command is executed.
+TBD10: What are the acceptable values for speed (40000 for 40G, 100000 for 100G?) ? what should user do to make it effective? "show interfaces status" still the previous value even after this command is executed.
 AI: 40000 is for 40G and 100000 for 100G. User need to know the device to configure it properly. We support only 40G and 100G until the dynamic breakout is supported.
 
 
@@ -1738,7 +1738,7 @@ The type of interfaces include the following.
 
 **show ip protocol**
 
-TBD: Fill details.
+TBD11: Need more details about this command. What is this "route-map" protocol? Please explain this command.
 AI: This is part of Quagga. Lets check with Xin to see if Pavel can answer this. Will the same command work for FRR?
 
   - Usage:  
