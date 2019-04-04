@@ -39,8 +39,8 @@ Table of Contents
       * [config reload](#config-reload)
       * [config save](#config-save)
    * [Mirroring Configuration And Show](#mirroring-configuration-and-show)
-   * [Mirroring Show](#mirroring-show)
-   * [Platform](#platform)
+	  * [Mirroring Show](#mirroring-show)
+	  * [Platform](#platform)
    * [PortChannel Configuration And Show](#portchannel-configuration-and-show)
       * [PortChannel Show](#portchannel-show)
       * [PortChannel Configuration](#portchannel-configuration)
@@ -74,21 +74,15 @@ Table of Contents
    * [Application Layer](#application-layer)
       * [NTP](#ntp)
    * [System State](#system-state)
-      * [Processes](#processes)
+      * [Show Processes](#show-processes)
+	  * [Show Services &amp; Memory](#show-services--memory)
    * [Startup &amp; Running Configuration](#startup--running-configuration)
       * [Startup Configuration](#startup-configuration)
       * [Running Configuration](#running-configuration)
    * [Troubleshooting Commands](#troubleshooting-commands)
    * [Software Installation Commands](#software-installation-commands)
       * [SONiC Installer](#sonic-installer)
-   * [More System Show Commands](#more-system-show-commands)
-      * [show services](#show-services)
-      * [show system-memory](#show-system-memory)
-      * [show uptime](#show-uptime)
-      * [show users](#show-users)
-      * [show line](#show-line)
-	  * [show mmu](#show-mmu)
-      * [show route-map](#show-route-map)
+   
 
 
 # Introduction
@@ -196,7 +190,8 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 ## Show Versions
 
-** show version **
+**show version**
+
 This command displays relevant information as the SONiC and Linux kernel version being utilized, as well as the commit-id used to build the SONiC image. The second section of the output displays the various docker images and their associated id’s. 
 
 - `show version`
@@ -245,7 +240,6 @@ To view a full list of available `show` subcommands, you can enter `show -?`, `s
 ```
 admin@sonic:~$ show -?
 Usage: show [OPTIONS] COMMAND [ARGS]...
-
   SONiC command line - 'show' command
 
 Options:
@@ -554,9 +548,8 @@ Note that the "aaa" commands need root privileges that is obtained using "sudo -
 
 This command is used to either enable or disable the failthrough option. When user selects remote authentication using tacacs+ and if the authentication fails, this "failthrough" configuration allows for further authentication using LOCAL database or not.
 If this 'failthrough' is disabled and if remote authentication fails, login is disallowed.
-- Usage:
-
-	config aaa authentication failthrough [OPTIONS] OPTION
+- Usage:  
+  config aaa authentication failthrough [OPTIONS] OPTION
 		   
 		   Allow AAA fail-through [enable | disable | default]
            enable - this allows the AAA module to process with local authentication if remote authentication fails.
@@ -572,9 +565,8 @@ If this 'failthrough' is disabled and if remote authentication fails, login is d
 **aaa authentication fallback**
 
 This command is not used at the moment. TBD - Need to reconfirm
-- Usage:
-
-    config aaa authentication fallback [OPTIONS] OPTION
+- Usage:  
+  config aaa authentication fallback [OPTIONS] OPTION
        
 	   Allow AAA fallback [enable | disable | default]
 
@@ -593,9 +585,8 @@ Admins need to configure the tacacs+ server accordingly and ensure that the conn
 Once if the admins choose the remote authentication based on tacacs+ server, all user logins will be authenticated by the tacacs+ server.
 If the authentication fails, AAA will check the "failthrough" configuration and authenticates the user based on local database if failthrough is enabled.
 
-- Usage: 
-
-    config aaa authentication login [OPTIONS] [AUTH_PROTOCOL]...
+- Usage:  
+  config aaa authentication login [OPTIONS] [AUTH_PROTOCOL]...
       
 	  Switch login authentication [ {tacacs+, local} | default ]
 	  tacacs+ - This enables remote authentication based on tacacs+
@@ -620,7 +611,7 @@ This section explains the various show commands and configuration commands avail
 This command displays either all the ACL tables that are configured or only the specified "TABLE_NAME". 
 Output from the command displays the table name, type of the table, the list of interface(s) to which the table is bound and the description about the table.
 
-- Usage: 
+- Usage:  
   show acl table [OPTIONS] [TABLE_NAME]
 
 
@@ -654,7 +645,7 @@ Output from the command gives the following information about the rules
 4) Action - Action to be performed if the packet matches with this ACL rule. It could be either Drop or Permit. Users can choose to have a default permit rule or default deny rule. In case of default "deny all" rule, add the permitted rules on top of the deny rule. In case of the default "permit all" rule, users can add the deny rules on top of it. If users have not confgured any rule, SONiC allows all traffic (which is "permit all").
 5) Match  - The fields from the packet header that need to be matched against the same present in the incoming traffic. 
 
-- Usage:
+- Usage:  
   show acl rule [OPTIONS] [TABLE_NAME] [RULE_ID]
   
 
@@ -677,8 +668,8 @@ Output from the command gives the following information about the rules
 
 This command displays all the mirror sessions that are configured. 
 
-- Usage: 
-    show mirror_session
+- Usage:  
+  show mirror_session
   
 - Example:
   ```
@@ -716,9 +707,8 @@ When "--session_name" optional argument is specified, command sets the session_n
 
 When the optional argument "max_priority"  is specified, each rule’s priority is calculated by subtracting its “sequence_id” value from the “max_priority”. If this value is not passed, the default “max_priority” 10000 is used.
 		
-- Usage: 
-
-    config acl update full [OPTIONS] FILE_NAME
+- Usage:  
+  config acl update full [OPTIONS] FILE_NAME  
 	Some of the possible options are
 	1) --table_name <table_name>, Example: config acl update full " --table_name DT_ACL_T1  /etc/sonic/acl_table_1.json "
 	2) --session_name <session_name>, Example: config acl update full " --session_name mirror_ses1 /etc/sonic/acl_table_1.json "
@@ -758,9 +748,8 @@ When "--session_name" optional argument is specified, command sets the session_n
 
 When the optional argument "max_priority"  is specified, each rule’s priority is calculated by subtracting its “sequence_id” value from the “max_priority”. If this value is not passed, the default “max_priority” 10000 is used.
 
-- Usage:	
-	
-   config acl update incremental [OPTIONS] FILE_NAME
+  - Usage:  
+    config acl update incremental [OPTIONS] FILE_NAME
 	Some of the possible options are
 	1) --session_name <session_name>, Example: config acl update full " --session_name mirror_ses1 /etc/sonic/acl_table_1.json "
 	2) --max-priority <priority_value>, Example: config acl update full " --max-priority 100  /etc/sonic/acl_table_1.json "
@@ -789,11 +778,10 @@ This section explains all the BGP show commands and BGP configuation commands th
 
 This command displays the summary of all IPv4 bgp neighbors that are configured and the corresponding states.
 
-- Usage:
-
-   show ip bgp summary
+  - Usage:   
+    show ip bgp summary
   
-- Example:
+  - Example:
   ```
   admin@sonic:~$ show ip bgp summary
   BGP router identifier 1.2.3.4, local AS number 65061
@@ -817,11 +805,10 @@ Command has got additional optional arguments to display only the advertised rou
 
 In order to get details for an IPv6 neigbor, use "show ipv6 bgp neighbor <ipv6_address>" command.
 
-- Usage:
-
+  - Usage:  
     show ip bgp neighbors [<ipv4-address> [advertised-routes | received-routes | routes]]
 
-- Example:
+  - Example:
   ```
   admin@sonic:~$ show ip bgp neighbors
   BGP neighbor is 192.168.1.161, remote AS 65501, local AS 65061, external link
@@ -886,8 +873,7 @@ In order to get details for an IPv6 neigbor, use "show ipv6 bgp neighbor <ipv6_a
 
 This command displays the summary of all IPv4 bgp neighbors that are configured and the corresponding states.
 
-  - Usage:
-  
+  - Usage:  
      show ipv6 bgp summary
 
   - Example:
@@ -907,11 +893,11 @@ This command displays the summary of all IPv4 bgp neighbors that are configured 
   ```
 
 **show ipv6 bgp neighbors**
+
 This command displays all the details of one particular IPv6 Border Gateway Protocol (BGP) neighbor. Option is also available to display only the advertised routes, or the received routes, or all routes.
 
-  - Usage:
-  
-     show ipv6 bgp neighbors <ipv6-address> (advertised-routes | received-routes | routes)`
+  - Usage:  
+    show ipv6 bgp neighbors <ipv6-address> (advertised-routes | received-routes | routes)`
 
 
   - Example:
@@ -924,11 +910,11 @@ This command displays all the details of one particular IPv6 Border Gateway Prot
   ```
 
 **show route-map**
+
 This command displays the routing policy that takes precedence over the other route processes that are configured.
 
-  - Usage:
-  
-     show route-map
+  - Usage:  
+    show route-map
  
   - Example:
   ```
@@ -994,9 +980,8 @@ The list of possible BGP config commands are given below.
 This command is used to shutdown all the BGP IPv4 & IPv6 sessions.
 When the session is shutdown using this command, BGP state in "show ip bgp summary" is displayed as "Idle (Admin)"
   
-  - Usage:
-  
-      sudo config bgp shutdown all
+  - Usage:  
+    sudo config bgp shutdown all
 
   - Examples:
   ```
@@ -1007,9 +992,8 @@ When the session is shutdown using this command, BGP state in "show ip bgp summa
 
 This command is to shut down a BGP session with a neighbor by that neighbor's IP address or hostname
 
-  - Usage: 
-  
-     sudo config bgp shutdown (<ip-address> | <hostname>)
+  - Usage:  
+    sudo config bgp shutdown (<ip-address> | <hostname>)
 
   - Examples:
   ```
@@ -1024,8 +1008,7 @@ This command is to shut down a BGP session with a neighbor by that neighbor's IP
 
 This command is to start up all the IPv4 & IPv6 BGP neighbors
 
-  - Usage:
-  
+  - Usage:     
     sudo config bgp startup all`
   
   - Examples:
@@ -1035,11 +1018,11 @@ This command is to start up all the IPv4 & IPv6 BGP neighbors
  
  
 **config bgp startup <neighbor>**
+
 This command is to start up the particular IPv4 or IPv6 BGP neighbor using either the IP address or hostname.
 
-  - Usage:
-  
-     sudo config bgp startup (<ip-address> | <hostname>)`
+  - Usage:  
+    sudo config bgp startup (<ip-address> | <hostname>)`
 
   - Examples:
   ```
@@ -1063,9 +1046,8 @@ This sub-section contains the show commands that are supported in ECN.
 
 This command displays all the WRED profiles that are configured in the device.
 
-  - Usage:
-  
-      show ecn
+  - Usage:     
+    show ecn
 	  
   - Example:
   ```
@@ -1104,9 +1086,9 @@ This command configures the possible fields in a particular WRED profile that is
 This command need root privileges. Either use "sudo config ecn" or go into root mode using "sudo -i".
 The list of the WRED profile fields that are configurable is listed in the below "Usage".
 
-  - Usage:
-  
-        config ecn [OPTIONS]
+  - Usage:   
+    config ecn [OPTIONS]
+	
   ```
     ECN Config OPTIONS:
 	  -profile <profile_name>       Profile name  [required] - Even though the profile_name is specified as optional parameter, it is a mandatory parameter.
@@ -1160,8 +1142,7 @@ This show command displays packet counters for all interfaces since the last tim
 Optional argument "-c" can be used to clear the counters for all interfaces.
 Optional argument "-p" specify a period (in seconds) with which to gather counters over.
 
-  - Usage:
-
+  - Usage:  
     show interfaces counters [OPTIONS]
       OPTIONS:
       -a, --printall
@@ -1202,7 +1183,7 @@ Optional argument "-p" specify a period (in seconds) with which to gather counte
 
 This command displays the key fields of the interfaces such as Operational Status, Administrative Status, Alias and Description.
 
-  - Usage: 
+  - Usage:  
     show interfaces description [INTERFACENAME]
   
    
@@ -1235,9 +1216,8 @@ Refer sub-section [Interface-Naming-Mode](#Interface-Naming-Mode)
 
 This command is to display the list of expected neighbors for all interfaces (or for a particular interface) that is configured.
  
-- Usage: 
- 
-   show interfaces neighbor expected [OPTIONS] [INTERFACENAME]
+  - Usage:  
+    show interfaces neighbor expected [OPTIONS] [INTERFACENAME]
    
   - Example:
   ```
@@ -1254,8 +1234,8 @@ This command is to display the list of expected neighbors for all interfaces (or
 
 This command displays information regarding port-channel interfaces
   
-  - Usage:
-     show interfaces portchannel
+  - Usage:  
+    show interfaces portchannel
 
   - Example:
   ```
@@ -1274,9 +1254,8 @@ This command displays information regarding port-channel interfaces
 
 This command displays some more fields such as Lanes, Speed, MTU, Type, Asymmetric PFC status and also the operational and administrative status of the interfaces 
 
-- Usage: 
-
-   show interfaces status [OPTIONS] [INTERFACENAME]
+- Usage:  
+  show interfaces status [OPTIONS] [INTERFACENAME]
 
   - Example:
   ```
@@ -1315,11 +1294,11 @@ This sub-section explains the following list of configuration on the interfaces.
 5) startup - to bring up the administratively shutdown interface
 
 **config interface ip add/remove**
+
 This command is for adding or removing the IP address for an interface.
 IP address for either physical interface or for portchannel or for VLAN interface can be configured using this command.
 
-  - Usage:
-
+  - Usage:  
     config interface <interface-name> ip add [OPTIONS] <ip_addr>
 	
   - Examples:
@@ -1335,8 +1314,7 @@ IP address for either physical interface or for portchannel or for VLAN interfac
 This command is for setting the asymmetric PFC for an interface to either "on" or "off".
 TBD: This command is not used by the module until the module is restarted. "show interfaces status" can be used to check the currently used value by the module.
 
-  - Usage:
-
+  - Usage:  
     config interface <interface-name> pfc asymmetric on/off
 	
   - Examples:
@@ -1350,9 +1328,8 @@ TBD: This command is not used by the module until the module is restarted. "show
 This command is for administratively shut down the either the Physical interface or port channel interface.
 TBD: What should user do to make it effective? "show interfaces status" still shows as UP even after executing this command.
 
-  - Usage:
-  
-      config interface <interface-name> shutdown
+  - Usage:   
+    config interface <interface-name> shutdown
 
   - Example:
   ```
@@ -1364,9 +1341,8 @@ TBD: What should user do to make it effective? "show interfaces status" still sh
 This command is for administratively bringing up the Physical interface or port channel interface.
 TBD: What should user do to make it effective? "show interfaces status" still shows as down even after executing this command.
 
-  - Usage:
-  
-      config interface <interface-name> startup
+  - Usage:   
+    config interface <interface-name> startup
 
   - Example:
   ```
@@ -1378,9 +1354,8 @@ TBD: What should user do to make it effective? "show interfaces status" still sh
 This command is to configure the speed for the Physical interface.
 TBD: What are the acceptable values for speed (40000 for 40G, 100000 for 100G?) ? what should user do to make it effective? "show interfaces status" still the previous value even after this command is executed.
 
-  - Usage:
-  
-      config interface <interface-name> speed <value>
+  - Usage:  
+    config interface <interface-name> speed <value>
 
   - Example:
   ```
@@ -1395,9 +1370,9 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 This command displays the current interface naming mode. Interface naming mode originally set to 'default'. Interfaces are referenced by default SONiC interface names. 
 Users can change the naming_mode using "config interface_naming_mode" command. 
 
-  - Usage: 
-     show interfaces naming_mode [OPTIONS]
-     OPTIONS - --verbose & -h/--help
+  - Usage:  
+    show interfaces naming_mode [OPTIONS]
+    OPTIONS - --verbose & -h/--help
    
   - Example:
   ```
@@ -1419,8 +1394,8 @@ The user must log out and log back in for changes to take effect. Note that the 
 
 NOTE: Some platforms do not support alias mapping. In such cases, this command is not applicable. Such platforms always use the same SONiC interface names.
 
-  - Usage:
-     config interface_naming_mode (default | alias)
+  - Usage:  
+    config interface_naming_mode (default | alias)
 
   - Example:
     - Interface naming mode originally set to 'default'. Interfaces are referenced by default SONiC interface names:
@@ -1464,10 +1439,9 @@ TBD: To be verified. This command does not clear the running configuration. If u
 When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
 If the argument is not specified, it prompts the user to confirm whether user really wants to load this configuration file.
 
-- Usage: 
-
-   config load [OPTIONS] [FILENAME]
-   OPTIONS : -y, --yes
+  - Usage:  
+    config load [OPTIONS] [FILENAME]
+    OPTIONS : -y, --yes
 
   - Example:
    ```
@@ -1486,10 +1460,9 @@ If the file does not exist or if the file does not have valid fields for "hostna
 When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
 If the argument is not specified, it prompts the user to confirm whether user really wants to load this configuration file.
 
-  - Usage: 
-
-   config load_mgmt_config [OPTIONS] [FILENAME]
-   OPTIONS : -y, --yes
+  - Usage:  
+    config load_mgmt_config [OPTIONS] [FILENAME]
+    OPTIONS : -y, --yes
 
   - Example:
    ```
@@ -1511,10 +1484,9 @@ NOTE: Management interface IP address and default route (or specific route) may 
 When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
 If the argument is not specified, it prompts the user to confirm whether user really wants to load this configuration file.
 
-  - Usage: 
-
-   config load_minigraph [OPTIONS]
-   OPTIONS : -y, --yes
+  - Usage:  
+    config load_minigraph [OPTIONS]
+    OPTIONS : -y, --yes
 
   - Example:
    ```
@@ -1536,9 +1508,8 @@ NOTE: Management interface IP address and default route (or specific route) may 
 When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
 If the argument is not specified, it prompts the user to confirm whether user really wants to load this configuration file.
 
-  - Usage: 
-
-   config reload [-y|--yes] [-l | --load-sysinfo] [FILENAME]
+  - Usage:  
+    config reload [-y|--yes] [-l | --load-sysinfo] [FILENAME]
 
   - Example:
    ```
@@ -1566,8 +1537,8 @@ If the argument is not specified, it prompts the user to confirm whether user re
 This command is to save the config DB configuration into the user-specified filename or into the default /etc/sonic/config_db.json. This saves the configuration into the disk which is available even after reboots.
 Saved file can be transferred to remote machines for debugging. If users wants to load the configuration from this new file at any point of time, they can use "config load" command and provide this newly generated file as input. If users wants this newly generated file to be used during reboot, they need to copy this file to /etc/sonic/config_db.json.
 
-  - Usage: 
-     config save [OPTIONS] [FILENAME]
+  - Usage:  
+    config save [OPTIONS] [FILENAME]
 
   - Example:
    ```
@@ -1582,7 +1553,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # Mirroring Show
 
-#Mirroring Config
+## Mirroring Config
 
 This command is used to add or remove mirroring sessions. Mirror session is identified by "session_name". 
 While adding a new session, users need to configure the following fields that are used while forwarding the mirrored packets.
@@ -1594,7 +1565,7 @@ While adding a new session, users need to configure the following fields that ar
 5) optional - GRE Type in case if user wants to send the packet via GRE tunnel. TBD. Valid values/type need to be filled in.
 6) optional - Queue in which packets shall be sent out of the device.TBD. Valid values/type need to be filled in.
 
-- Usage: 
+  - Usage:  
     config mirror_session add <session_name> <src_ip> <dst_ip>
                                  <dscp> <ttl> [gre_type] [queue]
 
@@ -1609,7 +1580,7 @@ While adding a new session, users need to configure the following fields that ar
 
   ```
 
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Mirroring-Show)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Mirroring-Configuration-And-Show)
 
 # Platform
 
@@ -1623,8 +1594,8 @@ The command "config platform" is obsoleted. TBD.
 
 This command is to display all the port channels that are configured in the device and its current status.
 
-  - Usage:
-   show interfaces portchannel
+  - Usage:  
+    show interfaces portchannel
 
   - Example:
   ```
@@ -1656,8 +1627,8 @@ Command takes two optional arguements given below.
 1) min-links  - minimum number of links required to bring up the portchannel
 2) fallback - true/false. LACP fallback feature can be enabled / disabled.  When it is set to true, only one member port will be selected as active per portchannel during fallback mode. Refer https://github.com/Azure/SONiC/blob/master/doc/lag/LACP%20Fallback%20Feature%20for%20SONiC_v0.5.md for more details about fallback feature.
 
-  - Usage:
-   config portchannel add/del <portchannel_name> [min-links INTEGER] [fallback true/false]
+  - Usage:  
+    config portchannel add/del <portchannel_name> [min-links INTEGER] [fallback true/false]
 
   - Example:
   ```
@@ -1669,8 +1640,8 @@ Command takes two optional arguements given below.
 
 This command is to add or delete a member port into the already created portchannel.
 
-  - Usage:
-   config portchannel member add/del <portchannel_name> <member_portname>
+  - Usage:  
+    config portchannel member add/del <portchannel_name> <member_portname>
 
   - Example:
   ```
@@ -1690,8 +1661,8 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 This command displays the details of the Rx & Tx priority-flow-control (pfc) for all ports. This command can be used to clear the counters using -c option.
 
-  - Usage: 
-     show pfc counters [-c or --clear]
+  - Usage:  
+    show pfc counters [-c or --clear]
 
   - Example:
    ```
@@ -1725,8 +1696,8 @@ This sub-section explains the following queue parameters that can be displayed u
 This command displays packet and byte counters for all queues of all ports or one specific-port given as arguement.
 This command can be used to clear the counters for all queues of all ports. Note that port specific clear is not supported (TBD: Need to reconfirm).
  
-  - Usage:
-     show queue counters [-c or --clear] [<interface-name>] 
+  - Usage:  
+    show queue counters [-c or --clear] [<interface-name>] 
 
   - Example:
   ```
@@ -1789,8 +1760,8 @@ This command can be used to clear the counters for all queues of all ports. Note
 
 This command displays the user watermark for the queues (Egress shared pool occupancy per queue) for either the unicast queues or multicast queues for all ports
 
-  - Usage: 
-     show queue watermark <multicast|unicast>
+  - Usage:  
+    show queue watermark <multicast|unicast>
 
   - Example:
   ```
@@ -1809,9 +1780,8 @@ This command displays the user watermark for the queues (Egress shared pool occu
 
 **show priority-group watermark|persistent-watermark**
 
-  - Usage: 
-
-     show priority-group <watermark|persistent-watermark> <headroom|shared>
+  - Usage:  
+    show priority-group <watermark|persistent-watermark> <headroom|shared>
 
 
   - Example:
@@ -1835,9 +1805,8 @@ It hold values independently of user watermark. This way user can use "user wate
 
 **show queue persistent-watermark**
 
-  - Usage: 
-
-     show queue persistent-watermark <unicast|multicast>
+  - Usage:  
+    show queue persistent-watermark <unicast|multicast>
 
 
   - Example:
@@ -1889,9 +1858,8 @@ This command clears all the QoS configuration from all the following QOS Tables 
 13) BUFFER_PG,
 14) BUFFER_QUEUE
 
-   - Usage:
-
-      config qos clear 
+   - Usage:  
+     config qos clear 
 
   - Example:
   ```
@@ -1929,9 +1897,8 @@ Some of the example QOS configurations that users can modify are given below.
 9) CABLE_LENGTH
 10) BUFFER_QUEUE
 
-   - Usage:
-
-      config qos reload 
+   - Usage:  
+     config qos reload 
 	  
   - Example:
   ```
@@ -1952,10 +1919,10 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 ## TACACS+ show
 
 **show tacacs**
+
 This command displays the global configuration fields and the list of all tacacs servers and their correponding configurations.
 
-  - Usage:
-  
+  - Usage:  
 	show tacacs 
   
   - Example:
@@ -1988,14 +1955,15 @@ Some of the parameters like authtype, passkey and timeout can be either configur
 5) timeout - global configuration that is applied to all servers if there is no server specific configuration.
 
 **config tacacs add**
+
 This command is to add a TACACS+ server to the tacacs server list.
 Note that more than one tacacs+ (maximum of seven) can be added in the device. When user tries to login, tacacs client shall contact the servers one by one. When any server times out, device will try the next server one by one.
 
-   - Usage: 
-   
+   - Usage:  
      config tacacs add <ip_address> [-t|--timeout SECOND] [-k|--key SECRET] [-a|--type TYPE] [-o|--port PORT] [-p|--pri PRIORITY] [-m|--use-mgmt-vrf]
 	 
 	 **Arguements:**
+	 
 	 ip_address - TACACS+ server IP address.
 	 timeout - Transmission timeout interval in seconds, range 1 to 1000 (TBD - no clarity), default 5
 	 key - Shared secret
@@ -2014,8 +1982,7 @@ Note that more than one tacacs+ (maximum of seven) can be added in the device. W
 
 This command is to delete the tacacs+ servers configured.
 
-   - Usage: 
-   
+   - Usage:  
      config tacacs delete <ip_address>
 
   - Example:
@@ -2029,8 +1996,7 @@ This command is to delete the tacacs+ servers configured.
 This command is to modify the global value for the TACACS+ authtype.
 When user has not configured server specific authtype, this global value shall be used for that server.
 
-   - Usage: 
-   
+   - Usage:  
      config tacacs authtype  chap|pap||mschap|login
 
   - Example:
@@ -2044,8 +2010,7 @@ When user has not configured server specific authtype, this global value shall b
 This command is to reset the global value for authtype or passkey or timeout to default value. 
 Default for authtype is "pap", default for passkey is EMPTY_STRING and default for timeout is 5 seconds.
 
-   - Usage: 
-   
+   - Usage:  
      config tacacs default authtype|passkey|timeout
 
   - Example:
@@ -2059,8 +2024,7 @@ Default for authtype is "pap", default for passkey is EMPTY_STRING and default f
 This command is to modify the global value for the TACACS+ passkey.
 When user has not configured server specific passkey, this global value shall be used for that server.
 
-   - Usage: 
-   
+   - Usage:  
      config tacacs passkey <pass_key>
 
   - Example:
@@ -2075,8 +2039,7 @@ This command is to modify the global value for the TACACS+ timeout.
 When user has not configured server specific timeout, this global value shall be used for that server.
 
 
-   - Usage: 
-   
+   - Usage:  
      config tacacs timeout <timeout_value_in_seconds>
 
   - Example:
@@ -2096,9 +2059,8 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 This command is to display brief information about all the vlans configured in the device. It displays the vlan ID, IP address (if configured for the vlan), list of vlan member ports, whether the port is tagged or in untagged mode and the DHCP Helper Address.
 
-  - Usage:
-  
-   show vlan brief
+  - Usage:  
+    show vlan brief
 
   - Example:
   ```
@@ -2118,9 +2080,8 @@ This command is to display brief information about all the vlans configured in t
 
 This command is to display all the vlan configuration.
 
-  - Usage:
-  
-   show vlan config
+  - Usage:  
+    show vlan config
 
   - Example:
   ```
@@ -2141,9 +2102,8 @@ This sub-section explains how to configure the vlan and its member ports.
 
 This command is used to add or delete the vlan. This command needs root privileges. 
 
-  - Usage:
-  
-   config vlan add/del <vlan__id> 
+  - Usage:  
+    config vlan add/del <vlan__id> 
 
   - Example:
   ```
@@ -2155,11 +2115,9 @@ This command is used to add or delete the vlan. This command needs root privileg
 
 This command is to add or delete a member port into the already created vlan.
 
-  - Usage:
-   
-   config vlan member add/del [-u or --untagged] <vlan_id> <member_portname>
-   
-   -u will set the port in untagged mode.
+  - Usage:  
+    config vlan member add/del [-u or --untagged] <vlan_id> <member_portname>   
+    -u will set the port in untagged mode.
 
   - Example:
   ```
@@ -2170,6 +2128,9 @@ This command is to add or delete a member port into the already created vlan.
   This command will add Ethernet4 as member of the vlan 100.
   ```
 
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#vlan-configuration-and-show)
+
+
 # Warm Restart
 
 ## Warm Restart Show
@@ -2178,8 +2139,7 @@ This command is to add or delete a member port into the already created vlan.
 
 This command displays all the configuration related to warm_restart.
 
-  - Usage:
-  
+  - Usage:  
     show warm_restart config
 
   - Example:
@@ -2197,8 +2157,7 @@ This command displays all the configuration related to warm_restart.
 
 This command displays the warm_restart state.
 
-  - Usage:
-  
+  - Usage:  
     show warm_restart state
 
   - Example:
@@ -2240,8 +2199,7 @@ Options:
 
 This command sets the bgp_timer value for warm_restart of BGP service. When BGP service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
 
-  - Usage: 
-  
+  - Usage:  
     config warm_restart bgp_timer <seconds>
 	seconds range 1 to 3600.
 
@@ -2256,8 +2214,7 @@ This command is used to enable or disable the warm_restart for a particular serv
 Following four services support warm reboot. When user restarts the particular service using "systemctl restart <service_name>", this configured value will be checked for whether it is enabled or disabled.
 If this configuration is enabled for that service, it will perform warm reboot for that service. Otherwise, it will do cold restart of the service.
 
-  - Usage: 
-  
+  - Usage:  
     config warm_restart enable [<module_name>]
 
        module_name can be either system or swss or bgp or teamd.
@@ -2282,8 +2239,7 @@ If this configuration is enabled for that service, it will perform warm reboot f
 
 TBD: This command sets the neighsyncd_timer value for warm_restart of "swss" service. When swss service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
 
-  - Usage: 
-  
+  - Usage:  
     config warm_restart bgp_timerneighsyncd_timer <seconds>
 	seconds range 1 to 9999.
 
@@ -2297,8 +2253,7 @@ TBD: This command sets the neighsyncd_timer value for warm_restart of "swss" ser
 
 TBD: This command sets the teamsyncd_timer value for warm_restart of teamd service. When teamd service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
 
-  - Usage: 
-  
+  - Usage:  
     config warm_restart teamsyncd_timer <seconds>
 	seconds range 1 to 3600.
 
@@ -2318,8 +2273,8 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 This command displays the configured interval for the telemetry. 
 
-  - Usage:
-      show watermark telemetry interval
+  - Usage:  
+    show watermark telemetry interval
 
   - Example:
   ```
@@ -2336,15 +2291,14 @@ This command displays the configured interval for the telemetry.
 
 This command configures the interval for telemetry. 
 
-  - Usage:
-      config watermark telemetry interval <value>
-	  interval can be any integer value from 1.
-	  TBD: Is there no maximum limit on this value?
+  - Usage:  
+    config watermark telemetry interval <value>
+	interval can be any integer value from 1.
+	TBD: Is there no maximum limit on this value?
 
   - Example:
   ```
 	admin@sonic:~$ sudo config watermark telemetry interval 999
-
   ```
 
 
@@ -2355,18 +2309,17 @@ This command configures the interval for telemetry.
 ### ARP
 
 **show arp**
+
 This command displays the ARP entries in the device with following options.
 1) Display the entire table.
 2) Display the ARP entries learnt on a specific interface.
 3) Display the ARP of a specific ip-address.
 
-- Usage:
-
+  - Usage:  
     show arp [-if <ifname>] [<ip-address>]
-	
-	show arp - displays all entries
-	show arp -if <ifname> - displays the ARP specific to the specified interface.
-	show arp <ip-address> - displays the ARP specific to the specicied ip-address.
+    show arp - displays all entries
+    show arp -if <ifname> - displays the ARP specific to the specified interface.
+    show arp <ip-address> - displays the ARP specific to the specicied ip-address.
 
   - Example:
   ```
@@ -2419,8 +2372,8 @@ This command displays the MAC (FDB) entries either in full or partial as given b
 3) show mac -p <port>  - displays the MACs learnt on the particular port.
 
 
-  - Usage:
-      show mac [-v vlan_id] [-p port_name]
+  - Usage:  
+    show mac [-v vlan_id] [-p port_name]
 
   - Example:
   ```
@@ -2513,11 +2466,11 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 ## LLDP Show
 
 **show lldp table**
+
 This command displays the brief summary of all LLDP neighbors.
 
-  - Usage:
-  
-     show lldp table`
+  - Usage:  
+    show lldp table`
    
   - Example:
   ```
@@ -2536,8 +2489,7 @@ This command displays the brief summary of all LLDP neighbors.
 
 This command displays more details about all LLDP neighbors or only the neighbors connected to a specific interface. 
 
-  - Usage:
-
+  - Usage:  
     show lldp neighbors [<interface-name>]
 
   - Example:
@@ -2623,11 +2575,11 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 ## NDP Show
 
 **show ndp**
+
 This command displays either all the IPv6 neighbor mac addresses, or for a particular IPv6 neighbor, or for all IPv6 neighbors reachable via a specific interface.
 
-  - Usage:
-
-     show ndp [-if|--iface <interface-name.] [IP6ADDRESS]
+  - Usage:  
+    show ndp [-if|--iface <interface-name.] [IP6ADDRESS]
 
   - Example:
   ```
@@ -2672,10 +2624,10 @@ This sub-section explains the various IP protocol specific show commands that ar
 5) protocol
 
 **show ip route**
+
 This command is used to display either all the route entries from the routing table or a specific route.
 
-  - Usage:
-
+  - Usage:  
     show ip route [<ip-address>]`
 
   - Example:
@@ -2706,6 +2658,7 @@ This command is used to display either all the route entries from the routing ta
   ```
 
 **show ip interfaces**
+
 This command displays the details about all the Layer3 IP interfaces in the device for which IP address has been assigned. 
 The type of interfaces include the following.
 1) Front panel physical ports.
@@ -2715,7 +2668,7 @@ The type of interfaces include the following.
 5) docker interface and
 6) management interface
 
-  - Usage:
+  - Usage:  
     show ip interfaces
   
   - Example:
@@ -2737,9 +2690,10 @@ The type of interfaces include the following.
   ```
 
 **show ip protocol**
+
 TBD: Fill details.
 
-  - Usage:
+  - Usage:  
     show ip protocol
   
   - Example:
@@ -2773,11 +2727,11 @@ This sub-section explains the various IPv6 protocol specific show commands that 
 4) protocol
 
 **show ipv6 route**
+
 This command is used to display either all the IPv6 route entries from the routing table or a specific IPv6 route.
 
-  - Usage: 
-  
-     show ipv6 route [<ipv6-address>]
+  - Usage:  
+    show ipv6 route [<ipv6-address>]
 	 
   - Example:
   ```
@@ -2810,6 +2764,7 @@ This command is used to display either all the IPv6 route entries from the routi
   ```
 
 **show ipv6 interfaces**
+
 This command displays the details about all the Layer3 IPv6 interfaces in the device for which IPv6 address has been assigned. 
 The type of interfaces include the following.
 1) Front panel physical ports.
@@ -2818,7 +2773,7 @@ The type of interfaces include the following.
 4) Loopback interfaces
 5) management interface
 
-  - Usage:
+  - Usage:  
     show ipv6 interfaces
   
   - Example:
@@ -2844,9 +2799,10 @@ The type of interfaces include the following.
   ```
 
 **show ipv6 protocol**
+
 TBD: Need to fill details.
 
-  - Usage:
+  - Usage:  
     show ipv6 protocol
   
   - Example:
@@ -2879,10 +2835,10 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 ## NTP
 
 **show ntp**
+
 This command displays a list of NTP peers known to the server as well as a summary of their state.
 
-  - Usage: 
-  
+  - Usage:  
     show ntp
   
   - Example:
@@ -2899,7 +2855,9 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # System State
 
-## Processes
+## Show Processes
+
+This command is used to determine the CPU utilization. It also lists the active processes along with their corresponding process ID and other relevant parameters.
 
 This sub-section explains the various "processes" specific data that includes the following.
 1) cpu      Show processes CPU info
@@ -2912,8 +2870,7 @@ This sub-section explains the various "processes" specific data that includes th
 
 This command displays the current CPU usage by process. This command uses linux's "top -bn 1 -o %CPU" command to display the output.
 
-  - Usage:
-
+  - Usage:  
     show processes cpu
 	
 	Note that pipe option can be used using " | head -n" to display only the "n" number of lines.
@@ -2942,8 +2899,7 @@ This command displays the current CPU usage by process. This command uses linux'
 
 This command displays the current memory usage by processes. This command uses linux's "top -bn 1 -o %MEM" command to display the output.
 
-  - Usage:
-
+  - Usage:  
     show processes memory
 	
 	Note that pipe option can be used using " | head -n" to display only the "n" number of lines.
@@ -2980,8 +2936,7 @@ This command displays the current memory usage by processes. This command uses l
 
 This command displays the current summary information about all the processes
 
-  - Usage:
-
+  - Usage:  
     show processes summary
 
   - Example:
@@ -2994,13 +2949,18 @@ This command displays the current summary information about all the processes
 		5     2 [kworker/0:0H]               0.0  0.0
   ```
 
+
+## Show services & memory
+
+These commands are used to know the services that are running and the memory that is utilized currently.
+
+
 **show services**
 
 This command displays the state of all the SONiC processes running inside a docker container. This helps to identify the status of SONiC’s critical processes.
 
-  - Usage: 
-  
-      sonic_installer remove <image_name>
+  - Usage:  
+    sonic_installer remove <image_name>
 
   - Example:
   ```
@@ -3047,9 +3007,8 @@ This command displays the state of all the SONiC processes running inside a dock
 
 This command displays the system-wide memory utilization information – just a wrapper over linux native “free” command
 
-  - Usage: 
-  
-      sonic_installer remove <image_name>
+  - Usage:  
+    sonic_installer remove <image_name>
 
   - Example:
   ```
@@ -3062,11 +3021,11 @@ This command displays the system-wide memory utilization information – just a 
   ```
  
 **show mmu**
+
 This command displays virtual address to the physical address translation status of the Memory Management Unit (MMU).
 
-  - Usage:
-  
-     show mmu
+  - Usage:  
+    show mmu
   
   - Example:
   ```
@@ -3146,11 +3105,11 @@ This command displays virtual address to the physical address translation status
    ```
    
 **show line**
+
 This command displays serial port or a virtual network connection status.
 
-  - Usage:
-  
-     show line
+  - Usage:  
+    show line
   
   - Example: TBD: This command is not working. It crashes as follows. Need more information.
   ```
@@ -3181,12 +3140,11 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 ## Startup Configuration
 
-** show startupconfiguration bgp**
+**show startupconfiguration bgp**
 
 This command is used to display the startup configuration for the BGP module. 
 
-  - Usage:
-
+  - Usage:  
     show startupconfiguration bgp`
 
   - Example:
@@ -3229,9 +3187,10 @@ This sub-section explains the show commands for displaying the running configura
 5) all 
 
 **show runningconfiguration all**
-This command displays the entire running configuration.
-  - Usage:
 
+This command displays the entire running configuration.
+
+  - Usage:  
     show runningconfiguration all
 	
   - Example:
@@ -3240,10 +3199,10 @@ This command displays the entire running configuration.
   ```
 
 **show runningconfiguration bgp**
+
 This command displays the running configuration of the BGP module.
 
-  - Usage:
-
+  - Usage:  
     show runningconfiguration bgp
 	
   - Example:
@@ -3252,11 +3211,11 @@ This command displays the running configuration of the BGP module.
   ```
 
 **show runningconfiguration interfaces**
+
 This command displays the running configuration for the "interfaces".
 
-  - Usage:
-
-     show runningconfiguration interfaces
+  - Usage:  
+    show runningconfiguration interfaces
 
   - Example:
   ```
@@ -3267,9 +3226,8 @@ This command displays the running configuration for the "interfaces".
 
 This command displays the running configuration of the ntp module. 
 
-  - Usage:
-
-     show runningconfiguration ntp
+  - Usage:  
+    show runningconfiguration ntp
 	 
   - Example:
   ```
@@ -3280,9 +3238,8 @@ This command displays the running configuration of the ntp module.
 
 This command displays the running configuration of the snmp module. 
 
-  - Usage:
-
-     show runningconfiguration snmp
+  - Usage:  
+    show runningconfiguration snmp
 
   - Example:
   ```
@@ -3298,8 +3255,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 For troubleshooting and debugging purposes, this command gathers pertinent information about the state of the device; information is as diverse as syslog entries, database state, routing-stack state, etc., It then compresses it into an archive file. This archive file can be sent to the SONiC development team for examination.
 Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS.tar.gz`
 
-- Usage:
-
+  - Usage:  
     show techsupport
 	
   - Example:
@@ -3320,12 +3276,12 @@ This is a command line tool available as part of the SONiC software; I=if the de
 This tool has facility to install an alternate image, list the available images and to set the next reboot image.
 
 **sonic_installer install**
+
 This command is to install a new image on the alternate image partition.  This command takes a path to an installable SONiC image or URL and installs the image.
 
-  - Usage: 
-     sonic_installer install <path>
+  - Usage:  
+    sonic_installer install <path>
 	 
-  - 
   - Example:
   ```
   admin@sonic:~$ sonic_installer install https://sonic-jenkins.westus.cloudapp.azure.com/job/xxxx/job/buildimage-xxxx-all/xxx/artifact/target/sonic-xxxx.bin
@@ -3364,8 +3320,7 @@ This command is to install a new image on the alternate image partition.  This c
 
 This command displays information about currently installed images. It displays a list of installed images, currently running image and image set to be loaded in next reboot.
 
-  - Usage: 
-  
+  - Usage:  
     sonic_installer list
 
   - Example:
@@ -3382,9 +3337,8 @@ This command displays information about currently installed images. It displays 
 
 This command can be used to change which image to be loaded by default in all the subsequent reboots.
 
-  - Usage:
-  
-     sonic_installer set_default <image_name>
+  - Usage:  
+    sonic_installer set_default <image_name>
    
   - Example:
   ```
@@ -3395,9 +3349,8 @@ This command can be used to change which image to be loaded by default in all th
 
 This command can be used to change which image to be in the *next* reboot only. Note that it will fallback to current image in all other subsequent reboots after the next reboot.
 
-  - Usage:
-  
-     sonic_installer set_next_boot <image_name>
+  - Usage:  
+    sonic_installer set_next_boot <image_name>
 
   - Example:
   ```
@@ -3408,9 +3361,8 @@ This command can be used to change which image to be in the *next* reboot only. 
 
 This command can be used to remove the unused SONiC image from the disk. Note that it's *not* allowed to remove currently running image.
 
-  - Usage: 
-  
-      sonic_installer remove <image_name>
+  - Usage:  
+    sonic_installer remove <image_name>
 
   - Example:
   ```
