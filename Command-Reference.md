@@ -123,7 +123,8 @@ This section covers the basic configurations related to the following
   sonic login: admin
   Password: YourPaSsWoRd
 
-  user@debug:~$ ssh admin@sonic (TBD)
+  SSH from any remote server to sonic can be done by connecting to SONiC IP
+  user@debug:~$ ssh admin@sonic_ip_address(or SONIC DNS Name)
   admin@sonic's password:
   ```
 
@@ -631,7 +632,7 @@ If this 'failthrough' is disabled and if remote authentication fails, login is d
   ```
 **aaa authentication fallback**
 
-This command is not used at the moment. TBD - Need to reconfirm
+This command is not used at the moment. TBD - Need to reconfirm - Lets ask Xin to find the right person to answer this.
 
 - Usage:  
   config aaa authentication fallback [OPTIONS] OPTION
@@ -720,7 +721,7 @@ Note that more than one tacacs+ (maximum of seven) can be added in the device. W
 	 **Arguements:**
 	 
 	 ip_address - TACACS+ server IP address.
-	 timeout - Transmission timeout interval in seconds, range 1 to 1000 (TBD - no clarity), default 5
+	 timeout - Transmission timeout interval in seconds, range 1 to 1000 (TBD - no clarity, lets ask Xin for right person to answer this too), default 5
 	 key - Shared secret
 	 type - Authentication type, "chap" or "pap" or "mschap" or "login", default is "pap".
 	 port - TCP port range is 1 to 65535, default 49
@@ -938,6 +939,7 @@ When the optional argument "max_priority"  is specified, each rule’s priority 
   Refer another example [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/tasks/acl/acltb_test_rules_part_1.json)
   ```
 TBD: Need to create these example input files, test them using the above examples, upload them in github and reference them from here.
+AI: KVSK will create a sample file. Will send it for review to Shuotian & Joe to confirm.
   
 **config acl update incremental:**
 
@@ -973,6 +975,7 @@ When the optional argument "max_priority"  is specified, each rule’s priority 
 
   ```
 TBD: Need to create these example input files, test them using the above examples, upload them in github and reference them from here.  
+AI: Same as above.
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#ACL-Configuration-And-Show)
 
@@ -1005,7 +1008,7 @@ This command displays the summary of all IPv4 bgp neighbors that are configured 
 
 **show ip bgp neighbors**
 
-This command displays all the details of IPv4 & IPv6 (TBD: Is it expected to show IPv6 also? ) BGP neighbors when no optional argument is specified. 
+This command displays all the details of IPv4 & IPv6 (TBD: Is it expected to show IPv6 also? Lets document as it is and raise ImprovementTicket to repo) BGP neighbors when no optional argument is specified. 
 
 When the optional argument IPv4_address is specified, it displays the detailed neighbor information about that specific IPv4 neighbor.
 
@@ -1527,6 +1530,7 @@ IP address for either physical interface or for portchannel or for VLAN interfac
 **config interface pfc**
 This command is for setting the asymmetric PFC for an interface to either "on" or "off".
 TBD: This command is not used by the module until the module is restarted. "show interfaces status" can be used to check the currently used value by the module.
+AI: Lets check with Xin if Wenda can handle this.
 
   - Usage:  
     config interface <interface-name> pfc asymmetric on/off
@@ -1539,7 +1543,8 @@ TBD: This command is not used by the module until the module is restarted. "show
 **config interface shutdown**
 
 This command is for administratively shut down the either the Physical interface or port channel interface.
-TBD: What should user do to make it effective? "show interfaces status" still shows as UP even after executing this command.
+TBD: What should user do to make it effective? "show interfaces status" still shows as UP even after executing this command.  
+AI: It works in other DUT. Not an issue.
 
   - Usage:   
     config interface <interface-name> shutdown
@@ -1553,6 +1558,7 @@ TBD: What should user do to make it effective? "show interfaces status" still sh
 
 This command is for administratively bringing up the Physical interface or port channel interface.
 TBD: What should user do to make it effective? "show interfaces status" still shows as down even after executing this command.
+AI: It works in other DUT. Not an issue.
 
   - Usage:   
     config interface <interface-name> startup
@@ -1566,6 +1572,8 @@ TBD: What should user do to make it effective? "show interfaces status" still sh
 
 This command is to configure the speed for the Physical interface.
 TBD: What are the acceptable values for speed (40000 for 40G, 100000 for 100G?) ? what should user do to make it effective? "show interfaces status" still the previous value even after this command is executed.
+AI: 40000 is for 40G and 100000 for 100G. User need to know the device to configure it properly. We support only 40G and 100G until the dynamic breakout is supported.
+
 
   - Usage:  
     config interface <interface-name> speed <value>
@@ -1731,6 +1739,7 @@ The type of interfaces include the following.
 **show ip protocol**
 
 TBD: Fill details.
+AI: This is part of Quagga. Lets check with Xin to see if Pavel can answer this. Will the same command work for FRR?
 
   - Usage:  
     show ip protocol
@@ -1845,6 +1854,7 @@ The type of interfaces include the following.
 **show ipv6 protocol**
 
 TBD: Need to fill details.
+AI: Same as above.
 
   - Usage:  
     show ipv6 protocol
@@ -1998,7 +2008,8 @@ This section explains the commands that are used to load the configuration from 
 This command is used to load the configuration from configDB. This command needs root privileges.
 If the optional parameter FILENAME is not specified, it loads the /etc/sonic/config_db.json that exists in the device. 
 If user wants to load a different configuration database file, users shall copy the file into the device and loads it using the optional argument FILENAME.
-TBD: To be verified. This command does not clear the running configuration. If users had done configuration changes on top of the already saved config_db.json, those configuration shall remain in running configuration even after loading the new configuration. Since configuration loading is always incremental, this command shall apply only the additional configuration present in the input file (or config_db.json) on top of running configuration. 
+TBD: To be verified. This command does not clear the running configuration. If users had done configuration changes on top of the already saved config_db.json, those configuration shall remain in running configuration even after loading the new configuration file. Since configuration loading is always incremental, this command shall apply only the additional configuration present in the input file (or config_db.json) on top of running configuration. 
+AI: Lets ask Xin to find the right person for this.
 When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
 If the argument is not specified, it prompts the user to confirm whether user really wants to load this configuration file.
 
@@ -2041,7 +2052,7 @@ If the argument is not specified, it prompts the user to confirm whether user re
 This command is used to load the configuration from /etc/sonic/minigraph.xml. This command needs root privileges.
 When users do not want to use configuration from config_db.json, they can copy the minigraph.xml configuration file to the device and load it using this command.
 This command restarts various services running in the device and it takes some time to complete the command.
-NOTE: If the user had logged in using SSH, users may (TBD) get disconnected. Users need to reconnect their SSH sessions.
+NOTE: If the user had logged in using SSH, users might get disconnected and some configuration failures might happen which might be hard to recover. Users need to reconnect their SSH sessions after configuring the management IP address. It is recommended to execute this command from console port.
 NOTE: Management interface IP address and default route (or specific route) may require reconfiguration in case if those parameters are not part of the minigraph.xml.
 
 When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
@@ -2065,7 +2076,7 @@ This command is used to clear current configuration and import new configuration
 This command shall stop all services before clearing the configuration and it then restarts those services.
 
 This command restarts various services running in the device and it takes some time to complete the command.
-NOTE: If the user had logged in using SSH, users may (TBD) get disconnected. Users need to reconnect their SSH sessions.
+NOTE: If the user had logged in using SSH, users may (TBD - AI: lets Xin for right person to confirm this, may be Joe) get disconnected. Users need to reconnect their SSH sessions.
 NOTE: Management interface IP address and default route (or specific route) may require reconfiguration in case if those parameters are not part of the minigraph.xml.
 
 When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
@@ -2125,8 +2136,8 @@ While adding a new session, users need to configure the following fields that ar
 2) destination IP address, 
 3) DSCP (QoS) value with which mirrored packets are forwarded
 4) TTL value
-5) optional - GRE Type in case if user wants to send the packet via GRE tunnel. TBD. Valid values/type need to be filled in.
-6) optional - Queue in which packets shall be sent out of the device.TBD. Valid values/type need to be filled in.
+5) optional - GRE Type in case if user wants to send the packet via GRE tunnel. TBD (Shuotian). Valid values/type need to be filled in.
+6) optional - Queue in which packets shall be sent out of the device.TBD (0 to 7 for most devices). Valid values/type need to be filled in.
 
   - Usage:  
     config mirror_session add <session_name> <src_ip> <dst_ip>  
@@ -2172,7 +2183,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # Platform
 
-The command "config platform" is obsoleted. TBD.
+The command "config platform" is obsoleted. TBD. Lets check with Joe to get more info. Command is still there. 
 
 # PortChannel Configuration And Show
 
@@ -2210,6 +2221,8 @@ It is recommended to use portchannel names in the format "PortChannelxxxx", wher
 NOTE: If users specify any other name like "pc99", command will succeed, but the name is not printed properly in the "show interface portchannel" command.
 
 TBD: When any port is already member of any other portchannel and if user tries to add the same port in some other portchannel (without deleting it from the current portchannel), the command fails internally. But, it does not print any error message. In such cases, remove the member from current portchannel and then add it to new portchannel.
+AI: Command should fail in such case. Raise Ticket to fix it.
+TBD: We dont support such pc99 names. Always use PortChannelOneToFourDigits. Document this.
 
 Command takes two optional arguements given below.
 1) min-links  - minimum number of links required to bring up the portchannel
@@ -2282,7 +2295,8 @@ This sub-section explains the following queue parameters that can be displayed u
 **show queue counters**
 
 This command displays packet and byte counters for all queues of all ports or one specific-port given as arguement.
-This command can be used to clear the counters for all queues of all ports. Note that port specific clear is not supported (TBD: Need to reconfirm).
+This command can be used to clear the counters for all queues of all ports. Note that port specific clear is not supported 
+TBD: Lets raise improvementTicket for supporting this.
  
   - Usage:  
     show queue counters [-c or --clear] [<interface-name>] 
@@ -2757,7 +2771,7 @@ This command displays the current CPU usage by process. This command uses linux'
     show processes cpu
 	
 	Note that pipe option can be used using " | head -n" to display only the "n" number of lines.
-	TBD: Do we support all options of "top" command?
+	TBD: Do we support all options of "top" command? Lets ask Joe.
 
 
 - Example:
@@ -2996,12 +3010,17 @@ This command displays virtual address to the physical address translation status
 **show line**
 
 This command displays serial port or a virtual network connection status.
+This command is used only when SONiC is used as console switch. 
+This command is not applicable when SONiC used as regular switch.
+
 
   - Usage:  
     show line
  
 
 - Example: TBD: This command is not working. It crashes as follows. Need more information.  
+AI: Lets raise a Ticket for this broken CLI. 
+
   ``` 
   admin@T1-2:~$ show line
   Traceback (most recent call last):
@@ -3238,6 +3257,8 @@ If this configuration is enabled for that service, it will perform warm reboot f
 **config warm_restart neighsyncd_timer**
 
 TBD: This command sets the neighsyncd_timer value for warm_restart of "swss" service. When swss service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
+When the timer expires, it will print an error message about failure, but its not a hard failure (lets confirm this with Linkedin).
+AI: Lets ask Linkedin guy.
 
   - Usage:  
     config warm_restart bgp_timerneighsyncd_timer <seconds>
@@ -3253,6 +3274,7 @@ TBD: This command sets the neighsyncd_timer value for warm_restart of "swss" ser
 **config warm_restart teamsyncd_timer**
 
 TBD: This command sets the teamsyncd_timer value for warm_restart of teamd service. When teamd service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
+AI: Same as above.
 
   - Usage:  
     config warm_restart teamsyncd_timer <seconds>
@@ -3297,6 +3319,7 @@ This command configures the interval for telemetry.
     config watermark telemetry interval <value>
 	interval can be any integer value from 1.
 	TBD: Is there no maximum limit on this value?
+	AI: Ask Xin for right person.
 
 
 - Example:
