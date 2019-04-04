@@ -3461,7 +3461,7 @@ This command displays the MAC (FDB) entries either in full or partial as given b
   FDB entries are cleared.
   ```
 
-### NDP
+### NDP Show
 
 **show ndp**
 This command displays either all the IPv6 neighbor mac addresses, or for a particular IPv6 neighbor, or for all IPv6 neighbors reachable via a specific interface.
