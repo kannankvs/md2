@@ -17,6 +17,9 @@ Table of Contents
    * [AAA Configuration And Show](#aaa-configuration-and-show)
       * [show aaa](#show-aaa)
       * [config aaa](#config-aaa)
+      * [TACACS  Configuration And Show](#tacacs-configuration-and-show)
+      * [TACACS  show](#tacacs-show)
+      * [TACACS  Configuration](#tacacs-configuration)
    * [ACL Configuration And Show](#acl-configuration-and-show)
       * [show acl](#show-acl)
       * [config acl](#config-acl)
@@ -32,15 +35,22 @@ Table of Contents
    * [Interface Naming Mode](#interface-naming-mode)
       * [show interface naming mode](#show-interface-naming-mode)
       * [config interface naming mode](#config-interface-naming-mode)
+   * [IP](#ip)
+      * [show ip](#show-ip)
+      * [show ipv6](#show-ipv6)
    * [Loading, Reloading And Saving Configuration](#loading-reloading-and-saving-configuration)
       * [config load](#config-load)
       * [config load_mgmt_config](#config-load_mgmt_config)
       * [config load_minigraph](#config-load_minigraph)
       * [config reload](#config-reload)
       * [config save](#config-save)
+   * [LLDP](#lldp)
+      * [LLDP Show](#lldp-show)
    * [Mirroring Configuration And Show](#mirroring-configuration-and-show)
 	  * [Mirroring Show](#mirroring-show)
 	  * [Platform](#platform)
+   * [NTP](#ntp)
+      * [Network Time Protocol](#Network-Time-Protocol)	
    * [PortChannel Configuration And Show](#portchannel-configuration-and-show)
       * [PortChannel Show](#portchannel-show)
       * [PortChannel Configuration](#portchannel-configuration)
@@ -49,9 +59,15 @@ Table of Contents
       * [PFC](#pfc)
       * [Queue And Priority-Group](#queue-and-priority-group)
       * [QoS Configuration](#qos-configuration)
-   * [TACACS  Configuration And Show](#tacacs-configuration-and-show)
-      * [TACACS  show](#tacacs-show)
-      * [TACACS  Configuration](#tacacs-configuration)
+   * [Software Installation Commands](#software-installation-commands)
+      * [SONiC Installer](#sonic-installer)
+   * [Startup &amp; Running Configuration](#startup--running-configuration)
+      * [Startup Configuration](#startup-configuration)
+      * [Running Configuration](#running-configuration)
+   * [System State](#system-state)
+      * [Show Processes](#show-processes)
+	  * [Show Services &amp; Memory](#show-services--memory)
+   * [Troubleshooting Commands](#troubleshooting-commands)
    * [VLAN Configuration And Show](#vlan-configuration-and-show)
       * [VLAN Show](#vlan-show)
       * [VLAN Configuration](#vlan-configuration)
@@ -64,26 +80,9 @@ Table of Contents
       * [Layer 2 Configuration &amp; Show](#layer-2-configuration--show)
          * [ARP](#arp)
          * [FDB](#fdb)
-   * [LLDP](#lldp)
-      * [LLDP Show](#lldp-show)
-   * [NDP](#ndp)
-      * [NDP Show](#ndp-show)
-   * [IP](#ip)
-      * [show ip](#show-ip)
-      * [show ipv6](#show-ipv6)
-   * [Application Layer](#application-layer)
-      * [NTP](#ntp)
-   * [System State](#system-state)
-      * [Show Processes](#show-processes)
-	  * [Show Services &amp; Memory](#show-services--memory)
-   * [Startup &amp; Running Configuration](#startup--running-configuration)
-      * [Startup Configuration](#startup-configuration)
-      * [Running Configuration](#running-configuration)
-   * [Troubleshooting Commands](#troubleshooting-commands)
-   * [Software Installation Commands](#software-installation-commands)
-      * [SONiC Installer](#sonic-installer)
+	     * [NDP Show](#ndp-show)
    
-
+ 
 
 # Introduction
 SONiC is an open source network operating system based on Linux that runs on switches from multiple vendors and ASICs. SONiC offers a full-suite of network functionality, like BGP and RDMA, that has been production-hardened in the data centers of some of the largest cloud-service providers. It offers teams the flexibility to create the network solutions they need while leveraging the collective strength of a large ecosystem and community.
@@ -116,7 +115,7 @@ This section covers the basic configurations related to the following
 - The default credential (if not modified at image build time) for login is admin/YourPaSsWoRd.
 - In case of SSH login, users can login to the management interface (eth0) IP address after configuring the same using serial console. Refer the following section for configuring the IP address for management interface.
 
-- Example:
+  - Example:
   ```
   At Console:
   Debian GNU/Linux 9 sonic ttyS1
@@ -152,7 +151,12 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 ## Config Help
 - List all the possible configuration commands at the top level. The exact command syntax is as follows; all commands are case sensitive
- admin$ config --help
+ 
+**config --help**
+Displays help for the mentioned configuration command.
+
+- Usage:  
+  config --help
 
 - Example:
   ```
@@ -188,13 +192,13 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## Show Versions
+Display software component versions of the currently running SONiC image. This includes the SONiC image version as well as Docker image versions. You can find details of the SONiC image version format [here](sonic-version).
 
 **show version**  
-
 This command displays relevant information as the SONiC and Linux kernel version being utilized, as well as the commit-id used to build the SONiC image. The second section of the output displays the various docker images and their associated id’s. 
 
-- `show version`
-  - Display software component versions of the currently running SONiC image. This includes the SONiC image version as well as Docker image versions. You can find details of the SONiC image version format [here](sonic-version).
+- Usage:
+  show version  
 
 - Example:
   ```
@@ -232,9 +236,14 @@ This command displays relevant information as the SONiC and Linux kernel version
   ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
-## Show Help
+## Show Help  
+Display the full list of help commands; the output of which helps to analyze, debug or troubleshoot the network node. 
 
-To view a full list of available `show` subcommands, you can enter `show -?`, `show -h` or `show --help`
+**show help** 
+To view a full list of available `show` subcommands.
+
+- Usage:
+  You can enter `show -?`, `show -h` or `show --help`
 
 - Example:
   ```
@@ -310,18 +319,25 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
  
  
 ## Show System Status
+Display the status of various parameters pertaining to the physical state of the network node.
 
-- `show clock`
-  - Display the current date and time configured on the system
-  
+**show clock**
+Display the current date and time configured on the system
+
+-  Usage:  
+   show clock`
+    
 - Example:
   ```
   admin@sonic:~$ show clock
   Mon Mar 25 20:25:16 UTC 2019
   ```
   
-- `show environment`
-  - Display platform environmentals, such as voltages, temperatures and fan speeds
+**show environment`**
+Display platform environmentals, such as voltages, temperatures and fan speeds
+
+-  Usage:
+   show environment
 
 - Example: Note that the show output has got lot of information; only the sample output is given in the below example
   ```
@@ -362,17 +378,23 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
   ```
 
-- `show reboot-cause`
-  - Display the cause of the previous reboot
+**show reboot-cause**
+Display the cause of the previous reboot
 
-- Example:
+- Usage:  
+  show reboot-cause
+
+-  Example:
   ```
   admin@sonic:~$ show reboot-cause
   User issued reboot command [User: admin, Time: Mon Mar 25 01:02:03 UTC 2019]
   ```
- 
-- `show uptime`
-  - Display the current system uptime
+
+**show uptime**
+Display the current system uptime
+
+- Usage:  
+  show uptime`
 
 - Example:
   ```
@@ -380,8 +402,11 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
   up 2 days, 21 hours, 30 minutes
   ```
 
-- `show logging ([<process-name>] [-l lines] | [-f])`
-  - Display the all currently stored log messages
+**show loggig**
+Display all the currently stored log messages
+
+- Usage:
+  show logging ([<process-name>] [-l lines] | [-f])`
 
 - Example:
   ```
@@ -401,7 +426,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
   ```
   - Optionally, you can specify a number of lines to display using the `-l' or `--lines` option. Only the most recent N lines will be displayed. Also note that this option can be combined with a process name.
 
-  - Examples:
+- Examples:
   ```
   admin@sonic:~$ show logging --lines 50
   ```
@@ -416,8 +441,11 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
   admin@sonic:~$ show logging --follow
   ```
 
-- `show users`
-  - Display a list of users currently logged in to the device
+**show users`**
+Display a list of users currently logged in to the device
+
+- Usage:  
+  show users
 
 - Examples:
   ```
@@ -430,12 +458,15 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
   ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
-## Show Platform
+## Show Hardware Platform
 
 The information displayed in this set of commands partially overlaps with the one generated by “show envinronment” instruction. In this case though, the information is presented in a more succinct fashion. In the future these two CLI stanzas may end up getting combined.
 
-- `show platform summary`
-  - Display a summary of the device's hardware platform
+**show platform summary**
+Display a summary of the device's hardware platform
+
+- Usage:  
+  show platform summary
 
 - Example:
   ```
@@ -445,8 +476,11 @@ The information displayed in this set of commands partially overlaps with the on
   ASIC: broadcom
   ```
 
-- `show platform syseeprom`
-  - Display information stored on the system EEPROM.
+**show platform syseeprom**
+Display information stored on the system EEPROM.
+
+- Usage:  
+  show platform syseeprom
 
 - Example:
   ```
@@ -465,8 +499,11 @@ The information displayed in this set of commands partially overlaps with the on
   (checksum valid)
   ```
 
-- `show platform psustatus`
-  - Display a status of the device's power supply units
+**show platform psustatus**
+Display a status of the device's power supply units
+
+- Usage:  
+  show platform psustatus
 
 - Example:
   ```
@@ -478,8 +515,13 @@ The information displayed in this set of commands partially overlaps with the on
   ```
 
 ### Transceivers
+Displays diagnostic monitoring information of the transceivers
 
-- `show interfaces transceiver [eeprom [-d | --dom] | lpmode | presence] [<interface-name>]`
+**show interfaces transceiver**
+If a port is specified, displays information for the transceiver in that port.
+
+- Usage:  
+  show interfaces transceiver [eeprom [-d | --dom] | lpmode | presence] [<interface-name>]`
 
 - Example (Decode and display information stored on the SFP EEPROM): 
   ```
@@ -539,8 +581,14 @@ This section captures the various show commands & configuration commands that ar
 Admins can configure the type of authentication (local or remote tacacs based) required for the users and also the authentication failthrough and fallback options.
 Following show command displays the current running configuration related to the AAA.
 
-## show aaa
-- Syntax: show aaa
+## show aaa  
+This command is used to view the Authentication, Authorization & Accounting settings that are configured in the network node.
+
+**show aaa**
+Display the AAA settings currently present in the network node
+
+- Usage:  
+  show aaa  
 
 - Example:
    ```
@@ -565,6 +613,7 @@ Note that the "aaa" commands need root privileges that is obtained using "sudo -
 
 This command is used to either enable or disable the failthrough option. When user selects remote authentication using tacacs+ and if the authentication fails, this "failthrough" configuration allows for further authentication using LOCAL database or not.
 If this 'failthrough' is disabled and if remote authentication fails, login is disallowed.
+
 - Usage:  
   config aaa authentication failthrough [OPTIONS] OPTION
 		   
@@ -583,11 +632,11 @@ If this 'failthrough' is disabled and if remote authentication fails, login is d
 **aaa authentication fallback**
 
 This command is not used at the moment. TBD - Need to reconfirm
+
 - Usage:  
   config aaa authentication fallback [OPTIONS] OPTION
        
 	   Allow AAA fallback [enable | disable | default]
-
 
 - Example:
   ```
@@ -618,7 +667,149 @@ If the authentication fails, AAA will check the "failthrough" configuration and 
   root@sonic:~# config aaa authentication login tacacs+
   root@sonic:~# 
   ```
+
+
+## TACACS+ Configuration And Show
+
+### TACACS+ show
+
+**show tacacs**
+
+This command displays the global configuration fields and the list of all tacacs servers and their correponding configurations.
+
+  - Usage:  
+	show tacacs 
+
+- Example:
+  ``` 
+	TACPLUS global auth_type pap (default)
+	TACPLUS global timeout 99
+	TACPLUS global passkey <EMPTY_STRING> (default)
+
+	TACPLUS_SERVER address 10.11.12.14
+				   priority 9
+				   tcp_port 50
+				   auth_type mschap
+				   timeout 10
+				   passkey testing789
+
+	TACPLUS_SERVER address 10.0.0.9
+				   priority 1
+				   tcp_port 49
+  ```
+
+## TACACS+ Configuration
+
+This sub-section explains the command "config tacacs" and its sub-commands that are used to configure the following tacacs+ parameters.
+Some of the parameters like authtype, passkey and timeout can be either configured at per server level or at global level (global value will be applied if there no server level configuration)
+
+1) Add/Delete the tacacs+ server details.
+2) authtype - global configuration that is applied to all servers if there is no server specific configuration.
+3) default - reset the authtype or passkey or timeout to the default values.
+4) passkey - global configuration that is applied to all servers if there is no server specific configuration.
+5) timeout - global configuration that is applied to all servers if there is no server specific configuration.
+
+**config tacacs add**
+
+This command is to add a TACACS+ server to the tacacs server list.
+Note that more than one tacacs+ (maximum of seven) can be added in the device. When user tries to login, tacacs client shall contact the servers one by one. When any server times out, device will try the next server one by one.
+
+   - Usage:  
+     config tacacs add <ip_address> [-t|--timeout SECOND] [-k|--key SECRET] [-a|--type TYPE] [-o|--port PORT] [-p|--pri PRIORITY] [-m|--use-mgmt-vrf]
+	 
+	 **Arguements:**
+	 
+	 ip_address - TACACS+ server IP address.
+	 timeout - Transmission timeout interval in seconds, range 1 to 1000 (TBD - no clarity), default 5
+	 key - Shared secret
+	 type - Authentication type, "chap" or "pap" or "mschap" or "login", default is "pap".
+	 port - TCP port range is 1 to 65535, default 49
+	 pri - Priority, priority range 1 to 64, default 1.
+	 use-mgmt-vrf - this means that the server is part of Management vrf, default is "no vrf"
+
+
+- Example:
+  ```	 
+  root@T1-2:~# config tacacs add 10.11.12.13 -t 10 -k testing789 -a mschap -o 50 -p 9
+  root@T1-2:~#
+  ```
+
+**config tacacs delete**
+
+This command is to delete the tacacs+ servers configured.
+
+   - Usage:  
+     config tacacs delete <ip_address>
+
+- Example:
+  ```
+  root@T1-2:~# config tacacs delete 10.11.12.13
+  root@T1-2:~#
+  ```
+
+**config tacacs authtype**
+
+This command is to modify the global value for the TACACS+ authtype.
+When user has not configured server specific authtype, this global value shall be used for that server.
+
+   - Usage:  
+     config tacacs authtype  chap|pap||mschap|login
+
+- Example:
+  ```
+  root@T1-2:~# config tacacs authtype mschap
+  root@T1-2:~#
+  ```
+  
+**config tacacs default**  
+
+This command is to reset the global value for authtype or passkey or timeout to default value. 
+Default for authtype is "pap", default for passkey is EMPTY_STRING and default for timeout is 5 seconds.
+
+   - Usage:  
+     config tacacs default authtype|passkey|timeout
+	 
+
+- Example:
+  ```
+  root@T1-2:~# config tacacs default authtype
+  This will reset the global authtype back to the default value "pap".
+  ```
+
+**config tacacs passkey**
+
+This command is to modify the global value for the TACACS+ passkey.
+When user has not configured server specific passkey, this global value shall be used for that server.
+
+   - Usage:  
+     config tacacs passkey <pass_key>
+
+
+- Example:
+  ```
+  root@T1-2:~# config tacacs passkey testing123
+  root@T1-2:~#
+  ```
+
+**config tacacs timeout**
+
+This command is to modify the global value for the TACACS+ timeout.
+When user has not configured server specific timeout, this global value shall be used for that server.
+
+
+   - Usage:  
+     config tacacs timeout <timeout_value_in_seconds>
+
+
+- Example:
+  ```
+  root@T1-2:~# config tacacs timeout 99
+  root@T1-2:~#
+  ```
+
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#AAA-Configuration-And-Show)
+
+
 
 # ACL Configuration And Show
 
@@ -1575,9 +1766,9 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # Mirroring Configuration And Show
 
-# Mirroring Show
+## Mirroring Show
 
-## Mirroring Config
+### Mirroring Config
 
 This command is used to add or remove mirroring sessions. Mirror session is identified by "session_name". 
 While adding a new session, users need to configure the following fields that are used while forwarding the mirrored packets.
@@ -1590,7 +1781,7 @@ While adding a new session, users need to configure the following fields that ar
 6) optional - Queue in which packets shall be sent out of the device.TBD. Valid values/type need to be filled in.
 
   - Usage:  
-    config mirror_session add <session_name> <src_ip> <dst_ip>
+    config mirror_session add <session_name> <src_ip> <dst_ip>  
                                  <dscp> <ttl> [gre_type] [queue]
 
 - Example:
@@ -1605,6 +1796,31 @@ While adding a new session, users need to configure the following fields that ar
   ```
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Mirroring-Configuration-And-Show)
+
+
+# NTP
+
+## Network Time Protocol
+
+**show ntp**
+
+This command displays a list of NTP peers known to the server as well as a summary of their state.
+
+  - Usage:  
+    show ntp
+ 
+
+- Example:
+  ``` 
+  admin@sonic:~$ show ntp
+		 remote           refid      st t when poll reach   delay   offset  jitter
+	==============================================================================
+	 23.92.29.245    .XFAC.          16 u    - 1024    0    0.000    0.000   0.000
+	*204.2.134.164   46.233.231.73    2 u  916 1024  377    3.079    0.394   0.128
+  ```
+
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#NTP)
+
 
 # Platform
 
@@ -1936,146 +2152,6 @@ Some of the example QOS configurations that users can modify are given below.
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#QoS-Configuration-And-Show)
 
-# TACACS+ Configuration And Show
-
-## TACACS+ show
-
-**show tacacs**
-
-This command displays the global configuration fields and the list of all tacacs servers and their correponding configurations.
-
-  - Usage:  
-	show tacacs 
-
-- Example:
-  ``` 
-	TACPLUS global auth_type pap (default)
-	TACPLUS global timeout 99
-	TACPLUS global passkey <EMPTY_STRING> (default)
-
-	TACPLUS_SERVER address 10.11.12.14
-				   priority 9
-				   tcp_port 50
-				   auth_type mschap
-				   timeout 10
-				   passkey testing789
-
-	TACPLUS_SERVER address 10.0.0.9
-				   priority 1
-				   tcp_port 49
-  ```
-
-## TACACS+ Configuration
-
-This sub-section explains the command "config tacacs" and its sub-commands that are used to configure the following tacacs+ parameters.
-Some of the parameters like authtype, passkey and timeout can be either configured at per server level or at global level (global value will be applied if there no server level configuration)
-
-1) Add/Delete the tacacs+ server details.
-2) authtype - global configuration that is applied to all servers if there is no server specific configuration.
-3) default - reset the authtype or passkey or timeout to the default values.
-4) passkey - global configuration that is applied to all servers if there is no server specific configuration.
-5) timeout - global configuration that is applied to all servers if there is no server specific configuration.
-
-**config tacacs add**
-
-This command is to add a TACACS+ server to the tacacs server list.
-Note that more than one tacacs+ (maximum of seven) can be added in the device. When user tries to login, tacacs client shall contact the servers one by one. When any server times out, device will try the next server one by one.
-
-   - Usage:  
-     config tacacs add <ip_address> [-t|--timeout SECOND] [-k|--key SECRET] [-a|--type TYPE] [-o|--port PORT] [-p|--pri PRIORITY] [-m|--use-mgmt-vrf]
-	 
-	 **Arguements:**
-	 
-	 ip_address - TACACS+ server IP address.
-	 timeout - Transmission timeout interval in seconds, range 1 to 1000 (TBD - no clarity), default 5
-	 key - Shared secret
-	 type - Authentication type, "chap" or "pap" or "mschap" or "login", default is "pap".
-	 port - TCP port range is 1 to 65535, default 49
-	 pri - Priority, priority range 1 to 64, default 1.
-	 use-mgmt-vrf - this means that the server is part of Management vrf, default is "no vrf"
-
-
-- Example:
-  ```	 
-  root@T1-2:~# config tacacs add 10.11.12.13 -t 10 -k testing789 -a mschap -o 50 -p 9
-  root@T1-2:~#
-  ```
-
-**config tacacs delete**
-
-This command is to delete the tacacs+ servers configured.
-
-   - Usage:  
-     config tacacs delete <ip_address>
-
-- Example:
-  ```
-  root@T1-2:~# config tacacs delete 10.11.12.13
-  root@T1-2:~#
-  ```
-
-**config tacacs authtype**
-
-This command is to modify the global value for the TACACS+ authtype.
-When user has not configured server specific authtype, this global value shall be used for that server.
-
-   - Usage:  
-     config tacacs authtype  chap|pap||mschap|login
-
-- Example:
-  ```
-  root@T1-2:~# config tacacs authtype mschap
-  root@T1-2:~#
-  ```
-  
-**config tacacs default**  
-
-This command is to reset the global value for authtype or passkey or timeout to default value. 
-Default for authtype is "pap", default for passkey is EMPTY_STRING and default for timeout is 5 seconds.
-
-   - Usage:  
-     config tacacs default authtype|passkey|timeout
-	 
-
-- Example:
-  ```
-  root@T1-2:~# config tacacs default authtype
-  This will reset the global authtype back to the default value "pap".
-  ```
-
-**config tacacs passkey**
-
-This command is to modify the global value for the TACACS+ passkey.
-When user has not configured server specific passkey, this global value shall be used for that server.
-
-   - Usage:  
-     config tacacs passkey <pass_key>
-
-
-- Example:
-  ```
-  root@T1-2:~# config tacacs passkey testing123
-  root@T1-2:~#
-  ```
-
-**config tacacs timeout**
-
-This command is to modify the global value for the TACACS+ timeout.
-When user has not configured server specific timeout, this global value shall be used for that server.
-
-
-   - Usage:  
-     config tacacs timeout <timeout_value_in_seconds>
-
-
-- Example:
-  ```
-  root@T1-2:~# config tacacs timeout 99
-  root@T1-2:~#
-  ```
-
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#TACACS-Configuration-And-Show)
-
 
 # VLAN Configuration And Show
 
@@ -2339,7 +2415,6 @@ This command configures the interval for telemetry.
 	admin@sonic:~$ sudo config watermark telemetry interval 999
   ```
 
-
 ## Layer 2 Configuration & Show
 
 ### ARP
@@ -2400,7 +2475,6 @@ This command displays the ARP entries in the device with following options.
   -------------    -----------------   ----------   ------
   192.168.1.181    e4:c7:22:c1:07:7c   Ethernet40   -
   Total number of entries 1 
-
   ```
 
 ### FDB
@@ -2503,6 +2577,44 @@ This command displays the MAC (FDB) entries either in full or partial as given b
   admin@sonic:~$ sonic-clear fdb all
   FDB entries are cleared.
   ```
+
+### NDP
+
+**show ndp**
+This command displays either all the IPv6 neighbor mac addresses, or for a particular IPv6 neighbor, or for all IPv6 neighbors reachable via a specific interface.
+
+  - Usage:  
+    show ndp [-if|--iface <interface-name.] [IP6ADDRESS]
+
+
+- Example:
+  ```
+    **ALL IPv6 NEIGHBORS:**
+	admin@sonic:~$ show ndp
+	Address                   MacAddress         Iface    Vlan    Status
+	------------------------  -----------------  -------  ------  ---------
+	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
+	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
+	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
+	Total number of entries 3 
+	
+	**SPECIFIC IPv6 NEIGHBOR**
+	admin@sonic:~$ show ndp fe80::20c:29ff:feb8:b11e
+	Address                   MacAddress         Iface    Vlan    Status
+	------------------------  -----------------  -------  ------  ---------
+	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
+	Total number of entries 1 
+	
+	**SPECIFIC INTERFACE**
+	admin@sonic:~$ show ndp -if eth0
+	Address                   MacAddress         Iface    Vlan    Status
+	------------------------  -----------------  -------  ------  ---------
+	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
+	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
+	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
+	Total number of entries 3 
+
+   ```
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Watermark-Configuration-And-Show)
 
@@ -2619,48 +2731,6 @@ This command displays more details about all LLDP neighbors or only the neighbor
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#LLDP)
 
-# NDP
-
-## NDP Show
-
-**show ndp**
-
-This command displays either all the IPv6 neighbor mac addresses, or for a particular IPv6 neighbor, or for all IPv6 neighbors reachable via a specific interface.
-
-  - Usage:  
-    show ndp [-if|--iface <interface-name.] [IP6ADDRESS]
-
-
-- Example:
-  ```
-    **ALL IPv6 NEIGHBORS:**
-	admin@sonic:~$ show ndp
-	Address                   MacAddress         Iface    Vlan    Status
-	------------------------  -----------------  -------  ------  ---------
-	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
-	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
-	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
-	Total number of entries 3 
-	
-	**SPECIFIC IPv6 NEIGHBOR**
-	admin@sonic:~$ show ndp fe80::20c:29ff:feb8:b11e
-	Address                   MacAddress         Iface    Vlan    Status
-	------------------------  -----------------  -------  ------  ---------
-	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
-	Total number of entries 1 
-	
-	**SPECIFIC INTERFACE**
-	admin@sonic:~$ show ndp -if eth0
-	Address                   MacAddress         Iface    Vlan    Status
-	------------------------  -----------------  -------  ------  ---------
-	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
-	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
-	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
-	Total number of entries 3 
-
-   ```
-
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#NDP)
 
 # IP 
 
@@ -2890,24 +2960,6 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # Application Layer
 
-## NTP
-
-**show ntp**
-
-This command displays a list of NTP peers known to the server as well as a summary of their state.
-
-  - Usage:  
-    show ntp
- 
-
-- Example:
-  ``` 
-  admin@sonic:~$ show ntp
-		 remote           refid      st t when poll reach   delay   offset  jitter
-	==============================================================================
-	 23.92.29.245    .XFAC.          16 u    - 1024    0    0.000    0.000   0.000
-	*204.2.134.164   46.233.231.73    2 u  916 1024  377    3.079    0.394   0.128
-  ```
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Application-Layer)
 
