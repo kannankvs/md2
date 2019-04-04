@@ -160,29 +160,29 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
   Usage: config [OPTIONS] COMMAND [ARGS]...
   SONiC command line - 'config' command
 
-Options:
-  --help  Show this message and exit.
+  Options:
+    --help  Show this message and exit.
 
-Commands:
-  aaa                    AAA command line
-  acl                    ACL-related configuration tasks
-  bgp                    BGP-related configuration tasks
-  ecn                    ECN-related configuration tasks
-  interface              Interface-related configuration tasks
-  interface_naming_mode  Modify interface naming mode for interacting...
-  load                   Import a previous saved config DB dump file.
-  load_mgmt_config       Reconfigure hostname and mgmt interface based...
-  load_minigraph         Reconfigure based on minigraph.
-  mirror_session
-  platform               Platform-related configuration tasks
-  portchannel
-  qos
-  reload                 Clear current configuration and import a...
-  save                   Export current config DB to a file on disk.
-  tacacs                 TACACS+ server configuration
-  vlan                   VLAN-related configuration tasks
-  warm_restart           warm_restart-related configuration tasks
-  watermark              Configure watermark
+  Commands:
+    aaa                    AAA command line
+    acl                    ACL-related configuration tasks
+    bgp                    BGP-related configuration tasks
+    ecn                    ECN-related configuration tasks
+    interface              Interface-related configuration tasks
+    interface_naming_mode  Modify interface naming mode for interacting...
+    load                   Import a previous saved config DB dump file.
+    load_mgmt_config       Reconfigure hostname and mgmt interface based...
+    load_minigraph         Reconfigure based on minigraph.
+    mirror_session
+    platform               Platform-related configuration tasks
+    portchannel
+    qos
+    reload                 Clear current configuration and import a...
+    save                   Export current config DB to a file on disk.
+    tacacs                 TACACS+ server configuration
+    vlan                   VLAN-related configuration tasks
+    warm_restart           warm_restart-related configuration tasks
+    watermark              Configure watermark
 
   ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
@@ -198,36 +198,36 @@ This command displays relevant information as the SONiC and Linux kernel version
 
 - Example:
   ```
-admin@sonic:~$ show version
-SONiC Software Version: SONiC.HEAD.32-21ea29a
-Distribution: Debian 9.8
-Kernel: 4.9.0-8-amd64
-Build commit: 21ea29a
-Build date: Fri Mar 22 01:55:48 UTC 2019
-Built by: johnar@jenkins-worker-4
+  admin@sonic:~$ show version
+  SONiC Software Version: SONiC.HEAD.32-21ea29a
+  Distribution: Debian 9.8
+  Kernel: 4.9.0-8-amd64
+  Build commit: 21ea29a
+  Build date: Fri Mar 22 01:55:48 UTC 2019
+  Built by: johnar@jenkins-worker-4
 
-Docker images:
-REPOSITORY                 TAG                 IMAGE ID            SIZE
-docker-syncd-brcm          HEAD.32-21ea29a     434240daff6e        362MB
-docker-syncd-brcm          latest              434240daff6e        362MB
-docker-orchagent-brcm      HEAD.32-21ea29a     e4f9c4631025        287MB
-docker-orchagent-brcm      latest              e4f9c4631025        287MB
-docker-lldp-sv2            HEAD.32-21ea29a     9681bbfea3ac        275MB
-docker-lldp-sv2            latest              9681bbfea3ac        275MB
-docker-dhcp-relay          HEAD.32-21ea29a     2db34c7bc6f4        257MB
-docker-dhcp-relay          latest              2db34c7bc6f4        257MB
-docker-database            HEAD.32-21ea29a     badc6fc84cdb        256MB
-docker-database            latest              badc6fc84cdb        256MB
-docker-snmp-sv2            HEAD.32-21ea29a     e2776e2a30b7        295MB
-docker-snmp-sv2            latest              e2776e2a30b7        295MB
-docker-teamd               HEAD.32-21ea29a     caf957cd2ad1        275MB
-docker-teamd               latest              caf957cd2ad1        275MB
-docker-router-advertiser   HEAD.32-21ea29a     b1a62023958c        255MB
-docker-router-advertiser   latest              b1a62023958c        255MB
-docker-platform-monitor    HEAD.32-21ea29a     40b40a4b2164        287MB
-docker-platform-monitor    latest              40b40a4b2164        287MB
-docker-fpm-quagga          HEAD.32-21ea29a     546036fe6838        282MB
-docker-fpm-quagga          latest              546036fe6838        282MB
+  Docker images:
+  REPOSITORY                 TAG                 IMAGE ID            SIZE
+  docker-syncd-brcm          HEAD.32-21ea29a     434240daff6e        362MB
+  docker-syncd-brcm          latest              434240daff6e        362MB
+  docker-orchagent-brcm      HEAD.32-21ea29a     e4f9c4631025        287MB
+  docker-orchagent-brcm      latest              e4f9c4631025        287MB
+  docker-lldp-sv2            HEAD.32-21ea29a     9681bbfea3ac        275MB
+  docker-lldp-sv2            latest              9681bbfea3ac        275MB
+  docker-dhcp-relay          HEAD.32-21ea29a     2db34c7bc6f4        257MB
+  docker-dhcp-relay          latest              2db34c7bc6f4        257MB
+  docker-database            HEAD.32-21ea29a     badc6fc84cdb        256MB
+  docker-database            latest              badc6fc84cdb        256MB
+  docker-snmp-sv2            HEAD.32-21ea29a     e2776e2a30b7        295MB
+  docker-snmp-sv2            latest              e2776e2a30b7        295MB
+  docker-teamd               HEAD.32-21ea29a     caf957cd2ad1        275MB
+  docker-teamd               latest              caf957cd2ad1        275MB
+  docker-router-advertiser   HEAD.32-21ea29a     b1a62023958c        255MB
+  docker-router-advertiser   latest              b1a62023958c        255MB
+  docker-platform-monitor    HEAD.32-21ea29a     40b40a4b2164        287MB
+  docker-platform-monitor    latest              40b40a4b2164        287MB
+  docker-fpm-quagga          HEAD.32-21ea29a     546036fe6838        282MB
+  docker-fpm-quagga          latest              546036fe6838        282MB
 
   ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
@@ -238,50 +238,50 @@ To view a full list of available `show` subcommands, you can enter `show -?`, `s
 
 - Example:
   ```
-admin@sonic:~$ show -?
-Usage: show [OPTIONS] COMMAND [ARGS]...
-  SONiC command line - 'show' command
+  admin@sonic:~$ show -?
+  Usage: show [OPTIONS] COMMAND [ARGS]...
+    SONiC command line - 'show' command
 
-Options:
-  -?, -h, --help  Show this message and exit.
+  Options:
+    -?, -h, --help  Show this message and exit.
 
-Commands:
-  aaa                   Show AAA configuration
-  acl                   Show ACL related information
-  arp                   Show IP ARP table
-  clock                 Show date and time
-  ecn                   Show ECN configuration
-  environment           Show environmentals (voltages, fans, temps)
-  interfaces            Show details of the network interfaces
-  ip                    Show IP (IPv4) commands
-  ipv6                  Show IPv6 commands
-  line                  Show all /dev/ttyUSB lines and their info
-  lldp                  LLDP (Link Layer Discovery Protocol)...
-  logging               Show system log
-  mac                   Show MAC (FDB) entries
-  mirror_session        Show existing everflow sessions
-  mmu                   Show mmu configuration
-  ndp                   Show IPv6 Neighbour table
-  ntp                   Show NTP information
-  pfc                   Show details of the priority-flow-control...
-  platform              Show platform-specific hardware info
-  priority-group        Show details of the PGs
-  processes             Display process information
-  queue                 Show details of the queues
-  reboot-cause          Show cause of most recent reboot
-  route-map             show route-map
-  runningconfiguration  Show current running configuration...
-  services              Show all daemon services
-  startupconfiguration  Show startup configuration information
-  system-memory         Show memory information
-  tacacs                Show TACACS+ configuration
-  techsupport           Gather information for troubleshooting
-  uptime                Show system uptime
-  users                 Show users
-  version               Show version information
-  vlan                  Show VLAN information
-  warm_restart          Show warm restart configuration and state
-  watermark             Show details of watermark
+  Commands:
+    aaa                   Show AAA configuration
+    acl                   Show ACL related information
+    arp                   Show IP ARP table
+    clock                 Show date and time
+    ecn                   Show ECN configuration
+    environment           Show environmentals (voltages, fans, temps)
+    interfaces            Show details of the network interfaces
+    ip                    Show IP (IPv4) commands
+    ipv6                  Show IPv6 commands
+    line                  Show all /dev/ttyUSB lines and their info
+    lldp                  LLDP (Link Layer Discovery Protocol)...
+    logging               Show system log
+    mac                   Show MAC (FDB) entries
+    mirror_session        Show existing everflow sessions
+    mmu                   Show mmu configuration
+    ndp                   Show IPv6 Neighbour table
+    ntp                   Show NTP information
+    pfc                   Show details of the priority-flow-control...
+    platform              Show platform-specific hardware info
+    priority-group        Show details of the PGs
+    processes             Display process information
+    queue                 Show details of the queues
+    reboot-cause          Show cause of most recent reboot
+    route-map             show route-map
+    runningconfiguration  Show current running configuration...
+    services              Show all daemon services
+    startupconfiguration  Show startup configuration information
+    system-memory         Show memory information
+    tacacs                Show TACACS+ configuration
+    techsupport           Gather information for troubleshooting
+    uptime                Show system uptime
+    users                 Show users
+    version               Show version information
+    vlan                  Show VLAN information
+    warm_restart          Show warm restart configuration and state
+    watermark             Show details of watermark
 
   ```
 
@@ -289,25 +289,26 @@ The same syntax applies to all subgroups of `show` which themselves contain subc
 
 - Example:
   ```
-user@debug:~$ show interfaces -?
+  user@debug:~$ show interfaces -?
 
-  Show details of the network interfaces
+    Show details of the network interfaces
 
-Options:
-  -?, -h, --help  Show this message and exit.
+  Options:
+    -?, -h, --help  Show this message and exit.
 
-Commands:
-  counters     Show interface counters
-  description  Show interface status, protocol and...
-  naming_mode  Show interface naming_mode status
-  neighbor     Show neighbor related information
-  portchannel  Show PortChannel information
-  status       Show Interface status information
-  transceiver  Show SFP Transceiver information
+  Commands:
+    counters     Show interface counters
+    description  Show interface status, protocol and...
+    naming_mode  Show interface naming_mode status
+    neighbor     Show neighbor related information
+    portchannel  Show PortChannel information
+    status       Show Interface status information
+    transceiver  Show SFP Transceiver information
   ```
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
-  
+ 
+ 
 ## Show System Status
 
 - `show clock`
@@ -320,7 +321,6 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
   ```
   
-
 - `show environment`
   - Display platform environmentals, such as voltages, temperatures and fan speeds
 
