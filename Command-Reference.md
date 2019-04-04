@@ -1577,6 +1577,7 @@ TBD: What are the acceptable values for speed (40000 for 40G, 100000 for 100G?) 
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Interface-Configuration-And-Show-Commands)
 
+
 # Interface Naming Mode
 
 ## show interface naming mode
@@ -1640,6 +1641,347 @@ NOTE: Some platforms do not support alias mapping. In such cases, this command i
   ```
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Interface-Naming-Mode)
+
+
+# IP 
+
+## show ip
+
+This sub-section explains the various IP protocol specific show commands that are used to display the following.
+1) routes
+2) bgp details - Explained in the [bgp section](#show-bgp)
+3) IP interfaces
+4) prefix-list
+5) protocol
+
+**show ip route**
+
+This command is used to display either all the route entries from the routing table or a specific route.
+
+  - Usage:  
+    show ip route [<ip-address>]`
+
+
+- Example:
+  ```
+  admin@sonic:~$ show ip route
+  Codes: K - kernel route, C - connected, S - static, R - RIP,
+         O - OSPF, I - IS-IS, B - BGP, P - PIM, A - Babel,
+         > - selected route, * - FIB route
+	S>* 0.0.0.0/0 [200/0] via 10.11.162.254, eth0
+	C>* 1.1.0.0/16 is directly connected, Vlan100
+	C>* 10.1.0.1/32 is directly connected, lo
+	C>* 10.1.0.32/32 is directly connected, lo
+	C>* 10.1.1.0/31 is directly connected, Ethernet112
+	C>* 10.1.1.2/31 is directly connected, Ethernet116
+	C>* 10.11.162.0/24 is directly connected, eth0
+	C>* 10.12.0.102/32 is directly connected, lo
+	C>* 127.0.0.0/8 is directly connected, lo
+	C>* 240.127.1.0/24 is directly connected, docker0
+
+  ```
+ - Optionally, you can specify an IP address in order to display only routes to that particular IP address
+
+- Example:
+  ```
+	admin@sonic:~$ show ip route 10.1.1.0
+	Routing entry for 10.1.1.0/31
+	  Known via "connected", distance 0, metric 0, best
+	  * directly connected, Ethernet112
+  ```
+
+**show ip interfaces**
+
+This command displays the details about all the Layer3 IP interfaces in the device for which IP address has been assigned. 
+The type of interfaces include the following.
+1) Front panel physical ports.
+2) PortChannel.
+3) VLAN interface.
+4) Loopback interfaces
+5) docker interface and
+6) management interface
+
+  - Usage:  
+    show ip interfaces
+
+- Example:
+  ```  
+	admin@sonic:~$ show ip interfaces
+	Interface        IPv4 address/mask    Admin/Oper
+	---------------  -------------------  ------------
+	Ethernet112      10.1.1.0/31          up/up
+	Ethernet116      10.1.1.2/31          up/up
+	PortChannel0001  10.0.1.1/31          up/down
+	PortChannel0002  10.0.1.3/31          up/down
+	Vlan100          1.1.2.2/16           up/down
+	docker0          240.127.1.1/24       up/down
+	eth0             10.11.162.42/24      up/up
+	lo               127.0.0.1/8          up/up
+					 10.1.0.1/32
+					 10.1.0.32/32
+					 10.12.0.102/32	
+  ```
+
+**show ip protocol**
+
+TBD: Fill details.
+
+  - Usage:  
+    show ip protocol
+
+
+- Example:
+  ```  
+	show ip protocol
+	Protocol    : route-map 
+	------------------------
+	system      : none
+	kernel      : none
+	connected   : none
+	static      : none
+	rip         : none
+	ripng       : none
+	ospf        : none
+	ospf6       : none
+	isis        : none
+	bgp         : RM_SET_SRC
+	pim         : none
+	hsls        : none
+	olsr        : none
+	babel       : none
+	any         : none
+  ```
+
+## show ipv6
+
+This sub-section explains the various IPv6 protocol specific show commands that are used to display the following.
+1) routes
+2) IPv6 bgp details - Explained in the [bgp section](#show-bgp)
+3) IP interfaces
+4) protocol
+
+**show ipv6 route**
+
+This command is used to display either all the IPv6 route entries from the routing table or a specific IPv6 route.
+
+  - Usage:  
+    show ipv6 route [<ipv6-address>]
+	 
+
+- Example:
+  ```
+  admin@sonic:~$ show ipv6 route 
+	Codes: K - kernel route, C - connected, S - static, R - RIPng,
+		   O - OSPFv6, I - IS-IS, B - BGP, A - Babel,
+		   > - selected route, * - FIB route
+
+	C>* ::1/128 is directly connected, lo
+	C>* 2018:2001::/126 is directly connected, Ethernet112
+	C>* 2018:2002::/126 is directly connected, Ethernet116
+	C>* fc00:1::32/128 is directly connected, lo
+	C>* fc00:1::102/128 is directly connected, lo
+	C>* fc00:2::102/128 is directly connected, eth0
+	C * fe80::/64 is directly connected, Vlan100
+	C * fe80::/64 is directly connected, Ethernet112
+	C * fe80::/64 is directly connected, Ethernet116
+	C * fe80::/64 is directly connected, Bridge
+	C * fe80::/64 is directly connected, PortChannel0011
+	C>* fe80::/64 is directly connected, eth0
+
+  ```
+ - Optionally, you can specify an IPv6 address in order to display only routes to that particular IPv6 address
+
+
+- Example:
+  ```
+	admin@sonic:~$ show ipv6 route  fc00:1::32
+	Routing entry for fc00:1::32/128
+	  Known via "connected", distance 0, metric 0, best
+	  * directly connected, lo
+  ```
+
+**show ipv6 interfaces**
+
+This command displays the details about all the Layer3 IPv6 interfaces in the device for which IPv6 address has been assigned. 
+The type of interfaces include the following.
+1) Front panel physical ports.
+2) PortChannel.
+3) VLAN interface.
+4) Loopback interfaces
+5) management interface
+
+  - Usage:  
+    show ipv6 interfaces
+
+
+- Example:
+  ```  
+	admin@sonic:~$ show ipv6 interfaces
+	Interface        IPv6 address/mask                            Admin/Oper
+	---------------  -------------------------------------------  ------------
+	Bridge           fe80::d494:dcff:fe37:535e%Bridge/64          up/down
+	Ethernet112      2018:2001::1/126                             up/up
+					 fe80::3617:ebff:fe38:100%Ethernet112/64
+	Ethernet116      2018:2002::1/126                             up/up
+					 fe80::3617:ebff:fe38:100%Ethernet116/64
+	PortChannel0001  2018:1002::2/126                             up/down
+	PortChannel0002  2018:1002::6/126                             up/down
+	PortChannel0011  fe80::3617:ebff:fe38:100%PortChannel0011/64  up/up
+	Vlan100          fe80::3617:ebff:fe38:100%Vlan100/64          up/down
+	eth0             fc00:2::102/128                              up/up
+					 fe80::3617:ebff:fe38:100%eth0/64
+	lo               fc00:1::102/128                              up/up
+					 fc00:1::32/128
+					 ::1/128
+
+  ```
+
+**show ipv6 protocol**
+
+TBD: Need to fill details.
+
+  - Usage:  
+    show ipv6 protocol
+ 
+
+- Example:
+  ``` 
+	show ipv6 protocol
+	Protocol    : route-map 
+	------------------------
+	system      : none
+	kernel      : none
+	connected   : none
+	static      : none
+	rip         : none
+	ripng       : none
+	ospf        : none
+	ospf6       : none
+	isis        : none
+	bgp         : RM_SET_SRC6
+	pim         : none
+	hsls        : none
+	olsr        : none
+	babel       : none
+	any         : none
+  ```
+
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#IP)
+
+
+# LLDP
+
+## LLDP Show
+
+**show lldp table**
+
+This command displays the brief summary of all LLDP neighbors.
+
+  - Usage:  
+    show lldp table`
+
+
+- Example:
+  ```   
+	admin@sonic:~$ show lldp table
+	Capability codes: (R) Router, (B) Bridge, (O) Other
+	LocalPort    RemoteDevice       RemotePortID         Capability    RemotePortDescr
+	-----------  -----------------  -------------------  ------------  --------------------
+	Ethernet112  T1-1               hundredGigE1/2       BR            T0-2:hundredGigE1/29
+	Ethernet116  T1-2               hundredGigE1/2       BR            T0-2:hundredGigE1/30
+	eth0         swtor-b2lab2-1610  GigabitEthernet 0/2  OBR
+	--------------------------------------------------
+	Total entries displayed:  3
+  ```
+
+**show lldp neighbors**
+
+This command displays more details about all LLDP neighbors or only the neighbors connected to a specific interface. 
+
+  - Usage:  
+    show lldp neighbors [<interface-name>]
+
+
+- Example:
+  ```
+	admin@sonic:~$ show lldp neighbors
+	-------------------------------------------------------------------------------
+	LLDP neighbors:
+	-------------------------------------------------------------------------------
+	Interface:    eth0, via: LLDP, RID: 1, Time: 0 day, 12:21:21
+	  Chassis:     
+		ChassisID:    mac 00:01:e8:81:e3:45
+		SysName:      swtor-b2lab2-1610
+		SysDescr:     Dell Force10 Networks Real Time Operating System Software. Dell Force10 Operating System Version: 1.0. Dell Force10 Application Software Version: 8.3.3.10d. Copyright (c) 1999-2012 by Dell Inc. All Rights Reserved.Build Time: Tue Sep 22 11:21:54 PDT 2015
+		TTL:          20
+		Capability:   Repeater, on
+		Capability:   Bridge, on
+		Capability:   Router, on
+	  Port:        
+		PortID:       ifname GigabitEthernet 0/2
+	  VLAN:         162, pvid: yes
+	-------------------------------------------------------------------------------
+	Interface:    Ethernet116, via: LLDP, RID: 3, Time: 0 day, 12:20:49
+	  Chassis:     
+		ChassisID:    mac 4c:76:25:e7:f0:c0
+		SysName:      T1-2
+		SysDescr:     Debian GNU/Linux 8 (jessie) Linux 4.9.0-8-amd64 #1 SMP Debian 4.9.110-3+deb9u6 (2015-12-19) x86_64
+		TTL:          120
+		MgmtIP:       10.11.162.40
+		Capability:   Bridge, on
+		Capability:   Router, on
+		Capability:   Wlan, off
+		Capability:   Station, off
+	  Port:        
+		PortID:       local hundredGigE1/2
+		PortDescr:    T0-2:hundredGigE1/30
+	-------------------------------------------------------------------------------
+	Interface:    Ethernet112, via: LLDP, RID: 2, Time: 0 day, 12:20:49
+	  Chassis:     
+		ChassisID:    mac 4c:76:25:e5:e6:c0
+		SysName:      T1-1
+		SysDescr:     Debian GNU/Linux 8 (jessie) Linux 4.9.0-8-amd64 #1 SMP Debian 4.9.110-3+deb9u6 (2015-12-19) x86_64
+		TTL:          120
+		MgmtIP:       10.11.162.41
+		Capability:   Bridge, on
+		Capability:   Router, on
+		Capability:   Wlan, off
+		Capability:   Station, off
+	  Port:        
+		PortID:       local hundredGigE1/2
+		PortDescr:    T0-2:hundredGigE1/29
+	-------------------------------------------------------------------------------	
+  ```
+  - Optionally, you can specify an interface name in order to display only that particular interface
+ 
+
+- Example:
+  ```
+  admin@sonic:~$ show lldp neighbors Ethernet112
+	show lldp neighbors Ethernet112
+	-------------------------------------------------------------------------------
+	LLDP neighbors:
+	-------------------------------------------------------------------------------
+	Interface:    Ethernet112, via: LLDP, RID: 2, Time: 0 day, 19:24:17
+	  Chassis:     
+		ChassisID:    mac 4c:76:25:e5:e6:c0
+		SysName:      T1-1
+		SysDescr:     Debian GNU/Linux 8 (jessie) Linux 4.9.0-8-amd64 #1 SMP Debian 4.9.110-3+deb9u6 (2015-12-19) x86_64
+		TTL:          120
+		MgmtIP:       10.11.162.41
+		Capability:   Bridge, on
+		Capability:   Router, on
+		Capability:   Wlan, off
+		Capability:   Station, off
+	  Port:        
+		PortID:       local hundredGigE1/2
+		PortDescr:    T0-2:hundredGigE1/29
+	-------------------------------------------------------------------------------
+  
+  ```
+
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#LLDP)
+
 
 # Loading, Reloading And Saving Configuration
 
@@ -2153,815 +2495,239 @@ Some of the example QOS configurations that users can modify are given below.
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#QoS-Configuration-And-Show)
 
 
-# VLAN Configuration And Show
+# Software Installation Commands
 
-## VLAN Show
+SONiC software can be installed in two methods, viz, "using sonic_installer tool", "ONIE Installer".
 
-**show vlan brief**
 
-This command is to display brief information about all the vlans configured in the device. It displays the vlan ID, IP address (if configured for the vlan), list of vlan member ports, whether the port is tagged or in untagged mode and the DHCP Helper Address.
+## SONiC Installer
+This is a command line tool available as part of the SONiC software; I=if the device is already running the SONiC software, this tool can be used. 
+This tool has facility to install an alternate image, list the available images and to set the next reboot image.
+
+**sonic_installer install**
+
+This command is to install a new image on the alternate image partition.  This command takes a path to an installable SONiC image or URL and installs the image.
+
+  - Usage:    
+    sonic_installer install <path>  
+
+
+- Example:
+  ```	 
+  admin@sonic:~$ sonic_installer install https://sonic-jenkins.westus.cloudapp.azure.com/job/xxxx/job/buildimage-xxxx-all/xxx/artifact/target/sonic-xxxx.bin
+  New image will be installed, continue? [y/N]: y
+  Downloading image...
+  ...100%, 480 MB, 3357 KB/s, 146 seconds passed
+  Command: /tmp/sonic_image
+  Verifying image checksum ... OK.
+  Preparing image archive ... OK.
+  ONIE Installer: platform: XXXX
+  onie_platform: 
+  Installing SONiC in SONiC
+  Installing SONiC to /host/image-xxxx
+  Directory /host/image-xxxx/ already exists. Cleaning up...
+  Archive:  fs.zip
+     creating: /host/image-xxxx/boot/
+    inflating: /host/image-xxxx/boot/vmlinuz-3.16.0-4-amd64  
+    inflating: /host/image-xxxx/boot/config-3.16.0-4-amd64  
+    inflating: /host/image-xxxx/boot/System.map-3.16.0-4-amd64  
+    inflating: /host/image-xxxx/boot/initrd.img-3.16.0-4-amd64  
+     creating: /host/image-xxxx/platform/
+   extracting: /host/image-xxxx/platform/firsttime  
+    inflating: /host/image-xxxx/fs.squashfs  
+    inflating: /host/image-xxxx/dockerfs.tar.gz  
+  Log file system already exists. Size: 4096MB
+  Installed SONiC base image SONiC-OS successfully
+
+  Command: cp /etc/sonic/minigraph.xml /host/
+
+  Command: grub-set-default --boot-directory=/host 0
+
+  Done
+  ```
+
+**sonic_installer list**
+
+This command displays information about currently installed images. It displays a list of installed images, currently running image and image set to be loaded in next reboot.
 
   - Usage:  
-    show vlan brief
+    sonic_installer list
 
-
-- Example:
-  ```
-  admin@sonic:~$ show vlan brief 
-
-	+-----------+--------------+-----------+----------------+-----------------------+
-	|   VLAN ID | IP Address   | Ports     | Port Tagging   | DHCP Helper Address   |
-	+===========+==============+===========+================+=======================+
-	|       100 | 1.1.2.2/16   | Ethernet0 | tagged         | 192.0.0.1             |
-	|           |              | Ethernet4 | tagged         | 192.0.0.2             |
-	|           |              |           |                | 192.0.0.3             |
-	+-----------+--------------+-----------+----------------+-----------------------+
-
-  ```
-
-**show vlan config**
-
-This command is to display all the vlan configuration.
-
-  - Usage:  
-    show vlan config
-
-
-- Example:
-  ```
-  admin@sonic:~$ show vlan config 
-	Name       VID  Member     Mode
-	-------  -----  ---------  ------
-	Vlan100    100  Ethernet0  tagged
-	Vlan100    100  Ethernet4  tagged
-
-  ```
-
-
-## VLAN Configuration
-
-This sub-section explains how to configure the vlan and its member ports.
-
-**config vlan add/del**
-
-This command is used to add or delete the vlan. This command needs root privileges. 
-
-  - Usage:  
-    config vlan add/del <vlan__id> 
-
-
-- Example:
-  ```
-  admin@sonic:~$ sudo config vlan add 100
-  This command will create the vlan 100 if not exists.
-  ```
-
-**config vlan member add/del**
-
-This command is to add or delete a member port into the already created vlan.
-
-  - Usage:  
-    config vlan member add/del [-u or --untagged] <vlan_id> <member_portname>   
-    -u will set the port in untagged mode.
-
-
-- Example:
-  ```
-  admin@sonic:~$ sudo config vlan member add 100 Ethernet0
-  This command will add Ethernet0 as member of the vlan 100
-  
-  admin@sonic:~$ sudo config vlan member add 100 Ethernet4
-  This command will add Ethernet4 as member of the vlan 100.
-  ```
-
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#vlan-configuration-and-show)
-
-
-# Warm Restart
-
-## Warm Restart Show
-
-**show warm_restart config**
-
-This command displays all the configuration related to warm_restart.
-
-  - Usage:  
-    show warm_restart config
-
-
-- Example:
-  ```
-	admin@sonic:~$ show warm_restart config
-	name    enable    timer_name        timer_duration
-	------  --------  ----------------  ----------------
-	bgp     true      bgp_timer         100
-	teamd   false     teamsyncd_timer   300
-	swss    false     neighsyncd_timer  200
-	system  true      NULL              NULL
-  ```
-
-**show warm_restart state**
-
-This command displays the warm_restart state.
-
-  - Usage:  
-    show warm_restart state
-
-
-- Example:
-  ```
-	name          restore_count  state
-	----------  ---------------  ----------
-	orchagent                 0
-	vlanmgrd                  0
-	bgp                       1  reconciled
-	portsyncd                 0
-	teammgrd                  1
-	neighsyncd                0
-	teamsyncd                 1
-	syncd                     0
-
-  ```
-
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#VLAN-Configuration-And-Show)
-
-## Warm Restart Configuration
-
-This sub-section explains the various configuration related to warm restart feature. Following parameters can be configured using this command.
-1) bgp_timer
-2) disable
-3) enable
-4) neighsyncd_timer
-5) teamsyncd_timer
-Each of these sub-commands are explained in the following section.
-
-Users can use an optional parameter "-s" to use the unix domain socket for communicating with the RedisDB which will be faster when compared to using the default network sockets. 
-All these commands have the following option.
-
-Options:
-  -s, --redis-unix-socket-path TEXT
-       unix socket path for redis connection
-
-
-**config warm_restart bgp_timer**
-
-This command sets the bgp_timer value for warm_restart of BGP service. When BGP service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
-
-  - Usage:  
-    config warm_restart bgp_timer <seconds>
-	seconds range 1 to 3600.
-
-
-- Example:
-  ```
-	admin@sonic:~$ sudo config warm_restart bgp_timer 1000
-  ```
-
-**config warm_restart enable/disable**
-
-This command is used to enable or disable the warm_restart for a particular service that supports warm reboot.
-Following four services support warm reboot. When user restarts the particular service using "systemctl restart <service_name>", this configured value will be checked for whether it is enabled or disabled.
-If this configuration is enabled for that service, it will perform warm reboot for that service. Otherwise, it will do cold restart of the service.
-
-  - Usage:  
-    config warm_restart enable [<module_name>]
-
-       module_name can be either system or swss or bgp or teamd.
-	   If "module_name" argument is not specified, it will enable "system" module.
-
-
-- Example:
-  ```
-	admin@sonic:~$ sudo config warm_restart enable
-	The above command will set warm_restart as "enable" for the "system" service.
-	
-	admin@sonic:~$ sudo config warm_restart enable swss
-	The above command will set warm_restart as "enable" for the "swss" service. When user does "systemctl restart swss", it will perform warm reboot instead of cold reboot.
-	
-	admin@sonic:~$ sudo config warm_restart enable teamd
-	The above command will set warm_restart as "enable" for the "teamd" service. When user does "systemctl restart teamd", it will perform warm reboot instead of cold reboot.
-	
-	
-  ```
-
-
-**config warm_restart neighsyncd_timer**
-
-TBD: This command sets the neighsyncd_timer value for warm_restart of "swss" service. When swss service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
-
-  - Usage:  
-    config warm_restart bgp_timerneighsyncd_timer <seconds>
-	seconds range 1 to 9999.
-
-
-- Example:
-  ```
-	admin@sonic:~$ sudo config warm_restart neighsyncd_timer 2000
-  ```
-
-
-**config warm_restart teamsyncd_timer**
-
-TBD: This command sets the teamsyncd_timer value for warm_restart of teamd service. When teamd service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
-
-  - Usage:  
-    config warm_restart teamsyncd_timer <seconds>
-	seconds range 1 to 3600.
-
-
-- Example:
-  ```
-	admin@sonic:~$ sudo config warm_restart teamsyncd_timer 3000
-  ```
-
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Warm-Restart)
-
-
-# Watermark Configuration And Show
-
-## Watermark Show
-
-**show watermark telemetry interval**
-
-This command displays the configured interval for the telemetry. 
-
-  - Usage:  
-    show watermark telemetry interval
-
-
-- Example:
-  ```
-	admin@sonic:~$ show watermark telemetry interval
-	
-      Telemetry interval 120 second(s)
-
-  ```
-
-
-## Watermark Config
-
-**config watermark telemetry interval**
-
-This command configures the interval for telemetry. 
-
-  - Usage:   
-    config watermark telemetry interval <value>
-	interval can be any integer value from 1.
-	TBD: Is there no maximum limit on this value?
-
-
-- Example:
-  ```
-	admin@sonic:~$ sudo config watermark telemetry interval 999
-  ```
-
-## Layer 2 Configuration & Show
-
-### ARP
-
-**show arp**
-
-This command displays the ARP entries in the device with following options.
-1) Display the entire table.
-2) Display the ARP entries learnt on a specific interface.
-3) Display the ARP of a specific ip-address.
-
-  - Usage:  
-    show arp [-if <ifname>] [<ip-address>]
-    show arp - displays all entries
-    show arp -if <ifname> - displays the ARP specific to the specified interface.
-    show arp <ip-address> - displays the ARP specific to the specicied ip-address.
-
-
-- Example:
-  ```
-  admin@sonic:~$ show arp
-   Address          MacAddress            Iface         Vlan
-  -------------     -----------------     -------       ------
-  192.168.1.183     88:5a:92:fb:bf:41     Ethernet44    -
-  192.168.1.175     88:5a:92:fc:95:81     Ethernet28    -
-  192.168.1.181     e4:c7:22:c1:07:7c     Ethernet40    -
-  192.168.1.179     88:5a:92:de:a8:bc     Ethernet36    -
-  192.168.1.118     00:1c:73:3c:de:43     Ethernet64    -
-  192.168.1.11      00:1c:73:3c:e1:38     Ethernet88    -
-  192.168.1.161     24:e9:b3:71:3a:01     Ethernet0     -
-  192.168.1.189     24:e9:b3:9d:57:41     Ethernet56    -
-  192.168.1.187     74:26:ac:8b:8f:c1     Ethernet52    -
-  192.168.1.165     88:5a:92:de:a0:7c     Ethernet8     -
-
-  Total number of entries 10
-  ```
-
-  - Optionally, you can specify the interface in order to display the ARPs learnt on that particular interface
-
-
-- Example:
-  ```
-  admin@sonic:~$ show arp -if Ethernet40
-  Address          MacAddress          Iface        Vlan
-  -------------    -----------------   ----------   ------
-  192.168.1.181    e4:c7:22:c1:07:7c   Ethernet40   -
-  Total number of entries 1 
-
-  ```
-  
-  - Optionally, you can specify an IP address in order to display only that particular entry
-
-
-- Example:
-  ```
-  admin@sonic:~$ show arp 192.168.1.181
-  Address          MacAddress          Iface        Vlan
-  -------------    -----------------   ----------   ------
-  192.168.1.181    e4:c7:22:c1:07:7c   Ethernet40   -
-  Total number of entries 1 
-  ```
-
-### FDB
-
-**show mac**
-
-This command displays the MAC (FDB) entries either in full or partial as given below.
-1) show mac - displays the full table
-2) show mac -v <vlanid> - displays the MACs learnt on the particular VLAN ID.
-3) show mac -p <port>  - displays the MACs learnt on the particular port.
-
-
-  - Usage:  
-    show mac [-v vlan_id] [-p port_name]
-
-
-- Example:
-  ```
-  admin@sonic:~$ show mac
-  No.    Vlan  MacAddress         Port
-  -----  ------  -----------------  -----------
-    1    1000  E2:8C:56:85:4A:CD  Ethernet192
-    2    1000  A0:1B:5E:47:C9:76  Ethernet192
-    3    1000  AA:54:EF:2C:EE:30  Ethernet192
-    4    1000  A4:3F:F2:17:A3:FC  Ethernet192
-    5    1000  0C:FC:01:72:29:91  Ethernet192
-    6    1000  48:6D:01:7E:C9:FD  Ethernet192
-    7    1000  1C:6B:7E:34:5F:A6  Ethernet192
-    8    1000  EE:81:D9:7B:93:A9  Ethernet192
-    9    1000  CC:F8:8D:BB:85:E2  Ethernet192
-   10    1000  0A:52:B3:9C:FB:6C  Ethernet192
-   11    1000  C6:E2:72:02:D1:23  Ethernet192
-   12    1000  8A:C9:5C:25:E9:28  Ethernet192
-   13    1000  5E:CD:34:E4:94:18  Ethernet192
-   14    1000  7E:49:1F:B5:91:B5  Ethernet192
-   15    1000  AE:DD:67:F3:09:5A  Ethernet192
-   16    1000  DC:2F:D1:08:4B:DE  Ethernet192
-   17    1000  50:96:23:AD:F1:65  Ethernet192
-   18    1000  C6:C9:5E:AE:24:42  Ethernet192
-  Total number of entries 18 
-  ```
-
-  - Optionally, you can specify a VLAN ID or interface name in order to display only that particular entries
-
-- Example:
-  ```
-  admin@sonic:~$ show mac -v 1000
-  No.    Vlan  MacAddress         Port
-  -----  ------  -----------------  -----------
-    1    1000  E2:8C:56:85:4A:CD  Ethernet192
-    2    1000  A0:1B:5E:47:C9:76  Ethernet192
-    3    1000  AA:54:EF:2C:EE:30  Ethernet192
-    4    1000  A4:3F:F2:17:A3:FC  Ethernet192
-    5    1000  0C:FC:01:72:29:91  Ethernet192
-    6    1000  48:6D:01:7E:C9:FD  Ethernet192
-    7    1000  1C:6B:7E:34:5F:A6  Ethernet192
-    8    1000  EE:81:D9:7B:93:A9  Ethernet192
-    9    1000  CC:F8:8D:BB:85:E2  Ethernet192
-   10    1000  0A:52:B3:9C:FB:6C  Ethernet192
-   11    1000  C6:E2:72:02:D1:23  Ethernet192
-   12    1000  8A:C9:5C:25:E9:28  Ethernet192
-   13    1000  5E:CD:34:E4:94:18  Ethernet192
-   14    1000  7E:49:1F:B5:91:B5  Ethernet192
-   15    1000  AE:DD:67:F3:09:5A  Ethernet192
-   16    1000  DC:2F:D1:08:4B:DE  Ethernet192
-   17    1000  50:96:23:AD:F1:65  Ethernet192
-   18    1000  C6:C9:5E:AE:24:42  Ethernet192
-  Total number of entries 18 
-
-  admin@sonic:~$ show mac -p Ethernet192
-  No.    Vlan  MacAddress         Port
-  -----  ------  -----------------  -----------
-    1    1000  E2:8C:56:85:4A:CD  Ethernet192
-    2    1000  A0:1B:5E:47:C9:76  Ethernet192
-    3    1000  AA:54:EF:2C:EE:30  Ethernet192
-    4    1000  A4:3F:F2:17:A3:FC  Ethernet192
-    5    1000  0C:FC:01:72:29:91  Ethernet192
-    6    1000  48:6D:01:7E:C9:FD  Ethernet192
-    7    1000  1C:6B:7E:34:5F:A6  Ethernet192
-    8    1000  EE:81:D9:7B:93:A9  Ethernet192
-    9    1000  CC:F8:8D:BB:85:E2  Ethernet192
-   10    1000  0A:52:B3:9C:FB:6C  Ethernet192
-   11    1000  C6:E2:72:02:D1:23  Ethernet192
-   12    1000  8A:C9:5C:25:E9:28  Ethernet192
-   13    1000  5E:CD:34:E4:94:18  Ethernet192
-   14    1000  7E:49:1F:B5:91:B5  Ethernet192
-   15    1000  AE:DD:67:F3:09:5A  Ethernet192
-   16    1000  DC:2F:D1:08:4B:DE  Ethernet192
-   17    1000  50:96:23:AD:F1:65  Ethernet192
-   18    1000  C6:C9:5E:AE:24:42  Ethernet192
-  Total number of entries 18 
-  ```
-
-- `sonic-clear fdb [OPTIONS]`
-  - Clear FDB table
-
-
-- Example:
-  ```
-  admin@sonic:~$ sonic-clear fdb all
-  FDB entries are cleared.
-  ```
-
-### NDP
-
-**show ndp**
-This command displays either all the IPv6 neighbor mac addresses, or for a particular IPv6 neighbor, or for all IPv6 neighbors reachable via a specific interface.
-
-  - Usage:  
-    show ndp [-if|--iface <interface-name.] [IP6ADDRESS]
-
-
-- Example:
-  ```
-    **ALL IPv6 NEIGHBORS:**
-	admin@sonic:~$ show ndp
-	Address                   MacAddress         Iface    Vlan    Status
-	------------------------  -----------------  -------  ------  ---------
-	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
-	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
-	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
-	Total number of entries 3 
-	
-	**SPECIFIC IPv6 NEIGHBOR**
-	admin@sonic:~$ show ndp fe80::20c:29ff:feb8:b11e
-	Address                   MacAddress         Iface    Vlan    Status
-	------------------------  -----------------  -------  ------  ---------
-	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
-	Total number of entries 1 
-	
-	**SPECIFIC INTERFACE**
-	admin@sonic:~$ show ndp -if eth0
-	Address                   MacAddress         Iface    Vlan    Status
-	------------------------  -----------------  -------  ------  ---------
-	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
-	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
-	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
-	Total number of entries 3 
-
+- Example:  
    ```
+  admin@sonic:~$ sonic_installer list 
+  Current: SONiC-OS-HEAD.XXXX
+  Next: SONiC-OS-HEAD.XXXX
+  Available: 
+  SONiC-OS-HEAD.XXXX
+  SONiC-OS-HEAD.YYYY
+  ```
 
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Watermark-Configuration-And-Show)
+**sonic_installer set_default**
 
-# LLDP
-
-## LLDP Show
-
-**show lldp table**
-
-This command displays the brief summary of all LLDP neighbors.
+This command can be used to change which image to be loaded by default in all the subsequent reboots.
 
   - Usage:  
-    show lldp table`
-
+    sonic_installer set_default <image_name>
 
 - Example:
   ```   
-	admin@sonic:~$ show lldp table
-	Capability codes: (R) Router, (B) Bridge, (O) Other
-	LocalPort    RemoteDevice       RemotePortID         Capability    RemotePortDescr
-	-----------  -----------------  -------------------  ------------  --------------------
-	Ethernet112  T1-1               hundredGigE1/2       BR            T0-2:hundredGigE1/29
-	Ethernet116  T1-2               hundredGigE1/2       BR            T0-2:hundredGigE1/30
-	eth0         swtor-b2lab2-1610  GigabitEthernet 0/2  OBR
-	--------------------------------------------------
-	Total entries displayed:  3
+  admin@sonic:~$ sonic_installer set_default SONiC-OS-HEAD.XXXX
   ```
 
-**show lldp neighbors**
+**sonic_installer set_next_boot**
 
-This command displays more details about all LLDP neighbors or only the neighbors connected to a specific interface. 
+This command can be used to change which image to be in the *next* reboot only. Note that it will fallback to current image in all other subsequent reboots after the next reboot.
 
   - Usage:  
-    show lldp neighbors [<interface-name>]
-
+    sonic_installer set_next_boot <image_name>
 
 - Example:
   ```
-	admin@sonic:~$ show lldp neighbors
-	-------------------------------------------------------------------------------
-	LLDP neighbors:
-	-------------------------------------------------------------------------------
-	Interface:    eth0, via: LLDP, RID: 1, Time: 0 day, 12:21:21
-	  Chassis:     
-		ChassisID:    mac 00:01:e8:81:e3:45
-		SysName:      swtor-b2lab2-1610
-		SysDescr:     Dell Force10 Networks Real Time Operating System Software. Dell Force10 Operating System Version: 1.0. Dell Force10 Application Software Version: 8.3.3.10d. Copyright (c) 1999-2012 by Dell Inc. All Rights Reserved.Build Time: Tue Sep 22 11:21:54 PDT 2015
-		TTL:          20
-		Capability:   Repeater, on
-		Capability:   Bridge, on
-		Capability:   Router, on
-	  Port:        
-		PortID:       ifname GigabitEthernet 0/2
-	  VLAN:         162, pvid: yes
-	-------------------------------------------------------------------------------
-	Interface:    Ethernet116, via: LLDP, RID: 3, Time: 0 day, 12:20:49
-	  Chassis:     
-		ChassisID:    mac 4c:76:25:e7:f0:c0
-		SysName:      T1-2
-		SysDescr:     Debian GNU/Linux 8 (jessie) Linux 4.9.0-8-amd64 #1 SMP Debian 4.9.110-3+deb9u6 (2015-12-19) x86_64
-		TTL:          120
-		MgmtIP:       10.11.162.40
-		Capability:   Bridge, on
-		Capability:   Router, on
-		Capability:   Wlan, off
-		Capability:   Station, off
-	  Port:        
-		PortID:       local hundredGigE1/2
-		PortDescr:    T0-2:hundredGigE1/30
-	-------------------------------------------------------------------------------
-	Interface:    Ethernet112, via: LLDP, RID: 2, Time: 0 day, 12:20:49
-	  Chassis:     
-		ChassisID:    mac 4c:76:25:e5:e6:c0
-		SysName:      T1-1
-		SysDescr:     Debian GNU/Linux 8 (jessie) Linux 4.9.0-8-amd64 #1 SMP Debian 4.9.110-3+deb9u6 (2015-12-19) x86_64
-		TTL:          120
-		MgmtIP:       10.11.162.41
-		Capability:   Bridge, on
-		Capability:   Router, on
-		Capability:   Wlan, off
-		Capability:   Station, off
-	  Port:        
-		PortID:       local hundredGigE1/2
-		PortDescr:    T0-2:hundredGigE1/29
-	-------------------------------------------------------------------------------	
+  admin@sonic:~$ sonic_installer set_next_boot SONiC-OS-HEAD.XXXX
   ```
-  - Optionally, you can specify an interface name in order to display only that particular interface
+
+**sonic_installer remove**
+
+This command can be used to remove the unused SONiC image from the disk. Note that it's *not* allowed to remove currently running image.
+
+  - Usage:  
+    sonic_installer remove <image_name>
+
+- Example:
+  ```
+  admin@sonic:~$ sonic_installer remove SONiC-OS-HEAD.YYYY
+  Image will be removed, continue? [y/N]: y
+  Updating GRUB...
+  Done
+  Removing image root filesystem...
+  Done
+  Command: grub-set-default --boot-directory=/host 0
+
+  Image removed
+  ```
  
-
-- Example:
-  ```
-  admin@sonic:~$ show lldp neighbors Ethernet112
-	show lldp neighbors Ethernet112
-	-------------------------------------------------------------------------------
-	LLDP neighbors:
-	-------------------------------------------------------------------------------
-	Interface:    Ethernet112, via: LLDP, RID: 2, Time: 0 day, 19:24:17
-	  Chassis:     
-		ChassisID:    mac 4c:76:25:e5:e6:c0
-		SysName:      T1-1
-		SysDescr:     Debian GNU/Linux 8 (jessie) Linux 4.9.0-8-amd64 #1 SMP Debian 4.9.110-3+deb9u6 (2015-12-19) x86_64
-		TTL:          120
-		MgmtIP:       10.11.162.41
-		Capability:   Bridge, on
-		Capability:   Router, on
-		Capability:   Wlan, off
-		Capability:   Station, off
-	  Port:        
-		PortID:       local hundredGigE1/2
-		PortDescr:    T0-2:hundredGigE1/29
-	-------------------------------------------------------------------------------
-  
-  ```
-
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#LLDP)
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Software-Installation-Commands)
 
 
-# IP 
+# Startup & Running Configuration
 
-## show ip
+## Startup Configuration
 
-This sub-section explains the various IP protocol specific show commands that are used to display the following.
-1) routes
-2) bgp details - Explained in the [bgp section](#show-bgp)
-3) IP interfaces
-4) prefix-list
-5) protocol
+**show startupconfiguration bgp**
 
-**show ip route**
-
-This command is used to display either all the route entries from the routing table or a specific route.
+This command is used to display the startup configuration for the BGP module. 
 
   - Usage:  
-    show ip route [<ip-address>]`
+    show startupconfiguration bgp`
 
 
 - Example:
   ```
-  admin@sonic:~$ show ip route
-  Codes: K - kernel route, C - connected, S - static, R - RIP,
-         O - OSPF, I - IS-IS, B - BGP, P - PIM, A - Babel,
-         > - selected route, * - FIB route
-	S>* 0.0.0.0/0 [200/0] via 10.11.162.254, eth0
-	C>* 1.1.0.0/16 is directly connected, Vlan100
-	C>* 10.1.0.1/32 is directly connected, lo
-	C>* 10.1.0.32/32 is directly connected, lo
-	C>* 10.1.1.0/31 is directly connected, Ethernet112
-	C>* 10.1.1.2/31 is directly connected, Ethernet116
-	C>* 10.11.162.0/24 is directly connected, eth0
-	C>* 10.12.0.102/32 is directly connected, lo
-	C>* 127.0.0.0/8 is directly connected, lo
-	C>* 240.127.1.0/24 is directly connected, docker0
-
+	admin@sonic:~$ show startupconfiguration bgp
+	Routing-Stack is: quagga
+	!
+	! =========== Managed by sonic-cfggen DO NOT edit manually! ====================
+	! generated by templates/quagga/bgpd.conf.j2 with config DB data
+	! file: bgpd.conf
+	!
+	!
+	hostname T1-2
+	password zebra
+	log syslog informational
+	log facility local4
+	! enable password !
+	!
+	! bgp multiple-instance
+	!
+	route-map FROM_BGP_SPEAKER_V4 permit 10
+	!
+	route-map TO_BGP_SPEAKER_V4 deny 10
+	!
+	router bgp 65000
+	  bgp log-neighbor-changes
+	  bgp bestpath as-path multipath-relax
+	  no bgp default ipv4-unicast
+	  bgp graceful-restart restart-time 180  
+	  
+	  <Only the partial output is shown here. In actual command, more configuration information will be displayed> 
   ```
- - Optionally, you can specify an IP address in order to display only routes to that particular IP address
 
-- Example:
-  ```
-	admin@sonic:~$ show ip route 10.1.1.0
-	Routing entry for 10.1.1.0/31
-	  Known via "connected", distance 0, metric 0, best
-	  * directly connected, Ethernet112
-  ```
+## Running Configuration
+This sub-section explains the show commands for displaying the running configuration for the following modules.
+1) bgp 
+2) interfaces
+3) ntp
+4) snmp
+5) all 
 
-**show ip interfaces**
+**show runningconfiguration all**
 
-This command displays the details about all the Layer3 IP interfaces in the device for which IP address has been assigned. 
-The type of interfaces include the following.
-1) Front panel physical ports.
-2) PortChannel.
-3) VLAN interface.
-4) Loopback interfaces
-5) docker interface and
-6) management interface
+This command displays the entire running configuration.
 
   - Usage:  
-    show ip interfaces
+    show runningconfiguration all
+
 
 - Example:
-  ```  
-	admin@sonic:~$ show ip interfaces
-	Interface        IPv4 address/mask    Admin/Oper
-	---------------  -------------------  ------------
-	Ethernet112      10.1.1.0/31          up/up
-	Ethernet116      10.1.1.2/31          up/up
-	PortChannel0001  10.0.1.1/31          up/down
-	PortChannel0002  10.0.1.3/31          up/down
-	Vlan100          1.1.2.2/16           up/down
-	docker0          240.127.1.1/24       up/down
-	eth0             10.11.162.42/24      up/up
-	lo               127.0.0.1/8          up/up
-					 10.1.0.1/32
-					 10.1.0.32/32
-					 10.12.0.102/32	
+  ```	
+  admin@sonic:~$ show runningconfiguration all
   ```
 
-**show ip protocol**
+**show runningconfiguration bgp**
 
-TBD: Fill details.
+This command displays the running configuration of the BGP module.
 
   - Usage:  
-    show ip protocol
+    show runningconfiguration bgp
 
 
 - Example:
-  ```  
-	show ip protocol
-	Protocol    : route-map 
-	------------------------
-	system      : none
-	kernel      : none
-	connected   : none
-	static      : none
-	rip         : none
-	ripng       : none
-	ospf        : none
-	ospf6       : none
-	isis        : none
-	bgp         : RM_SET_SRC
-	pim         : none
-	hsls        : none
-	olsr        : none
-	babel       : none
-	any         : none
+  ```	
+  admin@sonic:~$ show runningconfiguration bgp
   ```
 
-## show ipv6
+**show runningconfiguration interfaces**
 
-This sub-section explains the various IPv6 protocol specific show commands that are used to display the following.
-1) routes
-2) IPv6 bgp details - Explained in the [bgp section](#show-bgp)
-3) IP interfaces
-4) protocol
-
-**show ipv6 route**
-
-This command is used to display either all the IPv6 route entries from the routing table or a specific IPv6 route.
+This command displays the running configuration for the "interfaces".
 
   - Usage:  
-    show ipv6 route [<ipv6-address>]
-	 
-
-- Example:
-  ```
-  admin@sonic:~$ show ipv6 route 
-	Codes: K - kernel route, C - connected, S - static, R - RIPng,
-		   O - OSPFv6, I - IS-IS, B - BGP, A - Babel,
-		   > - selected route, * - FIB route
-
-	C>* ::1/128 is directly connected, lo
-	C>* 2018:2001::/126 is directly connected, Ethernet112
-	C>* 2018:2002::/126 is directly connected, Ethernet116
-	C>* fc00:1::32/128 is directly connected, lo
-	C>* fc00:1::102/128 is directly connected, lo
-	C>* fc00:2::102/128 is directly connected, eth0
-	C * fe80::/64 is directly connected, Vlan100
-	C * fe80::/64 is directly connected, Ethernet112
-	C * fe80::/64 is directly connected, Ethernet116
-	C * fe80::/64 is directly connected, Bridge
-	C * fe80::/64 is directly connected, PortChannel0011
-	C>* fe80::/64 is directly connected, eth0
-
-  ```
- - Optionally, you can specify an IPv6 address in order to display only routes to that particular IPv6 address
+    show runningconfiguration interfaces
 
 
 - Example:
   ```
-	admin@sonic:~$ show ipv6 route  fc00:1::32
-	Routing entry for fc00:1::32/128
-	  Known via "connected", distance 0, metric 0, best
-	  * directly connected, lo
+  admin@sonic:~$ show runningconfiguration interfaces
   ```
 
-**show ipv6 interfaces**
+**show runningconfiguration ntp**
 
-This command displays the details about all the Layer3 IPv6 interfaces in the device for which IPv6 address has been assigned. 
-The type of interfaces include the following.
-1) Front panel physical ports.
-2) PortChannel.
-3) VLAN interface.
-4) Loopback interfaces
-5) management interface
+This command displays the running configuration of the ntp module. 
 
   - Usage:  
-    show ipv6 interfaces
+    show runningconfiguration ntp
 
 
 - Example:
-  ```  
-	admin@sonic:~$ show ipv6 interfaces
-	Interface        IPv6 address/mask                            Admin/Oper
-	---------------  -------------------------------------------  ------------
-	Bridge           fe80::d494:dcff:fe37:535e%Bridge/64          up/down
-	Ethernet112      2018:2001::1/126                             up/up
-					 fe80::3617:ebff:fe38:100%Ethernet112/64
-	Ethernet116      2018:2002::1/126                             up/up
-					 fe80::3617:ebff:fe38:100%Ethernet116/64
-	PortChannel0001  2018:1002::2/126                             up/down
-	PortChannel0002  2018:1002::6/126                             up/down
-	PortChannel0011  fe80::3617:ebff:fe38:100%PortChannel0011/64  up/up
-	Vlan100          fe80::3617:ebff:fe38:100%Vlan100/64          up/down
-	eth0             fc00:2::102/128                              up/up
-					 fe80::3617:ebff:fe38:100%eth0/64
-	lo               fc00:1::102/128                              up/up
-					 fc00:1::32/128
-					 ::1/128
-
+  ```	 
+  admin@sonic:~$ show runningconfiguration ntp
   ```
 
-**show ipv6 protocol**
+**show runningconfiguration snmp**
 
-TBD: Need to fill details.
+This command displays the running configuration of the snmp module. 
 
   - Usage:  
-    show ipv6 protocol
- 
+    show runningconfiguration snmp
+
 
 - Example:
-  ``` 
-	show ipv6 protocol
-	Protocol    : route-map 
-	------------------------
-	system      : none
-	kernel      : none
-	connected   : none
-	static      : none
-	rip         : none
-	ripng       : none
-	ospf        : none
-	ospf6       : none
-	isis        : none
-	bgp         : RM_SET_SRC6
-	pim         : none
-	hsls        : none
-	olsr        : none
-	babel       : none
-	any         : none
+  ```
+  admin@sonic:~$ show runningconfiguration snmp
   ```
 
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Startup--Running-Configuration)
 
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#IP)
-
-# Application Layer
-
-
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Application-Layer)
 
 
 # System State
@@ -3254,126 +3020,6 @@ This command displays serial port or a virtual network connection status.
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#System-State)
  
 
-# Startup & Running Configuration
-
-## Startup Configuration
-
-**show startupconfiguration bgp**
-
-This command is used to display the startup configuration for the BGP module. 
-
-  - Usage:  
-    show startupconfiguration bgp`
-
-
-- Example:
-  ```
-	admin@sonic:~$ show startupconfiguration bgp
-	Routing-Stack is: quagga
-	!
-	! =========== Managed by sonic-cfggen DO NOT edit manually! ====================
-	! generated by templates/quagga/bgpd.conf.j2 with config DB data
-	! file: bgpd.conf
-	!
-	!
-	hostname T1-2
-	password zebra
-	log syslog informational
-	log facility local4
-	! enable password !
-	!
-	! bgp multiple-instance
-	!
-	route-map FROM_BGP_SPEAKER_V4 permit 10
-	!
-	route-map TO_BGP_SPEAKER_V4 deny 10
-	!
-	router bgp 65000
-	  bgp log-neighbor-changes
-	  bgp bestpath as-path multipath-relax
-	  no bgp default ipv4-unicast
-	  bgp graceful-restart restart-time 180  
-	  
-	  <Only the partial output is shown here. In actual command, more configuration information will be displayed> 
-  ```
-
-## Running Configuration
-This sub-section explains the show commands for displaying the running configuration for the following modules.
-1) bgp 
-2) interfaces
-3) ntp
-4) snmp
-5) all 
-
-**show runningconfiguration all**
-
-This command displays the entire running configuration.
-
-  - Usage:  
-    show runningconfiguration all
-
-
-- Example:
-  ```	
-  admin@sonic:~$ show runningconfiguration all
-  ```
-
-**show runningconfiguration bgp**
-
-This command displays the running configuration of the BGP module.
-
-  - Usage:  
-    show runningconfiguration bgp
-
-
-- Example:
-  ```	
-  admin@sonic:~$ show runningconfiguration bgp
-  ```
-
-**show runningconfiguration interfaces**
-
-This command displays the running configuration for the "interfaces".
-
-  - Usage:  
-    show runningconfiguration interfaces
-
-
-- Example:
-  ```
-  admin@sonic:~$ show runningconfiguration interfaces
-  ```
-
-**show runningconfiguration ntp**
-
-This command displays the running configuration of the ntp module. 
-
-  - Usage:  
-    show runningconfiguration ntp
-
-
-- Example:
-  ```	 
-  admin@sonic:~$ show runningconfiguration ntp
-  ```
-
-**show runningconfiguration snmp**
-
-This command displays the running configuration of the snmp module. 
-
-  - Usage:  
-    show runningconfiguration snmp
-
-
-- Example:
-  ```
-  admin@sonic:~$ show runningconfiguration snmp
-  ```
-
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Startup--Running-Configuration)
-
-
-
 # Troubleshooting Commands
 
 For troubleshooting and debugging purposes, this command gathers pertinent information about the state of the device; information is as diverse as syslog entries, database state, routing-stack state, etc., It then compresses it into an archive file. This archive file can be sent to the SONiC development team for examination.
@@ -3391,123 +3037,466 @@ Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Troubleshooting-commands)
 
 
-# Software Installation Commands
+# VLAN Configuration And Show
 
-SONiC software can be installed in two methods, viz, "using sonic_installer tool", "ONIE Installer".
+## VLAN Show
 
+**show vlan brief**
 
-## SONiC Installer
-This is a command line tool available as part of the SONiC software; I=if the device is already running the SONiC software, this tool can be used. 
-This tool has facility to install an alternate image, list the available images and to set the next reboot image.
+This command is to display brief information about all the vlans configured in the device. It displays the vlan ID, IP address (if configured for the vlan), list of vlan member ports, whether the port is tagged or in untagged mode and the DHCP Helper Address.
 
-**sonic_installer install**
-
-This command is to install a new image on the alternate image partition.  This command takes a path to an installable SONiC image or URL and installs the image.
-
-  - Usage:    
-    sonic_installer install <path>  
+  - Usage:  
+    show vlan brief
 
 
 - Example:
-  ```	 
-  admin@sonic:~$ sonic_installer install https://sonic-jenkins.westus.cloudapp.azure.com/job/xxxx/job/buildimage-xxxx-all/xxx/artifact/target/sonic-xxxx.bin
-  New image will be installed, continue? [y/N]: y
-  Downloading image...
-  ...100%, 480 MB, 3357 KB/s, 146 seconds passed
-  Command: /tmp/sonic_image
-  Verifying image checksum ... OK.
-  Preparing image archive ... OK.
-  ONIE Installer: platform: XXXX
-  onie_platform: 
-  Installing SONiC in SONiC
-  Installing SONiC to /host/image-xxxx
-  Directory /host/image-xxxx/ already exists. Cleaning up...
-  Archive:  fs.zip
-     creating: /host/image-xxxx/boot/
-    inflating: /host/image-xxxx/boot/vmlinuz-3.16.0-4-amd64  
-    inflating: /host/image-xxxx/boot/config-3.16.0-4-amd64  
-    inflating: /host/image-xxxx/boot/System.map-3.16.0-4-amd64  
-    inflating: /host/image-xxxx/boot/initrd.img-3.16.0-4-amd64  
-     creating: /host/image-xxxx/platform/
-   extracting: /host/image-xxxx/platform/firsttime  
-    inflating: /host/image-xxxx/fs.squashfs  
-    inflating: /host/image-xxxx/dockerfs.tar.gz  
-  Log file system already exists. Size: 4096MB
-  Installed SONiC base image SONiC-OS successfully
+  ```
+  admin@sonic:~$ show vlan brief 
 
-  Command: cp /etc/sonic/minigraph.xml /host/
+	+-----------+--------------+-----------+----------------+-----------------------+
+	|   VLAN ID | IP Address   | Ports     | Port Tagging   | DHCP Helper Address   |
+	+===========+==============+===========+================+=======================+
+	|       100 | 1.1.2.2/16   | Ethernet0 | tagged         | 192.0.0.1             |
+	|           |              | Ethernet4 | tagged         | 192.0.0.2             |
+	|           |              |           |                | 192.0.0.3             |
+	+-----------+--------------+-----------+----------------+-----------------------+
 
-  Command: grub-set-default --boot-directory=/host 0
-
-  Done
   ```
 
-**sonic_installer list**
+**show vlan config**
 
-This command displays information about currently installed images. It displays a list of installed images, currently running image and image set to be loaded in next reboot.
+This command is to display all the vlan configuration.
 
   - Usage:  
-    sonic_installer list
+    show vlan config
 
-- Example:  
+
+- Example:
+  ```
+  admin@sonic:~$ show vlan config 
+	Name       VID  Member     Mode
+	-------  -----  ---------  ------
+	Vlan100    100  Ethernet0  tagged
+	Vlan100    100  Ethernet4  tagged
+
+  ```
+
+
+## VLAN Configuration
+
+This sub-section explains how to configure the vlan and its member ports.
+
+**config vlan add/del**
+
+This command is used to add or delete the vlan. This command needs root privileges. 
+
+  - Usage:  
+    config vlan add/del <vlan__id> 
+
+
+- Example:
+  ```
+  admin@sonic:~$ sudo config vlan add 100
+  This command will create the vlan 100 if not exists.
+  ```
+
+**config vlan member add/del**
+
+This command is to add or delete a member port into the already created vlan.
+
+  - Usage:  
+    config vlan member add/del [-u or --untagged] <vlan_id> <member_portname>   
+    -u will set the port in untagged mode.
+
+
+- Example:
+  ```
+  admin@sonic:~$ sudo config vlan member add 100 Ethernet0
+  This command will add Ethernet0 as member of the vlan 100
+  
+  admin@sonic:~$ sudo config vlan member add 100 Ethernet4
+  This command will add Ethernet4 as member of the vlan 100.
+  ```
+
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#vlan-configuration-and-show)
+
+
+# Warm Restart
+
+## Warm Restart Show
+
+**show warm_restart config**
+
+This command displays all the configuration related to warm_restart.
+
+  - Usage:  
+    show warm_restart config
+
+
+- Example:
+  ```
+	admin@sonic:~$ show warm_restart config
+	name    enable    timer_name        timer_duration
+	------  --------  ----------------  ----------------
+	bgp     true      bgp_timer         100
+	teamd   false     teamsyncd_timer   300
+	swss    false     neighsyncd_timer  200
+	system  true      NULL              NULL
+  ```
+
+**show warm_restart state**
+
+This command displays the warm_restart state.
+
+  - Usage:  
+    show warm_restart state
+
+
+- Example:
+  ```
+	name          restore_count  state
+	----------  ---------------  ----------
+	orchagent                 0
+	vlanmgrd                  0
+	bgp                       1  reconciled
+	portsyncd                 0
+	teammgrd                  1
+	neighsyncd                0
+	teamsyncd                 1
+	syncd                     0
+
+  ```
+
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#VLAN-Configuration-And-Show)
+
+## Warm Restart Configuration
+
+This sub-section explains the various configuration related to warm restart feature. Following parameters can be configured using this command.
+1) bgp_timer
+2) disable
+3) enable
+4) neighsyncd_timer
+5) teamsyncd_timer
+Each of these sub-commands are explained in the following section.
+
+Users can use an optional parameter "-s" to use the unix domain socket for communicating with the RedisDB which will be faster when compared to using the default network sockets. 
+All these commands have the following option.
+
+Options:
+  -s, --redis-unix-socket-path TEXT
+       unix socket path for redis connection
+
+
+**config warm_restart bgp_timer**
+
+This command sets the bgp_timer value for warm_restart of BGP service. When BGP service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
+
+  - Usage:  
+    config warm_restart bgp_timer <seconds>
+	seconds range 1 to 3600.
+
+
+- Example:
+  ```
+	admin@sonic:~$ sudo config warm_restart bgp_timer 1000
+  ```
+
+**config warm_restart enable/disable**
+
+This command is used to enable or disable the warm_restart for a particular service that supports warm reboot.
+Following four services support warm reboot. When user restarts the particular service using "systemctl restart <service_name>", this configured value will be checked for whether it is enabled or disabled.
+If this configuration is enabled for that service, it will perform warm reboot for that service. Otherwise, it will do cold restart of the service.
+
+  - Usage:  
+    config warm_restart enable [<module_name>]
+
+       module_name can be either system or swss or bgp or teamd.
+	   If "module_name" argument is not specified, it will enable "system" module.
+
+
+- Example:
+  ```
+	admin@sonic:~$ sudo config warm_restart enable
+	The above command will set warm_restart as "enable" for the "system" service.
+	
+	admin@sonic:~$ sudo config warm_restart enable swss
+	The above command will set warm_restart as "enable" for the "swss" service. When user does "systemctl restart swss", it will perform warm reboot instead of cold reboot.
+	
+	admin@sonic:~$ sudo config warm_restart enable teamd
+	The above command will set warm_restart as "enable" for the "teamd" service. When user does "systemctl restart teamd", it will perform warm reboot instead of cold reboot.
+	
+	
+  ```
+
+
+**config warm_restart neighsyncd_timer**
+
+TBD: This command sets the neighsyncd_timer value for warm_restart of "swss" service. When swss service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
+
+  - Usage:  
+    config warm_restart bgp_timerneighsyncd_timer <seconds>
+	seconds range 1 to 9999.
+
+
+- Example:
+  ```
+	admin@sonic:~$ sudo config warm_restart neighsyncd_timer 2000
+  ```
+
+
+**config warm_restart teamsyncd_timer**
+
+TBD: This command sets the teamsyncd_timer value for warm_restart of teamd service. When teamd service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
+
+  - Usage:  
+    config warm_restart teamsyncd_timer <seconds>
+	seconds range 1 to 3600.
+
+
+- Example:
+  ```
+	admin@sonic:~$ sudo config warm_restart teamsyncd_timer 3000
+  ```
+
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Warm-Restart)
+
+
+# Watermark Configuration And Show
+
+## Watermark Show
+
+**show watermark telemetry interval**
+
+This command displays the configured interval for the telemetry. 
+
+  - Usage:  
+    show watermark telemetry interval
+
+
+- Example:
+  ```
+	admin@sonic:~$ show watermark telemetry interval
+	
+      Telemetry interval 120 second(s)
+
+  ```
+
+## Watermark Config
+
+**config watermark telemetry interval**
+
+This command configures the interval for telemetry. 
+
+  - Usage:   
+    config watermark telemetry interval <value>
+	interval can be any integer value from 1.
+	TBD: Is there no maximum limit on this value?
+
+
+- Example:
+  ```
+	admin@sonic:~$ sudo config watermark telemetry interval 999
+  ```
+
+## Layer 2 Configuration & Show
+
+### ARP
+
+**show arp**
+
+This command displays the ARP entries in the device with following options.
+1) Display the entire table.
+2) Display the ARP entries learnt on a specific interface.
+3) Display the ARP of a specific ip-address.
+
+  - Usage:  
+    show arp [-if <ifname>] [<ip-address>]
+    show arp - displays all entries
+    show arp -if <ifname> - displays the ARP specific to the specified interface.
+    show arp <ip-address> - displays the ARP specific to the specicied ip-address.
+
+
+- Example:
+  ```
+  admin@sonic:~$ show arp
+   Address          MacAddress            Iface         Vlan
+  -------------     -----------------     -------       ------
+  192.168.1.183     88:5a:92:fb:bf:41     Ethernet44    -
+  192.168.1.175     88:5a:92:fc:95:81     Ethernet28    -
+  192.168.1.181     e4:c7:22:c1:07:7c     Ethernet40    -
+  192.168.1.179     88:5a:92:de:a8:bc     Ethernet36    -
+  192.168.1.118     00:1c:73:3c:de:43     Ethernet64    -
+  192.168.1.11      00:1c:73:3c:e1:38     Ethernet88    -
+  192.168.1.161     24:e9:b3:71:3a:01     Ethernet0     -
+  192.168.1.189     24:e9:b3:9d:57:41     Ethernet56    -
+  192.168.1.187     74:26:ac:8b:8f:c1     Ethernet52    -
+  192.168.1.165     88:5a:92:de:a0:7c     Ethernet8     -
+
+  Total number of entries 10
+  ```
+
+  - Optionally, you can specify the interface in order to display the ARPs learnt on that particular interface
+
+
+- Example:
+  ```
+  admin@sonic:~$ show arp -if Ethernet40
+  Address          MacAddress          Iface        Vlan
+  -------------    -----------------   ----------   ------
+  192.168.1.181    e4:c7:22:c1:07:7c   Ethernet40   -
+  Total number of entries 1 
+
+  ```
+  
+  - Optionally, you can specify an IP address in order to display only that particular entry
+
+
+- Example:
+  ```
+  admin@sonic:~$ show arp 192.168.1.181
+  Address          MacAddress          Iface        Vlan
+  -------------    -----------------   ----------   ------
+  192.168.1.181    e4:c7:22:c1:07:7c   Ethernet40   -
+  Total number of entries 1 
+  ```
+
+### FDB
+
+**show mac**
+
+This command displays the MAC (FDB) entries either in full or partial as given below.
+1) show mac - displays the full table
+2) show mac -v <vlanid> - displays the MACs learnt on the particular VLAN ID.
+3) show mac -p <port>  - displays the MACs learnt on the particular port.
+
+
+  - Usage:  
+    show mac [-v vlan_id] [-p port_name]
+
+
+- Example:
+  ```
+  admin@sonic:~$ show mac
+  No.    Vlan  MacAddress         Port
+  -----  ------  -----------------  -----------
+    1    1000  E2:8C:56:85:4A:CD  Ethernet192
+    2    1000  A0:1B:5E:47:C9:76  Ethernet192
+    3    1000  AA:54:EF:2C:EE:30  Ethernet192
+    4    1000  A4:3F:F2:17:A3:FC  Ethernet192
+    5    1000  0C:FC:01:72:29:91  Ethernet192
+    6    1000  48:6D:01:7E:C9:FD  Ethernet192
+    7    1000  1C:6B:7E:34:5F:A6  Ethernet192
+    8    1000  EE:81:D9:7B:93:A9  Ethernet192
+    9    1000  CC:F8:8D:BB:85:E2  Ethernet192
+   10    1000  0A:52:B3:9C:FB:6C  Ethernet192
+   11    1000  C6:E2:72:02:D1:23  Ethernet192
+   12    1000  8A:C9:5C:25:E9:28  Ethernet192
+   13    1000  5E:CD:34:E4:94:18  Ethernet192
+   14    1000  7E:49:1F:B5:91:B5  Ethernet192
+   15    1000  AE:DD:67:F3:09:5A  Ethernet192
+   16    1000  DC:2F:D1:08:4B:DE  Ethernet192
+   17    1000  50:96:23:AD:F1:65  Ethernet192
+   18    1000  C6:C9:5E:AE:24:42  Ethernet192
+  Total number of entries 18 
+  ```
+
+  - Optionally, you can specify a VLAN ID or interface name in order to display only that particular entries
+
+- Example:
+  ```
+  admin@sonic:~$ show mac -v 1000
+  No.    Vlan  MacAddress         Port
+  -----  ------  -----------------  -----------
+    1    1000  E2:8C:56:85:4A:CD  Ethernet192
+    2    1000  A0:1B:5E:47:C9:76  Ethernet192
+    3    1000  AA:54:EF:2C:EE:30  Ethernet192
+    4    1000  A4:3F:F2:17:A3:FC  Ethernet192
+    5    1000  0C:FC:01:72:29:91  Ethernet192
+    6    1000  48:6D:01:7E:C9:FD  Ethernet192
+    7    1000  1C:6B:7E:34:5F:A6  Ethernet192
+    8    1000  EE:81:D9:7B:93:A9  Ethernet192
+    9    1000  CC:F8:8D:BB:85:E2  Ethernet192
+   10    1000  0A:52:B3:9C:FB:6C  Ethernet192
+   11    1000  C6:E2:72:02:D1:23  Ethernet192
+   12    1000  8A:C9:5C:25:E9:28  Ethernet192
+   13    1000  5E:CD:34:E4:94:18  Ethernet192
+   14    1000  7E:49:1F:B5:91:B5  Ethernet192
+   15    1000  AE:DD:67:F3:09:5A  Ethernet192
+   16    1000  DC:2F:D1:08:4B:DE  Ethernet192
+   17    1000  50:96:23:AD:F1:65  Ethernet192
+   18    1000  C6:C9:5E:AE:24:42  Ethernet192
+  Total number of entries 18 
+
+  admin@sonic:~$ show mac -p Ethernet192
+  No.    Vlan  MacAddress         Port
+  -----  ------  -----------------  -----------
+    1    1000  E2:8C:56:85:4A:CD  Ethernet192
+    2    1000  A0:1B:5E:47:C9:76  Ethernet192
+    3    1000  AA:54:EF:2C:EE:30  Ethernet192
+    4    1000  A4:3F:F2:17:A3:FC  Ethernet192
+    5    1000  0C:FC:01:72:29:91  Ethernet192
+    6    1000  48:6D:01:7E:C9:FD  Ethernet192
+    7    1000  1C:6B:7E:34:5F:A6  Ethernet192
+    8    1000  EE:81:D9:7B:93:A9  Ethernet192
+    9    1000  CC:F8:8D:BB:85:E2  Ethernet192
+   10    1000  0A:52:B3:9C:FB:6C  Ethernet192
+   11    1000  C6:E2:72:02:D1:23  Ethernet192
+   12    1000  8A:C9:5C:25:E9:28  Ethernet192
+   13    1000  5E:CD:34:E4:94:18  Ethernet192
+   14    1000  7E:49:1F:B5:91:B5  Ethernet192
+   15    1000  AE:DD:67:F3:09:5A  Ethernet192
+   16    1000  DC:2F:D1:08:4B:DE  Ethernet192
+   17    1000  50:96:23:AD:F1:65  Ethernet192
+   18    1000  C6:C9:5E:AE:24:42  Ethernet192
+  Total number of entries 18 
+  ```
+
+- `sonic-clear fdb [OPTIONS]`
+  - Clear FDB table
+
+
+- Example:
+  ```
+  admin@sonic:~$ sonic-clear fdb all
+  FDB entries are cleared.
+  ```
+
+### NDP
+
+**show ndp**
+This command displays either all the IPv6 neighbor mac addresses, or for a particular IPv6 neighbor, or for all IPv6 neighbors reachable via a specific interface.
+
+  - Usage:  
+    show ndp [-if|--iface <interface-name.] [IP6ADDRESS]
+
+
+- Example:
+  ```
+    **ALL IPv6 NEIGHBORS:**
+	admin@sonic:~$ show ndp
+	Address                   MacAddress         Iface    Vlan    Status
+	------------------------  -----------------  -------  ------  ---------
+	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
+	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
+	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
+	Total number of entries 3 
+	
+	**SPECIFIC IPv6 NEIGHBOR**
+	admin@sonic:~$ show ndp fe80::20c:29ff:feb8:b11e
+	Address                   MacAddress         Iface    Vlan    Status
+	------------------------  -----------------  -------  ------  ---------
+	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
+	Total number of entries 1 
+	
+	**SPECIFIC INTERFACE**
+	admin@sonic:~$ show ndp -if eth0
+	Address                   MacAddress         Iface    Vlan    Status
+	------------------------  -----------------  -------  ------  ---------
+	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
+	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
+	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
+	Total number of entries 3 
+
    ```
-  admin@sonic:~$ sonic_installer list 
-  Current: SONiC-OS-HEAD.XXXX
-  Next: SONiC-OS-HEAD.XXXX
-  Available: 
-  SONiC-OS-HEAD.XXXX
-  SONiC-OS-HEAD.YYYY
-  ```
 
-**sonic_installer set_default**
-
-This command can be used to change which image to be loaded by default in all the subsequent reboots.
-
-  - Usage:  
-    sonic_installer set_default <image_name>
-
-- Example:
-  ```   
-  admin@sonic:~$ sonic_installer set_default SONiC-OS-HEAD.XXXX
-  ```
-
-**sonic_installer set_next_boot**
-
-This command can be used to change which image to be in the *next* reboot only. Note that it will fallback to current image in all other subsequent reboots after the next reboot.
-
-  - Usage:  
-    sonic_installer set_next_boot <image_name>
-
-- Example:
-  ```
-  admin@sonic:~$ sonic_installer set_next_boot SONiC-OS-HEAD.XXXX
-  ```
-
-**sonic_installer remove**
-
-This command can be used to remove the unused SONiC image from the disk. Note that it's *not* allowed to remove currently running image.
-
-  - Usage:  
-    sonic_installer remove <image_name>
-
-- Example:
-  ```
-  admin@sonic:~$ sonic_installer remove SONiC-OS-HEAD.YYYY
-  Image will be removed, continue? [y/N]: y
-  Updating GRUB...
-  Done
-  Removing image root filesystem...
-  Done
-  Command: grub-set-default --boot-directory=/host 0
-
-  Image removed
-  ```
- 
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Software-Installation-Commands)
-
-
-
-
-
-
-
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Watermark-Configuration-And-Show)
