@@ -223,7 +223,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 This command displays software component versions of the currently running SONiC image. This includes the SONiC image version as well as Docker image versions.
 This command displays relevant information as the SONiC and Linux kernel version being utilized, as well as the commit-id used to build the SONiC image. The second section of the output displays the various docker images and their associated id’s. 
 
-- Usage:
+- Usage:  
   show version  
 
 - Example:
@@ -267,7 +267,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 **show help**  
 This command displays the full list of show commands available in the software; the output of each of those show commands can be used to analyze, debug or troubleshoot the network node.
 
-- Usage:
+- Usage:  
   You can enter `show -?`, `show -h` or `show --help`
 
 - Example:
@@ -350,7 +350,7 @@ This sub-section explains some set of sub-commands that are used to display the 
 This command displays the current date and time configured on the system
 
 -  Usage:  
-   show clock`
+   show clock
     
 - Example:
   ```
@@ -361,7 +361,7 @@ This command displays the current date and time configured on the system
 **show environment`**  
 This command displays the platform environmentals, such as voltages, temperatures and fan speeds
 
--  Usage:
+-  Usage:  
    show environment
 
 - Example: Note that the show output has got lot of information; only the sample output is given in the below example
@@ -419,8 +419,8 @@ This command displays the cause of the previous reboot
 This command displays the current system uptime
 
 - Usage:  
-  show uptime`
-
+  show uptime
+  
 - Example:
   ```
   admin@sonic:~$ show uptime
@@ -430,7 +430,7 @@ This command displays the current system uptime
 **show logging**  
 This command displays all the currently stored log messages
 
-- Usage:
+- Usage:  
   show logging ([<process-name>] [-l lines] | [-f])`
 
 - Example:
