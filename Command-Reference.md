@@ -3,8 +3,6 @@
 Table of Contents
 =================
 
-   * [SONiC COMMAND LINE INTERFACE GUIDE](#sonic-command-line-interface-guide)
-   * [Table of Contents](#table-of-contents)
    * [Introduction](#introduction)
    * [Basic Configuration And Show](#basic-configuration-and-show)
       * [SSH Login](#ssh-login)
@@ -63,7 +61,7 @@ Table of Contents
       * [QoS Show commands](#qos-show-commands)
          * [PFC](#pfc)
          * [Queue And Priority-Group](#queue-and-priority-group)
-      * [QoS configuration command](#qos-configuration-command)
+      * [QoS configuration commands](#qos-configuration-command)
    * [Startup &amp; Running Configuration](#startup--running-configuration)
       * [Startup Configuration command](#startup-configuration-command)
       * [Running Configuration command](#running-configuration-command)
@@ -104,11 +102,23 @@ After logging into the device, SONiC software can be configured in following thr
 This document explains the first method and gives the complete list of commands that are supported in SONiC 201811 version (build#32).
 All the configuration commands need root privileges to execute them. Note that show commands can be executed by all users without the root privileges.
 Root privileges can be obtained either by using "sudo" keyword in front of all config commands, or by going to root prompt using "sudo -i".
+Note that all commands are case sensitive.
 
-Note that the command list is just a subset of the configurations that are possible in SONiC. 
-Please follow config_db.json based configuration for all complete list of configuration options.
+  - Example:
+  ```
+  admin@sonic:~$ sudo config aaa authentication login tacacs+
+  
+  OR
+  
+  admin@sonic:~$ sudo -i
+  root@sonic:~#  config aaa authentication login tacacs+
+  ```
 
-# Basic Configuration And Show
+Note that the command list given in this document is just a subset of all possible configurations in SONiC. 
+Please follow config_db.json based configuration for the complete list of configuration options.
+
+# Basic Configuration And Show  
+
 This section covers the basic configurations related to the following
  1) [SSH login](#SSH-Login), 
  2) [configuring the management interface](#Configuring-Management-Interface), 
@@ -119,9 +129,11 @@ This section covers the basic configurations related to the following
  7) [Show Hardware Platform](#Show-Hardware-Platform).
 
 ## SSH Login
-- All SONiC devices support both the serial console based login and the SSH based login by default.
-- The default credential (if not modified at image build time) for login is admin/YourPaSsWoRd.
-- In case of SSH login, users can login to the management interface (eth0) IP address after configuring the same using serial console. Refer the following section for configuring the IP address for management interface.
+
+All SONiC devices support both the serial console based login and the SSH based login by default.
+The default credential (if not modified at image build time) for login is admin/YourPaSsWoRd.
+In case of SSH login, users can login to the management interface (eth0) IP address after configuring the same using serial console. 
+Refer the following section for configuring the IP address for management interface.
 
   - Example:
   ```
@@ -136,33 +148,38 @@ This section covers the basic configurations related to the following
   admin@sonic's password:
   ```
 
-By default, login takes the user the default prompt from which most of the show commands and few configuration commands work. 
+By default, login takes the user to the default prompt from which all the show commands can be executed.  
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## Configuring Management Interface
-- By default, the management interface (eth0) is configured to use DHCP to get the IP address from the DHCP server. Connect the management interface to the same network in which your DHCP server is connected and get the IP address from DHCP server.
-- Verify the IP address obtained from DHCP server using the "/sbin/ifconfig eth0" linux command.
-- In case if you want to use static IP for the interface, SONiC does not provide a CLI for this. There are few ways in which the IP address can be configured.
-   (1) use "ifconfig eth0" command (example: ifconfig eth0 10.11.12.13/24). This configuration won't be preserved across reboot.
-   (2) use config_db.jsob and configure the MGMT_INTERFACE key with the appropriate values. Refer [here](https://github.com/Azure/SONiC/wiki/Configuration#Management-Interface) 
-   (3) use minigraph.xml and configure "ManagementIPInterfaces" tag inside "DpgDesc" tag as given at the [page](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
-- Once if the IP address is configured, verify the same using "/sbin/ifconfig eth0" linux command.
-- Users can SSH login to this management interface IP address from their management network.
 
-- Example:
-  ```
-  admin@sonic:~$ /sbin/ifconfig eth0
-  eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 10.11.11.13  netmask 255.255.255.0  broadcast 10.11.12.255
-  ```
+The management interface (eth0) in SONiC is configured (by default) to use DHCP client to get the IP address from the DHCP server. Connect the management interface to the same network in which your DHCP server is connected and get the IP address from DHCP server.
+The IP address received from DHCP server can be verified using the "/sbin/ifconfig eth0" linux command.
+
+SONiC does not provide a CLI to configure the static IP for the management interface. There are alternate few alternate ways by which a static IP address can be configured for the management interface.  
+   1) use "ifconfig eth0" linux command (example: ifconfig eth0 10.11.12.13/24). This configuration won't be preserved across reboot.
+   2) use config_db.jsob and configure the MGMT_INTERFACE key with the appropriate values. Refer [here](https://github.com/Azure/SONiC/wiki/Configuration#Management-Interface) 
+   3) use minigraph.xml and configure "ManagementIPInterfaces" tag inside "DpgDesc" tag as given at the [page](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
+   
+Once if the IP address is configured, the same can be verified using "/sbin/ifconfig eth0" linux command.
+Users can SSH login to this management interface IP address from their management network.
+
+  - Example:
+   ```
+   admin@sonic:~$ /sbin/ifconfig eth0
+   eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+         inet 10.11.11.13  netmask 255.255.255.0  broadcast 10.11.12.255
+   ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
-## Config Help
-- List all the possible configuration commands at the top level. The exact command syntax is as follows; all commands are case sensitive
+## Config Help  
+All commands has got in-built help that helps the user to understand the command as well as the possible sub-commands and options.
+"--help" can be used at any level of the command; i.e. it can be used at the command level, or sub-command level or at argument level. The in-built help will display the next possibilities corresponding to that particular command/sub-command.
  
 **config --help**  
-This command displays the help for the mentioned configuration command.
+
+This command lists all the possible configuration commands at the top level. 
 
 - Usage:  
   config --help
@@ -170,7 +187,7 @@ This command displays the help for the mentioned configuration command.
 - Example:
   ```
   admin@sonic:~$ config --help
-  Usage: config [OPTIONS] COMMAND [ARGS]...
+  Usage: config [OPTIONS] COMMAND [ARGS]
   SONiC command line - 'config' command
 
   Options:
@@ -201,9 +218,9 @@ This command displays the help for the mentioned configuration command.
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## Show Versions
-Display software component versions of the currently running SONiC image. This includes the SONiC image version as well as Docker image versions. You can find details of the SONiC image version format [here](sonic-version).
-
+ 
 **show version**  
+This command displays software component versions of the currently running SONiC image. This includes the SONiC image version as well as Docker image versions.
 This command displays relevant information as the SONiC and Linux kernel version being utilized, as well as the commit-id used to build the SONiC image. The second section of the output displays the various docker images and their associated id’s. 
 
 - Usage:
@@ -246,10 +263,9 @@ This command displays relevant information as the SONiC and Linux kernel version
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## Show Help  
-Display the full list of help commands; the output of which helps to analyze, debug or troubleshoot the network node. 
 
 **show help**  
-This command displays the full list of available `show` subcommands.
+This command displays the full list of show commands available in the software; the output of each of those show commands can be used to analyze, debug or troubleshoot the network node.
 
 - Usage:
   You can enter `show -?`, `show -h` or `show --help`
@@ -328,7 +344,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
  
  
 ## Show System Status
-Display the status of various parameters pertaining to the physical state of the network node.
+This sub-section explains some set of sub-commands that are used to display the status of various parameters pertaining to the physical state of the network node. 
 
 **show clock**  
 This command displays the current date and time configured on the system
@@ -411,7 +427,7 @@ This command displays the current system uptime
   up 2 days, 21 hours, 30 minutes
   ```
 
-**show loggig**  
+**show logging**  
 This command displays all the currently stored log messages
 
 - Usage:
@@ -630,7 +646,7 @@ When this is disabled and if the authentication request fails on first server, a
 
 
 - Usage:  
-  config aaa authentication failthrough [OPTIONS] OPTION
+  config aaa authentication failthrough enable|disable|default
 		   
 		   Allow AAA fail-through [enable | disable | default]
            enable - this allows the AAA module to process with local authentication if remote authentication fails.
@@ -695,7 +711,7 @@ If the authentication fails, AAA will check the "failthrough" configuration and 
 
 This command displays the global configuration fields and the list of all tacacs servers and their correponding configurations.
 
-  - Usage:  
+- Usage:  
 	show tacacs 
 
 - Example:
@@ -732,8 +748,8 @@ Some of the parameters like authtype, passkey and timeout can be either configur
 This command is used to add a TACACS+ server to the tacacs server list.
 Note that more than one tacacs+ (maximum of seven) can be added in the device. When user tries to login, tacacs client shall contact the servers one by one. When any server times out, device will try the next server one by one.
 
-   - Usage:  
-     config tacacs add <ip_address> [-t|--timeout SECOND] [-k|--key SECRET] [-a|--type TYPE] [-o|--port PORT] [-p|--pri PRIORITY] [-m|--use-mgmt-vrf]
+- Usage:  
+   config tacacs add <ip_address> [-t|--timeout SECOND] [-k|--key SECRET] [-a|--type TYPE] [-o|--port PORT] [-p|--pri PRIORITY] [-m|--use-mgmt-vrf]
 	 
 	 **Arguments:**  
 	 
@@ -767,8 +783,8 @@ Note that more than one tacacs+ (maximum of seven) can be added in the device. W
 
 This command is used to delete the tacacs+ servers configured.
 
-   - Usage:  
-     config tacacs delete <ip_address>
+- Usage:  
+   config tacacs delete <ip_address>
 
 - Example:
   ```
@@ -795,8 +811,8 @@ When user has not configured server specific authtype, this global value shall b
 This command is used to reset the global value for authtype or passkey or timeout to default value. 
 Default for authtype is "pap", default for passkey is EMPTY_STRING and default for timeout is 5 seconds.
 
-   - Usage:  
-     config tacacs default authtype|passkey|timeout
+- Usage:  
+   config tacacs default authtype|passkey|timeout
 	 
 
 - Example:
@@ -2581,7 +2597,7 @@ This command displays the user persistet-watermark for the queues (Egress shared
   ```
 
 
-## QoS configuration command
+## QoS configuration commands
 
 **config qos clear**  
 
