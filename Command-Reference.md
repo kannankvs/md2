@@ -1007,6 +1007,111 @@ AI: Same as above. May need to raise Ticket that "incremental" is working like "
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#ACL-Configuration-And-Show)
 
+
+# ARP &amp; NDP
+
+## ARP
+
+**show arp**
+
+This command displays the ARP entries in the device with following options.
+1) Display the entire table.
+2) Display the ARP entries learnt on a specific interface.
+3) Display the ARP of a specific ip-address.
+
+  - Usage:  
+    show arp [-if <ifname>] [<ip-address>]
+    show arp - displays all entries
+    show arp -if <ifname> - displays the ARP specific to the specified interface.
+    show arp <ip-address> - displays the ARP specific to the specicied ip-address.
+
+
+- Example:
+  ```
+  admin@sonic:~$ show arp
+   Address          MacAddress            Iface         Vlan
+  -------------     -----------------     -------       ------
+  192.168.1.183     88:5a:92:fb:bf:41     Ethernet44    -
+  192.168.1.175     88:5a:92:fc:95:81     Ethernet28    -
+  192.168.1.181     e4:c7:22:c1:07:7c     Ethernet40    -
+  192.168.1.179     88:5a:92:de:a8:bc     Ethernet36    -
+  192.168.1.118     00:1c:73:3c:de:43     Ethernet64    -
+  192.168.1.11      00:1c:73:3c:e1:38     Ethernet88    -
+  192.168.1.161     24:e9:b3:71:3a:01     Ethernet0     -
+  192.168.1.189     24:e9:b3:9d:57:41     Ethernet56    -
+  192.168.1.187     74:26:ac:8b:8f:c1     Ethernet52    -
+  192.168.1.165     88:5a:92:de:a0:7c     Ethernet8     -
+
+  Total number of entries 10
+  ```
+
+  - Optionally, you can specify the interface in order to display the ARPs learnt on that particular interface
+
+
+- Example:
+  ```
+  admin@sonic:~$ show arp -if Ethernet40
+  Address          MacAddress          Iface        Vlan
+  -------------    -----------------   ----------   ------
+  192.168.1.181    e4:c7:22:c1:07:7c   Ethernet40   -
+  Total number of entries 1 
+
+  ```
+  
+  - Optionally, you can specify an IP address in order to display only that particular entry
+
+
+- Example:
+  ```
+  admin@sonic:~$ show arp 192.168.1.181
+  Address          MacAddress          Iface        Vlan
+  -------------    -----------------   ----------   ------
+  192.168.1.181    e4:c7:22:c1:07:7c   Ethernet40   -
+  Total number of entries 1 
+  ```
+
+## NDP Show
+
+**show ndp**
+This command displays either all the IPv6 neighbor mac addresses, or for a particular IPv6 neighbor, or for all IPv6 neighbors reachable via a specific interface.
+
+  - Usage:  
+    show ndp [-if|--iface <interface-name.] [IP6ADDRESS]
+
+
+- Example:
+  ```
+    **ALL IPv6 NEIGHBORS:**
+	admin@sonic:~$ show ndp
+	Address                   MacAddress         Iface    Vlan    Status
+	------------------------  -----------------  -------  ------  ---------
+	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
+	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
+	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
+	Total number of entries 3 
+	
+	**SPECIFIC IPv6 NEIGHBOR**
+	admin@sonic:~$ show ndp fe80::20c:29ff:feb8:b11e
+	Address                   MacAddress         Iface    Vlan    Status
+	------------------------  -----------------  -------  ------  ---------
+	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
+	Total number of entries 1 
+	
+	**SPECIFIC INTERFACE**
+	admin@sonic:~$ show ndp -if eth0
+	Address                   MacAddress         Iface    Vlan    Status
+	------------------------  -----------------  -------  ------  ---------
+	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
+	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
+	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
+	Total number of entries 3 
+
+   ```
+
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Watermark-Configuration-And-Show)
+
+
+
 # BGP Configuration And Show Commands
 
 This section explains all the BGP show commands and BGP configuation commands that are supported in SONiC.
