@@ -584,12 +584,15 @@ If a port is specified, displays information for the transceiver in that port.
   ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
-# AAA Configuration And Show
+# AAA & TACACS+ Configuration And Show
 This section captures the various show commands & configuration commands that are applicable for the AAA (Authentication, Authorization, and Accounting) module.
 Admins can configure the type of authentication (local or remote tacacs based) required for the users and also the authentication failthrough and fallback options.
 Following show command displays the current running configuration related to the AAA.
 
-## AAA show commands
+## AAA Configuration And Show
+
+### AAA show commands
+
 This command is used to view the Authentication, Authorization & Accounting settings that are configured in the network node.
 
 **show aaa**  
@@ -606,7 +609,7 @@ Display the AAA settings currently present in the network node
    AAA authentication fallback True (default)
    ```
 
-## AAA configuration commands
+### AAA configuration commands
 
 This sub-section explains all the possible CLI based configuration options for the AAA module. The list of commands/sub-commands possible for aaa is given below.
 
@@ -712,7 +715,7 @@ This command displays the global configuration fields and the list of all tacacs
 				   tcp_port 49
   ```
 
-## TACACS+ Configuration commands
+### TACACS+ Configuration commands
 
 This sub-section explains the command "config tacacs" and its sub-commands that are used to configure the following tacacs+ parameters.
 Some of the parameters like authtype, passkey and timeout can be either configured at per server level or at global level (global value will be applied if there no server level configuration)
@@ -898,22 +901,7 @@ Output from the command gives the following information about the rules
 
   ```
 
-**show mirror_session**
 
-This command displays all the mirror sessions that are configured. 
-
-- Usage:  
-  show mirror_session
- 
-
-- Example:
-  ``` 
-  admin@sonic:~$ show mirror session
-  Name       Status    SRC IP     DST IP    GRE    DSCP    TTL    Queue
-  ---------  --------  ---------  --------  -----  ------  -----  -------
-  everflow0  active    10.1.0.32  10.0.0.7
-                  
-  ```  
 
 ## ACL config commands
 This sub-section explains the list of configuration options available for ACL module.
@@ -2134,7 +2122,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 This section explains the commands that are used to load the configuration from either the ConfigDB or from the minigraph.
 
-## Load config commands
+## Load config command
 
 This command is used to load the configuration from configDB. This command needs root privileges.
 If the optional parameter FILENAME is not specified, it loads the /etc/sonic/config_db.json that exists in the device. 
@@ -2157,7 +2145,7 @@ If the argument is not specified, it prompts the user to confirm whether user re
 	root@T1-2:~# 
    ```
 
-## Load_mgmt_config commands
+## Load_mgmt_config command
 
 This command is used to reconfigure hostname and mgmt interface based on device description file. 
 This command either uses the optional file specified as arguement or looks for the file "/etc/sonic/device_desc.xml". 
@@ -2179,7 +2167,7 @@ If the argument is not specified, it prompts the user to confirm whether user re
    ```
 
 
-## Load_minigraph config commands
+## Load_minigraph config command
 
 This command is used to load the configuration from /etc/sonic/minigraph.xml. 
 When users do not want to use configuration from config_db.json, they can copy the minigraph.xml configuration file to the device and load it using this command.
@@ -2202,7 +2190,7 @@ If the argument is not specified, it prompts the user to confirm whether user re
 	root@T1-2:~# 
    ```
 
-## Reload config commands
+## Reload config command
 
 This command is used to clear current configuration and import new configurationn from the input file or from /etc/sonic/config_db.json.
 This command shall stop all services before clearing the configuration and it then restarts those services.
@@ -2240,7 +2228,7 @@ If the argument is not specified, it prompts the user to confirm whether user re
 	root@T1-2:~# 
    ```
 
-## Save config  commands
+## Save config  command
 
 This command is to save the config DB configuration into the user-specified filename or into the default /etc/sonic/config_db.json. This saves the configuration into the disk which is available even after reboots.
 Saved file can be transferred to remote machines for debugging. If users wants to load the configuration from this new file at any point of time, they can use "config load" command and provide this newly generated file as input. If users wants this newly generated file to be used during reboot, they need to copy this file to /etc/sonic/config_db.json.
@@ -2259,9 +2247,26 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # Mirroring Configuration And Show
 
-## Mirroring Show
+## Mirroring Show command
 
-### Mirroring Config commands
+**show mirror_session**
+
+This command displays all the mirror sessions that are configured. 
+
+- Usage:  
+  show mirror_session
+ 
+
+- Example:
+  ``` 
+  admin@sonic:~$ show mirror session
+  Name       Status    SRC IP     DST IP    GRE    DSCP    TTL    Queue
+  ---------  --------  ---------  --------  -----  ------  -----  -------
+  everflow0  active    10.1.0.32  10.0.0.7
+                  
+  ```  
+
+## Mirroring Config command
 
 This command is used to add or remove mirroring sessions. Mirror session is identified by "session_name". 
 While adding a new session, users need to configure the following fields that are used while forwarding the mirrored packets.
@@ -2317,9 +2322,9 @@ This command displays a list of NTP peers known to the server as well as a summa
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#NTP)
 
 
-# Platform
+# Platform Specific Commands
 
-**config platform mlnx**
+**config platform mlnx**  
 This command is valid only on mellanox devices. The sub-commands for "config platform" gets populated only on mellanox platforms.
 There are no other subcommands on non-Mellanox devices and hence this command appears empty and useless in other platforms. 
 TBD17. Need more information and content from mellanox to fill all sub-commands related to this command. 
@@ -2574,8 +2579,6 @@ It hold values independently of user watermark. This way user can use "user wate
   root@sonic:~# sonic-clear priority-group persistent-watermark headroom
   ```
 
-
-# QoS Configuration
 
 ## QoS configuration command
 
