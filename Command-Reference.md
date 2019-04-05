@@ -668,7 +668,7 @@ Need to reconfirm - Lets ask Xin to find the right person to answer this.
 By default, fallback happens to local authentication when tacacs+ authentication fails.
 
 - Usage:  
-  config aaa authentication fallback [OPTIONS] OPTION
+  config aaa authentication fallback enable|disable|default
        
 	   Allow AAA fallback [enable | disable | default]
 
@@ -688,7 +688,7 @@ Once if the admins choose the remote authentication based on tacacs+ server, all
 If the authentication fails, AAA will check the "failthrough" configuration and authenticates the user based on local database if failthrough is enabled.
 
 - Usage:  
-  config aaa authentication login [OPTIONS] [AUTH_PROTOCOL]...
+  Switch login authentication [ {tacacs+, local} | default ]
       
 	  Switch login authentication [ {tacacs+, local} | default ]
 	  tacacs+ - This enables remote authentication based on tacacs+
@@ -948,7 +948,7 @@ When "--session_name" optional argument is specified, command sets the session_n
 When the optional argument "max_priority"  is specified, each rule’s priority is calculated by subtracting its “sequence_id” value from the “max_priority”. If this value is not passed, the default “max_priority” 10000 is used.
 		
 - Usage:  
-  config acl update full [OPTIONS] FILE_NAME  
+  config acl update full FILE_NAME  
 	Some of the possible options are
 	1) --table_name <table_name>, Example: config acl update full " --table_name DT_ACL_T1  /etc/sonic/acl_table_1.json "
 	2) --session_name <session_name>, Example: config acl update full " --session_name mirror_ses1 /etc/sonic/acl_table_1.json "
@@ -991,7 +991,7 @@ When "--session_name" optional argument is specified, command sets the session_n
 When the optional argument "max_priority"  is specified, each rule’s priority is calculated by subtracting its “sequence_id” value from the “max_priority”. If this value is not passed, the default “max_priority” 10000 is used.
 
   - Usage:  
-    config acl update incremental [OPTIONS] FILE_NAME
+    config acl update incremental FILE_NAME
 	Some of the possible options are
 	1) --session_name <session_name>, Example: config acl update full " --session_name mirror_ses1 /etc/sonic/acl_table_1.json "
 	2) --max-priority <priority_value>, Example: config acl update full " --max-priority 100  /etc/sonic/acl_table_1.json "
@@ -1498,10 +1498,10 @@ Optional argument "-c" can be used to clear the counters for all interfaces.
 Optional argument "-p" specify a period (in seconds) with which to gather counters over.
 
   - Usage:  
-    show interfaces counters [OPTIONS]
-      OPTIONS:
-      -a, --printall
-      -c, --clear
+    show interfaces counters [OPTIONS]  
+      OPTIONS:  
+      -a, --printall  
+      -c, --clear  
       -p, --period TEXT
 
 
@@ -1573,7 +1573,7 @@ Refer sub-section [Interface-Naming-Mode](#Interface-Naming-Mode)
 This command is used to display the list of expected neighbors for all interfaces (or for a particular interface) that is configured.
  
   - Usage:  
-    show interfaces neighbor expected [OPTIONS] [INTERFACENAME]
+    show interfaces neighbor expected [INTERFACENAME]
  
 - Example:
   ``` 
@@ -1611,7 +1611,7 @@ This command displays information regarding port-channel interfaces
 This command displays some more fields such as Lanes, Speed, MTU, Type, Asymmetric PFC status and also the operational and administrative status of the interfaces 
 
 - Usage:  
-  show interfaces status [OPTIONS] [INTERFACENAME]
+  show interfaces status [INTERFACENAME]
 
 - Example:
   ```
@@ -1655,7 +1655,7 @@ This command is used for adding or removing the IP address for an interface.
 IP address for either physical interface or for portchannel or for VLAN interface can be configured using this command.
 
   - Usage:  
-    config interface <interface-name> ip add [OPTIONS] <ip_addr>
+    config interface <interface-name> ip add <ip_addr>
 
 - Examples:  
   
@@ -1732,9 +1732,8 @@ Users can change the naming_mode using "config interface_naming_mode" command.
 This command displays the current interface naming mode
 
   - Usage:  
-    show interfaces naming_mode [OPTIONS]
-    OPTIONS - --verbose & -h/--help
- 
+    show interfaces naming_mode 
+     
 - Example:
   ``` 
   admin@sonic:~$ show interfaces naming_mode 
@@ -2252,6 +2251,7 @@ Saved file can be transferred to remote machines for debugging. If users wants t
 
   - Usage:  
     config save [OPTIONS] [FILENAME]
+	OPTIONS : -y, --yes
 
 - Example:
    ```
