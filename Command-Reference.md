@@ -16,10 +16,10 @@ Table of Contents
    * [AAA &amp; TACACS  Configuration And Show](#aaa--tacacs-configuration-and-show)
       * [AAA Configuration And Show](#aaa-configuration-and-show)
          * [AAA show commands](#aaa-show-commands)
-         * [AAA configuration commands](#aaa-configuration-commands)
+         * [AAA config commands](#aaa-config-commands)
       * [TACACS  Configuration And Show](#tacacs-configuration-and-show)
          * [TACACS  show commands](#tacacs-show-commands)
-         * [TACACS  Configuration commands](#tacacs-configuration-commands)
+         * [TACACS  Config commands](#tacacs-config-commands)
    * [ACL Configuration And Show](#acl-configuration-and-show)
       * [ACL show commands](#acl-show-commands)
       * [ACL config commands](#acl-config-commands)
@@ -53,7 +53,7 @@ Table of Contents
       * [Mirroring Show command](#mirroring-show-command)
       * [Mirroring Config command](#mirroring-config-command)
    * [NTP](#ntp)
-      * [Network Time Protocol show command](#network-time-protocol-show-command)
+      * [NTP show command](#network-time-protocol-show-command)
    * [Platform Specific Commands](#platform-specific-commands)
    * [PortChannel Configuration And Show](#portchannel-configuration-and-show)
       * [PortChannel Show commands](#portchannel-show-commands)
@@ -62,7 +62,7 @@ Table of Contents
       * [QoS Show commands](#qos-show-commands)
          * [PFC](#pfc)
          * [Queue And Priority-Group](#queue-and-priority-group)
-      * [QoS configuration commands](#qos-configuration-command)
+      * [QoS config commands](#qos-config-commands)
    * [Startup &amp; Running Configuration](#startup--running-configuration)
       * [Startup Configuration command](#startup-configuration-command)
       * [Running Configuration command](#running-configuration-command)
@@ -72,12 +72,12 @@ Table of Contents
    * [VLAN &amp; FDB](#vlan--fdb)
       * [VLAN](#vlan)
          * [VLAN show commands](#vlan-show-commands)
-         * [VLAN Configuration commands](#vlan-configuration-commands)
+         * [VLAN Config commands](#vlan-config-commands)
       * [FDB](#fdb)
          * [FDB show commands](#fdb-show-commands)
    * [Warm Restart](#warm-restart)
       * [Warm Restart show command](#warm-restart-show-command)
-      * [Warm Restart Configuration command](#warm-restart-configuration-command)
+      * [Warm Restart Config command](#warm-restart-config-command)
    * [Watermark Configuration And Show](#watermark-configuration-and-show)
       * [Watermark Show command](#watermark-show-command)
       * [Watermark Config command](#watermark-config-command)
@@ -117,6 +117,12 @@ Note that all commands are case sensitive.
 
 Note that the command list given in this document is just a subset of all possible configurations in SONiC. 
 Please follow config_db.json based configuration for the complete list of configuration options.
+
+**Assumption**  
+It is assumed that all configuration commands start with the keyword “config” as prefix. Any other scripts/utilities/commands  that need user configuration control are wrapped as sub-commands under the “config” command.
+Hence those scripts/utilities/commands are not explained in this document.
+TBD0: With this assumption, commands/scripts like "acl_loader", "crm", "sonic-clear",etc., are not in the scope in this document.
+
 
 # Basic Configuration And Show  
 
@@ -175,6 +181,7 @@ Users can SSH login to this management interface IP address from their managemen
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## Config Help  
+
 All commands has got in-built help that helps the user to understand the command as well as the possible sub-commands and options.
 "--help" can be used at any level of the command; i.e. it can be used at the command level, or sub-command level or at argument level. The in-built help will display the next possibilities corresponding to that particular command/sub-command.
  
@@ -627,7 +634,7 @@ This command displays the AAA settings currently present in the network node
    AAA authentication fallback True (default)
    ```
 
-### AAA configuration commands
+### AAA config commands
 
 This sub-section explains all the possible CLI based configuration options for the AAA module. The list of commands/sub-commands possible for aaa is given below.
 
@@ -733,7 +740,7 @@ This command displays the global configuration fields and the list of all tacacs
 				   tcp_port 49
   ```
 
-### TACACS+ Configuration commands
+### TACACS+ Config commands
 
 This sub-section explains the command "config tacacs" and its sub-commands that are used to configure the following tacacs+ parameters.
 Some of the parameters like authtype, passkey and timeout can be either configured at per server level or at global level (global value will be applied if there no server level configuration)
@@ -2318,7 +2325,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # NTP
 
-## Network Time Protocol show command
+## NTP show command
 
 **show ntp**  
 
@@ -2598,7 +2605,7 @@ This command displays the user persistet-watermark for the queues (Egress shared
   ```
 
 
-## QoS configuration commands
+## QoS config commands
 
 **config qos clear**  
 
@@ -3120,7 +3127,7 @@ This command displays all the vlan configuration.
   ```
 
 
-### VLAN Configuration commands
+### VLAN Config commands
 
 This sub-section explains how to configure the vlan and its member ports.
 
@@ -3311,7 +3318,7 @@ This command displays the warm_restart state.
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#VLAN-Configuration-And-Show)
 
-## Warm Restart Configuration command
+## Warm Restart Config command
 
 This sub-section explains the various configuration related to warm restart feature. Following parameters can be configured using this command.
 1) bgp_timer
