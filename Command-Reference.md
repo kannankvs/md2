@@ -868,7 +868,7 @@ This command displays either all the ACL tables that are configured or only the 
 Output from the command displays the table name, type of the table, the list of interface(s) to which the table is bound and the description about the table.
 
 - Usage:  
-  show acl table [OPTIONS] [TABLE_NAME]
+  show acl table [TABLE_NAME]
 
 - Example:
   ```
@@ -901,7 +901,7 @@ Output from the command gives the following information about the rules
 5) Match  - The fields from the packet header that need to be matched against the same present in the incoming traffic. 
 
 - Usage:  
-  show acl rule [OPTIONS] [TABLE_NAME] [RULE_ID]
+  show acl rule [TABLE_NAME] [RULE_ID]
   
 
 - Example:
