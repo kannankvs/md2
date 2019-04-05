@@ -3463,7 +3463,7 @@ SONiC software can be installed in two methods, viz, "using sonic_installer tool
 
 
 ## SONiC Installer
-This is a command line tool available as part of the SONiC software; I=if the device is already running the SONiC software, this tool can be used. 
+This is a command line tool available as part of the SONiC software; If the device is already running the SONiC software, this tool can be used to install an alternate image in the partition.
 This tool has facility to install an alternate image, list the available images and to set the next reboot image.
  
 **sonic_installer install**  
