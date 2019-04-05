@@ -612,8 +612,12 @@ Note that the "aaa" commands need root privileges that is obtained using "sudo -
 
 **aaa authentication failthrough**
 
-This command is used to either enable or disable the failthrough option. When user selects remote authentication using tacacs+ and if the authentication fails, this "failthrough" configuration allows for further authentication using LOCAL database or not.
-If this 'failthrough' is disabled and if remote authentication fails, login is disallowed.
+This command is used to either enable or disable the failthrough option. 
+This command is useful when user has configured more than one tacacs+ server and when user has enabled tacacs+ authentication.
+When authentication request to the first server fails, this configuration allows to continue the request to the next server.
+When this configuration is enabled, authentication process continues through all servers configured.
+When this is disabled and if the authentication request fails on first server, authentication process will stop and the login will be disallowed.
+
 
 - Usage:  
   config aaa authentication failthrough [OPTIONS] OPTION
@@ -632,7 +636,10 @@ If this 'failthrough' is disabled and if remote authentication fails, login is d
   ```
 **aaa authentication fallback**
 
-This command is not used at the moment. TBD2 - Need to reconfirm - Lets ask Xin to find the right person to answer this.
+TBD2. Looks like the command is not used at the moment. 
+In the file https://github.com/Azure/sonic-buildimage/blob/master/files/image_config/hostcfgd/common-auth-sonic.j2, code is available to use "failthrough", but there is no checks based on "fallback". 
+Need to reconfirm - Lets ask Xin to find the right person to answer this.
+By default, fallback happens to local authentication when tacacs+ authentication fails.
 
 - Usage:  
   config aaa authentication fallback [OPTIONS] OPTION
@@ -718,10 +725,21 @@ Note that more than one tacacs+ (maximum of seven) can be added in the device. W
    - Usage:  
      config tacacs add <ip_address> [-t|--timeout SECOND] [-k|--key SECRET] [-a|--type TYPE] [-o|--port PORT] [-p|--pri PRIORITY] [-m|--use-mgmt-vrf]
 	 
-	 **Arguements:**
+	 **Arguments:**
 	 
 	 ip_address - TACACS+ server IP address.
-	 timeout - Transmission timeout interval in seconds, range 1 to 1000 (TBD3 - no clarity, lets ask Xin for right person to answer this too), default 5
+	 timeout - Transmission timeout interval in seconds, range 1 to 1000, default 5
+	 TBD3a - Is this range 1 to 1000 correct? CLI accepts any integer value without validating the range. Seems incorrect. Should we raise a ticket?, lets ask Xin for right person to answer this too.
+	 TBD3b - When more than one server IP address is added, what is the order in which it will be used? Looks like the code does "sorting", but the following example is not clear on what is being used for sorting.Should we document the guideline to user about the order?
+	 ```
+	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.11.12.14:50 secret=testing789 login=mschap timeout=10  try_first_pass
+	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.11.12.24:50 secret=testing789 login=mschap timeout=987654321098765433211
+	0987  try_first_pass
+	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.0.0.9:49 secret= login=mschap timeout=5  try_first_pass
+	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.0.0.8:49 secret= login=mschap timeout=5  try_first_pass
+	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.11.12.13:50 secret=testing789 login=mschap timeout=10  try_first_pass
+	auth    [success=1 default=ignore]      pam_unix.so nullok try_first_pass
+	 ```
 	 key - Shared secret
 	 type - Authentication type, "chap" or "pap" or "mschap" or "login", default is "pap".
 	 port - TCP port range is 1 to 65535, default 49
@@ -930,11 +948,12 @@ When the optional argument "max_priority"  is specified, each rule’s priority 
 	
 - Example:
   ``` 
-  admin@sonic:~$ config acl update full /etc/sonic/acl_full_snmp_r2.json
-  admin@sonic:~$ config acl update full " --table_name SNMP-ACL /etc/sonic/acl_full_snmp_r2.json "
-  admin@sonic:~$ config acl update full " --session_name everflow0 /etc/sonic/acl_full_snmp_r2.json "
+  admin@sonic:~$ config acl update full /etc/sonic/acl_full_snmp_1_2_ssh_4.json
+  admin@sonic:~$ config acl update full " --table_name SNMP-ACL /etc/sonic/acl_full_snmp_1_2_ssh_4.json "
+  admin@sonic:~$ config acl update full " --session_name everflow0 /etc/sonic/acl_full_snmp_1_2_ssh_4.json "
   
   This command will remove all rules from all the ACL tables and insert all the rules present in this input file.
+  Refer the example file [acl_full_snmp_1_2_ssh_4.json](#) that adds two rules for SNMP (Rule1 and Rule2) and one rule for SSH (Rule4)
   Refer an example for input file format [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/files/helpers/config_service_acls.sh)
   Refer another example [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/tasks/acl/acltb_test_rules_part_1.json)
   ```
@@ -954,6 +973,7 @@ If we assume that "file1.json" is the already loaded ACL rules file and if "file
 4) Modify the existing ACL rules (that require changes) in file2.json.
 
 NOTE: If any ACL rule that is already available in file1.json is required even after this command execution, such rules should remain unalterted in file2.json. Don't remove them.
+Note that "incremental" is working like "full".
 
 When "--session_name" optional argument is specified, command sets the session_name for the ACL table with this mirror session name. It fails if the specified mirror session name does not exist.
 
@@ -970,12 +990,18 @@ When the optional argument "max_priority"  is specified, each rule’s priority 
 
 - Example:
   ```
-  admin@sonic:~$ config acl update incremental /etc/sonic/acl_incremental_snmp_r2.json
-  admin@sonic:~$ config acl update incremental " --session_name everflow0 /etc/sonic/acl_incremental_snmp_r2.json "
+  admin@sonic:~$ config acl update incremental /etc/sonic/acl_incremental_snmp_1_3_ssh_4.json
+  admin@sonic:~$ config acl update incremental " --session_name everflow0 /etc/sonic/acl_incremental_snmp_1_3_ssh_4.json "
+
+  Refer the example file [acl_incremental_snmp_1_3_ssh_4.json](#) that adds two rules for SNMP (Rule1 and Rule3) and one rule for SSH (Rule4)
+  When this "incremental" command is executed after "full" command, it has removed SNMP Rule2 and added SNMP Rule3 in the example.
+  File "acl_full_snmp_1_2_ssh_4.json" has got SNMP Rule1, SNMP Rule2 and SSH Rule4.
+  File "acl_incremental_snmp_1_3_ssh_4.json" has got SNMP Rule1, SNMP Rule3 and SSH Rule4.
+  This file is created by copying the file "acl_full_snmp_1_2_ssh_4.json" to "acl_incremental_snmp_1_3_ssh_4.json" and then removing SNMP Rule2 and adding SNMP Rule3. 
 
   ```
 TBD5: Need to create these example input files, test them using the above examples, upload them in github and reference them from here.  
-AI: Same as above.
+AI: Same as above. May need to raise Ticket that "incremental" is working like "full".
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#ACL-Configuration-And-Show)
 
@@ -1008,7 +1034,9 @@ This command displays the summary of all IPv4 bgp neighbors that are configured 
 
 **show ip bgp neighbors**
 
-This command displays all the details of IPv4 & IPv6 (TBD6: Is it expected to show IPv6 also? Lets document as it is and raise ImprovementTicket to repo) BGP neighbors when no optional argument is specified. 
+This command displays all the details of IPv4 & IPv6 BGP neighbors when no optional argument is specified. 
+
+TBD6: Is it expected to show IPv6 also? Lets document as it is and raise ImprovementTicket to repo for not displaying IPv6. In the same ImprovementTicket, add a note that the command "show ipv6 bgp neighbors" should display all IPv6 neighbors when specific IPv6_neighbor_address argument is not specified. 
 
 When the optional argument IPv4_address is specified, it displays the detailed neighbor information about that specific IPv4 neighbor.
 
@@ -1528,9 +1556,7 @@ IP address for either physical interface or for portchannel or for VLAN interfac
   ```
   
 **config interface pfc**
-This command is for setting the asymmetric PFC for an interface to either "on" or "off".
-TBD7: This command is not used by the module until the module is restarted. "show interfaces status" can be used to check the currently used value by the module.
-AI: Lets check with Xin if Wenda can handle this.
+This command is for setting the asymmetric PFC for an interface to either "on" or "off". Once if it is configured, use "show interfaces status" to check the same.
 
   - Usage:  
     config interface <interface-name> pfc asymmetric on/off
@@ -1542,9 +1568,7 @@ AI: Lets check with Xin if Wenda can handle this.
 
 **config interface shutdown**
 
-This command is for administratively shut down the either the Physical interface or port channel interface.
-TBD8: What should user do to make it effective? "show interfaces status" still shows as UP even after executing this command.  
-AI: It works in other DUT. Not an issue.
+This command is for administratively shut down the either the Physical interface or port channel interface. Once if it is configured, use "show interfaces status" to check the same.
 
   - Usage:   
     config interface <interface-name> shutdown
@@ -1556,9 +1580,8 @@ AI: It works in other DUT. Not an issue.
 
 **config interface startup**
 
-This command is for administratively bringing up the Physical interface or port channel interface.
-TBD9: What should user do to make it effective? "show interfaces status" still shows as down even after executing this command.
-AI: It works in other DUT. Not an issue.
+This command is for administratively bringing up the Physical interface or port channel interface.Once if it is configured, use "show interfaces status" to check the same.
+
 
   - Usage:   
     config interface <interface-name> startup
@@ -1570,9 +1593,8 @@ AI: It works in other DUT. Not an issue.
 
 **config interface speed**
 
-This command is to configure the speed for the Physical interface.
-TBD10: What are the acceptable values for speed (40000 for 40G, 100000 for 100G?) ? what should user do to make it effective? "show interfaces status" still the previous value even after this command is executed.
-AI: 40000 is for 40G and 100000 for 100G. User need to know the device to configure it properly. We support only 40G and 100G until the dynamic breakout is supported.
+This command is to configure the speed for the Physical interface. Use the value 40000 for setting it to 40G and 100000 for 100G. Users need to know the device to configure it properly. 
+Dynamic breakout feature is yet supported in SONiC and hence uses cannot configure any values other than 40G and 100G.
 
 
   - Usage:  
@@ -1738,8 +1760,8 @@ The type of interfaces include the following.
 
 **show ip protocol**
 
-TBD11: Need more details about this command. What is this "route-map" protocol? Please explain this command.
-AI: This is part of Quagga. Lets check with Xin to see if Pavel can answer this. Will the same command work for FRR?
+This command displays the route-map that is configured for the routing protocol.
+Refer the routing stack [Quagga Command Reference](https://www.quagga.net/docs/quagga.pdf) or [FRR Command Reference](https://buildmedia.readthedocs.org/media/pdf/frrouting/latest/frrouting.pdf) to know more about this command.
 
   - Usage:  
     show ip protocol
@@ -1853,8 +1875,9 @@ The type of interfaces include the following.
 
 **show ipv6 protocol**
 
-TBD: Need to fill details.
-AI: Same as above.
+This command displays the route-map that is configured for the IPv6 routing protocol.
+Refer the routing stack [Quagga Command Reference](https://www.quagga.net/docs/quagga.pdf) or [FRR Command Reference](https://buildmedia.readthedocs.org/media/pdf/frrouting/latest/frrouting.pdf) to know more about this command.
+
 
   - Usage:  
     show ipv6 protocol
@@ -2008,7 +2031,8 @@ This section explains the commands that are used to load the configuration from 
 This command is used to load the configuration from configDB. This command needs root privileges.
 If the optional parameter FILENAME is not specified, it loads the /etc/sonic/config_db.json that exists in the device. 
 If user wants to load a different configuration database file, users shall copy the file into the device and loads it using the optional argument FILENAME.
-TBD: To be verified. This command does not clear the running configuration. If users had done configuration changes on top of the already saved config_db.json, those configuration shall remain in running configuration even after loading the new configuration file. Since configuration loading is always incremental, this command shall apply only the additional configuration present in the input file (or config_db.json) on top of running configuration. 
+This command does not clear the running configuration. If users had done configuration changes on top of the already saved config_db.json, those configuration shall remain in running configuration even after loading the new configuration file. Since configuration loading is always incremental, this command shall apply only the additional configuration present in the input file (or config_db.json) on top of running configuration. 
+TBD13: The above statement needs to be verified. 
 AI: Lets ask Xin to find the right person for this.
 When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
 If the argument is not specified, it prompts the user to confirm whether user really wants to load this configuration file.
@@ -2076,7 +2100,9 @@ This command is used to clear current configuration and import new configuration
 This command shall stop all services before clearing the configuration and it then restarts those services.
 
 This command restarts various services running in the device and it takes some time to complete the command.
-NOTE: If the user had logged in using SSH, users may (TBD - AI: lets Xin for right person to confirm this, may be Joe) get disconnected. Users need to reconnect their SSH sessions.
+NOTE: If the user had logged in using SSH, users might get disconnected depending upon the new management IP address. Users need to reconnect their SSH sessions.
+In general, it is recommended to execute this command from console port after disconnecting all SSH sessions to the device.
+TBD14 - AI: lets Xin for right person to confirm this, may be Joe.
 NOTE: Management interface IP address and default route (or specific route) may require reconfiguration in case if those parameters are not part of the minigraph.xml.
 
 When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
@@ -2136,8 +2162,10 @@ While adding a new session, users need to configure the following fields that ar
 2) destination IP address, 
 3) DSCP (QoS) value with which mirrored packets are forwarded
 4) TTL value
-5) optional - GRE Type in case if user wants to send the packet via GRE tunnel. TBD (Shuotian). Valid values/type need to be filled in.
-6) optional - Queue in which packets shall be sent out of the device.TBD (0 to 7 for most devices). Valid values/type need to be filled in.
+5) optional - GRE Type in case if user wants to send the packet via GRE tunnel. 
+TBD15:Valid values/type need to be filled in.
+AI: Shuotian will confirm
+6) optional - Queue in which packets shall be sent out of the device. Valid values 0 to 7 for most of the devices. Users need to know their device and the number of queues supported in that device.
 
   - Usage:  
     config mirror_session add <session_name> <src_ip> <dst_ip>  
@@ -2183,7 +2211,10 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # Platform
 
-The command "config platform" is obsoleted. TBD. Lets check with Joe to get more info. Command is still there. 
+**config platform mlnx**
+This command is valid only on mellanox devices. The sub-commands for "config platform" gets populated only on mellanox platforms.
+There are no other subcommands on non-Mellanox devices and hence this command appears empty and useless in other platforms. 
+TBD17. Need more information and content from mellanox to fill all sub-commands related to this command. 
 
 # PortChannel Configuration And Show
 
@@ -2216,13 +2247,12 @@ This sub-section explains how to configure the portchannel and its member ports.
 **config portchannel add/del <portchannel_name>**
 
 This command is used to add or delete the portchannel. This command needs root privileges. 
-It is recommended to use portchannel names in the format "PortChannelxxxx", where "xxxx" is the number. Ex: "PortChannel0002".
+It is recommended to use portchannel names in the format "PortChannelxxxx", where "xxxx" is number of 1 to 4 digits. Ex: "PortChannel0002".
 
-NOTE: If users specify any other name like "pc99", command will succeed, but the name is not printed properly in the "show interface portchannel" command.
+NOTE: If users specify any other name like "pc99", command will succeed, but such names are not supported. Such names are not printed properly in the "show interface portchannel" command. It is recommended not to use such names.
 
-TBD: When any port is already member of any other portchannel and if user tries to add the same port in some other portchannel (without deleting it from the current portchannel), the command fails internally. But, it does not print any error message. In such cases, remove the member from current portchannel and then add it to new portchannel.
+TBD18: When any port is already member of any other portchannel and if user tries to add the same port in some other portchannel (without deleting it from the current portchannel), the command fails internally. But, it does not print any error message. In such cases, remove the member from current portchannel and then add it to new portchannel.
 AI: Command should fail in such case. Raise Ticket to fix it.
-TBD: We dont support such pc99 names. Always use PortChannelOneToFourDigits. Document this.
 
 Command takes two optional arguements given below.
 1) min-links  - minimum number of links required to bring up the portchannel
@@ -2295,8 +2325,8 @@ This sub-section explains the following queue parameters that can be displayed u
 **show queue counters**
 
 This command displays packet and byte counters for all queues of all ports or one specific-port given as arguement.
-This command can be used to clear the counters for all queues of all ports. Note that port specific clear is not supported 
-TBD: Lets raise improvementTicket for supporting this.
+This command can be used to clear the counters for all queues of all ports. Note that port specific clear is not supported.
+TBD20: Lets raise improvementTicket for supporting this.
  
   - Usage:  
     show queue counters [-c or --clear] [<interface-name>] 
@@ -2771,7 +2801,6 @@ This command displays the current CPU usage by process. This command uses linux'
     show processes cpu
 	
 	Note that pipe option can be used using " | head -n" to display only the "n" number of lines.
-	TBD: Do we support all options of "top" command? Lets ask Joe.
 
 
 - Example:
@@ -3013,32 +3042,16 @@ This command displays serial port or a virtual network connection status.
 This command is used only when SONiC is used as console switch. 
 This command is not applicable when SONiC used as regular switch.
 
-
   - Usage:  
     show line
  
 
-- Example: TBD: This command is not working. It crashes as follows. Need more information.  
+- Example: TBD22: This command is not working. It crashes as follows. Need more information.  
 AI: Lets raise a Ticket for this broken CLI. 
 
   ``` 
   admin@T1-2:~$ show line
-  Traceback (most recent call last):
-	File "/usr/bin/show", line 9, in <module>
-	  load_entry_point('sonic-utilities==1.2', 'console_scripts', 'show')()
-   File "/usr/lib/python2.7/dist-packages/click/core.py", line 722, in __call__
-      return self.main(*args, **kwargs)
-   File "/usr/lib/python2.7/dist-packages/click/core.py", line 697, in main
-      rv = self.invoke(ctx)
-	File "/usr/lib/python2.7/dist-packages/click/core.py", line 1066, in invoke
-      return _process_result(sub_ctx.command.invoke(sub_ctx))
-	File "/usr/lib/python2.7/dist-packages/click/core.py", line 895, in invoke
-      return ctx.invoke(self.callback, **ctx.params)
-	File "/usr/lib/python2.7/dist-packages/click/core.py", line 535, in invoke
-      return callback(*args, **kwargs)
-	File "/usr/lib/python2.7/dist-packages/show/main.py", line 1659, in line
-      run_command(cmd, display_cmd=verbose)
-  NameError: global name 'verbose' is not defined
+
   ```
  
 
@@ -3256,9 +3269,10 @@ If this configuration is enabled for that service, it will perform warm reboot f
 
 **config warm_restart neighsyncd_timer**
 
-TBD: This command sets the neighsyncd_timer value for warm_restart of "swss" service. When swss service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
+TBD23: This command sets the neighsyncd_timer value for warm_restart of "swss" service. When swss service is warm rebooted, it waits until this timer expiry to complete the warm reboot process; it is expected that all the reconciliation should be completed before this timer expires.
+Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
 When the timer expires, it will print an error message about failure, but its not a hard failure (lets confirm this with Linkedin).
-AI: Lets ask Linkedin guy.
+AI: To be verified by LinkedIn.
 
   - Usage:  
     config warm_restart bgp_timerneighsyncd_timer <seconds>
@@ -3273,8 +3287,9 @@ AI: Lets ask Linkedin guy.
 
 **config warm_restart teamsyncd_timer**
 
-TBD: This command sets the teamsyncd_timer value for warm_restart of teamd service. When teamd service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
-AI: Same as above.
+TBD24: This command sets the teamsyncd_timer value for warm_restart of teamd service. When teamd service is warm rebooted, it waits until this timer expiry to complete the warm reboot process; it is expected that all the reconciliation should be completed before this timer expires.
+Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
+AI: To be verified by LinkedIn.
 
   - Usage:  
     config warm_restart teamsyncd_timer <seconds>
@@ -3318,7 +3333,7 @@ This command configures the interval for telemetry.
   - Usage:   
     config watermark telemetry interval <value>
 	interval can be any integer value from 1.
-	TBD: Is there no maximum limit on this value?
+	TBD25: Is there no maximum limit on this value?
 	AI: Ask Xin for right person.
 
 
@@ -3529,3 +3544,33 @@ This command displays either all the IPv6 neighbor mac addresses, or for a parti
    ```
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Watermark-Configuration-And-Show)
+
+
+# Routing Stack Configuration And Show
+
+SONiC software is agnostic of the routing software that is being used in the device. For example, users can use either Quagga or FRR routing stack as per their requirement.
+A separate shell (vtysh) is provided to configure such routing stacks.
+Once if users go to "vtysh", they can use the routing stack specific commands as given in the following example.
+
+  - Example: Quagga Routing Stack
+  ```
+	admin@T1-2:~$ vtysh
+
+	Hello, this is Quagga (version 0.99.24.1).
+	Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+	T1-2# show route-map (This command displays the route-map that is configured for the routing protocol.)
+	ZEBRA:
+	route-map RM_SET_SRC, permit, sequence 10
+	  Match clauses:
+	  Set clauses:
+		src 10.12.0.102
+	  Call clause:
+	  Action:
+		Exit routemap
+  ```
+
+Refer the routing stack [Quagga Command Reference](https://www.quagga.net/docs/quagga.pdf) or [FRR Command Reference](https://buildmedia.readthedocs.org/media/pdf/frrouting/latest/frrouting.pdf) to know more about about the routing stack configuration.
+
+
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) 
