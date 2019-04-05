@@ -97,6 +97,9 @@ After logging into the device, SONiC software can be configured in following thr
  3) [minigraph.xml](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
 
 This document explains the first method and gives the complete list of commands that are supported in SONiC 201811 version (build#32).
+All the configuration commands need root privileges to execute them. Note that show commands can be executed by all users without the root privileges.
+Root privileges can be obtained either by using "sudo" keyword in front of all config commands, or by going to root prompt using "sudo -i".
+
 Note that the command list is just a subset of the configurations that are possible in SONiC. 
 Please follow config_db.json based configuration for all complete list of configuration options.
 
@@ -128,7 +131,7 @@ This section covers the basic configurations related to the following
   admin@sonic's password:
   ```
 
-By default, login takes the user the default prompt from which most of the show commands and few configuration commands work. Some commands like "aaa" need root level privileges that can be obtained using "sudo -i" for the "admin" user.
+By default, login takes the user the default prompt from which most of the show commands and few configuration commands work. 
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
@@ -602,7 +605,6 @@ Display the AAA settings currently present in the network node
 ## config aaa
 
 This sub-section explains all the possible CLI based configuration options for the AAA module. The list of commands/sub-commands possible for aaa is given below.
-Note that the "aaa" commands need root privileges that is obtained using "sudo -i".
 
 	Command: aaa authentication
              sub-commands:
@@ -1204,7 +1206,6 @@ This command displays the routing policy that takes precedence over the other ro
 ## config bgp 
 
 This sub-section explains the list of configuration options available for BGP module for both IPv4 and IPv6 BGP neighbors.
-All BGP config commands need root privileges to execute. Either use "sudo config bgp" or go to root prompt using "sudo -i" and then use the "config bgp" without "sudo".
 
 The list of possible BGP config commands are given below.
 
@@ -1324,7 +1325,6 @@ This sub-section contains the configuration commands that can configure the WRED
 **config ecn**
 
 This command configures the possible fields in a particular WRED profile that is specified using "-profile <profilename>" argument. 
-This command need root privileges. Either use "sudo config ecn" or go into root mode using "sudo -i".
 The list of the WRED profile fields that are configurable is listed in the below "Usage".
 
   - Usage:   
@@ -1635,12 +1635,12 @@ To display the current interface naming mode
 
 ## config interface naming mode
 
-This command changes the interface naming mode. This command needs to be excuted in root mode either using "sudo" or "sudo -i".
+**config interface naming mode**  
+This command changes the interface naming mode. 
 Users can select between default mode (SONiC interface names) or alias mode (Hardware vendor names). 
 The user must log out and log back in for changes to take effect. Note that the newly-applied interface mode will affect all interface-related show/config commands.
 
-**config interface naming mode**  
-This command is executed in super user/root mode to configure the interface naming mode
+
 
 NOTE: Some platforms do not support alias mapping. In such cases, this command is not applicable. Such platforms always use the same SONiC interface names.
 
@@ -2051,7 +2051,7 @@ If the argument is not specified, it prompts the user to confirm whether user re
 
 ## config load_mgmt_config
 
-This command is used to reconfigure hostname and mgmt interface based on device description file. This command needs root privileges.
+This command is used to reconfigure hostname and mgmt interface based on device description file. 
 This command either uses the optional file specified as arguement or looks for the file "/etc/sonic/device_desc.xml". 
 If the file does not exist or if the file does not have valid fields for "hostname" and "ManagementAddress", it fails.
 
@@ -2073,7 +2073,7 @@ If the argument is not specified, it prompts the user to confirm whether user re
 
 ## config load_minigraph
 
-This command is used to load the configuration from /etc/sonic/minigraph.xml. This command needs root privileges.
+This command is used to load the configuration from /etc/sonic/minigraph.xml. 
 When users do not want to use configuration from config_db.json, they can copy the minigraph.xml configuration file to the device and load it using this command.
 This command restarts various services running in the device and it takes some time to complete the command.
 NOTE: If the user had logged in using SSH, users might get disconnected and some configuration failures might happen which might be hard to recover. Users need to reconnect their SSH sessions after configuring the management IP address. It is recommended to execute this command from console port.
@@ -2246,7 +2246,7 @@ This sub-section explains how to configure the portchannel and its member ports.
 
 **config portchannel add/del <portchannel_name>**
 
-This command is used to add or delete the portchannel. This command needs root privileges. 
+This command is used to add or delete the portchannel.  
 It is recommended to use portchannel names in the format "PortChannelxxxx", where "xxxx" is number of 1 to 4 digits. Ex: "PortChannel0002".
 
 NOTE: If users specify any other name like "pc99", command will succeed, but such names are not supported. Such names are not printed properly in the "show interface portchannel" command. It is recommended not to use such names.
@@ -2471,7 +2471,7 @@ It hold values independently of user watermark. This way user can use "user wate
 
 **config qos clear**
 
-This command clears all the QoS configuration from all the following QOS Tables in ConfigDB. This command needs root privileges.
+This command clears all the QoS configuration from all the following QOS Tables in ConfigDB. 
 
 1) TC_TO_PRIORITY_GROUP_MAP,
 2) MAP_PFC_PRIORITY_TO_QUEUE,
@@ -3126,7 +3126,7 @@ This sub-section explains how to configure the vlan and its member ports.
 
 **config vlan add/del**
 
-This command is used to add or delete the vlan. This command needs root privileges. 
+This command is used to add or delete the vlan. 
 
   - Usage:  
     config vlan add/del <vlan__id> 
