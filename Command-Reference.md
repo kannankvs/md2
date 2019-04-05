@@ -585,7 +585,7 @@ This section captures the various show commands & configuration commands that ar
 Admins can configure the type of authentication (local or remote tacacs based) required for the users and also the authentication failthrough and fallback options.
 Following show command displays the current running configuration related to the AAA.
 
-## show aaa  
+## AAA show commands
 This command is used to view the Authentication, Authorization & Accounting settings that are configured in the network node.
 
 **show aaa**  
@@ -602,7 +602,7 @@ Display the AAA settings currently present in the network node
    AAA authentication fallback True (default)
    ```
 
-## config aaa
+## AAA configuration commands
 
 This sub-section explains all the possible CLI based configuration options for the AAA module. The list of commands/sub-commands possible for aaa is given below.
 
@@ -681,7 +681,7 @@ If the authentication fails, AAA will check the "failthrough" configuration and 
 
 ## TACACS+ Configuration And Show
 
-### TACACS+ show
+### TACACS+ show commands
 
 **show tacacs**
 
@@ -708,7 +708,7 @@ This command displays the global configuration fields and the list of all tacacs
 				   tcp_port 49
   ```
 
-## TACACS+ Configuration
+## TACACS+ Configuration commands
 
 This sub-section explains the command "config tacacs" and its sub-commands that are used to configure the following tacacs+ parameters.
 Some of the parameters like authtype, passkey and timeout can be either configured at per server level or at global level (global value will be applied if there no server level configuration)
@@ -836,7 +836,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 This section explains the various show commands and configuration commands available for users.
 
-## show acl 
+## ACL show commands
 
 **show acl table**
 
@@ -911,7 +911,7 @@ This command displays all the mirror sessions that are configured.
                   
   ```  
 
-## config acl
+## ACL config commands
 This sub-section explains the list of configuration options available for ACL module.
 Note that there is no direct command to add or delete or modify the ACL table and ACL rule. 
 Existing ACL tables and ACL rules can be updated by specifying the ACL rules in json file formats and configure those files using this CLI command.
@@ -1010,7 +1010,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # ARP &amp; NDP
 
-## ARP
+## ARP show commands
 
 **show arp**
 
@@ -1070,7 +1070,7 @@ This command displays the ARP entries in the device with following options.
   Total number of entries 1 
   ```
 
-## NDP Show
+## NDP show commands
 
 **show ndp**
 This command displays either all the IPv6 neighbor mac addresses, or for a particular IPv6 neighbor, or for all IPv6 neighbors reachable via a specific interface.
@@ -1116,7 +1116,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 This section explains all the BGP show commands and BGP configuation commands that are supported in SONiC.
 
-## show bgp
+## BGP show commands
 
 **show ip bgp summary**
 
@@ -1308,7 +1308,7 @@ This command displays the routing policy that takes precedence over the other ro
   ```
 
 
-## config bgp 
+## BGP config commands 
 
 This sub-section explains the list of configuration options available for BGP module for both IPv4 and IPv6 BGP neighbors.
 
@@ -1386,7 +1386,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 This section explains all the Explicit Congestion Notification (ECN) show commands and ECN configuation options that are supported in SONiC.
 
-## show ecn
+## ECN show commands
 This sub-section contains the show commands that are supported in ECN.
 
 **show ecn**
@@ -1423,7 +1423,7 @@ This command displays all the WRED profiles that are configured in the device.
 	
   ```
 
-## config ecn
+## ECN config commands
 
 This sub-section contains the configuration commands that can configure the WRED profiles.
 
@@ -1715,7 +1715,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # Interface Naming Mode
 
-## show interface naming mode
+## Interface naming mode show commands
 This command displays the current interface naming mode. Interface naming mode originally set to 'default'. Interfaces are referenced by default SONiC interface names. 
 Users can change the naming_mode using "config interface_naming_mode" command. 
 
@@ -1738,7 +1738,7 @@ To display the current interface naming mode
   ```
 
 
-## config interface naming mode
+## Interface naming mode config commands
 
 **config interface naming mode**  
 This command changes the interface naming mode. 
@@ -1786,7 +1786,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # IP 
 
-## show ip
+## IP show commands
 
 This sub-section explains the various IP protocol specific show commands that are used to display the following.
 1) routes
@@ -1894,7 +1894,7 @@ Refer the routing stack [Quagga Command Reference](https://www.quagga.net/docs/q
 	any         : none
   ```
 
-## show ipv6
+## IPv6 show commands
 
 This sub-section explains the various IPv6 protocol specific show commands that are used to display the following.
 1) routes
@@ -2015,7 +2015,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # LLDP
 
-## LLDP Show
+## LLDP show commands
 
 **show lldp table**
 
@@ -2123,7 +2123,6 @@ This command displays more details about all LLDP neighbors or only the neighbor
 	-------------------------------------------------------------------------------
   
   ```
-
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#LLDP)
 
 
@@ -2131,7 +2130,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 This section explains the commands that are used to load the configuration from either the ConfigDB or from the minigraph.
 
-## config load
+## Load config commands
 
 This command is used to load the configuration from configDB. This command needs root privileges.
 If the optional parameter FILENAME is not specified, it loads the /etc/sonic/config_db.json that exists in the device. 
@@ -2154,7 +2153,7 @@ If the argument is not specified, it prompts the user to confirm whether user re
 	root@T1-2:~# 
    ```
 
-## config load_mgmt_config
+## Load_mgmt_config commands
 
 This command is used to reconfigure hostname and mgmt interface based on device description file. 
 This command either uses the optional file specified as arguement or looks for the file "/etc/sonic/device_desc.xml". 
@@ -2176,7 +2175,7 @@ If the argument is not specified, it prompts the user to confirm whether user re
    ```
 
 
-## config load_minigraph
+## Load_minigraph config commands
 
 This command is used to load the configuration from /etc/sonic/minigraph.xml. 
 When users do not want to use configuration from config_db.json, they can copy the minigraph.xml configuration file to the device and load it using this command.
@@ -2199,7 +2198,7 @@ If the argument is not specified, it prompts the user to confirm whether user re
 	root@T1-2:~# 
    ```
 
-## config reload
+## Reload config commands
 
 This command is used to clear current configuration and import new configurationn from the input file or from /etc/sonic/config_db.json.
 This command shall stop all services before clearing the configuration and it then restarts those services.
@@ -2237,7 +2236,7 @@ If the argument is not specified, it prompts the user to confirm whether user re
 	root@T1-2:~# 
    ```
 
-## config save
+## Save config  commands
 
 This command is to save the config DB configuration into the user-specified filename or into the default /etc/sonic/config_db.json. This saves the configuration into the disk which is available even after reboots.
 Saved file can be transferred to remote machines for debugging. If users wants to load the configuration from this new file at any point of time, they can use "config load" command and provide this newly generated file as input. If users wants this newly generated file to be used during reboot, they need to copy this file to /etc/sonic/config_db.json.
@@ -2258,7 +2257,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 ## Mirroring Show
 
-### Mirroring Config
+### Mirroring Config commands
 
 This command is used to add or remove mirroring sessions. Mirror session is identified by "session_name". 
 While adding a new session, users need to configure the following fields that are used while forwarding the mirrored packets.
@@ -2292,7 +2291,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # NTP
 
-## Network Time Protocol
+## Network Time Protocol show command
 
 **show ntp**
 
@@ -2323,7 +2322,7 @@ TBD17. Need more information and content from mellanox to fill all sub-commands 
 
 # PortChannel Configuration And Show
 
-## PortChannel Show
+## PortChannel Show commands
 
 **show interfaces portchannel**
 
@@ -2345,7 +2344,7 @@ This command is to display all the port channels that are configured in the devi
       8  PortChannel8   LACP(A)(Up)  Ethernet8(S) Ethernet12(S)
   ```
 
-## PortChannel Configuration
+## PortChannel Config commands
 
 This sub-section explains how to configure the portchannel and its member ports.
 
@@ -2389,7 +2388,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # QoS Configuration And Show
 
-# QoS Show
+## QoS Show commands
 
 ### PFC
 
@@ -2574,6 +2573,8 @@ It hold values independently of user watermark. This way user can use "user wate
 
 # QoS Configuration
 
+## QoS configuration command
+
 **config qos clear**
 
 This command clears all the QoS configuration from all the following QOS Tables in ConfigDB. 
@@ -2652,7 +2653,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # Startup & Running Configuration
 
-## Startup Configuration
+## Startup Configuration command
 
 **show startupconfiguration bgp**
 
@@ -2693,7 +2694,7 @@ This command is used to display the startup configuration for the BGP module.
 	  <Only the partial output is shown here. In actual command, more configuration information will be displayed> 
   ```
 
-## Running Configuration
+## Running Configuration command
 This sub-section explains the show commands for displaying the running configuration for the following modules.
 1) bgp 
 2) interfaces
@@ -2772,7 +2773,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # System State
 
-## Show Processes
+## Processes show commands
 
 This command is used to determine the CPU utilization. It also lists the active processes along with their corresponding process ID and other relevant parameters.
 
@@ -2869,7 +2870,7 @@ This command displays the current summary information about all the processes
   ```
 
 
-## Show services & memory
+## Services & memory show commands
 
 These commands are used to know the services that are running and the memory that is utilized currently.
 
@@ -3051,7 +3052,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 ## VLAN
 
-### VLAN Show
+### VLAN show commands
 
 **show vlan brief**
 
@@ -3094,7 +3095,7 @@ This command is to display all the vlan configuration.
   ```
 
 
-### VLAN Configuration
+### VLAN Configuration commands
 
 This sub-section explains how to configure the vlan and its member ports.
 
@@ -3132,7 +3133,7 @@ This command is to add or delete a member port into the already created vlan.
 
 ## FDB
 
-### FDB show
+### FDB show commands
 
 **show mac**
 
@@ -3239,7 +3240,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # Warm Restart
 
-## Warm Restart Show
+## Warm Restart show command
 
 **show warm_restart config**
 
@@ -3285,7 +3286,7 @@ This command displays the warm_restart state.
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#VLAN-Configuration-And-Show)
 
-## Warm Restart Configuration
+## Warm Restart Configuration command
 
 This sub-section explains the various configuration related to warm restart feature. Following parameters can be configured using this command.
 1) bgp_timer
@@ -3384,7 +3385,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 # Watermark Configuration And Show
 
-## Watermark Show
+## Watermark Show command
 
 **show watermark telemetry interval**
 
@@ -3402,7 +3403,7 @@ This command displays the configured interval for the telemetry.
 
   ```
 
-## Watermark Config
+## Watermark Config command
 
 **config watermark telemetry interval**
 
@@ -3555,8 +3556,6 @@ Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS
   ```
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Troubleshooting-commands)
-
-
 
 
 # Routing Stack Configuration And Show
