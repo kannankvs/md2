@@ -2545,121 +2545,6 @@ Some of the example QOS configurations that users can modify are given below.
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#QoS-Configuration-And-Show)
 
 
-# Software Installation Commands
-
-SONiC software can be installed in two methods, viz, "using sonic_installer tool", "ONIE Installer".
-
-
-## SONiC Installer
-This is a command line tool available as part of the SONiC software; I=if the device is already running the SONiC software, this tool can be used. 
-This tool has facility to install an alternate image, list the available images and to set the next reboot image.
-
-**sonic_installer install**
-
-This command is to install a new image on the alternate image partition.  This command takes a path to an installable SONiC image or URL and installs the image.
-
-  - Usage:    
-    sonic_installer install <path>  
-
-
-- Example:
-  ```	 
-  admin@sonic:~$ sonic_installer install https://sonic-jenkins.westus.cloudapp.azure.com/job/xxxx/job/buildimage-xxxx-all/xxx/artifact/target/sonic-xxxx.bin
-  New image will be installed, continue? [y/N]: y
-  Downloading image...
-  ...100%, 480 MB, 3357 KB/s, 146 seconds passed
-  Command: /tmp/sonic_image
-  Verifying image checksum ... OK.
-  Preparing image archive ... OK.
-  ONIE Installer: platform: XXXX
-  onie_platform: 
-  Installing SONiC in SONiC
-  Installing SONiC to /host/image-xxxx
-  Directory /host/image-xxxx/ already exists. Cleaning up...
-  Archive:  fs.zip
-     creating: /host/image-xxxx/boot/
-    inflating: /host/image-xxxx/boot/vmlinuz-3.16.0-4-amd64  
-    inflating: /host/image-xxxx/boot/config-3.16.0-4-amd64  
-    inflating: /host/image-xxxx/boot/System.map-3.16.0-4-amd64  
-    inflating: /host/image-xxxx/boot/initrd.img-3.16.0-4-amd64  
-     creating: /host/image-xxxx/platform/
-   extracting: /host/image-xxxx/platform/firsttime  
-    inflating: /host/image-xxxx/fs.squashfs  
-    inflating: /host/image-xxxx/dockerfs.tar.gz  
-  Log file system already exists. Size: 4096MB
-  Installed SONiC base image SONiC-OS successfully
-
-  Command: cp /etc/sonic/minigraph.xml /host/
-
-  Command: grub-set-default --boot-directory=/host 0
-
-  Done
-  ```
-
-**sonic_installer list**
-
-This command displays information about currently installed images. It displays a list of installed images, currently running image and image set to be loaded in next reboot.
-
-  - Usage:  
-    sonic_installer list
-
-- Example:  
-   ```
-  admin@sonic:~$ sonic_installer list 
-  Current: SONiC-OS-HEAD.XXXX
-  Next: SONiC-OS-HEAD.XXXX
-  Available: 
-  SONiC-OS-HEAD.XXXX
-  SONiC-OS-HEAD.YYYY
-  ```
-
-**sonic_installer set_default**
-
-This command can be used to change which image to be loaded by default in all the subsequent reboots.
-
-  - Usage:  
-    sonic_installer set_default <image_name>
-
-- Example:
-  ```   
-  admin@sonic:~$ sonic_installer set_default SONiC-OS-HEAD.XXXX
-  ```
-
-**sonic_installer set_next_boot**
-
-This command can be used to change which image to be in the *next* reboot only. Note that it will fallback to current image in all other subsequent reboots after the next reboot.
-
-  - Usage:  
-    sonic_installer set_next_boot <image_name>
-
-- Example:
-  ```
-  admin@sonic:~$ sonic_installer set_next_boot SONiC-OS-HEAD.XXXX
-  ```
-
-**sonic_installer remove**
-
-This command can be used to remove the unused SONiC image from the disk. Note that it's *not* allowed to remove currently running image.
-
-  - Usage:  
-    sonic_installer remove <image_name>
-
-- Example:
-  ```
-  admin@sonic:~$ sonic_installer remove SONiC-OS-HEAD.YYYY
-  Image will be removed, continue? [y/N]: y
-  Updating GRUB...
-  Done
-  Removing image root filesystem...
-  Done
-  Command: grub-set-default --boot-directory=/host 0
-
-  Image removed
-  ```
- 
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Software-Installation-Commands)
-
-
 # Startup & Running Configuration
 
 ## Startup Configuration
@@ -3052,32 +2937,16 @@ AI: Lets raise a Ticket for this broken CLI.
   ``` 
   admin@T1-2:~$ show line
 
-  ```
- 
+  ``` 
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#System-State)
- 
-
-# Troubleshooting Commands
-
-For troubleshooting and debugging purposes, this command gathers pertinent information about the state of the device; information is as diverse as syslog entries, database state, routing-stack state, etc., It then compresses it into an archive file. This archive file can be sent to the SONiC development team for examination.
-Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS.tar.gz`
-
-  - Usage:  
-    show techsupport
 
 
-- Example:
-  ```	
-  admin@sonic:~$ show techsupport
-  ```
+# VLAN &amp; FDB
 
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Troubleshooting-commands)
+## VLAN
 
-
-# VLAN Configuration And Show
-
-## VLAN Show
+### VLAN Show
 
 **show vlan brief**
 
@@ -3120,7 +2989,7 @@ This command is to display all the vlan configuration.
   ```
 
 
-## VLAN Configuration
+### VLAN Configuration
 
 This sub-section explains how to configure the vlan and its member ports.
 
@@ -3156,7 +3025,111 @@ This command is to add or delete a member port into the already created vlan.
   This command will add Ethernet4 as member of the vlan 100.
   ```
 
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#vlan-configuration-and-show)
+## FDB
+
+### FDB show
+
+**show mac**
+
+This command displays the MAC (FDB) entries either in full or partial as given below.
+1) show mac - displays the full table
+2) show mac -v <vlanid> - displays the MACs learnt on the particular VLAN ID.
+3) show mac -p <port>  - displays the MACs learnt on the particular port.
+
+
+  - Usage:  
+    show mac [-v vlan_id] [-p port_name]
+
+
+- Example:
+  ```
+  admin@sonic:~$ show mac
+  No.    Vlan  MacAddress         Port
+  -----  ------  -----------------  -----------
+    1    1000  E2:8C:56:85:4A:CD  Ethernet192
+    2    1000  A0:1B:5E:47:C9:76  Ethernet192
+    3    1000  AA:54:EF:2C:EE:30  Ethernet192
+    4    1000  A4:3F:F2:17:A3:FC  Ethernet192
+    5    1000  0C:FC:01:72:29:91  Ethernet192
+    6    1000  48:6D:01:7E:C9:FD  Ethernet192
+    7    1000  1C:6B:7E:34:5F:A6  Ethernet192
+    8    1000  EE:81:D9:7B:93:A9  Ethernet192
+    9    1000  CC:F8:8D:BB:85:E2  Ethernet192
+   10    1000  0A:52:B3:9C:FB:6C  Ethernet192
+   11    1000  C6:E2:72:02:D1:23  Ethernet192
+   12    1000  8A:C9:5C:25:E9:28  Ethernet192
+   13    1000  5E:CD:34:E4:94:18  Ethernet192
+   14    1000  7E:49:1F:B5:91:B5  Ethernet192
+   15    1000  AE:DD:67:F3:09:5A  Ethernet192
+   16    1000  DC:2F:D1:08:4B:DE  Ethernet192
+   17    1000  50:96:23:AD:F1:65  Ethernet192
+   18    1000  C6:C9:5E:AE:24:42  Ethernet192
+  Total number of entries 18 
+  ```
+
+  - Optionally, you can specify a VLAN ID or interface name in order to display only that particular entries
+
+- Example:
+  ```
+  admin@sonic:~$ show mac -v 1000
+  No.    Vlan  MacAddress         Port
+  -----  ------  -----------------  -----------
+    1    1000  E2:8C:56:85:4A:CD  Ethernet192
+    2    1000  A0:1B:5E:47:C9:76  Ethernet192
+    3    1000  AA:54:EF:2C:EE:30  Ethernet192
+    4    1000  A4:3F:F2:17:A3:FC  Ethernet192
+    5    1000  0C:FC:01:72:29:91  Ethernet192
+    6    1000  48:6D:01:7E:C9:FD  Ethernet192
+    7    1000  1C:6B:7E:34:5F:A6  Ethernet192
+    8    1000  EE:81:D9:7B:93:A9  Ethernet192
+    9    1000  CC:F8:8D:BB:85:E2  Ethernet192
+   10    1000  0A:52:B3:9C:FB:6C  Ethernet192
+   11    1000  C6:E2:72:02:D1:23  Ethernet192
+   12    1000  8A:C9:5C:25:E9:28  Ethernet192
+   13    1000  5E:CD:34:E4:94:18  Ethernet192
+   14    1000  7E:49:1F:B5:91:B5  Ethernet192
+   15    1000  AE:DD:67:F3:09:5A  Ethernet192
+   16    1000  DC:2F:D1:08:4B:DE  Ethernet192
+   17    1000  50:96:23:AD:F1:65  Ethernet192
+   18    1000  C6:C9:5E:AE:24:42  Ethernet192
+  Total number of entries 18 
+
+  admin@sonic:~$ show mac -p Ethernet192
+  No.    Vlan  MacAddress         Port
+  -----  ------  -----------------  -----------
+    1    1000  E2:8C:56:85:4A:CD  Ethernet192
+    2    1000  A0:1B:5E:47:C9:76  Ethernet192
+    3    1000  AA:54:EF:2C:EE:30  Ethernet192
+    4    1000  A4:3F:F2:17:A3:FC  Ethernet192
+    5    1000  0C:FC:01:72:29:91  Ethernet192
+    6    1000  48:6D:01:7E:C9:FD  Ethernet192
+    7    1000  1C:6B:7E:34:5F:A6  Ethernet192
+    8    1000  EE:81:D9:7B:93:A9  Ethernet192
+    9    1000  CC:F8:8D:BB:85:E2  Ethernet192
+   10    1000  0A:52:B3:9C:FB:6C  Ethernet192
+   11    1000  C6:E2:72:02:D1:23  Ethernet192
+   12    1000  8A:C9:5C:25:E9:28  Ethernet192
+   13    1000  5E:CD:34:E4:94:18  Ethernet192
+   14    1000  7E:49:1F:B5:91:B5  Ethernet192
+   15    1000  AE:DD:67:F3:09:5A  Ethernet192
+   16    1000  DC:2F:D1:08:4B:DE  Ethernet192
+   17    1000  50:96:23:AD:F1:65  Ethernet192
+   18    1000  C6:C9:5E:AE:24:42  Ethernet192
+  Total number of entries 18 
+  ```
+
+- `sonic-clear fdb [OPTIONS]`
+  - Clear FDB table
+
+
+- Example:
+  ```
+  admin@sonic:~$ sonic-clear fdb all
+  FDB entries are cleared.
+  ```
+
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#vlan--FDB)
+
 
 
 # Warm Restart
@@ -3342,208 +3315,143 @@ This command configures the interval for telemetry.
 	admin@sonic:~$ sudo config watermark telemetry interval 999
   ```
 
-## Layer 2 Configuration & Show
-
-### ARP
-
-**show arp**
-
-This command displays the ARP entries in the device with following options.
-1) Display the entire table.
-2) Display the ARP entries learnt on a specific interface.
-3) Display the ARP of a specific ip-address.
-
-  - Usage:  
-    show arp [-if <ifname>] [<ip-address>]
-    show arp - displays all entries
-    show arp -if <ifname> - displays the ARP specific to the specified interface.
-    show arp <ip-address> - displays the ARP specific to the specicied ip-address.
-
-
-- Example:
-  ```
-  admin@sonic:~$ show arp
-   Address          MacAddress            Iface         Vlan
-  -------------     -----------------     -------       ------
-  192.168.1.183     88:5a:92:fb:bf:41     Ethernet44    -
-  192.168.1.175     88:5a:92:fc:95:81     Ethernet28    -
-  192.168.1.181     e4:c7:22:c1:07:7c     Ethernet40    -
-  192.168.1.179     88:5a:92:de:a8:bc     Ethernet36    -
-  192.168.1.118     00:1c:73:3c:de:43     Ethernet64    -
-  192.168.1.11      00:1c:73:3c:e1:38     Ethernet88    -
-  192.168.1.161     24:e9:b3:71:3a:01     Ethernet0     -
-  192.168.1.189     24:e9:b3:9d:57:41     Ethernet56    -
-  192.168.1.187     74:26:ac:8b:8f:c1     Ethernet52    -
-  192.168.1.165     88:5a:92:de:a0:7c     Ethernet8     -
-
-  Total number of entries 10
-  ```
-
-  - Optionally, you can specify the interface in order to display the ARPs learnt on that particular interface
-
-
-- Example:
-  ```
-  admin@sonic:~$ show arp -if Ethernet40
-  Address          MacAddress          Iface        Vlan
-  -------------    -----------------   ----------   ------
-  192.168.1.181    e4:c7:22:c1:07:7c   Ethernet40   -
-  Total number of entries 1 
-
-  ```
-  
-  - Optionally, you can specify an IP address in order to display only that particular entry
-
-
-- Example:
-  ```
-  admin@sonic:~$ show arp 192.168.1.181
-  Address          MacAddress          Iface        Vlan
-  -------------    -----------------   ----------   ------
-  192.168.1.181    e4:c7:22:c1:07:7c   Ethernet40   -
-  Total number of entries 1 
-  ```
-
-### FDB
-
-**show mac**
-
-This command displays the MAC (FDB) entries either in full or partial as given below.
-1) show mac - displays the full table
-2) show mac -v <vlanid> - displays the MACs learnt on the particular VLAN ID.
-3) show mac -p <port>  - displays the MACs learnt on the particular port.
-
-
-  - Usage:  
-    show mac [-v vlan_id] [-p port_name]
-
-
-- Example:
-  ```
-  admin@sonic:~$ show mac
-  No.    Vlan  MacAddress         Port
-  -----  ------  -----------------  -----------
-    1    1000  E2:8C:56:85:4A:CD  Ethernet192
-    2    1000  A0:1B:5E:47:C9:76  Ethernet192
-    3    1000  AA:54:EF:2C:EE:30  Ethernet192
-    4    1000  A4:3F:F2:17:A3:FC  Ethernet192
-    5    1000  0C:FC:01:72:29:91  Ethernet192
-    6    1000  48:6D:01:7E:C9:FD  Ethernet192
-    7    1000  1C:6B:7E:34:5F:A6  Ethernet192
-    8    1000  EE:81:D9:7B:93:A9  Ethernet192
-    9    1000  CC:F8:8D:BB:85:E2  Ethernet192
-   10    1000  0A:52:B3:9C:FB:6C  Ethernet192
-   11    1000  C6:E2:72:02:D1:23  Ethernet192
-   12    1000  8A:C9:5C:25:E9:28  Ethernet192
-   13    1000  5E:CD:34:E4:94:18  Ethernet192
-   14    1000  7E:49:1F:B5:91:B5  Ethernet192
-   15    1000  AE:DD:67:F3:09:5A  Ethernet192
-   16    1000  DC:2F:D1:08:4B:DE  Ethernet192
-   17    1000  50:96:23:AD:F1:65  Ethernet192
-   18    1000  C6:C9:5E:AE:24:42  Ethernet192
-  Total number of entries 18 
-  ```
-
-  - Optionally, you can specify a VLAN ID or interface name in order to display only that particular entries
-
-- Example:
-  ```
-  admin@sonic:~$ show mac -v 1000
-  No.    Vlan  MacAddress         Port
-  -----  ------  -----------------  -----------
-    1    1000  E2:8C:56:85:4A:CD  Ethernet192
-    2    1000  A0:1B:5E:47:C9:76  Ethernet192
-    3    1000  AA:54:EF:2C:EE:30  Ethernet192
-    4    1000  A4:3F:F2:17:A3:FC  Ethernet192
-    5    1000  0C:FC:01:72:29:91  Ethernet192
-    6    1000  48:6D:01:7E:C9:FD  Ethernet192
-    7    1000  1C:6B:7E:34:5F:A6  Ethernet192
-    8    1000  EE:81:D9:7B:93:A9  Ethernet192
-    9    1000  CC:F8:8D:BB:85:E2  Ethernet192
-   10    1000  0A:52:B3:9C:FB:6C  Ethernet192
-   11    1000  C6:E2:72:02:D1:23  Ethernet192
-   12    1000  8A:C9:5C:25:E9:28  Ethernet192
-   13    1000  5E:CD:34:E4:94:18  Ethernet192
-   14    1000  7E:49:1F:B5:91:B5  Ethernet192
-   15    1000  AE:DD:67:F3:09:5A  Ethernet192
-   16    1000  DC:2F:D1:08:4B:DE  Ethernet192
-   17    1000  50:96:23:AD:F1:65  Ethernet192
-   18    1000  C6:C9:5E:AE:24:42  Ethernet192
-  Total number of entries 18 
-
-  admin@sonic:~$ show mac -p Ethernet192
-  No.    Vlan  MacAddress         Port
-  -----  ------  -----------------  -----------
-    1    1000  E2:8C:56:85:4A:CD  Ethernet192
-    2    1000  A0:1B:5E:47:C9:76  Ethernet192
-    3    1000  AA:54:EF:2C:EE:30  Ethernet192
-    4    1000  A4:3F:F2:17:A3:FC  Ethernet192
-    5    1000  0C:FC:01:72:29:91  Ethernet192
-    6    1000  48:6D:01:7E:C9:FD  Ethernet192
-    7    1000  1C:6B:7E:34:5F:A6  Ethernet192
-    8    1000  EE:81:D9:7B:93:A9  Ethernet192
-    9    1000  CC:F8:8D:BB:85:E2  Ethernet192
-   10    1000  0A:52:B3:9C:FB:6C  Ethernet192
-   11    1000  C6:E2:72:02:D1:23  Ethernet192
-   12    1000  8A:C9:5C:25:E9:28  Ethernet192
-   13    1000  5E:CD:34:E4:94:18  Ethernet192
-   14    1000  7E:49:1F:B5:91:B5  Ethernet192
-   15    1000  AE:DD:67:F3:09:5A  Ethernet192
-   16    1000  DC:2F:D1:08:4B:DE  Ethernet192
-   17    1000  50:96:23:AD:F1:65  Ethernet192
-   18    1000  C6:C9:5E:AE:24:42  Ethernet192
-  Total number of entries 18 
-  ```
-
-- `sonic-clear fdb [OPTIONS]`
-  - Clear FDB table
-
-
-- Example:
-  ```
-  admin@sonic:~$ sonic-clear fdb all
-  FDB entries are cleared.
-  ```
-
-### NDP Show
-
-**show ndp**
-This command displays either all the IPv6 neighbor mac addresses, or for a particular IPv6 neighbor, or for all IPv6 neighbors reachable via a specific interface.
-
-  - Usage:  
-    show ndp [-if|--iface <interface-name.] [IP6ADDRESS]
-
-
-- Example:
-  ```
-    **ALL IPv6 NEIGHBORS:**
-	admin@sonic:~$ show ndp
-	Address                   MacAddress         Iface    Vlan    Status
-	------------------------  -----------------  -------  ------  ---------
-	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
-	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
-	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
-	Total number of entries 3 
-	
-	**SPECIFIC IPv6 NEIGHBOR**
-	admin@sonic:~$ show ndp fe80::20c:29ff:feb8:b11e
-	Address                   MacAddress         Iface    Vlan    Status
-	------------------------  -----------------  -------  ------  ---------
-	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
-	Total number of entries 1 
-	
-	**SPECIFIC INTERFACE**
-	admin@sonic:~$ show ndp -if eth0
-	Address                   MacAddress         Iface    Vlan    Status
-	------------------------  -----------------  -------  ------  ---------
-	fe80::20c:29ff:feb8:b11e  00:0c:29:b8:b1:1e  eth0     -       REACHABLE
-	fe80::20c:29ff:feb8:cff0  00:0c:29:b8:cf:f0  eth0     -       REACHABLE
-	fe80::20c:29ff:fef9:324   00:0c:29:f9:03:24  eth0     -       REACHABLE
-	Total number of entries 3 
-
-   ```
-
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Watermark-Configuration-And-Show)
+
+
+
+# Software Installation Commands
+
+SONiC software can be installed in two methods, viz, "using sonic_installer tool", "ONIE Installer".
+
+
+## SONiC Installer
+This is a command line tool available as part of the SONiC software; I=if the device is already running the SONiC software, this tool can be used. 
+This tool has facility to install an alternate image, list the available images and to set the next reboot image.
+
+**sonic_installer install**
+
+This command is to install a new image on the alternate image partition.  This command takes a path to an installable SONiC image or URL and installs the image.
+
+  - Usage:    
+    sonic_installer install <path>  
+
+
+- Example:
+  ```	 
+  admin@sonic:~$ sonic_installer install https://sonic-jenkins.westus.cloudapp.azure.com/job/xxxx/job/buildimage-xxxx-all/xxx/artifact/target/sonic-xxxx.bin
+  New image will be installed, continue? [y/N]: y
+  Downloading image...
+  ...100%, 480 MB, 3357 KB/s, 146 seconds passed
+  Command: /tmp/sonic_image
+  Verifying image checksum ... OK.
+  Preparing image archive ... OK.
+  ONIE Installer: platform: XXXX
+  onie_platform: 
+  Installing SONiC in SONiC
+  Installing SONiC to /host/image-xxxx
+  Directory /host/image-xxxx/ already exists. Cleaning up...
+  Archive:  fs.zip
+     creating: /host/image-xxxx/boot/
+    inflating: /host/image-xxxx/boot/vmlinuz-3.16.0-4-amd64  
+    inflating: /host/image-xxxx/boot/config-3.16.0-4-amd64  
+    inflating: /host/image-xxxx/boot/System.map-3.16.0-4-amd64  
+    inflating: /host/image-xxxx/boot/initrd.img-3.16.0-4-amd64  
+     creating: /host/image-xxxx/platform/
+   extracting: /host/image-xxxx/platform/firsttime  
+    inflating: /host/image-xxxx/fs.squashfs  
+    inflating: /host/image-xxxx/dockerfs.tar.gz  
+  Log file system already exists. Size: 4096MB
+  Installed SONiC base image SONiC-OS successfully
+
+  Command: cp /etc/sonic/minigraph.xml /host/
+
+  Command: grub-set-default --boot-directory=/host 0
+
+  Done
+  ```
+
+**sonic_installer list**
+
+This command displays information about currently installed images. It displays a list of installed images, currently running image and image set to be loaded in next reboot.
+
+  - Usage:  
+    sonic_installer list
+
+- Example:  
+   ```
+  admin@sonic:~$ sonic_installer list 
+  Current: SONiC-OS-HEAD.XXXX
+  Next: SONiC-OS-HEAD.XXXX
+  Available: 
+  SONiC-OS-HEAD.XXXX
+  SONiC-OS-HEAD.YYYY
+  ```
+
+**sonic_installer set_default**
+
+This command can be used to change which image to be loaded by default in all the subsequent reboots.
+
+  - Usage:  
+    sonic_installer set_default <image_name>
+
+- Example:
+  ```   
+  admin@sonic:~$ sonic_installer set_default SONiC-OS-HEAD.XXXX
+  ```
+
+**sonic_installer set_next_boot**
+
+This command can be used to change which image to be in the *next* reboot only. Note that it will fallback to current image in all other subsequent reboots after the next reboot.
+
+  - Usage:  
+    sonic_installer set_next_boot <image_name>
+
+- Example:
+  ```
+  admin@sonic:~$ sonic_installer set_next_boot SONiC-OS-HEAD.XXXX
+  ```
+
+**sonic_installer remove**
+
+This command can be used to remove the unused SONiC image from the disk. Note that it's *not* allowed to remove currently running image.
+
+  - Usage:  
+    sonic_installer remove <image_name>
+
+- Example:
+  ```
+  admin@sonic:~$ sonic_installer remove SONiC-OS-HEAD.YYYY
+  Image will be removed, continue? [y/N]: y
+  Updating GRUB...
+  Done
+  Removing image root filesystem...
+  Done
+  Command: grub-set-default --boot-directory=/host 0
+
+  Image removed
+  ```
+ 
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Software-Installation-Commands)
+
+
+
+# Troubleshooting Commands
+
+For troubleshooting and debugging purposes, this command gathers pertinent information about the state of the device; information is as diverse as syslog entries, database state, routing-stack state, etc., It then compresses it into an archive file. This archive file can be sent to the SONiC development team for examination.
+Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS.tar.gz`
+
+  - Usage:  
+    show techsupport
+
+
+- Example:
+  ```	
+  admin@sonic:~$ show techsupport
+  ```
+
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Troubleshooting-commands)
+
+
 
 
 # Routing Stack Configuration And Show
