@@ -3,8 +3,6 @@
 Table of Contents
 =================
 
-   * [SONiC COMMAND LINE INTERFACE GUIDE](#sonic-command-line-interface-guide)
-   * [Table of Contents](#table-of-contents)
    * [Introduction](#introduction)
    * [Basic Configuration And Show](#basic-configuration-and-show)
       * [SSH Login](#ssh-login)
