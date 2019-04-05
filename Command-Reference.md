@@ -41,7 +41,7 @@ Table of Contents
    * [IP](#ip)
       * [IP show commands](#ip-show-commands)
 	  * [IPv6 show commands](#ipv6-show-commands)
-    * [LLDP](#lldp)
+   * [LLDP](#lldp)
       * [LLDP show commands](#lldp-show-commands)
    * [Loading, Reloading And Saving Configuration](#loading-reloading-and-saving-configuration)
       * [Load config command](#load-config-command)
