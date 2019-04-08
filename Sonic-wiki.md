@@ -36,7 +36,7 @@ However, this feature is not implemented by all applications yet. By Sep
 is BGP (docker-fpm-quagga). For other applications, a manual restart is
 required after configuration changes in ConfigDB.
 
-## **Redis and Json Schema** 
+# **Redis and Json Schema** 
 
 ConfigDB uses a table-object schema that is similar with
 [AppDB](https://github.com/Azure/sonic-swss/blob/4c56d23b9ff4940bdf576cf7c9e5aa77adcbbdcc/doc/swss-schema.md),
