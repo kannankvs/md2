@@ -1,0 +1,74 @@
+{
+    "acl": {
+        "acl-sets": {
+            "acl-set": {
+                "SNMP-ACL": {
+                    "acl-entries": {
+                        "acl-entry": {
+                            "1": {
+                                "actions": {
+                                    "config": {
+                                        "forwarding-action": "ACCEPT"
+                                    }
+                                },
+                                "config": {
+                                    "sequence-id": 1
+                                },
+                                "ip": {
+                                    "config": {
+                                        "protocol": "IP_UDP",
+                                        "source-ip-address": "1.1.1.1/32"
+                                    }
+                                }
+                            },
+                            "3": {
+                                "actions": {
+                                    "config": {
+                                        "forwarding-action": "ACCEPT"
+                                    }
+                                },
+                                "config": {
+                                    "sequence-id": 3
+                                },
+                                "ip": {
+                                    "config": {
+                                        "protocol": "IP_UDP",
+                                        "source-ip-address": "3.3.3.3/32"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "config": {
+                        "name": "SNMP-ACL"
+                    }
+                },
+                "ssh-only": {
+                    "acl-entries": {
+                        "acl-entry": {
+                            "4": {
+                                "actions": {
+                                    "config": {
+                                        "forwarding-action": "ACCEPT"
+                                    }
+                                },
+                                "config": {
+                                    "sequence-id": 1
+                                },
+                                "ip": {
+                                    "config": {
+                                        "protocol": "IP_TCP",
+                                        "source-ip-address": "4.4.4.4/8"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "config": {
+                        "name": "ssh-only"
+                    }
+                }
+            }
+        }
+    }
+}
