@@ -7,9 +7,9 @@ Table of Contents
    * [Basic Configuration And Show](#basic-configuration-and-show)
       * [SSH Login](#ssh-login)
       * [Configuring Management Interface](#configuring-management-interface)
+	  * [Show Help](#show-help)
       * [Config Help](#config-help)
       * [Show Versions](#show-versions)
-      * [Show Help](#show-help)
       * [Show System Status](#show-system-status)
       * [Show Hardware Platform](#show-hardware-platform)
          * [Transceivers](#transceivers)
@@ -164,12 +164,12 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 The management interface (eth0) in SONiC is configured (by default) to use DHCP client to get the IP address from the DHCP server. Connect the management interface to the same network in which your DHCP server is connected and get the IP address from DHCP server.
 The IP address received from DHCP server can be verified using the "/sbin/ifconfig eth0" linux command.
 
-SONiC does not provide a CLI to configure the static IP for the management interface. There are alternate few alternate ways by which a static IP address can be configured for the management interface.  
+SONiC does not provide a CLI to configure the static IP for the management interface. There are alternate ways by which a static IP address can be configured for the management interface.  
    1) use "ifconfig eth0" linux command (example: ifconfig eth0 10.11.12.13/24). This configuration won't be preserved across reboot.
    2) use config_db.jsob and configure the MGMT_INTERFACE key with the appropriate values. Refer [here](https://github.com/Azure/SONiC/wiki/Configuration#Management-Interface) 
    3) use minigraph.xml and configure "ManagementIPInterfaces" tag inside "DpgDesc" tag as given at the [page](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
    
-Once if the IP address is configured, the same can be verified using "/sbin/ifconfig eth0" linux command.
+Once the IP address is configured, the same can be verified using "/sbin/ifconfig eth0" linux command.
 Users can SSH login to this management interface IP address from their management network.
 
   - Example:
@@ -179,6 +179,88 @@ Users can SSH login to this management interface IP address from their managemen
          inet 10.11.11.13  netmask 255.255.255.0  broadcast 10.11.12.255
    ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
+
+
+## Show Help  
+
+**show help**  
+This command displays the full list of show commands available in the software; the output of each of those show commands can be used to analyze, debug or troubleshoot the network node.
+
+- Usage:  
+  You can enter `show -?`, `show -h` or `show --help`
+
+- Example:
+  ```
+  admin@sonic:~$ show -?
+  Usage: show [OPTIONS] COMMAND [ARGS]...
+    SONiC command line - 'show' command
+
+  Options:
+    -?, -h, --help  Show this message and exit.
+
+  Commands:
+    aaa                   Show AAA configuration
+    acl                   Show ACL related information
+    arp                   Show IP ARP table
+    clock                 Show date and time
+    ecn                   Show ECN configuration
+    environment           Show environmentals (voltages, fans, temps)
+    interfaces            Show details of the network interfaces
+    ip                    Show IP (IPv4) commands
+    ipv6                  Show IPv6 commands
+    line                  Show all /dev/ttyUSB lines and their info
+    lldp                  LLDP (Link Layer Discovery Protocol)...
+    logging               Show system log
+    mac                   Show MAC (FDB) entries
+    mirror_session        Show existing everflow sessions
+    mmu                   Show mmu configuration
+    ndp                   Show IPv6 Neighbour table
+    ntp                   Show NTP information
+    pfc                   Show details of the priority-flow-control...
+    platform              Show platform-specific hardware info
+    priority-group        Show details of the PGs
+    processes             Display process information
+    queue                 Show details of the queues
+    reboot-cause          Show cause of most recent reboot
+    route-map             show route-map
+    runningconfiguration  Show current running configuration...
+    services              Show all daemon services
+    startupconfiguration  Show startup configuration information
+    system-memory         Show memory information
+    tacacs                Show TACACS+ configuration
+    techsupport           Gather information for troubleshooting
+    uptime                Show system uptime
+    users                 Show users
+    version               Show version information
+    vlan                  Show VLAN information
+    warm_restart          Show warm restart configuration and state
+    watermark             Show details of watermark
+
+  ```
+
+The same syntax applies to all subgroups of `show` which themselves contain subcommands, and subcommands which accept options/arguments.
+
+- Example:
+  ```
+  user@debug:~$ show interfaces -?
+
+    Show details of the network interfaces
+
+  Options:
+    -?, -h, --help  Show this message and exit.
+
+  Commands:
+    counters     Show interface counters
+    description  Show interface status, protocol and...
+    naming_mode  Show interface naming_mode status
+    neighbor     Show neighbor related information
+    portchannel  Show PortChannel information
+    status       Show Interface status information
+    transceiver  Show SFP Transceiver information
+  ```
+
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
+
 
 ## Config Help  
 
@@ -270,86 +352,7 @@ This command displays relevant information as the SONiC and Linux kernel version
   ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
-## Show Help  
 
-**show help**  
-This command displays the full list of show commands available in the software; the output of each of those show commands can be used to analyze, debug or troubleshoot the network node.
-
-- Usage:  
-  You can enter `show -?`, `show -h` or `show --help`
-
-- Example:
-  ```
-  admin@sonic:~$ show -?
-  Usage: show [OPTIONS] COMMAND [ARGS]...
-    SONiC command line - 'show' command
-
-  Options:
-    -?, -h, --help  Show this message and exit.
-
-  Commands:
-    aaa                   Show AAA configuration
-    acl                   Show ACL related information
-    arp                   Show IP ARP table
-    clock                 Show date and time
-    ecn                   Show ECN configuration
-    environment           Show environmentals (voltages, fans, temps)
-    interfaces            Show details of the network interfaces
-    ip                    Show IP (IPv4) commands
-    ipv6                  Show IPv6 commands
-    line                  Show all /dev/ttyUSB lines and their info
-    lldp                  LLDP (Link Layer Discovery Protocol)...
-    logging               Show system log
-    mac                   Show MAC (FDB) entries
-    mirror_session        Show existing everflow sessions
-    mmu                   Show mmu configuration
-    ndp                   Show IPv6 Neighbour table
-    ntp                   Show NTP information
-    pfc                   Show details of the priority-flow-control...
-    platform              Show platform-specific hardware info
-    priority-group        Show details of the PGs
-    processes             Display process information
-    queue                 Show details of the queues
-    reboot-cause          Show cause of most recent reboot
-    route-map             show route-map
-    runningconfiguration  Show current running configuration...
-    services              Show all daemon services
-    startupconfiguration  Show startup configuration information
-    system-memory         Show memory information
-    tacacs                Show TACACS+ configuration
-    techsupport           Gather information for troubleshooting
-    uptime                Show system uptime
-    users                 Show users
-    version               Show version information
-    vlan                  Show VLAN information
-    warm_restart          Show warm restart configuration and state
-    watermark             Show details of watermark
-
-  ```
-
-The same syntax applies to all subgroups of `show` which themselves contain subcommands, and subcommands which accept options/arguments.
-
-- Example:
-  ```
-  user@debug:~$ show interfaces -?
-
-    Show details of the network interfaces
-
-  Options:
-    -?, -h, --help  Show this message and exit.
-
-  Commands:
-    counters     Show interface counters
-    description  Show interface status, protocol and...
-    naming_mode  Show interface naming_mode status
-    neighbor     Show neighbor related information
-    portchannel  Show PortChannel information
-    status       Show Interface status information
-    transceiver  Show SFP Transceiver information
-  ```
-
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
- 
  
 ## Show System Status
 This sub-section explains some set of sub-commands that are used to display the status of various parameters pertaining to the physical state of the network node. 
@@ -366,13 +369,13 @@ This command displays the current date and time configured on the system
   Mon Mar 25 20:25:16 UTC 2019
   ```
   
-**show environment`**  
+**show environment**  
 This command displays the platform environmentals, such as voltages, temperatures and fan speeds
 
 -  Usage:  
    show environment
 
-- Example: Note that the show output has got lot of information; only the sample output is given in the below example
+- Example: 
   ```
   admin@sonic:~$ show environment
   coretemp-isa-0000
@@ -408,8 +411,10 @@ This command displays the platform environmentals, such as voltages, temperature
     PSU 1:
       Input:           AC
   <... few more things ...>
-
   ```
+
+`Note`: The show output has got lot of information; only the sample output is given in the above example. Though the exact output varies amongst different platforms, in general it refers to the overall physical state of the hardware.
+
 
 **show reboot-cause**  
 This command displays the cause of the previous reboot
@@ -474,7 +479,7 @@ This command displays all the currently stored log messages
   admin@sonic:~$ show logging --follow
   ```
 
-**show users`**  
+**show users**  
 This command displays a list of users currently logged in to the device
 
 - Usage:  
@@ -531,6 +536,36 @@ This command displays information stored on the system EEPROM.
   Base MAC Address      12 FE:EC:BA:AB:CD:EF
   (checksum valid)
   ```
+  
+  ```
+  admin@arc-switch1025:~$ show platform syseeprom
+  TlvInfo Header:
+    Id String:    TlvInfo
+    Version:      1
+    Total Length: 527
+  TLV Name             Code Len Value
+  ---- --- -----
+  Product Name         0x21  64 MSN2700
+  Part Number          0x22  20 MSN2700-CS2FO
+  Serial Number        0x23  24 MT1822K07815
+  Base MAC Address     0x24   6 50:6B:4B:8F:CE:40
+  Manufacture Date     0x25  19 05/28/2018 23:56:02
+  Device Version       0x26   1 16
+  MAC Addresses        0x2A   2 128
+  Manufacturer         0x2B   8 Mellanox
+  Vendor Extension     0xFD  36
+  Vendor Extension     0xFD 164
+  Vendor Extension     0xFD  36
+  Vendor Extension     0xFD  36
+  Vendor Extension     0xFD  36
+  Platform Name        0x28  18 x86_64-mlnx_x86-r0
+  ONIE Version         0x29  21 2018.08-5.2.0006-9600
+  CRC-32               0xFE   4 0x11C017E1
+ 
+  (checksum valid)
+  ```
+
+`Note`: The output for the above command varies based on the hardware make. Mentioned above are two different outputs
 
 **show platform psustatus**  
 This command displays the status of the device's power supply units
