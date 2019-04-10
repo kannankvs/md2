@@ -14,7 +14,7 @@ Connect the console port of the device and use the 9600 baud rate to access the 
 Users shall use the default username/password "admin/YourPaSsWoRd" to login to the device through the console port.
 
 After logging into the device, SONiC software can be configured in following three methods.
- 1) [Command Line Interface] (https://github.com/Azure/SONiC/wiki/Command-Reference)
+ 1) [Command Line Interface](https://github.com/Azure/SONiC/wiki/Command-Reference)
  2) [config_db.json](https://github.com/Azure/SONiC/wiki/Configuration) 
  3) [minigraph.xml](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
  
@@ -54,7 +54,7 @@ Root privileges can be obtained either by using "sudo" keyword in front of all c
 Note that all commands are case sensitive.
 
 
-# How to login, how to configure management interface, loopback address configuration
+# 1) How to login, how to configure management interface, loopback address configuration
 
 
 ## Login (Repeat from CLIGuide)
@@ -106,7 +106,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 To be filled
 
 
-# How to check the software version running on the device? And, how to check the list of features available in this software version? How to upgrade to new software version?
+# 2) How to check the software version running on the device? And, how to check the list of features available in this software version? How to upgrade to new software version?
 
 ## Show Versions (Repeat from CLIGuide)
  
@@ -166,7 +166,7 @@ Give link to QuickStartGuide that explains the ONIE method to install a new soft
 Copy and paste the "sonic_installer" from CLIGuide to explain the alternate way to install new software version/
 
 
-# How to check the default startup configuration with which the device is currently running? How to load a new configuration to this device?  
+# 3) How to check the default startup configuration with which the device is currently running? How to load a new configuration to this device?  
 
 Users shall use the "show runningconfiguration" command to check the current running configuration. 
 If users had not done any configuration change after the reboot, this will be same as the default startup configuration.
