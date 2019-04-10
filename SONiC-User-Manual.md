@@ -27,11 +27,11 @@ Information in this manual is based on the SONiC software version 201811 (build#
 
 
 This manual provides information related to the following points.
-1) How to login, how to configure management interface, loopback address configuration
-2) How to check the software version running on the device? And, how to check the list of features available in this software version? How to upgrade to new software version?
-3) How to check the default startup configuration with which the device is currently running?, How to load a new configuration to this device?
-4) How to check the interface/link/port status, basic cable connectivity status, port speed, etc.,?
-5) How to check the BGP protocol status?
+1) How to login, how to configure management interface, loopback address configuration -  Repeat from CLIGuide.
+2) How to check the software version running on the device? And, how to check the list of features available in this software version? How to upgrade to new software version? - Repeatt from CLIGuide.
+3) How to check the default startup configuration with which the device is currently running?, How to load a new configuration to this device? - some part repeat from CLIGuide. Extra info about minigraph.xml and config_db.json, which is a repeat from correponding documents
+4) How to check the interface/link/port status, basic cable connectivity status, port speed, etc.,? - Repeat from CLIGuide.
+5) How to check the BGP protocol status? - Repat from CLIGuide.
 6) Steps to configure Interface - will be repetitive of CLIGuide
 7) Steps to configure BGP- will be repetitive of CLIGuide
 8) Steps to configure ACL- will be repetitive of CLIGuide
