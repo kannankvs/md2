@@ -39,6 +39,11 @@ This manual provides information related to the following points.
 10) Steps to configure Mirroring feature- will be repetitive of CLIGuide
 11) Example configuration for T0 topology - Need to confirm whether it is good to explain this. We can explain each of the configuration example given in minigraph.xml, we can explain the equivalent config_db.json for each of those configurations, we can also give CLI commands (if exist) for each of those configuration.
 12) Basic troubleshooting - We can get some example trouble shooting commands/steps for specific issues, but providing a generic guide will be repeatitive of the commands.
+
+TBD: Choose which of the following options shall we used for the guide.
+
+In addition, we shall explain about "show techsupport", about "syslogs" (local logging, remote logging), about "snmp traps" & "tcpdump".
+
 **Option1:Give example problems and steps/tips/suggestions**  
 1) How to debug/troubleshoot if the port is down? Explain what to check in application level, what to check in configDB, what to check in APP_DB, what to check in ASIC_DB, what to check in SAI and what to check in chip?
 2) How to debug/troubleshoot if the routing does not happen as expected?
@@ -176,9 +181,9 @@ This command displays relevant information as the SONiC and Linux kernel version
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
 ## check the list of features available in this software version
-To be filled.
-Provide link to roadmap or any document that captures the features corresponding to a particular release.
-TBD: Need information from Xin: If such document is not available, either it can be prepared, or remove this section.
+
+[SONiC roadmap planning](#https://github.com/Azure/SONiC/wiki/Sonic-Roadmap-Planning) explains the various features that are added in every software release.
+TBD: Is this enough? Need information from Xin.
 
 
 ## How to upgrade to new software version? 
