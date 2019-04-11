@@ -53,6 +53,8 @@ In addition, we shall explain about "show techsupport", about "syslogs" (local l
 6) How to debug/troubleshoot mirroring issues?
 7) How to debug//troubleshoot ACL issues?
 8) How to debug/troubleshoot Everflow issues? 
+9) what are the dockers & services that are running in SONiC? how to debug a particular docker and its state/status? can we restart a docker if it is not running? can we restart a docker if it had crashed earlier?
+10) What are the mandatory configurations required to bring up the SONiC?
 
 **Option2:Give generic commands that are commonly used to debug various problems**  
 	(a) Check the Link down/Up status - Repeat of Point4.
@@ -339,3 +341,142 @@ User shall use the following BGP commands to check the BGP neighbor status.
 1) show ip bgp neighbors
 2) show ipv6 bgp neighbors
 
+# 11) Example Configuration
+
+
+
+# 12) Troubleshooting
+
+For troubleshooting and debugging purposes, users shall use the following commands and methods to isolate the problem.
+They can use "show techsupport" to collect the information from the device, shall use syslog to view the syslogs printed by the services, shall use the linux utitlies like "ping", "tcpdump", etc., to check the connectivity and packet tracing.
+
+## Basic Troubleshooting Commands
+
+**show techsupport**  
+This command gathers pertinent information about the state of the device; information is as diverse as syslog entries, database state, routing-stack state, etc., It then compresses it into an archive file. This archive file can be sent to the SONiC development team for examination.
+Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS.tar.gz`
+Few details that the dump includes are given below: 
+-	Interface details  
+-	Platform  details
+-	Machine.conf 
+-	Vlan configs
+-	Routes
+-	Sensor , transceiver details 
+-	Syslog
+-	Ip configs 
+-	Bgp details 
+-	Device Configs  (json/ minigraph) 
+
+
+  - Usage:  
+    show techsupport
+
+
+- Example:
+  ```	
+  admin@sonic:~$ show techsupport
+  ```
+
+**syslog**  
+  
+-	System logs and event messages  from all dockers are captured via rsyslog  and saved in /var/log/syslog 
+-	Console logs can be viewed using "show logging" command also. This command prints the information in syslog in console .
+-	Show logging -f  will tail the output of syslogs in  console/ssh session.
+
+**tcpdump**  
+
+-	tcpdump is a common packet analyzer that runs under the sonic command line . It allows the user to display TCP/IP and other packets being transmitted or received over a network
+ex: tcpdump -i Ethernet0 
+
+## How to troubleshoot the port up/down status?  
+
+All port related configuration done using CLI/ConfigDB/Minigraph are saved in the redis config database. Such configuration is handled by the appropriate modules and the result of such operation might be stored in the application database (APP_DB).
+Once if the modules complete their operation, if the result needs to be programmed into the ASIC, same will be synchronized by syncd service and the result is stored in the ASIC_DB.
+
+When user need to debug/troubleshoot any issue, the best is to verify all of these databases as explained below.
+1) Check the configuration in the CONFIG_DB and status using "show" commands.
+2) Check the application status of the application in APP_DB.
+3) Check the ASIC related programming state and the status in ASIC_DB.
+4) Check the actual ASIC.
+
+1) How to check the configuration & status of ports?
+
+Following "show" commands can be used to check the port status.
+
+-	Show interface status ( up/down)
+-	Show interface transceiver  presence 
+
+Following "redis-dump" command can be used to dump the port configuraiton from the ConfigDB.
+
+Example : 
+```
+root@sonic-z9100-02:~# redis-dump -d 4 -k  "PORT|Ethernet4" -y
+{
+  "PORT|Ethernet4": {
+    "type": "hash",
+    "value": {
+      "admin_status": "up",
+      "alias": "fiftyGigE1/2/1",
+      "description": "Servers1:eth0",
+      "index": "2",
+      "lanes": "53,54",
+      "mtu": "9100",
+      "pfc_asym": "off",
+      "speed": "50000"
+    }
+  }
+  
+```
+
+Following redis-dump can be used to check the port status in the APP_DB.
+
+Example:
+```
+root@sonic-z9100-02:~# redis-dump -d 0 -k *PORT_TABLE:Ethernet62* -y
+{
+  "PORT_TABLE:Ethernet62": {
+    "type": "hash",
+    "value": {
+      "admin_status": "down",
+      "alias": "fiftyGigE1/16/2",
+      "description": "fiftyGigE1/16/2",
+      "index": "16",
+      "lanes": "95,96",
+      "mtu": "9100",
+      "oper_status": "down",
+      "pfc_asym": "off",
+      "speed": "50000"
+    }
+  }
+```
+
+Following redis-dump can be used to check the port status in the ASIC_DB.
+
+Example:
+```
+root@sonic-z9100-02:~# redis-dump -d 1 -k  "ASIC_STATE:SAI_OBJECT_TYPE_PORT:oid:0x1000000000014"  -y
+{
+  "ASIC_STATE:SAI_OBJECT_TYPE_PORT:oid:0x1000000000014": {
+    "type": "hash",
+    "value": {
+      "NULL": "NULL",
+      "SAI_PORT_ATTR_ADMIN_STATE": "true",
+      "SAI_PORT_ATTR_INGRESS_ACL": "oid:0xb000000000a61",
+      "SAI_PORT_ATTR_MTU": "9122",
+      "SAI_PORT_ATTR_PORT_VLAN_ID": "1000",
+      "SAI_PORT_ATTR_PRIORITY_FLOW_CONTROL": "24",
+      "SAI_PORT_ATTR_QOS_DSCP_TO_TC_MAP": "oid:0x14000000000a34",
+      "SAI_PORT_ATTR_QOS_PFC_PRIORITY_TO_QUEUE_MAP": "oid:0x14000000000a35",
+      "SAI_PORT_ATTR_QOS_TC_TO_PRIORITY_GROUP_MAP": "oid:0x14000000000a38",
+      "SAI_PORT_ATTR_QOS_TC_TO_QUEUE_MAP": "oid:0x14000000000a39",
+      "SAI_PORT_ATTR_SPEED": "50000"
+    }
+  }
+```
+  
+Following is an example for checking the port status for Broadcom ASICs.
+
+Example:
+```
+BCM : bcmcmd “ps”
+```
