@@ -37,8 +37,19 @@ This manual provides information related to the following points.
 8) Steps to configure ACL- will be repetitive of CLIGuide
 9) Steps to configure COPP- will be repetitive of CLIGuide
 10) Steps to configure Mirroring feature- will be repetitive of CLIGuide
-11) Example configuration for T0 topology.
-12) Basic troubleshooting
+11) Example configuration for T0 topology - Need to confirm whether it is good to explain this. We can explain each of the configuration example given in minigraph.xml, we can explain the equivalent config_db.json for each of those configurations, we can also give CLI commands (if exist) for each of those configuration.
+12) Basic troubleshooting - We can get some example trouble shooting commands/steps for specific issues, but providing a generic guide will be repeatitive of the commands.
+**Option1:Give example problems and steps/tips/suggestions**  
+1) How to debug/troubleshoot if the port is down? Explain what to check in application level, what to check in configDB, what to check in APP_DB, what to check in ASIC_DB, what to check in SAI and what to check in chip?
+2) How to debug/troubleshoot if the routing does not happen as expected?
+3) How to debug/troubleshoot if ECMP does not happen?
+4) How to debug/troubleshoot if QoS is dropping lot of packets?
+5) How to debug/troubleshoot platform issues?
+6) How to debug/troubleshoot mirroring issues?
+7) How to debug//troubleshoot ACL issues?
+8) How to debug/troubleshoot Everflow issues? 
+
+**Option2:Give generic commands that are commonly used to debug various problems**  
 	(a) Check the Link down/Up status - Repeat of Point4.
 	(b)	Check if device is in Inoperable state, check if all services are running. 
     (c) Check High CPU/Memory usage - Copy & paste "show processes" command.
@@ -81,7 +92,13 @@ By default, login takes the user to the default prompt from which all the show c
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
-## Configuring Management Interface (Repeat from CLIGuide)
+## Username & Password  
+
+There is no separate CLI for adding users and for changing passwords. Users shall use the linux commands "useradd" command to add new users and use the command "passwd <username>" to change the password for the specific username.
+
+
+
+## Configuring Management Interface and Loopback Interface (Repeat from CLIGuide)
 
 The management interface (eth0) in SONiC is configured (by default) to use DHCP client to get the IP address from the DHCP server. Connect the management interface to the same network in which your DHCP server is connected and get the IP address from DHCP server.
 The IP address received from DHCP server can be verified using the "/sbin/ifconfig eth0" linux command.
@@ -91,7 +108,7 @@ SONiC does not provide a CLI to configure the static IP for the management inter
    2) use config_db.jsob and configure the MGMT_INTERFACE key with the appropriate values. Refer [here](https://github.com/Azure/SONiC/wiki/Configuration#Management-Interface) 
    3) use minigraph.xml and configure "ManagementIPInterfaces" tag inside "DpgDesc" tag as given at the [page](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
    
-Once if the IP address is configured, the same can be verified using "/sbin/ifconfig eth0" linux command.
+Once the IP address is configured, the same can be verified using "/sbin/ifconfig eth0" linux command.
 Users can SSH login to this management interface IP address from their management network.
 
   - Example:
@@ -100,10 +117,15 @@ Users can SSH login to this management interface IP address from their managemen
    eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
          inet 10.11.11.13  netmask 255.255.255.0  broadcast 10.11.12.255
    ```
+   
+The same method shall be used to configure the loopback interface address as follows.
+1) "/sbin/ifconfig lo" linux command shall be used, OR,
+2) Add the key LOOPBACK_INTERFACE & value in config_db.json and load it, OR,
+3) use minigraph.xml and configure LoopbackIPInterfaces tag inside the "DpgDesc" tag.
+
+   
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
-## Configuring Loopback Interface (Repeat from CLIGuide)
-To be filled
 
 
 # 2) How to check the software version running on the device? And, how to check the list of features available in this software version? How to upgrade to new software version?
@@ -156,14 +178,126 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 ## check the list of features available in this software version
 To be filled.
 Provide link to roadmap or any document that captures the features corresponding to a particular release.
-TBD: If such document is not available, either it can be prepared, or remove this section.
+TBD: Need information from Xin: If such document is not available, either it can be prepared, or remove this section.
 
 
 ## How to upgrade to new software version? 
-Explain how to do software upgrade. 
-Give link to list of available software versions.
-Give link to QuickStartGuide that explains the ONIE method to install a new software version.
-Copy and paste the "sonic_installer" from CLIGuide to explain the alternate way to install new software version/
+
+
+SONiC software can be installed in two methods, viz, using "ONIE Installer" or "sonic_installer tool".
+"ONIE Installer" shall be used as explained in the [QuickStartGuide](#https://github.com/Azure/SONiC/wiki/Quick-Start)
+"sonic_installer" shall be used as given below.
+
+
+## SONiC Installer (Repeated from CLIGuide)
+This is a command line tool available as part of the SONiC software; If the device is already running the SONiC software, this tool can be used to install an alternate image in the partition.
+This tool has facility to install an alternate image, list the available images and to set the next reboot image.
+ 
+**sonic_installer install**  
+
+This command is used to install a new image on the alternate image partition.  This command takes a path to an installable SONiC image or URL and installs the image.
+
+  - Usage:    
+    sonic_installer install <path>  
+
+
+- Example:
+  ```	 
+  admin@sonic:~$ sonic_installer install https://sonic-jenkins.westus.cloudapp.azure.com/job/xxxx/job/buildimage-xxxx-all/xxx/artifact/target/sonic-xxxx.bin
+  New image will be installed, continue? [y/N]: y
+  Downloading image...
+  ...100%, 480 MB, 3357 KB/s, 146 seconds passed
+  Command: /tmp/sonic_image
+  Verifying image checksum ... OK.
+  Preparing image archive ... OK.
+  ONIE Installer: platform: XXXX
+  onie_platform: 
+  Installing SONiC in SONiC
+  Installing SONiC to /host/image-xxxx
+  Directory /host/image-xxxx/ already exists. Cleaning up...
+  Archive:  fs.zip
+     creating: /host/image-xxxx/boot/
+    inflating: /host/image-xxxx/boot/vmlinuz-3.16.0-4-amd64  
+    inflating: /host/image-xxxx/boot/config-3.16.0-4-amd64  
+    inflating: /host/image-xxxx/boot/System.map-3.16.0-4-amd64  
+    inflating: /host/image-xxxx/boot/initrd.img-3.16.0-4-amd64  
+     creating: /host/image-xxxx/platform/
+   extracting: /host/image-xxxx/platform/firsttime  
+    inflating: /host/image-xxxx/fs.squashfs  
+    inflating: /host/image-xxxx/dockerfs.tar.gz  
+  Log file system already exists. Size: 4096MB
+  Installed SONiC base image SONiC-OS successfully
+
+  Command: cp /etc/sonic/minigraph.xml /host/
+
+  Command: grub-set-default --boot-directory=/host 0
+
+  Done
+  ```
+
+**sonic_installer list**  
+
+This command displays information about currently installed images. It displays a list of installed images, currently running image and image set to be loaded in next reboot.
+
+  - Usage:  
+    sonic_installer list
+
+- Example:  
+   ```
+  admin@sonic:~$ sonic_installer list 
+  Current: SONiC-OS-HEAD.XXXX
+  Next: SONiC-OS-HEAD.XXXX
+  Available: 
+  SONiC-OS-HEAD.XXXX
+  SONiC-OS-HEAD.YYYY
+  ```
+
+**sonic_installer set_default**  
+
+This command is be used to change the image which can be loaded by default in all the subsequent reboots.
+
+  - Usage:  
+    sonic_installer set_default <image_name>
+
+- Example:
+  ```   
+  admin@sonic:~$ sonic_installer set_default SONiC-OS-HEAD.XXXX
+  ```
+
+**sonic_installer set_next_boot**  
+
+This command is used to change the image that can be loaded in the *next* reboot only. Note that it will fallback to current image in all other subsequent reboots after the next reboot.
+
+  - Usage:  
+    sonic_installer set_next_boot <image_name>
+
+- Example:
+  ```
+  admin@sonic:~$ sonic_installer set_next_boot SONiC-OS-HEAD.XXXX
+  ```
+
+**sonic_installer remove**  
+
+This command is used to remove the unused SONiC image from the disk. Note that it's *not* allowed to remove currently running image.
+
+  - Usage:  
+    sonic_installer remove <image_name>
+
+- Example:
+  ```
+  admin@sonic:~$ sonic_installer remove SONiC-OS-HEAD.YYYY
+  Image will be removed, continue? [y/N]: y
+  Updating GRUB...
+  Done
+  Removing image root filesystem...
+  Done
+  Command: grub-set-default --boot-directory=/host 0
+
+  Image removed
+  ```
+ 
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Software-Installation-Commands)
+
 
 
 # 3) How to check the default startup configuration with which the device is currently running? How to load a new configuration to this device?  
