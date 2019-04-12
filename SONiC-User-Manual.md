@@ -3,6 +3,33 @@
 Table of Contents
 =================
 
+   * [SONiC USER MANUAL](#sonic-user-manual)
+   * [Table of Contents](#table-of-contents)
+   * [Introduction](#introduction)
+   * [CLI Tips](#cli-tips)
+   * [1) How to login, how to configure management interface, loopback address configuration](#1-how-to-login-how-to-configure-management-interface-loopback-address-configuration)
+      * [Login (Repeat from CLIGuide)](#login-repeat-from-cliguide)
+      * [Username &amp; Password](#username--password)
+      * [Configuring Management Interface and Loopback Interface (Repeat from CLIGuide)](#configuring-management-interface-and-loopback-interface-repeat-from-cliguide)
+   * [2) How to check the software version running on the device? And, how to check the list of features available in this software version? How to upgrade to new software version?](#2-how-to-check-the-software-version-running-on-the-device-and-how-to-check-the-list-of-features-available-in-this-software-version-how-to-upgrade-to-new-software-version)
+      * [Show Versions (Repeat from CLIGuide)](#show-versions-repeat-from-cliguide)
+      * [check the list of features available in this software version](#check-the-list-of-features-available-in-this-software-version)
+      * [How to upgrade to new software version?](#how-to-upgrade-to-new-software-version)
+      * [SONiC Installer (Repeated from CLIGuide)](#sonic-installer-repeated-from-cliguide)
+   * [3) How to check the default startup configuration with which the device is currently running? How to load a new configuration to this device?](#3-how-to-check-the-default-startup-configuration-with-which-the-device-is-currently-running-how-to-load-a-new-configuration-to-this-device)
+      * [Modify Startup Configuration](#modify-startup-configuration)
+         * [Modify config_db.json](#modify-config_dbjson)
+         * [Modify minigrpah.xml](#modify-minigrpahxml)
+   * [4) How to check the interface/link/port status, basic cable connectivity status, port speed, etc.,?](#4-how-to-check-the-interfacelinkport-status-basic-cable-connectivity-status-port-speed-etc)
+   * [5) How to check the BGP protocol status?](#5-how-to-check-the-bgp-protocol-status)
+   * [11) Example Configuration](#11-example-configuration)
+   * [12) Troubleshooting](#12-troubleshooting)
+      * [Basic Troubleshooting Commands](#basic-troubleshooting-commands)
+      * [How to troubleshoot the port up/down status?](#how-to-troubleshoot-the-port-updown-status)
+      * [<200b>Investigating Packet Drops (Repeat from Troubleshooting Guide)](#investigating-packet-drops-repeat-from-troubleshooting-guide)
+      * [Physical Link Signa<200b><200b>l (Repeat from Troubleshooting Guide)](#physical-link-signal-repeat-from-troubleshooting-guide)
+      * [Isolate SONiC Device from the Ne<200b>twork (Repeat from Troubleshooting Guide)](#isolate-sonic-device-from-the-network-repeat-from-troubleshooting-guide)
+
  
 
 # Introduction
