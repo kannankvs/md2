@@ -312,6 +312,25 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 Users shall use the "show runningconfiguration" command to check the current running configuration. 
 If users had not done any configuration change after the reboot, this will be same as the default startup configuration.
 SONiC device contains the startup configuration in the file /etc/sonic/config_db.json. During reboot, this configuration will be loaded by default. 
+Following are some of the keys that are configured by default in the config_db.json.
+1) DEVICE_METADATA
+2) MAP_PFC_PRIORITY_TO_QUEUE
+3) QUEUE
+4) PORT
+5) CRM
+6) PORT_QOS_MAP
+7) NTP_SERVER
+8) BUFFER_QUEUE
+9) WRED_PROFILE
+10) TC_TO_PRIORITY_GROUP_MAP
+11) BUFFER_PROFILE
+12) DEVICE_NEIGHBOR
+13) DSCP_TO_TC_MAP
+14) TC_TO_QUEUE_MAP
+15) CABLE_LENGTH
+16) SCHEDULER
+17) BUFFER_POOL
+
 
 SONiC provides an alternate method for loading the startup configuration from minigraph.xml from a remote server when DHCP is used. SONiC contains a file /etc/sonic/updategraph.conf that contains a flag "enabled" which is set to "false" by default. Similarly, management interface is configured to use DHCP by default for getting the management interface IP address from the DHCP server. Users can modify this flag to "true" and then reboot the device. SONiC will use DHCP to get the management IP address as well as the details about the configuration file minigraph.xml (DHCP server should have been configured to provide the details like management interface IP address, default route, configuration file name and the server IP address from this the configuration file should be fetched). SONiC shall contact the remote server and get the minigraph.xml and loads the same.
 
