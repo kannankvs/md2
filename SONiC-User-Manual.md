@@ -520,10 +520,17 @@ root@sonic-z9100-02:~# redis-dump -d 1 -k  "ASIC_STATE:SAI_OBJECT_TYPE_PORT:oid:
 ```
   
 Following is an example for checking the port status for Broadcom ASICs.
+From command line, enter "bcmsh" to enter into Broadcom shell. Users can use "Ctrcl c" to come out of Broadcom shell.
+In the broadcom shell, users shall use "ps" command to check the port state.
 
 Example:
 ```
 BCM : bcmcmd “ps”
+       port      ena/link  Lanes  Speed Duplex   LinkScan  AutoNeg?   STPstate    pause  discrd  LrnOps   Interface MaxFrame  CutThru?  Loopback
+       xe0( 50)  down      2      50G   FD       SW        No         Forward            None    FA       KR2       9122      No
+       xe1( 51)  down      2      50G   FD       SW        No         Forward            None    FA       KR2       9122      No
+       xe2( 54)  up        2      50G   FD       SW        No         Forward            None    FA       KR2       9122      No
+
 ```
 
 ## ​Investigating Packet Drops (Repeat from Troubleshooting Guide)
