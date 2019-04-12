@@ -386,6 +386,17 @@ User shall use the following BGP commands to check the BGP neighbor status.
 1) show ip bgp neighbors
 2) show ipv6 bgp neighbors
 
+
+# 6) Steps to configure Interface - will be repetitive of CLIGuide  
+
+# 7) Steps to configure BGP- will be repetitive of CLIGuide  
+
+# 8) Steps to configure ACL- will be repetitive of CLIGuide  
+
+# 9) Steps to configure COPP- will be repetitive of CLIGuide  
+
+# 10) Steps to configure Mirroring feature- will be repetitive of CLIGuide  
+
 # 11) Example Configuration
 
 
