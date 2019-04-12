@@ -190,9 +190,8 @@ TBD: Is this enough? Need information from Xin.
 
 ## How to upgrade to new software version? 
 
-
-SONiC software can be installed in two methods, viz, using "ONIE Installer" or "sonic_installer tool".
-"ONIE Installer" shall be used as explained in the [QuickStartGuide](#https://github.com/Azure/SONiC/wiki/Quick-Start)
+SONiC software can be installed in two methods, viz, using "ONIE Installer" or by using "sonic_installer tool".
+"ONIE Installer" shall be used as explained in the [QuickStartGuide](https://github.com/Azure/SONiC/wiki/Quick-Start)
 "sonic_installer" shall be used as given below.
 
 
