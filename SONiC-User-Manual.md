@@ -26,8 +26,8 @@ Table of Contents
    * [12) Troubleshooting](#12-troubleshooting)
       * [Basic Troubleshooting Commands](#basic-troubleshooting-commands)
       * [How to troubleshoot the port up/down status?](#how-to-troubleshoot-the-port-updown-status)
-      * [<200b>Investigating Packet Drops (Repeat from Troubleshooting Guide)](#investigating-packet-drops-repeat-from-troubleshooting-guide)
-      * [Physical Link Signa<200b><200b>l (Repeat from Troubleshooting Guide)](#physical-link-signal-repeat-from-troubleshooting-guide)
+      * [Investigating Packet Drops (Repeat from Troubleshooting Guide)](#investigating-packet-drops-repeat-from-troubleshooting-guide)
+      * [Physical Link Signa>l (Repeat from Troubleshooting Guide)](#physical-link-signal-repeat-from-troubleshooting-guide)
       * [Isolate SONiC Device from the Ne<200b>twork (Repeat from Troubleshooting Guide)](#isolate-sonic-device-from-the-network-repeat-from-troubleshooting-guide)
 
  
