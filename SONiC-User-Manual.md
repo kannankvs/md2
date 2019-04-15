@@ -150,29 +150,30 @@ SONiC does not provide a CLI to configure the static IP for the management inter
    ```   
    
    2) use config_db.json and configure the MGMT_INTERFACE key with the appropriate values. Refer [here](https://github.com/Azure/SONiC/wiki/Configuration#Management-Interface) 
-      - Example:
-   ```
+   
+   
    Add the following example configuration in a file (ex: mgmt_ip.json) and load it as follows.
+   ```
    "MGMT_INTERFACE": {
         "eth0|10.11.12.13/24": {
             "gwaddr": "10.11.12.1"
         }
    }
+   ```
    NOTE: If the interface IP address and default gateway were already present, users should remove them before loading the above configuration.
    
    Users can use the "show runningconfiguration all" to check the already configured MGMT_INTERFACE. Or, users can use the "redis-cli" command as follows to check the same.
-
+```
    root@T1-2:/etc/sonic# redis-cli -n 4 keys "MGMT_INTERFACE*"
 	1) "MGMT_INTERFACE|eth0|10.20.30.40/24"
-   
+```   
    In the above redis-cli command example, it gets the keys starting with MGMT_INTERFACE and it displays the already configured MGMT_INTERFACE in the CONFIG_DB.
    To remove this key from CONFIG_DB, users shall use the following redis-cli command.
-   
+```   
    redis-cli -n 4 DEL "MGMT_INTERFACE|eth0|10.20.30.40/24"
-   
-   After removing the key, users can load the new configuration using "config load mgmt_ip.json" command and verify the configured value using "ifconfig" linux command.
+```   
+   After removing the key, users can load the new configuration using "config load mgmt_ip.json" command and then do "systemctl restart interfaces-config" to make it effective. Users shall verify the configured management interface IP address value using "ifconfig" linux command.
       
-   ```   
    
    3) use minigraph.xml and configure "ManagementIPInterfaces" tag inside "DpgDesc" tag as given at the [page](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
    
