@@ -89,10 +89,10 @@ Table of Contents
 
 # Document History
 
-| # | Date       |  Document Version | Details |
-| --- | ------ | --- | --- |
-| 2 |  Apr-22-2019   |SONiC architecture | CLI Guide for SONiC 201811 version (build#32) with full "config" command set|
-| 1 |  Mar-23-2019   |v1 | Initial version of CLI Guide with minimal command set | 
+| # | Date    |  Document Version | Details |
+| --- | --- | --- | --- |
+| 2 |  Apr-22-2019 |SONiC architecture | Enhanced version of CLI Guide for SONiC 201811 version (build#32) |
+| 1 |  Mar-23-2019 |v1 | Initial version of CLI Guide with minimal command set | 
 
 # Introduction
 SONiC is an open source network operating system based on Linux that runs on switches from multiple vendors and ASICs. SONiC offers a full-suite of network functionality, like BGP and RDMA, that has been production-hardened in the data centers of some of the largest cloud-service providers. It offers teams the flexibility to create the network solutions they need while leveraging the collective strength of a large ecosystem and community.
