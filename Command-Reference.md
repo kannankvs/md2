@@ -129,9 +129,9 @@ Please follow config_db.json based configuration for the complete list of config
 It is assumed that all configuration commands start with the keyword “config” as prefix. 
 Any other scripts/utilities/commands  that need user configuration control are wrapped as sub-commands under the “config” command.
 The direct scripts/utilities/commands (examples given below) that are not wrapped under the "config" command are not in the scope of this document.
-  (a)	Acl_loader – This script is already wrapped inside “config acl” command; i.e. any ACL configuration that user is allowed to do is already part of “config acl” command; users are not expected to use the acl_loader script directly and hence this document need not explain the “acl_loader” script.
-  (b)	Crm – this command is not explained in this document. 
-  (c)	Sonic-clear, sfputil, etc., This document does not explain these scripts also. 
+  1)	Acl_loader – This script is already wrapped inside “config acl” command; i.e. any ACL configuration that user is allowed to do is already part of “config acl” command; users are not expected to use the acl_loader script directly and hence this document need not explain the “acl_loader” script.
+  2)	Crm – this command is not explained in this document. 
+  3)	Sonic-clear, sfputil, etc., This document does not explain these scripts also. 
 
 # Basic Configuration And Show  
 
