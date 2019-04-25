@@ -3,37 +3,6 @@
 Table of Contents
 =================
 
-   * [SONiC USER MANUAL](#sonic-user-manual)
-   * [Table of Contents](#table-of-contents)
-   * [Introduction](#introduction)
-   * [CLI Tips](#cli-tips)
-   * [1) How to login, how to configure management interface, loopback address configuration](#1-how-to-login-how-to-configure-management-interface-loopback-address-configuration)
-      * [Login (Repeat from CLIGuide)](#login-repeat-from-cliguide)
-      * [Username &amp; Password](#username--password)
-      * [Configuring Management Interface and Loopback Interface (Repeat from CLIGuide)](#configuring-management-interface-and-loopback-interface-repeat-from-cliguide)
-   * [2) How to check the software version running on the device? And, how to check the list of features available in this software version? How to upgrade to new software version?](#2-how-to-check-the-software-version-running-on-the-device-and-how-to-check-the-list-of-features-available-in-this-software-version-how-to-upgrade-to-new-software-version)
-      * [Show Versions (Repeat from CLIGuide)](#show-versions-repeat-from-cliguide)
-      * [check the list of features available in this software version](#check-the-list-of-features-available-in-this-software-version)
-      * [How to upgrade to new software version?](#how-to-upgrade-to-new-software-version)
-      * [SONiC Installer (Repeated from CLIGuide)](#sonic-installer-repeated-from-cliguide)
-   * [3) How to check the default startup configuration with which the device is currently running? How to load a new configuration to this device?](#3-how-to-check-the-default-startup-configuration-with-which-the-device-is-currently-running-how-to-load-a-new-configuration-to-this-device)
-      * [Modify Startup Configuration](#modify-startup-configuration)
-         * [Modify config_db.json](#modify-config_dbjson)
-         * [Modify minigrpah.xml](#modify-minigrpahxml)
-   * [4) How to check the interface/link/port status, basic cable connectivity status, port speed, etc.,?](#4-how-to-check-the-interfacelinkport-status-basic-cable-connectivity-status-port-speed-etc)
-   * [5) How to check the BGP protocol status?](#5-how-to-check-the-bgp-protocol-status)
-   * [6) Steps to configure Interface - will be repetitive of CLIGuide](#6-steps-to-configure-interface---will-be-repetitive-of-cliguide)
-   * [7) Steps to configure BGP- will be repetitive of CLIGuide](#7-steps-to-configure-bgp--will-be-repetitive-of-cliguide)
-   * [8) Steps to configure ACL- will be repetitive of CLIGuide](#8-steps-to-configure-acl--will-be-repetitive-of-cliguide)
-   * [9) Steps to configure COPP- will be repetitive of CLIGuide](#9-steps-to-configure-copp--will-be-repetitive-of-cliguide)
-   * [10) Steps to configure Mirroring feature- will be repetitive of CLIGuide](#10-steps-to-configure-mirroring-feature--will-be-repetitive-of-cliguide)
-   * [11) Example Configuration](#11-example-configuration)
-   * [12) Troubleshooting](#12-troubleshooting)
-      * [Basic Troubleshooting Commands](#basic-troubleshooting-commands)
-      * [How to troubleshoot the port up/down status?](#how-to-troubleshoot-the-port-updown-status)
-      * [Investigating Packet Drops (Repeat from Troubleshooting Guide)](#investigating-packet-drops-repeat-from-troubleshooting-guide)
-      * [Physical Link Signa>l (Repeat from Troubleshooting Guide)](#physical-link-signal-repeat-from-troubleshooting-guide)
-      * [Isolate SONiC Device from the Ne<200b>twork (Repeat from Troubleshooting Guide)](#isolate-sonic-device-from-the-network-repeat-from-troubleshooting-guide)
 
  
 
@@ -57,46 +26,157 @@ This user manual explains the common commands & related configuration/show examp
 **Scope Of The Document**  
 Information in this manual is based on the SONiC software version 201811 (build#32).
 
+This manual provides some insights on the following.
+1) First section explains how to load the SONiC image on the supported platforms
+2) Next section explains how to login using default username & password, how to change password, how to configure management interface & loopback address configuration.
+3) Next section how to check the software version running on the device, how to check the list of features available in this software version, how to upgrade to new software version, etc.,
+4) Next section explains how to check the default startup configuration with which the device is currently running, how to load a new configuration to this device, etc., 
+5) Next section explains how to check the interface/link/port status, basic cable connectivity status, port speed, etc.,
+6) Next section provides the required web links to the corresponding documents (and sections) that explains the steps to configure "Interface","BGP", "ACL","COPP", "Mirroring", etc.,
+7) Next section gives an example configuration for T0 topology
+8) Next section gives basic information about troubleshooting and it provides the link to the detailed troubleshooting guide. 
 
-This manual provides information related to the following points.
-1) How to login, how to configure management interface, loopback address configuration -  Repeat from CLIGuide.
-2) How to check the software version running on the device? And, how to check the list of features available in this software version? How to upgrade to new software version? - Repeatt from CLIGuide.
-3) How to check the default startup configuration with which the device is currently running?, How to load a new configuration to this device? - some part repeat from CLIGuide. Extra info about minigraph.xml and config_db.json, which is a repeat from correponding documents
-4) How to check the interface/link/port status, basic cable connectivity status, port speed, etc.,? - Repeat from CLIGuide.
-5) How to check the BGP protocol status? - Repat from CLIGuide.
-6) Steps to configure Interface - will be repetitive of CLIGuide
-7) Steps to configure BGP- will be repetitive of CLIGuide
-8) Steps to configure ACL- will be repetitive of CLIGuide
-9) Steps to configure COPP- will be repetitive of CLIGuide
-10) Steps to configure Mirroring feature- will be repetitive of CLIGuide
-11) Example configuration for T0 topology - Need to confirm whether it is good to explain this. We can explain each of the configuration example given in minigraph.xml, we can explain the equivalent config_db.json for each of those configurations, we can also give CLI commands (if exist) for each of those configuration.
-12) Basic troubleshooting - We can get some example trouble shooting commands/steps for specific issues, but providing a generic guide will be repeatitive of the commands.
+Note that some parts of this document might be a repetition of few commands/paragraphs from other configuration documents (like "Command Reference", "Config DB Manual", "Troubleshooting Guide", etc.,). Refer those documents for detailed information.
 
-TBD: Choose which of the following options shall we used for the guide.
 
-In addition, we shall explain about "show techsupport", about "syslogs" (local logging, remote logging), about "snmp traps" & "tcpdump".
+## Description
+This guide details the steps to install a SONiC image on your supported switch. 
 
-**Option1:Give example problems and steps/tips/suggestions**  
-1) How to debug/troubleshoot if the port is down? Explain what to check in application level, what to check in configDB, what to check in APP_DB, what to check in ASIC_DB, what to check in SAI and what to check in chip?
-2) How to debug/troubleshoot if the routing does not happen as expected?
-3) How to debug/troubleshoot if ECMP does not happen?
-4) How to debug/troubleshoot if QoS is dropping lot of packets?
-5) How to debug/troubleshoot platform issues?
-6) How to debug/troubleshoot mirroring issues?
-7) How to debug//troubleshoot ACL issues?
-8) How to debug/troubleshoot Everflow issues? 
-9) what are the dockers & services that are running in SONiC? how to debug a particular docker and its state/status? can we restart a docker if it is not running? can we restart a docker if it had crashed earlier?
-10) What are the mandatory configurations required to bring up the SONiC?
+## Download Image
 
-**Option2:Give generic commands that are commonly used to debug various problems**  
-	(a) Check the Link down/Up status - Repeat of Point4.
-	(b)	Check if device is in Inoperable state, check if all services are running. 
-    (c) Check High CPU/Memory usage - Copy & paste "show processes" command.
-	(d) check basic ping
-	(e) Check packet drop percentage - need more info
-	(f) Check the BGP neighbor state - will be repeat of BGP 
-	(g) check for packet corruption - need more info.
+We have one SONiC Image per ASIC vendor. You can download SONiC Image [here](https://github.com/Azure/SONiC/wiki/Supported-Devices-and-Platforms)
 
+You can also build SONiC from source and the instructions can be found [here](https://github.com/Azure/sonic-buildimage).
+
+## Installation
+
+### Install SONiC ONIE Image
+
+1. Connect to switch via serial console.
+
+1. (Optional) Some switches may come with a NOS which will require you to uninstall the existing NOS first before you install SONiC. To do so, simply boot into ONIE and select `Uninstall OS`:
+
+    ```
+                         GNU GRUB  version 2.02~beta2+e4a1fe391
+     +----------------------------------------------------------------------------+
+     |*ONIE: Install OS                                                           | 
+     | ONIE: Rescue                                                               |
+     | ONIE: Uninstall OS  <----- Select this one                                 |
+     | ONIE: Update ONIE                                                          |
+     | ONIE: Embed ONIE                                                           |
+     +----------------------------------------------------------------------------+
+
+          Use the ^ and v keys to select which entry is highlighted.          
+          Press enter to boot the selected OS, `e' to edit the commands       
+          before booting or `c' for a command-line.                           
+    ```
+
+
+1. Reboot the switch into ONIE and select `Install OS`:
+
+    ```
+                         GNU GRUB  version 2.02~beta2+e4a1fe391
+     +----------------------------------------------------------------------------+
+     |*ONIE: Install OS    <----- Select this one                                 | 
+     | ONIE: Rescue                                                               |
+     | ONIE: Uninstall OS                                                         |
+     | ONIE: Update ONIE                                                          |
+     | ONIE: Embed ONIE                                                           |
+     +----------------------------------------------------------------------------+
+
+          Use the ^ and v keys to select which entry is highlighted.          
+          Press enter to boot the selected OS, `e' to edit the commands       
+          before booting or `c' for a command-line.                           
+    ```
+
+1. Install SONiC. Here, we assume you have uploaded SONiC image onto a http server (`192.168.2.10`). Once you are in ONIE, you can first configure a management IP (`192.168.0.2/24`)and default gateway (`192.168.0.1`) for your switch, and then install the SONiC image from the http server. 
+
+    ```
+    ONIE:/ # ifconfig eth0 192.168.0.2 netmask 255.255.255.0
+    ONIE:/ # ip route add default via 192.168.0.1
+    ONIE:/ # onie-nos-install http://192.168.2.10/sonic-broadcom.bin
+    ```
+
+  **Note:** There are many options to install SONiC ONIE image on a ONIE-enabled switch. For more installation options, visit the [ONIE Quick Start Guide](https://github.com/opencomputeproject/onie/wiki/Quick-Start-Guide).
+
+When NOS installation finishes, the box will reboot into SONiC by default.
+
+```
+                    GNU GRUB  version 2.02~beta2+e4a1fe391
+
++----------------------------------------------------------------------------+
+|*SONiC-OS-7069cef                                                           | 
+| ONIE                                                                       | 
++----------------------------------------------------------------------------+
+```
+
+SONiC Login prompt. Use username `admin` and password `YourPaSsWoRd` to login for the first time.
+
+```
+Debian GNU/Linux 8 sonic ttyS0
+
+sonic login: 
+```
+
+  **Note**: By default, the SONiC console baud rate is 9600. You may need to change the baud rate in case you cannot see anything from the console after reboot.
+
+SONiC Welcome Message of the Day:
+
+```
+You are on
+  ____   ___  _   _ _  ____
+ / ___| / _ \| \ | (_)/ ___|
+ \___ \| | | |  \| | | |
+  ___) | |_| | |\  | | |___
+ |____/ \___/|_| \_|_|\____|
+
+-- Software for Open Networking In the Cloud --
+
+Unauthorized access and/or use are prohibited.
+All access and/or use are subject to monitoring.
+
+admin@sonic:~$ 
+```
+
+### Install SONiC EOS Image
+
+- **This section is only applicable if you plan to install a SONiC image on Arista switches.**
+
+Installing SONiC EOS uses the same steps you would use to upgrade a normal EOS image. You simply download a SONiC EOS image to an Arista box, select to boot from the image and reload the box. 
+
+```
+localhost#copy http://192.168.2.10/sonic-aboot-broadcom.swi flash: 
+Copy completed successfully.                                                    
+localhost(config)#boot system flash:sonic-aboot-broadcom.swi  
+localhost(config)#reload 
+System configuration has been modified. Save? [yes/no/cancel/diff]:no 
+Proceed with reload? [confirm] [type enter] 
+ 
+Broadcast message from root@localhost 
+        (unknown) at 8:22 ... 
+
+..... (boot messages)
+
+ 
+Debian GNU/Linux 8 sonic ttyS0 
+ 
+sonic login:
+```
+
+## Configuration
+
+SONiC is managing configuration in a single source of truth - a redisDB instance that we refer as ConfigDB. Applications subscribe to ConfigDB and generate their running configuration correspondingly.
+
+Details about ConfigDB and schema design, please find it [here](https://github.com/Azure/SONiC/wiki/Configuration) 
+
+Before Sep 2017, we were using an XML file named minigraph.xml to configure SONiC devices. For historical documentation, please refer to [Configuration with Minigraph](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
+ 
+
+## Command line
+
+SONiC includes commands that allow user to show platform, transceivers, L2, IP, BGP status, etc.
+
+- [[Command Reference]]
 
 # CLI Tips
 All the configuration commands need root privileges to execute them. Note that show commands can be executed by all users without the root privileges.
@@ -104,10 +184,11 @@ Root privileges can be obtained either by using "sudo" keyword in front of all c
 Note that all commands are case sensitive.
 
 
-# 1) How to login, how to configure management interface, loopback address configuration
+# Login, Configure Management Interface
 
+This section explains how to login to 
 
-## Login (Repeat from CLIGuide)
+## Login
 
 All SONiC devices support both the serial console based login and the SSH based login by default.
 The default credential (if not modified at image build time) for login is admin/YourPaSsWoRd.
