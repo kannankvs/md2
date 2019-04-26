@@ -244,7 +244,7 @@ Before Sep 2017, we were using an XML file named minigraph.xml to configure SONi
  
 SONiC includes commands that allow user to show platform, transceivers, L2, IP, BGP status, etc.
 
-- [[Command Reference]]
+- [Command Reference](Command-Reference.md)
 
 Note that all the configuration commands need root privileges to execute them and the commands are case-sensitive.
 Show commands can be executed by all users without the root privileges.
