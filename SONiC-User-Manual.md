@@ -489,7 +489,7 @@ Users can directly edit & modify the file /etc/sonic/config_db.json or do a SCP 
 User can either do "config reload" command to load this new configuration, or users can simply reboot to make it effective.
 
 
-#### 3.3.2.2 Modify minigrpah.xml  
+#### 3.3.2.2 Modify minigraph.xml  
 
 Users can directly edit & modify the file /etc/sonic/mingraph.xml or do a SCP and copy this file from a remote server. 
 User can either do "config load_minigraph" command to load this new configuration, or users can simply reboot to make it effective.
@@ -512,16 +512,23 @@ Basic cable connectivity shall be verified by configuring the IP address for the
 
 
 
-# 11) Example Configuration
+# 5 Example Configuration
+
+Refer the following links/files for the example configuration based on CLI, ConfigDB and Minigraph.
+
+  1)  [Example CLI Configuration File](Example_CLI.md)
+  2)  [Example T0 ConfigDB](T0_config_db.json)
+  3)  [Example T0 Minigraph.xml](T0_minigraph.xml)
 
 
+# 6 Troubleshooting
 
-# 12) Troubleshooting
-
-For troubleshooting and debugging purposes, users shall use the following commands and methods to isolate the problem.
-They can use "show techsupport" to collect the information from the device, shall use syslog to view the syslogs printed by the services, shall use the linux utitlies like "ping", "tcpdump", etc., to check the connectivity and packet tracing.
+This section captures some of the frequenently used troubleshooting commands and methods.
+Users can refer the [Troubleshooting Guide](Troubleshooting-Guide.md) for more details about troubleshooting.
 
 ## Basic Troubleshooting Commands
+
+Users shall use "show techsupport" to collect the information from the device, shall use syslog to view the syslogs printed by the services, shall use the linux utitlies like "ping", "tcpdump", etc., to check the connectivity and packet tracing.
 
 **show techsupport**  
 This command gathers pertinent information about the state of the device; information is as diverse as syslog entries, database state, routing-stack state, etc., It then compresses it into an archive file. This archive file can be sent to the SONiC development team for examination.
@@ -559,7 +566,7 @@ Few details that the dump includes are given below:
 -	tcpdump is a common packet analyzer that runs under the sonic command line . It allows the user to display TCP/IP and other packets being transmitted or received over a network
 ex: tcpdump -i Ethernet0 
 
-## How to troubleshoot the port up/down status?  
+## Port up/down Troubleshooting  
 
 All port related configuration done using CLI/ConfigDB/Minigraph are saved in the redis config database. Such configuration is handled by the appropriate modules and the result of such operation might be stored in the application database (APP_DB).
 Once if the modules complete their operation, if the result needs to be programmed into the ASIC, same will be synchronized by syncd service and the result is stored in the ASIC_DB.
@@ -659,7 +666,7 @@ BCM : bcmcmd “ps”
 
 ```
 
-## ​Investigating Packet Drops (Repeat from Troubleshooting Guide)
+## ​Investigating Packet Drops 
 Packet drops can be investigated by viewing counters using the `show interfaces counters` command.
 
 - **RX_ERR/TX_ERR** includes all physical layer (layer-2) related drops, such as FCS error, RUNT frames. If there is RX_ERR or TX_ERR, it usually indicates some physical layer link issues.
@@ -684,7 +691,7 @@ Packet drops can be investigated by viewing counters using the `show interfaces 
    Ethernet24   33,543,533,441   36.59 MB/s      0.71%         0     1,613         0   43,066,076,370   49.92 MB/s      0.97%         0         0         0
   ```
 
-## Physical Link Signa​​l (Repeat from Troubleshooting Guide)
+## Physical Link Signa​​l 
 
 Use the following command to get optical signal strength. Note: not all types of links have such channel monitor values. The AOC and DAC cables do not have such values.
 
@@ -741,7 +748,7 @@ Generally, optical power should be greater than -10dBm.
   ```
 
 
-## Isolate SONiC Device from the Ne​twork (Repeat from Troubleshooting Guide)
+## Isolate SONiC Device from the Ne​twork 
 
 When there is suspicion that a SONiC device is dropping traffic and behaving abnormally, you may want to isolate the device from the network. Before isolating the device, please generate SONiC tech-support first.
 
