@@ -39,20 +39,33 @@ This manual provides some insights on the following.
 Note that some parts of this document might be a repetition of few commands/paragraphs from other configuration documents (like "Command Reference", "Config DB Manual", "Troubleshooting Guide", etc.,). Refer those documents for detailed information.
 
 
-## Description
+# 1 Quick Start Guide 
 This guide details the steps to install a SONiC image on your supported switch. 
 
-## Download Image
+## 1.1 Download Image
 
 We have one SONiC Image per ASIC vendor. You can download SONiC Image [here](https://github.com/Azure/SONiC/wiki/Supported-Devices-and-Platforms)
 
 You can also build SONiC from source and the instructions can be found [here](https://github.com/Azure/sonic-buildimage).
 
-## Installation
+Once the image is available in your local machine, the image can be installed either by installing using a USB thumb drive or over the network as given in following sub-sections.
+In case if the device is already preloaded with SONiC image, the device can be booted without the installation process.
 
-### Install SONiC ONIE Image
+### 1.1.1 Installation using a USB Thumb Drive
+This sub-section explains how to transfer the image from an USB thumb drive into the device and install it.
+Copy the downloaded SONiC image on the USB thumb drive. 
+Remove the USB drive from your machine and insert it into the USB port on the front (or rear) panel of your ONIE enabled device. 
+Power on the device and ONIE will discover the onie-installer file on the root of the USB drive and execute it.
+TBD1: The above method need to be reviewed and corrected. The above information is taken from https://opencomputeproject.github.io/onie/user-guide/index.html
+
+### 1.1.2 Installation Over The Network
+This sub-section explains how to transfer the image from remote server into the device and install it.
+
+#### 1.1.2.1 Install SONiC ONIE Image
 
 1. Connect to switch via serial console.
+  
+  **Note**: By default, the SONiC console baud rate is 9600. You may need to change the baud rate in case you cannot see anything from the console after reboot.
 
 1. (Optional) Some switches may come with a NOS which will require you to uninstall the existing NOS first before you install SONiC. To do so, simply boot into ONIE and select `Uninstall OS`:
 
@@ -110,35 +123,8 @@ When NOS installation finishes, the box will reboot into SONiC by default.
 +----------------------------------------------------------------------------+
 ```
 
-SONiC Login prompt. Use username `admin` and password `YourPaSsWoRd` to login for the first time.
 
-```
-Debian GNU/Linux 8 sonic ttyS0
-
-sonic login: 
-```
-
-  **Note**: By default, the SONiC console baud rate is 9600. You may need to change the baud rate in case you cannot see anything from the console after reboot.
-
-SONiC Welcome Message of the Day:
-
-```
-You are on
-  ____   ___  _   _ _  ____
- / ___| / _ \| \ | (_)/ ___|
- \___ \| | | |  \| | | |
-  ___) | |_| | |\  | | |___
- |____/ \___/|_| \_|_|\____|
-
--- Software for Open Networking In the Cloud --
-
-Unauthorized access and/or use are prohibited.
-All access and/or use are subject to monitoring.
-
-admin@sonic:~$ 
-```
-
-### Install SONiC EOS Image
+#### 1.1.2.2 Install SONiC EOS Image
 
 - **This section is only applicable if you plan to install a SONiC image on Arista switches.**
 
@@ -163,32 +149,10 @@ Debian GNU/Linux 8 sonic ttyS0
 sonic login:
 ```
 
-## Configuration
+# 2 Login Username & Password
+This section explains the default username & password and how to change the password
 
-SONiC is managing configuration in a single source of truth - a redisDB instance that we refer as ConfigDB. Applications subscribe to ConfigDB and generate their running configuration correspondingly.
-
-Details about ConfigDB and schema design, please find it [here](https://github.com/Azure/SONiC/wiki/Configuration) 
-
-Before Sep 2017, we were using an XML file named minigraph.xml to configure SONiC devices. For historical documentation, please refer to [Configuration with Minigraph](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
- 
-
-## Command line
-
-SONiC includes commands that allow user to show platform, transceivers, L2, IP, BGP status, etc.
-
-- [[Command Reference]]
-
-# CLI Tips
-All the configuration commands need root privileges to execute them. Note that show commands can be executed by all users without the root privileges.
-Root privileges can be obtained either by using "sudo" keyword in front of all config commands, or by going to root prompt using "sudo -i".
-Note that all commands are case sensitive.
-
-
-# Login, Configure Management Interface
-
-This section explains how to login to 
-
-## Login
+## 2.1 Default Login
 
 All SONiC devices support both the serial console based login and the SSH based login by default.
 The default credential (if not modified at image build time) for login is admin/YourPaSsWoRd.
@@ -210,15 +174,51 @@ Refer the next section for configuring the IP address for management interface.
 
 By default, login takes the user to the default prompt from which all the show commands can be executed.  
 
+On successful login, SONiC Welcome Message of the Day shall be printed as follows.
+
+```
+You are on
+  ____   ___  _   _ _  ____
+ / ___| / _ \| \ | (_)/ ___|
+ \___ \| | | |  \| | | |
+  ___) | |_| | |\  | | |___
+ |____/ \___/|_| \_|_|\____|
+
+-- Software for Open Networking In the Cloud --
+
+Unauthorized access and/or use are prohibited.
+All access and/or use are subject to monitoring.
+
+admin@sonic:~$ 
+```
+
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
-## Username & Password  
+## 2.2 Configuring Username & Password  
 
-There is no separate CLI for adding users and for changing passwords. Users shall use the linux commands "useradd" command to add new users and use the command "passwd <username>" to change the password for the specific username.
+There is no separate CLI for adding users and for changing passwords. 
+Users shall use the linux commands "useradd" command to add new users.
+Users shall use the linux command "passwd <username>" to change the password for the specific username.
 
 
+# 3 Basic Configuration & Show
 
-## Configuring Management Interface and Loopback Interface (Repeat from CLIGuide)
+SONiC is managing configuration in a single source of truth - a redisDB instance that we refer as ConfigDB. Applications subscribe to ConfigDB and generate their running configuration correspondingly.
+
+Details about ConfigDB and schema design, please find it [here](https://github.com/Azure/SONiC/wiki/Configuration) 
+
+Before Sep 2017, we were using an XML file named minigraph.xml to configure SONiC devices. For historical documentation, please refer to [Configuration with Minigraph](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
+ 
+SONiC includes commands that allow user to show platform, transceivers, L2, IP, BGP status, etc.
+
+- [[Command Reference]]
+
+Note that all the configuration commands need root privileges to execute them and the commands are case-sensitive.
+Show commands can be executed by all users without the root privileges.
+Root privileges can be obtained either by using "sudo" keyword in front of all config commands, or by going to root prompt using "sudo -i".
+
+
+## 3.1 Configuring Management Interface and Loopback Interface
 
 The management interface (eth0) in SONiC is configured (by default) to use DHCP client to get the IP address from the DHCP server. Connect the management interface to the same network in which your DHCP server is connected and get the IP address from DHCP server.
 The IP address received from DHCP server can be verified using the "/sbin/ifconfig eth0" linux command.
@@ -278,9 +278,10 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 
 
-# 2) How to check the software version running on the device? And, how to check the list of features available in this software version? How to upgrade to new software version?
+## 3.2 Software version & Upgrade  
+This section explains how to check the current version of the software running in the device, how to check the features available in the version and how to upgrade/downgrade to different versions.
 
-## Show Versions (Repeat from CLIGuide)
+### 3.2.1 Show Versions 
  
 **show version**  
 This command displays software component versions of the currently running SONiC image. This includes the SONiC image version as well as Docker image versions.
@@ -325,20 +326,20 @@ This command displays relevant information as the SONiC and Linux kernel version
   ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
 
-## check the list of features available in this software version
+## 3.2.2 Check features available in this version
 
 [SONiC roadmap planning](https://github.com/Azure/SONiC/wiki/Sonic-Roadmap-Planning) explains the various features that are added in every software release.
 TBD: Is this enough? Need information from Xin.
 
 
-## How to upgrade to new software version? 
+## 3.2.3 Upgrade Or Downgrade Version 
 
 SONiC software can be installed in two methods, viz, using "ONIE Installer" or by using "sonic_installer tool".
-"ONIE Installer" shall be used as explained in the [QuickStartGuide](https://github.com/Azure/SONiC/wiki/Quick-Start)
+"ONIE Installer" shall be used as explained in the [QuickStartGuide](#Quick-Start-Guide)
 "sonic_installer" shall be used as given below.
 
 
-## SONiC Installer (Repeated from CLIGuide)
+### 3.2.3.1 SONiC Installer
 This is a command line tool available as part of the SONiC software; If the device is already running the SONiC software, this tool can be used to install an alternate image in the partition.
 This tool has facility to install an alternate image, list the available images and to set the next reboot image.
  
@@ -449,7 +450,11 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 
 
 
-# 3) How to check the default startup configuration with which the device is currently running? How to load a new configuration to this device?  
+## 3.3 Startup Configuration
+
+This section explains how to check the default startup configuration with which the device is currently running and how to load a new configuration to this device.
+
+### 3.3.1 Default Startup Configuration 
 
 Users shall use the "show runningconfiguration" command to check the current running configuration. 
 If users had not done any configuration change after the reboot, this will be same as the default startup configuration.
@@ -477,25 +482,31 @@ Following are some of the keys that are configured by default in the config_db.j
 SONiC provides an alternate method for loading the startup configuration from minigraph.xml from a remote server when DHCP is used. SONiC contains a file /etc/sonic/updategraph.conf that contains a flag "enabled" which is set to "false" by default. Similarly, management interface is configured to use DHCP by default for getting the management interface IP address from the DHCP server. Users can modify this flag to "true" and then reboot the device. SONiC will use DHCP to get the management IP address as well as the details about the configuration file minigraph.xml (DHCP server should have been configured to provide the details like management interface IP address, default route, configuration file name and the server IP address from this the configuration file should be fetched). SONiC shall contact the remote server and get the minigraph.xml and loads the same.
 
 
-## Modify Startup Configuration  
+### 3.3.2 Modify Configuration  
 
-###  Modify config_db.json  
+#### 3.3.2.1 Modify config_db.json  
 Users can directly edit & modify the file /etc/sonic/config_db.json or do a SCP and copy this file from a remote server. 
 User can either do "config reload" command to load this new configuration, or users can simply reboot to make it effective.
 
 
-### Modify minigrpah.xml  
+#### 3.3.2.2 Modify minigrpah.xml  
 
 Users can directly edit & modify the file /etc/sonic/mingraph.xml or do a SCP and copy this file from a remote server. 
 User can either do "config load_minigraph" command to load this new configuration, or users can simply reboot to make it effective.
 Or, users can modify the "enabled" flag in /etc/sonic/updategraph.conf to true and then reboot the device as explained above.
 
 
-# 4) How to check the interface/link/port status, basic cable connectivity status, port speed, etc.,?
-Users shall use the following commands to check the interface related parameters.
-1) show interfaces status
-2) show interfaces description
+# 4 Detailed Configuration & Show  
+
 Basic cable connectivity shall be verified by configuring the IP address for the ports and by using the "ping" test.
+
+# Links to Different Configuration Sections
+
+| # | Module    |  CLI Link | ConfigDB Link |  Remarks |
+| --- | --- | --- | --- | --- |
+| 1 |  Interface |[Interface CLI](Command-Reference.md#Interface-Configuration-And-Show-Commands) | [Interface ConfigDB]()| To view the details about the interface |
+| 2 |  BGP |[BGP CLI]() | [BGP ConfigDB]()| To view the details about the BGP |
+
 
 # 5) How to check the BGP protocol status?
 User shall use the following BGP commands to check the BGP neighbor status.
