@@ -3,6 +3,7 @@
 Table of Contents
 =================
 
+   * [Document History](#document-history)
    * [Introduction](#introduction)
    * [Basic Configuration And Show](#basic-configuration-and-show)
       * [SSH Login](#ssh-login)
@@ -86,7 +87,13 @@ Table of Contents
    * [Troubleshooting Commands](#troubleshooting-commands)
    * [Routing Stack Configuration And Show](#routing-stack-configuration-and-show)
    
- 
+
+# Document History
+
+| # | Date    |  Document Version | Details |
+| --- | --- | --- | --- |
+| 2 |  Apr-22-2019 |SONiC architecture | CLI Guide for SONiC 201811 version (build#32) with complete "config" command set |
+| 1 |  Mar-23-2019 |v1 | Initial version of CLI Guide with minimal command set | 
 
 # Introduction
 SONiC is an open source network operating system based on Linux that runs on switches from multiple vendors and ASICs. SONiC offers a full-suite of network functionality, like BGP and RDMA, that has been production-hardened in the data centers of some of the largest cloud-service providers. It offers teams the flexibility to create the network solutions they need while leveraging the collective strength of a large ecosystem and community.
@@ -118,11 +125,13 @@ Note that all commands are case sensitive.
 Note that the command list given in this document is just a subset of all possible configurations in SONiC. 
 Please follow config_db.json based configuration for the complete list of configuration options.
 
-**Assumption**  
-It is assumed that all configuration commands start with the keyword “config” as prefix. Any other scripts/utilities/commands  that need user configuration control are wrapped as sub-commands under the “config” command.
-Hence those scripts/utilities/commands are not explained in this document.
-TBD0: With this assumption, commands/scripts like "acl_loader", "crm", "sonic-clear",etc., are not in the scope in this document.
-
+**Scope Of The Document**  
+It is assumed that all configuration commands start with the keyword “config” as prefix. 
+Any other scripts/utilities/commands  that need user configuration control are wrapped as sub-commands under the “config” command.
+The direct scripts/utilities/commands (examples given below) that are not wrapped under the "config" command are not in the scope of this document.
+  1)	Acl_loader – This script is already wrapped inside “config acl” command; i.e. any ACL configuration that user is allowed to do is already part of “config acl” command; users are not expected to use the acl_loader script directly and hence this document need not explain the “acl_loader” script.
+  2)	Crm – this command is not explained in this document. 
+  3)	Sonic-clear, sfputil, etc., This document does not explain these scripts also. 
 
 # Basic Configuration And Show  
 
@@ -130,8 +139,8 @@ This section covers the basic configurations related to the following
  1) [SSH login](#SSH-Login), 
  2) [configuring the management interface](#Configuring-Management-Interface), 
  3) [Help for Config Commands](#Config-Help),
- 4) [show version](#Show-Versions),
- 5) [Help For Show Commands](#Show-Help), 
+ 4) [Help For Show Commands](#Show-Help), 
+ 5) [show version](#Show-Versions),
  6) [Show System Status](#Show-System-Status) and 
  7) [Show Hardware Platform](#Show-Hardware-Platform).
 
@@ -164,12 +173,16 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 The management interface (eth0) in SONiC is configured (by default) to use DHCP client to get the IP address from the DHCP server. Connect the management interface to the same network in which your DHCP server is connected and get the IP address from DHCP server.
 The IP address received from DHCP server can be verified using the "/sbin/ifconfig eth0" linux command.
 
-SONiC does not provide a CLI to configure the static IP for the management interface. There are alternate few alternate ways by which a static IP address can be configured for the management interface.  
+SONiC does not provide a CLI to configure the static IP for the management interface. There are few alternate ways by which a static IP address can be configured for the management interface.  
    1) use "ifconfig eth0" linux command (example: ifconfig eth0 10.11.12.13/24). This configuration won't be preserved across reboot.
-   2) use config_db.jsob and configure the MGMT_INTERFACE key with the appropriate values. Refer [here](https://github.com/Azure/SONiC/wiki/Configuration#Management-Interface) 
+   Example:
+   ```
+   admin@sonic:~$ /sbin/ifconfig eth0 10.11.12.13/24
+   ```   
+   2) use config_db.json and configure the MGMT_INTERFACE key with the appropriate values. Refer [here](https://github.com/Azure/SONiC/wiki/Configuration#Management-Interface) 
    3) use minigraph.xml and configure "ManagementIPInterfaces" tag inside "DpgDesc" tag as given at the [page](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
    
-Once if the IP address is configured, the same can be verified using "/sbin/ifconfig eth0" linux command.
+Once the IP address is configured, the same can be verified using "/sbin/ifconfig eth0" linux command.
 Users can SSH login to this management interface IP address from their management network.
 
   - Example:
@@ -221,51 +234,6 @@ This command lists all the possible configuration commands at the top level.
     vlan                   VLAN-related configuration tasks
     warm_restart           warm_restart-related configuration tasks
     watermark              Configure watermark
-
-  ```
-Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
-
-## Show Versions
- 
-**show version**  
-This command displays software component versions of the currently running SONiC image. This includes the SONiC image version as well as Docker image versions.
-This command displays relevant information as the SONiC and Linux kernel version being utilized, as well as the commit-id used to build the SONiC image. The second section of the output displays the various docker images and their associated id’s. 
-
-- Usage:  
-  show version  
-
-- Example:
-  ```
-  admin@sonic:~$ show version
-  SONiC Software Version: SONiC.HEAD.32-21ea29a
-  Distribution: Debian 9.8
-  Kernel: 4.9.0-8-amd64
-  Build commit: 21ea29a
-  Build date: Fri Mar 22 01:55:48 UTC 2019
-  Built by: johnar@jenkins-worker-4
-
-  Docker images:
-  REPOSITORY                 TAG                 IMAGE ID            SIZE
-  docker-syncd-brcm          HEAD.32-21ea29a     434240daff6e        362MB
-  docker-syncd-brcm          latest              434240daff6e        362MB
-  docker-orchagent-brcm      HEAD.32-21ea29a     e4f9c4631025        287MB
-  docker-orchagent-brcm      latest              e4f9c4631025        287MB
-  docker-lldp-sv2            HEAD.32-21ea29a     9681bbfea3ac        275MB
-  docker-lldp-sv2            latest              9681bbfea3ac        275MB
-  docker-dhcp-relay          HEAD.32-21ea29a     2db34c7bc6f4        257MB
-  docker-dhcp-relay          latest              2db34c7bc6f4        257MB
-  docker-database            HEAD.32-21ea29a     badc6fc84cdb        256MB
-  docker-database            latest              badc6fc84cdb        256MB
-  docker-snmp-sv2            HEAD.32-21ea29a     e2776e2a30b7        295MB
-  docker-snmp-sv2            latest              e2776e2a30b7        295MB
-  docker-teamd               HEAD.32-21ea29a     caf957cd2ad1        275MB
-  docker-teamd               latest              caf957cd2ad1        275MB
-  docker-router-advertiser   HEAD.32-21ea29a     b1a62023958c        255MB
-  docker-router-advertiser   latest              b1a62023958c        255MB
-  docker-platform-monitor    HEAD.32-21ea29a     40b40a4b2164        287MB
-  docker-platform-monitor    latest              40b40a4b2164        287MB
-  docker-fpm-quagga          HEAD.32-21ea29a     546036fe6838        282MB
-  docker-fpm-quagga          latest              546036fe6838        282MB
 
   ```
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
@@ -349,8 +317,54 @@ The same syntax applies to all subgroups of `show` which themselves contain subc
   ```
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
+
+
+## Show Versions
  
- 
+**show version**  
+This command displays software component versions of the currently running SONiC image. This includes the SONiC image version as well as Docker image versions.
+This command displays relevant information as the SONiC and Linux kernel version being utilized, as well as the commit-id used to build the SONiC image. The second section of the output displays the various docker images and their associated id’s. 
+
+- Usage:  
+  show version  
+
+- Example:
+  ```
+  admin@sonic:~$ show version
+  SONiC Software Version: SONiC.HEAD.32-21ea29a
+  Distribution: Debian 9.8
+  Kernel: 4.9.0-8-amd64
+  Build commit: 21ea29a
+  Build date: Fri Mar 22 01:55:48 UTC 2019
+  Built by: johnar@jenkins-worker-4
+
+  Docker images:
+  REPOSITORY                 TAG                 IMAGE ID            SIZE
+  docker-syncd-brcm          HEAD.32-21ea29a     434240daff6e        362MB
+  docker-syncd-brcm          latest              434240daff6e        362MB
+  docker-orchagent-brcm      HEAD.32-21ea29a     e4f9c4631025        287MB
+  docker-orchagent-brcm      latest              e4f9c4631025        287MB
+  docker-lldp-sv2            HEAD.32-21ea29a     9681bbfea3ac        275MB
+  docker-lldp-sv2            latest              9681bbfea3ac        275MB
+  docker-dhcp-relay          HEAD.32-21ea29a     2db34c7bc6f4        257MB
+  docker-dhcp-relay          latest              2db34c7bc6f4        257MB
+  docker-database            HEAD.32-21ea29a     badc6fc84cdb        256MB
+  docker-database            latest              badc6fc84cdb        256MB
+  docker-snmp-sv2            HEAD.32-21ea29a     e2776e2a30b7        295MB
+  docker-snmp-sv2            latest              e2776e2a30b7        295MB
+  docker-teamd               HEAD.32-21ea29a     caf957cd2ad1        275MB
+  docker-teamd               latest              caf957cd2ad1        275MB
+  docker-router-advertiser   HEAD.32-21ea29a     b1a62023958c        255MB
+  docker-router-advertiser   latest              b1a62023958c        255MB
+  docker-platform-monitor    HEAD.32-21ea29a     40b40a4b2164        287MB
+  docker-platform-monitor    latest              40b40a4b2164        287MB
+  docker-fpm-quagga          HEAD.32-21ea29a     546036fe6838        282MB
+  docker-fpm-quagga          latest              546036fe6838        282MB
+
+  ```
+Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Basic-Configuration-And-Show)
+
+
 ## Show System Status
 This sub-section explains some set of sub-commands that are used to display the status of various parameters pertaining to the physical state of the network node. 
 
@@ -366,13 +380,13 @@ This command displays the current date and time configured on the system
   Mon Mar 25 20:25:16 UTC 2019
   ```
   
-**show environment`**  
+**show environment**  
 This command displays the platform environmentals, such as voltages, temperatures and fan speeds
 
 -  Usage:  
    show environment
 
-- Example: Note that the show output has got lot of information; only the sample output is given in the below example
+- Example: 
   ```
   admin@sonic:~$ show environment
   coretemp-isa-0000
@@ -410,6 +424,8 @@ This command displays the platform environmentals, such as voltages, temperature
   <... few more things ...>
 
   ```
+Note: The show output has got lot of information; only the sample output is given in the above example. 
+Though the displayed output slightly differs from one platform to another platform, the overall content will be similar to the example mentioned above.
 
 **show reboot-cause**  
 This command displays the cause of the previous reboot
@@ -436,10 +452,13 @@ This command displays the current system uptime
   ```
 
 **show logging**  
-This command displays all the currently stored log messages
+This command displays all the currently stored log messages. 
+All the latest processes and corresponding transactions are stored in the "syslog" file. 
+This file is saved in the path `/var/log` and can be viewed by giving the command ` sudo cat syslog` as this requires root login. 
+Individual process can also be viewed using the command `ps -ax | grep <\process name>
 
 - Usage:  
-  show logging ([<process-name>] [-l lines] | [-f])`
+  show logging ([<process-name>] [-l lines] | [-f])
 
 - Example:
   ```
@@ -474,7 +493,7 @@ This command displays all the currently stored log messages
   admin@sonic:~$ show logging --follow
   ```
 
-**show users`**  
+**show users**  
 This command displays a list of users currently logged in to the device
 
 - Usage:  
@@ -511,6 +530,8 @@ This command displays a summary of the device's hardware platform
 
 **show platform syseeprom**  
 This command displays information stored on the system EEPROM.
+Note that the output of this command is not the same for all vendor's platforms. 
+Couple of example outputs are given below.
 
 - Usage:  
   show platform syseeprom
@@ -532,6 +553,36 @@ This command displays information stored on the system EEPROM.
   (checksum valid)
   ```
 
+  ```
+	admin@arc-switch1025:~$ show platform syseeprom
+	TlvInfo Header:
+	  Id String:    TlvInfo
+	  Version:      1
+	  Total Length: 527
+	TLV Name             Code Len Value
+	---- --- -----
+	Product Name         0x21  64 MSN2700
+	Part Number          0x22  20 MSN2700-CS2FO
+	Serial Number        0x23  24 MT1822K07815
+	Base MAC Address     0x24   6 50:6B:4B:8F:CE:40
+	Manufacture Date     0x25  19 05/28/2018 23:56:02
+	Device Version       0x26   1 16
+	MAC Addresses        0x2A   2 128
+	Manufacturer         0x2B   8 Mellanox
+	Vendor Extension     0xFD  36
+	Vendor Extension     0xFD 164
+	Vendor Extension     0xFD  36
+	Vendor Extension     0xFD  36
+	Vendor Extension     0xFD  36
+	Platform Name        0x28  18 x86_64-mlnx_x86-r0
+	ONIE Version         0x29  21 2018.08-5.2.0006-9600
+	CRC-32               0xFE   4 0x11C017E1
+
+	(checksum valid)
+  ```
+
+
+
 **show platform psustatus**  
 This command displays the status of the device's power supply units
 
@@ -551,10 +602,11 @@ This command displays the status of the device's power supply units
 Displays diagnostic monitoring information of the transceivers
 
 **show interfaces transceiver**  
-This command displays information for the transceiver in that port if the port is specified
+This command displays information for all the interfaces for the transceiver requested or a specific interface if the optional "interface-name" is specified.
 
 - Usage:  
-  show interfaces transceiver [eeprom [-d | --dom] | lpmode | presence] [<interface-name>]`
+  show interfaces transceiver [eeprom | lpmode | presence]
+  show interfaces transceiver [eeprom [-d | --dom] | lpmode | presence] [<interface-name>]
 
 - Example (Decode and display information stored on the SFP EEPROM): 
   ```
@@ -659,7 +711,7 @@ When this is disabled and if the authentication request fails on first server, a
 		   Allow AAA fail-through [enable | disable | default]
            enable - this allows the AAA module to process with local authentication if remote authentication fails.
 		   disbale - this disallows the AAA module to proceed further if remote authentication fails.
-		   default - this reconfigures the default value, which is "enable". TBD1 - Need to be verified. Lets ask Xin to find the right person to answer this.
+		   default - this reconfigures the default value, which is "enable". 
 
 
 - Example:
@@ -670,10 +722,8 @@ When this is disabled and if the authentication request fails on first server, a
   ```
 **aaa authentication fallback**  
 
-TBD2. Looks like the command is not used at the moment. 
-In the file https://github.com/Azure/sonic-buildimage/blob/master/files/image_config/hostcfgd/common-auth-sonic.j2, code is available to use "failthrough", but there is no checks based on "fallback". 
-Need to reconfirm - Lets ask Xin to find the right person to answer this.
-By default, fallback happens to local authentication when tacacs+ authentication fails.
+The command is not used at the moment. 
+When the tacacs+ authentication fails, it falls back to local authentication by default.
 
 - Usage:  
   config aaa authentication fallback enable|disable|default
@@ -754,7 +804,10 @@ Some of the parameters like authtype, passkey and timeout can be either configur
 **config tacacs add**  
 
 This command is used to add a TACACS+ server to the tacacs server list.
-Note that more than one tacacs+ (maximum of seven) can be added in the device. When user tries to login, tacacs client shall contact the servers one by one. When any server times out, device will try the next server one by one.
+Note that more than one tacacs+ (maximum of seven) can be added in the device. 
+When user tries to login, tacacs client shall contact the servers one by one. 
+When any server times out, device will try the next server one by one.
+When this command is executed, the configured tacacs+ server addresses are updated in /etc/pam.d/common-auth-sonic configuration file which is being used by tacacs service.
 
 - Usage:  
    config tacacs add <ip_address> [-t|--timeout SECOND] [-k|--key SECRET] [-a|--type TYPE] [-o|--port PORT] [-p|--pri PRIORITY] [-m|--use-mgmt-vrf]
@@ -763,17 +816,6 @@ Note that more than one tacacs+ (maximum of seven) can be added in the device. W
 	 
 	 ip_address - TACACS+ server IP address.
 	 timeout - Transmission timeout interval in seconds, range 1 to 1000, default 5
-	 TBD3a - Is this range 1 to 1000 correct? CLI accepts any integer value without validating the range. Seems incorrect. Should we raise a ticket?, lets ask Xin for right person to answer this too.
-	 TBD3b - When more than one server IP address is added, what is the order in which it will be used? Looks like the code does "sorting", but the following example is not clear on what is being used for sorting.Should we document the guideline to user about the order?
-	 ```
-	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.11.12.14:50 secret=testing789 login=mschap timeout=10  try_first_pass
-	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.11.12.24:50 secret=testing789 login=mschap timeout=987654321098765433211
-	0987  try_first_pass
-	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.0.0.9:49 secret= login=mschap timeout=5  try_first_pass
-	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.0.0.8:49 secret= login=mschap timeout=5  try_first_pass
-	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.11.12.13:50 secret=testing789 login=mschap timeout=10  try_first_pass
-	auth    [success=1 default=ignore]      pam_unix.so nullok try_first_pass
-	 ```
 	 key - Shared secret
 	 type - Authentication type, "chap" or "pap" or "mschap" or "login", default is "pap".
 	 port - TCP port range is 1 to 65535, default 49
@@ -785,6 +827,17 @@ Note that more than one tacacs+ (maximum of seven) can be added in the device. W
   ```	 
   root@T1-2:~# config tacacs add 10.11.12.13 -t 10 -k testing789 -a mschap -o 50 -p 9
   root@T1-2:~#
+
+	Example Server Configuration in /etc/pam.d/common-auth-sonic configuration file:
+	
+	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.11.12.14:50 secret=testing789 login=mschap timeout=10  try_first_pass
+	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.11.12.24:50 secret=testing789 login=mschap timeout=987654321098765433211
+	0987  try_first_pass
+	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.0.0.9:49 secret= login=mschap timeout=5  try_first_pass
+	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.0.0.8:49 secret= login=mschap timeout=5  try_first_pass
+	auth    [success=done new_authtok_reqd=done default=ignore]     pam_tacplus.so server=10.11.12.13:50 secret=testing789 login=mschap timeout=10  try_first_pass
+	auth    [success=1 default=ignore]      pam_unix.so nullok try_first_pass
+  
   ```
 
 **config tacacs delete**  
@@ -976,8 +1029,6 @@ When the optional argument "max_priority"  is specified, each rule’s priority 
   Refer an example for input file format [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/files/helpers/config_service_acls.sh)
   Refer another example [here](https://github.com/Azure/sonic-mgmt/blob/master/ansible/roles/test/tasks/acl/acltb_test_rules_part_1.json)
   ```
-TBD4: Need to create these example input files, test them using the above examples, upload them in github and reference them from here.
-AI: KVSK will create a sample file. Will send it for review to Shuotian & Joe to confirm.
   
 **config acl update incremental:**  
 
@@ -1019,8 +1070,6 @@ When the optional argument "max_priority"  is specified, each rule’s priority 
   This file is created by copying the file "acl_full_snmp_1_2_ssh_4.json" to "acl_incremental_snmp_1_3_ssh_4.json" and then removing SNMP Rule2 and adding SNMP Rule3. 
 
   ```
-TBD5: Need to create these example input files, test them using the above examples, upload them in github and reference them from here.  
-AI: Same as above. May need to raise Ticket that "incremental" is working like "full".
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#ACL-Configuration-And-Show)
 
@@ -1159,8 +1208,6 @@ This command displays the summary of all IPv4 bgp neighbors that are configured 
 **show ip bgp neighbors**  
 
 This command displays all the details of IPv4 & IPv6 BGP neighbors when no optional argument is specified. 
-
-TBD6: Is it expected to show IPv6 also? Lets document as it is and raise ImprovementTicket to repo for not displaying IPv6. In the same ImprovementTicket, add a note that the command "show ipv6 bgp neighbors" should display all IPv6 neighbors when specific IPv6_neighbor_address argument is not specified. 
 
 When the optional argument IPv4_address is specified, it displays the detailed neighbor information about that specific IPv4 neighbor.
 
@@ -2148,12 +2195,14 @@ This section explains the commands that are used to load the configuration from 
 
 ## Load config command
 
-This command is used to load the configuration from configDB. This command needs root privileges.
-If the optional parameter FILENAME is not specified, it loads the /etc/sonic/config_db.json that exists in the device. 
-If user wants to load a different configuration database file, users shall copy the file into the device and loads it using the optional argument FILENAME.
-This command does not clear the running configuration. If users had done configuration changes on top of the already saved config_db.json, those configuration shall remain in running configuration even after loading the new configuration file. Since configuration loading is always incremental, this command shall apply only the additional configuration present in the input file (or config_db.json) on top of running configuration. 
-TBD13: The above statement needs to be verified. 
-AI: Lets ask Xin to find the right person for this.
+This command is used to load the configuration from configDB. 
+This command loads the configuration from the input file (if user specifies this optional filename, it will use that input file. Or else, it will use the /etc/sonic/config_db.json as the input file) into CONFIG_DB.
+The configurations present in the input file are applied on top of the already running configuration. 
+This command does not flush the config DB before loading the new configuration. 
+i.e. If the configuration present in the input file is same as the current running-configuration, nothing happens.
+If the config present in the input file is not present in running-configuration, it will be added.
+If the config present in the input file matches (when key matches) with the running-configuration, it will be modified as per the new values for those keys.
+
 When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
 If the argument is not specified, it prompts the user to confirm whether user really wants to load this configuration file.
 
@@ -2220,9 +2269,16 @@ This command is used to clear current configuration and import new configuration
 This command shall stop all services before clearing the configuration and it then restarts those services.
 
 This command restarts various services running in the device and it takes some time to complete the command.
-NOTE: If the user had logged in using SSH, users might get disconnected depending upon the new management IP address. Users need to reconnect their SSH sessions.
+NOTE: If the user had logged in using SSH, users **might get disconnected** depending upon the new management IP address. Users need to reconnect their SSH sessions.
 In general, it is recommended to execute this command from console port after disconnecting all SSH sessions to the device.
-TBD14 - AI: lets Xin for right person to confirm this, may be Joe.
+When users to do “config reload” the newly loaded config may have management IP address, or it may not have management IP address. 
+If mgmtIP is there in the newly loaded config file, that mgmtIP might be same as previously configured value or it might be different. 
+This difference in mgmtIP address values results in following possible behaviours.
+
+Case1: Previously configured mgmtIP is same as newly loaded mgmtIP. The SSH session may not be affected at all, but it’s possible that there will be a brief interruption in the SSH session. But, assuming the client’s timeout value isn’t on the order of a couple of seconds, the session would most likely just resume again as soon as the interface is reconfigured and up with the same IP.
+Case2: Previously configured mgmtIP is different from newly loaded mgmtIP. Users will lose their SSH connections.
+Case3: Newly loaded config does not have any mgmtIP. Users will lose their SSH connections.
+
 NOTE: Management interface IP address and default route (or specific route) may require reconfiguration in case if those parameters are not part of the minigraph.xml.
 
 When user specifies the optional argument "-y" or "--yes", this command forces the loading without prompting the user for confirmation.
@@ -2300,9 +2356,7 @@ While adding a new session, users need to configure the following fields that ar
 2) destination IP address, 
 3) DSCP (QoS) value with which mirrored packets are forwarded
 4) TTL value
-5) optional - GRE Type in case if user wants to send the packet via GRE tunnel. 
-TBD15:Valid values/type need to be filled in.
-AI: Shuotian will confirm
+5) optional - GRE Type in case if user wants to send the packet via GRE tunnel. GRE type could be anything; it could also be left as empty; by default, it is 0x8949 for Mellanox; and 0x88be for the rest of the chips.
 6) optional - Queue in which packets shall be sent out of the device. Valid values 0 to 7 for most of the devices. Users need to know their device and the number of queues supported in that device.
 
   - Usage:  
@@ -2352,7 +2406,7 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 **config platform mlnx**  
 This command is valid only on mellanox devices. The sub-commands for "config platform" gets populated only on mellanox platforms.
 There are no other subcommands on non-Mellanox devices and hence this command appears empty and useless in other platforms. 
-TBD17. Need more information and content from mellanox to fill all sub-commands related to this command. 
+Mellanox specific commands shall be filled in later. 
 
 # PortChannel Configuration And Show
 
@@ -2389,8 +2443,7 @@ It is recommended to use portchannel names in the format "PortChannelxxxx", wher
 
 NOTE: If users specify any other name like "pc99", command will succeed, but such names are not supported. Such names are not printed properly in the "show interface portchannel" command. It is recommended not to use such names.
 
-TBD18: When any port is already member of any other portchannel and if user tries to add the same port in some other portchannel (without deleting it from the current portchannel), the command fails internally. But, it does not print any error message. In such cases, remove the member from current portchannel and then add it to new portchannel.
-AI: Command should fail in such case. Raise Ticket to fix it.
+When any port is already member of any other portchannel and if user tries to add the same port in some other portchannel (without deleting it from the current portchannel), the command fails internally. But, it does not print any error message. In such cases, remove the member from current portchannel and then add it to new portchannel.
 
 Command takes two optional arguements given below.
 1) min-links  - minimum number of links required to bring up the portchannel
@@ -2463,7 +2516,6 @@ This sub-section explains the following queue parameters that can be displayed u
 
 This command displays packet and byte counters for all queues of all ports or one specific-port given as arguement.
 This command can be used to clear the counters for all queues of all ports. Note that port specific clear is not supported.
-TBD20: Lets raise improvementTicket for supporting this.
  
   - Usage:  
     show queue counters [-c or --clear] [<interface-name>] 
@@ -3064,13 +3116,12 @@ This command displays virtual address to the physical address translation status
 This command displays serial port or a virtual network connection status.
 This command is used only when SONiC is used as console switch. 
 This command is not applicable when SONiC used as regular switch.
+NOTE: This command is not working. It crashes as follows. A bug ticket is opened for this issue.
 
   - Usage:  
     show line
  
-
-- Example: TBD22: This command is not working. It crashes as follows. Need more information.  
-AI: Lets raise a Ticket for this broken CLI. 
+- Example:   
 
   ``` 
   admin@T1-2:~$ show line
@@ -3338,7 +3389,12 @@ Options:
 
 **config warm_restart bgp_timer**  
 
-This command is used to set the bgp_timer value for warm_restart of BGP service. When BGP service is warm rebooted, it waits until this timer expiry to complete the warm reboot process. Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
+This command is used to set the bgp_timer value for warm_restart of BGP service. 
+bgp_timer holds the time interval utilized by fpmsyncd during warm-restart episodes.
+During this interval fpmsyncd will recover all the routing state previously pushed to AppDB, as well as all the new state coming from zebra/bgpd. 
+Upon expiration of this timer, fpmsyncd will execute the reconciliation logic to eliminate all the stale entries from AppDB. 
+This timer should match the BGP-GR restart-timer configured within the elected routing-stack.
+Supported range: 1-3600.
 
   - Usage:  
     config warm_restart bgp_timer <seconds>
@@ -3380,10 +3436,12 @@ If this configuration is enabled for that service, it will perform warm reboot f
 
 **config warm_restart neighsyncd_timer**  
 
-TBD23: This command is used to set the neighsyncd_timer value for warm_restart of "swss" service. When swss service is warm rebooted, it waits until this timer expiry to complete the warm reboot process; it is expected that all the reconciliation should be completed before this timer expires.
-Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
-When the timer expires, it will print an error message about failure, but its not a hard failure (lets confirm this with Linkedin).
-AI: To be verified by LinkedIn.
+This command is used to set the neighsyncd_timer value for warm_restart of "swss" service. 
+neighsyncd_timer is the timer used for "swss" (neighsyncd) service during the warm restart. 
+Timer is started after the neighborTable is restored to internal data structures.
+neighborsyncd then starts to read all linux kernel entries and mark the entries in the data structures accordingly. 
+Once the timer is expired, reconciliation is done and the delta is pushed to appDB
+Valid value is 1-9999. 0 is invalid.
 
   - Usage:  
     config warm_restart bgp_timerneighsyncd_timer <seconds>
@@ -3398,13 +3456,16 @@ AI: To be verified by LinkedIn.
 
 **config warm_restart teamsyncd_timer**  
 
-TBD24: This command is used to set the teamsyncd_timer value for warm_restart of teamd service. When teamd service is warm rebooted, it waits until this timer expiry to complete the warm reboot process; it is expected that all the reconciliation should be completed before this timer expires.
-Users can modify this value based on the number of neighbors and numbers of routes that are present at the moment.
-AI: To be verified by LinkedIn.
+This command is used to set the teamsyncd_timer value for warm_restart of teamd service. 
+teamsyncd_timer holds the time interval utilized by teamsyncd during warm-restart episodes.
+The timer is started when teamsyncd starts. During the timer interval, teamsyncd will preserve all LAG interface changes, but it will not apply them. 
+The changes will only be applied when the timer expires. 
+When the changes are applied, the stale LAG entries will be removed, the new LAG entries will be created.
+Supported range: 1-9999. 0 is invalid
 
   - Usage:  
     config warm_restart teamsyncd_timer <seconds>
-	seconds range 1 to 3600.
+	seconds range 1 to 9999.
 
 
 - Example:
@@ -3440,13 +3501,12 @@ This command displays the configured interval for the telemetry.
 **config watermark telemetry interval**  
 
 This command is used to configure the interval for telemetry. 
+The default interval is 120 seconds. 
+There is no regulation on the valid range of values; it leverages linux timer.
 
   - Usage:   
     config watermark telemetry interval <value>
-	interval can be any integer value from 1.
-	TBD25: Is there no maximum limit on this value?
-	AI: Ask Xin for right person.
-
+	
 
 - Example:
   ```
