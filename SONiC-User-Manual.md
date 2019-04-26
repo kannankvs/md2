@@ -504,25 +504,13 @@ Basic cable connectivity shall be verified by configuring the IP address for the
 
 | # | Module    |  CLI Link | ConfigDB Link |  Remarks |
 | --- | --- | --- | --- | --- |
-| 1 |  Interface |[Interface CLI](Command-Reference.md#Interface-Configuration-And-Show-Commands) | [Interface ConfigDB]()| To view the details about the interface |
-| 2 |  BGP |[BGP CLI]() | [BGP ConfigDB]()| To view the details about the BGP |
+| 1 |  Interface |[Interface CLI](Command-Reference.md#Interface-Configuration-And-Show-Commands) | [Interface ConfigDB](Configuration.md)| To view the details about the interface |
+| 2 |  BGP |[BGP CLI](Command-Reference.md#BGP-Configuration-And-Show-Commands) | [BGP ConfigDB](Configuration.md)| To view the details about the BGP |
+| 3 |  ACL |[ACL CLI](Command-Reference.md#ACL-Configuration-And-Show) | [ACL ConfigDB](Configuration.md)| To view the details about the ACL |
+| 4 |  COPP |COPP CLI Not Available | [COPP ConfigDB](Configuration.md)| To view the details about the COPP |
+| 5 |  Mirroring |[Mirroring CLI](Command-Reference.md#Mirroring-Configuration-And-Show) | [Mirroring ConfigDB](Configuration.md)| To view the details about the Mirroring |
 
 
-# 5) How to check the BGP protocol status?
-User shall use the following BGP commands to check the BGP neighbor status.
-1) show ip bgp neighbors
-2) show ipv6 bgp neighbors
-
-
-# 6) Steps to configure Interface - will be repetitive of CLIGuide  
-
-# 7) Steps to configure BGP- will be repetitive of CLIGuide  
-
-# 8) Steps to configure ACL- will be repetitive of CLIGuide  
-
-# 9) Steps to configure COPP- will be repetitive of CLIGuide  
-
-# 10) Steps to configure Mirroring feature- will be repetitive of CLIGuide  
 
 # 11) Example Configuration
 
