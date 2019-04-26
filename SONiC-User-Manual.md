@@ -500,7 +500,7 @@ Or, users can modify the "enabled" flag in /etc/sonic/updategraph.conf to true a
 
 Basic cable connectivity shall be verified by configuring the IP address for the ports and by using the "ping" test.
 
-# Links to Different Configuration Sections
+## 4.2 Links to Different Configuration Sections
 
 | # | Module    |  CLI Link | ConfigDB Link |  Remarks |
 | --- | --- | --- | --- | --- |
@@ -526,7 +526,7 @@ Refer the following links/files for the example configuration based on CLI, Conf
 This section captures some of the frequenently used troubleshooting commands and methods.
 Users can refer the [Troubleshooting Guide](Troubleshooting-Guide.md) for more details about troubleshooting.
 
-## Basic Troubleshooting Commands
+## 6.1 Basic Troubleshooting Commands
 
 Users shall use "show techsupport" to collect the information from the device, shall use syslog to view the syslogs printed by the services, shall use the linux utitlies like "ping", "tcpdump", etc., to check the connectivity and packet tracing.
 
@@ -566,7 +566,7 @@ Few details that the dump includes are given below:
 -	tcpdump is a common packet analyzer that runs under the sonic command line . It allows the user to display TCP/IP and other packets being transmitted or received over a network
 ex: tcpdump -i Ethernet0 
 
-## Port up/down Troubleshooting  
+## 6.2 Port up/down Troubleshooting  
 
 All port related configuration done using CLI/ConfigDB/Minigraph are saved in the redis config database. Such configuration is handled by the appropriate modules and the result of such operation might be stored in the application database (APP_DB).
 Once if the modules complete their operation, if the result needs to be programmed into the ASIC, same will be synchronized by syncd service and the result is stored in the ASIC_DB.
@@ -666,7 +666,7 @@ BCM : bcmcmd “ps”
 
 ```
 
-## ​Investigating Packet Drops 
+## ​6.3 Investigating Packet Drops 
 Packet drops can be investigated by viewing counters using the `show interfaces counters` command.
 
 - **RX_ERR/TX_ERR** includes all physical layer (layer-2) related drops, such as FCS error, RUNT frames. If there is RX_ERR or TX_ERR, it usually indicates some physical layer link issues.
@@ -691,7 +691,7 @@ Packet drops can be investigated by viewing counters using the `show interfaces 
    Ethernet24   33,543,533,441   36.59 MB/s      0.71%         0     1,613         0   43,066,076,370   49.92 MB/s      0.97%         0         0         0
   ```
 
-## Physical Link Signa​​l 
+## 6.4 Physical Link Signa​​l 
 
 Use the following command to get optical signal strength. Note: not all types of links have such channel monitor values. The AOC and DAC cables do not have such values.
 
@@ -748,7 +748,7 @@ Generally, optical power should be greater than -10dBm.
   ```
 
 
-## Isolate SONiC Device from the Ne​twork 
+## 6.5 Isolate SONiC Device from the Ne​twork 
 
 When there is suspicion that a SONiC device is dropping traffic and behaving abnormally, you may want to isolate the device from the network. Before isolating the device, please generate SONiC tech-support first.
 
