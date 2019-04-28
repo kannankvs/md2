@@ -14,6 +14,7 @@ Table of Contents
    * [2 Login Username &amp; Password](#2-login-username--password)
       * [2.1 Default Login](#21-default-login)
       * [2.2 Configuring Username &amp; Password](#22-configuring-username--password)
+      * [2.3 How to reset Password ](#23-how-to-reset-password)      
    * [3 Basic Configuration &amp; Show](#3-basic-configuration--show)
       * [3.1 Configuring Management Interface and Loopback Interface](#31-configuring-management-interface-and-loopback-interface)
       * [3.2 Software version &amp; Upgrade](#32-software-version--upgrade)
