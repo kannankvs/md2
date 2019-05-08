@@ -43,10 +43,10 @@ https://security-tracker.debian.org/tracker/CVE-2018-18065
 
 	# SAI APIs used in this release  
 
-| SAI APIs used in this 201903 release |
-| ---: |
-| SAI_ACL_ACTION_TYPE_ACL_DTEL_FLOW_OP |
-| SAI_ACL_ACTION_TYPE_DTEL_DROP_REPORT_ENABLE |
-| SAI_ACL_ACTION_TYPE_DTEL_FLOW_SAMPLE_PERCENT |
+| SAI APIs used in this 201903 release | Comments |
+|---: |---|
+| SAI_ACL_ACTION_TYPE_ACL_DTEL_FLOW_OP |  |
+| SAI_ACL_ACTION_TYPE_DTEL_DROP_REPORT_ENABLE |  |
+| SAI_ACL_ACTION_TYPE_DTEL_FLOW_SAMPLE_PERCENT |  |
 
 
