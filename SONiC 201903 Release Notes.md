@@ -33,3 +33,20 @@ https://github.com/Azure/sonic-buildimage/tree/201904
 | 14      | Port and Vlan configuration and validation  |  |
 | 15      | 	  |  |
 
+# Security Updates  
+1. [security] Fixes for DSA-4314-1 net-snmp
+https://security-tracker.debian.org/tracker/CVE-2018-18065
+
+2. dfa
+
+3. sdafsad
+
+	# SAI APIs used in this release  
+
+| SAI APIs used in this 201903 release
+|---: 
+| SAI_ACL_ACTION_TYPE_ACL_DTEL_FLOW_OP
+| SAI_ACL_ACTION_TYPE_DTEL_DROP_REPORT_ENABLE
+| SAI_ACL_ACTION_TYPE_DTEL_FLOW_SAMPLE_PERCENT
+
+
