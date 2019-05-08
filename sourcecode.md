@@ -9,8 +9,16 @@
 ## sonic-swss  
 - https://github.com/Azure/sonic-swss
 	- Switch State Service - Core component of SONiC which processes network switch data
+	- This repository contains the source code for the swss container shown in the grey coloured rectangle in the following architecture diagram
 
 ![Sec4Img1](https://github.com/Azure/SONiC/blob/master/images/sonic_user_guide_images/section4_images/section4_pic1_high_level.png "High Level Component Interactions") 	
+
+  SWWS repository contains the source code for the following.
+  - cfgmgr - This directory contains the code to build the following deamons. More details about each deamon is available in the [architecture document](https://github.com/Azure/SONiC/wiki/Architecture).
+	- "neighbor management" (neighsyncd) - Listens to neighbor-related netlink events triggered by newly discovered neighbors as a result of ARP processing.
+	- "port management" (Portsyncd) - Listens to port-related netlink events, physical port information, pushes port state to APP_DB, etc.,
+	- "" () - 
+
 	
 ## sonic-swss-common  	
 - https://github.com/Azure/sonic-swss-common
