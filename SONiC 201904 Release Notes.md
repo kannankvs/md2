@@ -24,15 +24,15 @@ https://github.com/Azure/sonic-buildimage/tree/201904
 
 | # | Big Feature List and Design Doc Link   | Comments |
 |---:     |---       |---       |
-| 1       | [FRR as default routing stack](#http://docs.frrouting.org/en/latest/) |  |
+| 1       | [FRR as default routing stack](http://docs.frrouting.org/en/latest/) |  |
 | 2       | Upgrade each docker to stretch version | SNMPD, LLDPD, Teamd |
 | 3       | Upgrade docker engine to 18.09 |  |
-| 4       | [Everflow enhancement](#https://github.com/Azure/SONiC/blob/master/doc/SONiC_EVERFLOW_IPv6.pdf) |  |
+| 4       | [Everflow enhancement](https://github.com/Azure/SONiC/blob/master/doc/SONiC_EVERFLOW_IPv6.pdf) |  |
 | 5       | RDMA CLI enhancement |  |
 | 7       | Egress ACL bug fix and ACL CLI enhancement  |  |
-| 8       | [L3 RIF counter support](#https://github.com/Azure/SONiC/blob/master/doc/RIF_counters.md) [PR](#https://github.com/Azure/SONiC/pull/310)  |  |
+| 8       | [L3 RIF counter support](https://github.com/Azure/SONiC/blob/master/doc/RIF_counters.md) [PR](#https://github.com/Azure/SONiC/pull/310)  |  |
 | 9       | Transceiver parameter tuning  |  |
-| 10      | [PMon Refactoring](#https://github.com/Azure/SONiC/tree/master/doc/pmon)  |  |
+| 10      | [PMon Refactoring](https://github.com/Azure/SONiC/tree/master/doc/pmon)  |  |
 | 11      | BGP-EVPN support (type 5)   |  |
 | 12      | Port and Vlan configuration and validation  |  |
 | 14      | 	  |  |
