@@ -29,7 +29,7 @@ https://github.com/Azure/sonic-buildimage/tree/201904
 | 3       | Upgrade docker engine to 18.09 |  |
 | 4       | [Everflow enhancement](https://github.com/Azure/SONiC/blob/master/doc/SONiC_EVERFLOW_IPv6.pdf) |  |
 | 5       | RDMA CLI enhancement |  |
-| 7       | Egress ACL bug fix and ACL CLI enhancement  |  |
+| 7       | [Egress ACL bug fix and ACL CLI enhancement](https://github.com/Azure/sonic-swss/pull/741)  |  |
 | 8       | [L3 RIF counter support](https://github.com/Azure/SONiC/blob/master/doc/RIF_counters.md) [PR](#https://github.com/Azure/SONiC/pull/310)  |  |
 | 9       | Transceiver parameter tuning  |  |
 | 10      | [PMon Refactoring](https://github.com/Azure/SONiC/tree/master/doc/pmon)  |  |
