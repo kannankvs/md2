@@ -6,32 +6,36 @@ https://github.com/Azure/sonic-buildimage/tree/201904
 
 # Dependency Version
 
-- Linux kernel version - 4.9.110-3+deb9u2 
-- SAI version - SAI 1.3 
-- Quagga - 0.99.24.1-2.1 
-- LLDPD - 0.9.6-0 
+- Linux kernel version - 4.9.110-3+deb9u2  - Linux 4.9 for 64-bit PCs
+- SAI version - SAI 1.4 
+- FRR - 6.0.2-0 
+- LLDPD - 0.9.6-` 
 - TeamD - 1.26-1 
 - SNMPD - 5.7.3+dfsg-1.5 
-- Python - 3.6
+- Python - 2.7.13, python3 - 3.5.3
+- syncd - 1.0.0, swss - 1.0.0
+- radvd - 1:2.17-2~bpo9+1
+- isc-dhcp-relay - 4.3.5-3.1
+- sonic-telemetry - 0.1
+- redis-server, redis-tools - 3:3.2.4-1~bpo8+1
+
 
 # Feature List 
 
 | # | Big Feature List and Design Doc Link   | Comments |
 |---:     |---       |---       |
-| 1       | [FRR as default routing stack](#) |  |
+| 1       | [FRR as default routing stack](#http://docs.frrouting.org/en/latest/) |  |
 | 2       | Upgrade each docker to stretch version | SNMPD, LLDPD, Teamd |
 | 3       | Upgrade docker engine to 18.09 |  |
-| 4       | Everflow enhancement |  |
+| 4       | [Everflow enhancement](#https://github.com/Azure/SONiC/blob/master/doc/SONiC_EVERFLOW_IPv6.pdf) |  |
 | 5       | RDMA CLI enhancement |  |
 | 7       | Egress ACL bug fix and ACL CLI enhancement  |  |
-| 8       | [L3 RIF counter support](https://github.com/Azure/SONiC/pull/310 )  |  |
+| 8       | [L3 RIF counter support](#https://github.com/Azure/SONiC/blob/master/doc/RIF_counters.md) [PR](#https://github.com/Azure/SONiC/pull/310)  |  |
 | 9       | Transceiver parameter tuning  |  |
-| 10      | [PMon Refactoring](https://github.com/Azure/SONiC/tree/master/doc/pmon)  |  |
-| 11      | Performance enhancement on Redis DB  |  |
-| 12      | Virtual path for streaming telemetry  |  |
-| 13      | BGP-EVPN support (type 5)   |  |
-| 14      | Port and Vlan configuration and validation  |  |
-| 15      | 	  |  |
+| 10      | [PMon Refactoring](#https://github.com/Azure/SONiC/tree/master/doc/pmon)  |  |
+| 11      | BGP-EVPN support (type 5)   |  |
+| 12      | Port and Vlan configuration and validation  |  |
+| 14      | 	  |  |
 
 # Security Updates  
 1. [security] Fixes for DSA-4314-1 net-snmp
