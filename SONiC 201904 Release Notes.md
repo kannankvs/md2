@@ -34,8 +34,7 @@ https://github.com/Azure/sonic-buildimage/tree/201904
 | 9       | Transceiver parameter tuning  |  |
 | 10      | [PMon Refactoring](https://github.com/Azure/SONiC/tree/master/doc/pmon)  |  |
 | 11      | BGP-EVPN support (type 5)   |  |
-| 12      | Port and Vlan configuration and validation  |  |
-| 14      | 	  |  |
+
 
 # Security Updates  
 1. Kernel upgrade from 4.9.110-3+deb9u2 to 4.9.110-3+deb9u6
