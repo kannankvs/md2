@@ -40,7 +40,7 @@ https://github.com/Azure/sonic-buildimage/tree/201904
 1. Kernel upgrade from 4.9.110-3+deb9u2 to 4.9.110-3+deb9u6
    Change log: https://tracker.debian.org/media/packages/l/linux/changelog-4.9.110-3deb9u6
 
-2. Docker upgrade from 18.09.0\~3 to 18.09.2\~3 to address below issue:
+2. Docker upgrade from 18.09.0\~3 to 18.09.2\~3 to address below issue:  
    https://security-tracker.debian.org/tracker/CVE-2019-5736
 
 
