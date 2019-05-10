@@ -6,7 +6,7 @@ https://github.com/Azure/sonic-buildimage/tree/201904
 
 # Dependency Version
 
-- Linux kernel version - 4.9.110-3+deb9u2  - Linux 4.9 for 64-bit PCs
+- Linux kernel version - 4.9.110-3+deb9u6  - Linux 4.9 for 64-bit PCs
 - SAI version - SAI 1.4 
 - FRR - 6.0.2-0 
 - LLDPD - 0.9.6-` 
