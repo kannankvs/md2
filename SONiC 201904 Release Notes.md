@@ -29,7 +29,7 @@ https://github.com/Azure/sonic-buildimage/tree/201904
 | 3       | Upgrade docker engine to 18.09 |  |
 | 4       | [Everflow enhancement](https://github.com/Azure/SONiC/blob/master/doc/SONiC_EVERFLOW_IPv6.pdf) |  |
 | 5       | RDMA CLI enhancement |  |
-| 7       | [Egress ACL bug fix and ACL CLI enhancement](https://github.com/Azure/sonic-swss/pull/741)  |  |
+| 7       | Egress ACL bug fix and ACL CLI enhancement [PR](https://github.com/Azure/sonic-swss/pull/741)  |  |
 | 8       | [L3 RIF counter support](https://github.com/Azure/SONiC/blob/master/doc/RIF_counters.md) [PR](#https://github.com/Azure/SONiC/pull/310)  |  |
 | 9       | Transceiver parameter tuning  |  |
 | 10      | [PMon Refactoring](https://github.com/Azure/SONiC/tree/master/doc/pmon)  |  |
@@ -38,12 +38,12 @@ https://github.com/Azure/sonic-buildimage/tree/201904
 | 14      | 	  |  |
 
 # Security Updates  
-1. [security] Fixes for DSA-4314-1 net-snmp
-https://security-tracker.debian.org/tracker/CVE-2018-18065
+1. Kernel upgrade from 4.9.110-3+deb9u2 to 4.9.110-3+deb9u6
+   Change log: https://tracker.debian.org/media/packages/l/linux/changelog-4.9.110-3deb9u6
 
-2. dfa
+2. Docker upgrade from 18.09.0~3 to 18.09.2~3 to address below issue:
+   https://security-tracker.debian.org/tracker/CVE-2019-5736
 
-3. sdafsad
 
 	# SAI APIs used in this release  
 
