@@ -14,6 +14,7 @@ Table of Contents
    * [2 Login Username &amp; Password](#2-login-username--password)
       * [2.1 Default Login](#21-default-login)
       * [2.2 Configuring Username &amp; Password](#22-configuring-username--password)
+      * [2.3 How to reset Password ](#23-how-to-reset-password)      
    * [3 Basic Configuration &amp; Show](#3-basic-configuration--show)
       * [3.1 Configuring Management Interface and Loopback Interface](#31-configuring-management-interface-and-loopback-interface)
       * [3.2 Software version &amp; Upgrade](#32-software-version--upgrade)
@@ -232,6 +233,46 @@ Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [
 There is no separate CLI for adding users and for changing passwords. 
 Users shall use the linux commands "useradd" command to add new users.
 Users shall use the linux command "passwd <username>" to change the password for the specific username.
+	
+## 2.3 How to reset Password  
+
+This TSG gives the instruction of how to reset a SONiC switch password.
+
+1. Edit Grub boot menu options
+1.1 First you need to get into grub menu options. This menu is displayed right at the beginning of the boot.  You should get something similar to this, but not the exactly the same. 
+Choose the choice Start with SONiC-:
+  ![image.png](https://github.com/Azure/SONiC/blob/master/images/PW-1.png)
+
+1.2 Now we attempt to edit grub's boot option. Press "e" to edit the first grub menu option and navigate to kernel line:
+ ![image.png](https://github.com/Azure/SONiC/blob/master/images/PW-2.png)
+
+1.3 Remove quiet  and add  init=/bin/bash
+ ![image.png](https://github.com/Azure/SONiC/blob/master/images/PW-3.png)
+
+1.4 Press Ctrl-x to boot
+
+2. Remount / and /proc
+2.1 After successfully boot you will be presented with bash command prompt:
+ ![image.png](https://github.com/Azure/SONiC/blob/master/images/PW-4.png)
+
+```
+mount -o remount,rw / 
+mount -o remount,rw /proc
+```
+
+3 Reset password
+3.1 To reset an actual password is now simple as typing :
+`passwd admin`
+ 
+  ![image.png](https://github.com/Azure/SONiC/blob/master/images/PW-5.png)
+ 
+```
+sync
+sudo reboot -f
+```
+
+
+
 
 
 # 3 Basic Configuration & Show
