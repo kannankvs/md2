@@ -155,6 +155,80 @@ and migration plan
         }
    }
 }
+```
+
+***Below ACL table added by comparig minigraph.xml & config_db.json***
+
+```
+{
+"ACL_TABLE": {
+		"EVERFLOW": {
+		"type": "MIRROR",
+		"policy_desc": "EVERFLOW",
+		"ports": [
+		  "PortChannel0001",
+		  "PortChannel0002",
+		  "PortChannel0003",
+		  "PortChannel0004"
+		]
+	  },
+		"EVERFLOWV6": {
+        "type": "MIRRORV6",
+        "policy_desc": "EVERFLOWV6",
+        "ports": [
+          "PortChannel0001",
+          "PortChannel0002",
+          "PortChannel0003",
+          "PortChannel0004"
+        ]
+      },
+        "SNMP_ACL": {
+          "services": [
+            "SNMP"
+        ],
+        "type": "CTRLPLANE",
+        "policy_desc": "SNMP_ACL"
+      },
+        "SSH_ONLY": {
+          "services": [
+            "SSH"
+          ],
+          "type": "CTRLPLANE",
+          "policy_desc": "SSH_ONLY"
+      }
+   },
+
+"ACL_RULE": {
+        "SNMP_ACL|DEFAULT_RULE": {
+            "PRIORITY": "1",
+            "PACKET_ACTION": "DROP",
+            "ETHER_TYPE": "2048"
+        },
+        "SNMP_ACL|RULE_1": {
+            "PRIORITY": "9999",
+            "PACKET_ACTION": "ACCEPT",
+            "SRC_IP": "1.1.1.1/32",
+            "IP_PROTOCOL": "17"
+        },
+        "SNMP_ACL|RULE_2": {
+            "PRIORITY": "9998",
+            "PACKET_ACTION": "ACCEPT",
+            "SRC_IP": "2.2.2.2/32",
+            "IP_PROTOCOL": "17"
+        },
+        "SSH_ONLY|DEFAULT_RULE": {
+            "PRIORITY": "1",
+            "PACKET_ACTION": "DROP",
+            "ETHER_TYPE": "2048"
+        },
+        "SSH_ONLY|RULE_1": {
+            "PRIORITY": "9999",
+            "PACKET_ACTION": "ACCEPT",
+            "SRC_IP": "4.4.4.4/8",
+            "IP_PROTOCOL": "6"
+        }
+    }
+}
 
 ```
 
@@ -891,6 +965,19 @@ name as object key and member list as attribute.
     }
   }
 }  
+```
+
+### Versions
+
+This table is where the curret version of the software is recorded.
+```
+{
+    "VERSIONS": {
+        "DATABASE": {
+            "VERSION": "version_1_0_1"
+        }
+    }
+}
 ```
 
 ### VLAN
