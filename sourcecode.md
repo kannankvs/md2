@@ -10,7 +10,7 @@
 - https://github.com/Azure/sonic-swss
 	- Switch State Service - Core component of SONiC which processes network switch data - The SWitch State Service (SWSS) is a collection of software that provides a database interface for communication with and state representation of network applications and network switch hardware.
 
-	- This repository contains the source code for the swss container shown in the grey coloured rectangle in the following [architecture diagram](SWSS_container.jpg)
+	- This repository contains the source code for the swss container shown in the grey coloured rectangle in the following [architecture diagram]!(SWSS_container.jpg)
 
   SWWS repository contains the source code for the following.
   - cfgmgr - This directory contains the code to build the following processes that run inside swss container. More details about each deamon is available in the [architecture document](https://github.com/Azure/SONiC/wiki/Architecture).
