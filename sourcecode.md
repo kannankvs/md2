@@ -12,8 +12,6 @@
 
 	- This repository contains the source code for the swss container shown in the grey coloured rectangle in the following [architecture diagram](SWSS_container.jpg)
 
-![Sec4Img1](https://github.com/Azure/SONiC/blob/master/images/sonic_user_guide_images/section4_images/section4_pic1_high_level.png "High Level Component Interactions") 	
-
   SWWS repository contains the source code for the following.
   - cfgmgr - This directory contains the code to build the following processes that run inside swss container. More details about each deamon is available in the [architecture document](https://github.com/Azure/SONiC/wiki/Architecture).
 	- nbrmgrd - manager for neighbor management - Listens to neighbor-related changes in STATE_PORT_TABLE_NAME,STATE_LAG_TABLE_NAME, STATE_VLAN_TABLE_NAME & STATE_INTERFACE_TABLE_NAME and then uses netlink to program the neighbors in linux kernel. 
