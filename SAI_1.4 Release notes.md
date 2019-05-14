@@ -1,4 +1,6 @@
-# Added SAI_OBJECT_TYPE_BRIDGE_PORT support in ACL
+# SAI 1.4 Release Notes
+
+# 1. Added SAI_OBJECT_TYPE_BRIDGE_PORT support in ACL
 
 ## Description
 
@@ -18,7 +20,7 @@ Below mentioned are some of the sub-items related to this change
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Uninitialize data plane ON removal of switch object
+# 2. Uninitialize data plane ON removal of switch object
 
 ## Description
 
@@ -33,11 +35,12 @@ Below mentioned are some of the sub-items related to this change
 [Link to the commit](https://github.com/opencomputeproject/SAI/commit/c26fb2657a7b246548d10458a542ea5fa2d23cd5)
 
 ## PRs related to this commit
+
 [795](https://github.com/opencomputeproject/SAI/pull/795)
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
-# Add SAI_PORT_ATTR_EYE_VALUES
+# 3. Add SAI_PORT_ATTR_EYE_VALUES
 
 ## Description
 
@@ -54,7 +57,7 @@ Below mentioned are some of the sub-items related to this change
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
-# Add capability metadata for attributes
+# 4. Add capability metadata for attributes
 
 ## Description
 
@@ -64,15 +67,19 @@ Below mentioned are some of the sub-items related to this change
 
 [Link to the commit](https://github.com/opencomputeproject/SAI/commit/ca5006112d4fa64747a848ef85fd4194f26a3df8)
 
-## PRs related to this commit
+## 5. PRs related to this commit
 
 [794](https://github.com/opencomputeproject/SAI/pull/794)
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
-# Add license information to metadata source files
+# 6. Add license information to metadata source files
 
 ## Description
+
+- 
+
+- 
 
 
 ## Commit
@@ -82,8 +89,9 @@ Below mentioned are some of the sub-items related to this change
 ## PRs related to this commit
 
 [799](https://github.com/opencomputeproject/SAI/pull/799)
+
 ------------------------------------------------------------------------------------------------------------------------------------------
-# VRRP support in RIF create call
+# 7. VRRP support in RIF create call
 
 ## Description
 
@@ -100,7 +108,7 @@ Below mentioned are some of the sub-items related to this change
 [792](https://github.com/opencomputeproject/SAI/pull/792)
 
 ------------------------------------------------------------------------------------------------------------------------------------------
-# Refactor parser for auto serialize and deserialize
+# 8. Refactor parser for auto serialize and deserialize
 
 ## Description
 
@@ -117,7 +125,7 @@ Below mentioned are some of the sub-items related to this change
 [804](https://github.com/opencomputeproject/SAI/pull/804)
 
 ------------------------------------------------------------------------------------------------------------------------------------------
-# Add mirror session congestion mode
+# 9. Add mirror session congestion mode
 
 ## Description
 
@@ -134,7 +142,7 @@ Below mentioned are some of the sub-items related to this change
 [786](https://github.com/opencomputeproject/SAI/pull/786)
 
 ------------------------------------------------------------------------------------------------------------------------------------------
-# Add HostIf traps for CISCO MCAST packet types
+# 10. Add HostIf traps for CISCO MCAST packet types
 
 ## Description
 
@@ -151,18 +159,89 @@ Below mentioned are some of the sub-items related to this change
 [819](https://github.com/opencomputeproject/SAI/pull/819)
 
 ------------------------------------------------------------------------------------------------------------------------------------------
-# Add HostIf traps for CISCO MCAST packet types
+# 11. Add a new DTel attribute to provide fine-grained control while enabling drop reports
 
 ## Description
 
-- To add CISCO MCast types other than UDLD to SAI header, so we can trap individual types to CPU  
+- To selectively enables/disables queue tail drop reporting when drop reporting is enabled  
 
-- Common Mcast DMAC trap is added to use a single trap for CISCO Mcast DMAC (01-00-0c-cc-cc-cc)  
+- If the new attribute is disabled, all other drops are still reported 
 
 ## Commit
 
-[Link to the commit](https://github.com/opencomputeproject/SAI/commit/9b169454b277f26664f52464184a80b0ff4f202b)
+[Link to the commit](https://github.com/opencomputeproject/SAI/commit/fb8cd257f2a5c7d880b40ab39a95ec3dcc6f9ac5)
 
 ## PRs related to this commit
 
 [813](https://github.com/opencomputeproject/SAI/pull/813)
+
+------------------------------------------------------------------------------------------------------------------------------------------
+# 12. Create fdb using vlan object id instead of vlan id
+
+## Description
+
+-   
+
+- 
+
+## Commit
+
+[Link to the commit](https://github.com/opencomputeproject/SAI/commit/95eb274c2c4ecfe4213b6ad695d45769ae460313)
+
+## PRs related to this commit
+
+[829](https://github.com/opencomputeproject/SAI/pull/829)
+
+------------------------------------------------------------------------------------------------------------------------------------------
+# 13. IP in IP tunnel ptf tests
+
+## Description
+
+-   
+
+- 
+
+## Commit
+
+[Link to the commit](https://github.com/opencomputeproject/SAI/commit/9583b410903bffc0aa29f57a81ddd418e40867da)
+
+## PRs related to this commit
+
+[833](https://github.com/opencomputeproject/SAI/pull/833)  [385](https://github.com/opencomputeproject/SAI/pull/385)  [SAITUNNEL](https://github.com/opencomputeproject/SAI/blob/v0.9.4/test/saithrift/tests/saitunnel.py)
+
+------------------------------------------------------------------------------------------------------------------------------------------
+# 14. Added P4 Behavioral Model
+
+## Description
+
+- A general switch P4 behavioral model.
+- Implementation of the SAI API over the P4 BM.
+- unit test example for the sai api usage.
+- Thirft sai server implementation and ptf tests. (currently only L2 (1D,1Q) flows are supported)
+
+## Commit
+
+[Link to the commit](https://github.com/opencomputeproject/SAI/commit/09d8c749dac0e990e64c2090af93faa69f37b001)
+
+## PRs related to this commit
+
+[492](https://github.com/opencomputeproject/SAI/pull/492) 
+
+------------------------------------------------------------------------------------------------------------------------------------------
+# 15. Add meta data attribute support to SAI extensions
+
+## Description
+
+-   
+
+- 
+
+## Commit
+
+[Link to the commit](https://github.com/opencomputeproject/SAI/commit/0115c7c67d95ca492da467a99f7e0975a5954066)
+
+## PRs related to this commit
+
+[835](https://github.com/opencomputeproject/SAI/pull/835) 
+
+------------------------------------------------------------------------------------------------------------------------------------------
