@@ -9,7 +9,7 @@
 | # | Repository   | Information |
 |---: |---       |---       |
 | 1   | [sonic-buildimage](https://github.com/Azure/sonic-buildimage) |  |
-| 2   | [sonic-utilities](https://github.com/Azure/sonic-utilities/tree/09806b861486091d9db5cb75bdd2cc9428e46844) | Use this for all CLI config commands and show commands add/modify/delete. |
+| 2   | [sonic-utilities](https://github.com/Azure/sonic-utilities/tree/09806b861486091d9db5cb75bdd2cc9428e46844) | Use this for all CLI config commands, clear commands and show commands add/modify/delete. Most of the CLI commands uses the scripts present in the sub-directories present in this repository |
 | 3   | [sonic-swss](https://github.com/Azure/sonic-swss/tree/ee4992665b94566936340d32d8d96f8dd038ed75) | Use code inside "cfgmgr" for all applications to listen to configuration changes in ConfigDB and take action. Use code inside orchagent to sync up the application output into ASIC. Use code inside "ModulenameSyncd" to listen for output from application and program the same into APP_DB. Use "warmerestart-assist" for handling warmrestart restore functionality|
 | 4   | [sonic-swss-common](https://github.com/Azure/sonic-swss-common/tree/8af58ad80df531fc7fe1fa197a1caf2c5520dbb3) |  |
 | 5   | [sonic-sairedis](https://github.com/Azure/sonic-sairedis/tree/1b0d609c6f9acd1cb868898f019eaade071c85ee) |  |
@@ -54,6 +54,18 @@
 ## sonic-swss-common  	
 - https://github.com/Azure/sonic-swss-common
 	- Switch State Service common library - Common library for Switch State Service
+
+## sonic-utilities  
+- https://github.com/Azure/sonic-utilities
+  - This repository contains the code for Command Line Interfaces for SONiC. 
+  - Folders like "config", "show", "clear" contain the CLI commands 
+  - Folders like "scripts", "sfputil", "psuutil" & "acl_loader" contain the scripts that are used by the CLI commands. These scripts are not supposed to be directly called by user. All these scripts are wrapped under the "config" and "show" commands.
+  - "connect" folder and "consutil" folder is used for scripts to connec to other SONiC devices and manage them from this device.
+  - crm folder contains the scripts for CRM configuration and show commands. These commands are not wrapped under "config" and "show" commands. i.e. users can use the "crm" commands directly.
+  - pfc folder contains script for configuring and showing the PFC parameters for the interface
+  - pfcwd folder contains the PFC watch dog related configuration and show commands.
+  - utilities-command folder contains the scripts that are internally used by other scripts.
+
 	
 ## SAI  	
 - https://github.com/opencomputeproject/SAI
