@@ -14,8 +14,8 @@
 | 4   | [sonic-swss-common](https://github.com/Azure/sonic-swss-common/tree/8af58ad80df531fc7fe1fa197a1caf2c5520dbb3) |  |
 | 5   | [sonic-sairedis](https://github.com/Azure/sonic-sairedis/tree/1b0d609c6f9acd1cb868898f019eaade071c85ee) |  |
 | 6   | [sonic-linux-kernel](https://github.com/Azure/sonic-linux-kernel/tree/69ba0c13f6b984b554dd83fadfaace4e856239ae) |  |
-| 7   | [sonic-platform-common](https://github.com/Azure/sonic-platform-common/tree/92b54b1984db0b71196e4fe68cc5a09796fd185c) |  |
-| 8   | [sonic-platform-daemons](https://github.com/Azure/sonic-platform-daemons/tree/c8931f30a0068e5f6c432ce5c428dbe0c8976c23) |  |
+| 7   | [sonic-platform-common](https://github.com/Azure/sonic-platform-common/tree/92b54b1984db0b71196e4fe68cc5a09796fd185c) | This repo contains code which is to be shared among all platforms for interfacing with platform-specific peripheral hardware |
+| 8   | [sonic-platform-daemons](https://github.com/Azure/sonic-platform-daemons/tree/c8931f30a0068e5f6c432ce5c428dbe0c8976c23) | Contains the python scripts xcvrd, ledd &  psud that listens for change events on optics, LED & PSU respectively and programs it in STATE_DB |
 | 9   | [sonic-py-swsssdk](https://github.com/Azure/sonic-py-swsssdk/tree/4cee38534919e34f407363ac3ab5f31b4d09be6d) |  |
 | 10  | [sonic-quagga](https://github.com/Azure/sonic-quagga/tree/2e192c06b8f526cab6fce710ab5da0223b0ba2b1) |  |
 | 11  | [sonic-snmpagent](https://github.com/Azure/sonic-snmpagent/tree/70a6c7dad4fcfa750fb4d4efbf267842d19ca8ef) |  |
@@ -33,17 +33,17 @@
 
   SWWS repository contains the source code for the following.
   - cfgmgr - This directory contains the code to build the following processes that run inside swss container. More details about each deamon is available in the [architecture document](https://github.com/Azure/SONiC/wiki/Architecture).
-	- nbrmgrd - manager for neighbor management - Listens to neighbor-related changes in NEIGH_TABLE in ConfigDB for static ARP/ND configuration and then uses netlink to program the neighbors in linux kernel. 
+	- nbrmgrd - manager for neighbor management - Listens to neighbor-related changes in NEIGH_TABLE in ConfigDB for static ARP/ND configuration and also to trigger proactive ARP (for potential VxLan Server IP address by not specifying MAC) and then uses netlink to program the neighbors in linux kernel. nbrmgrd does not write anything in APP_DB.
 	- portmgrd - manager for Port management - Listens to port-related changes in ConfigDB and sets the MTU and/or AdminState in kernel using "ip" commands and also pushes the same to APP_DB.
 	- buffermgrd - manager for buffer management - Reads buffer profile config file and programs it in ConfigDB and then listens (at runtime) for cable length change and speed change in ConfigDB, and sets the same into buffer profile table ConfigDB.
 	- teammgrd - team/portchannel management - Listens to portchannel related config changes in ConfigDB and  runs the teamd process for each port channel. Note that teammgrd will be executed inside teamd container (not inside swss container).
-	- intfmgrd - manager for interfaces - Listens for IP address changes and VRF name changes for the interfaces in ConfigDB and programs the same in linux using "/sbin/ip" command.
-    - vlanmgrd - manager for VLAN - Listens for VLAN related changes in ConfigDB and programs the same in linux using "bridge" & "ip" commands. 
-    - vrfmgrd - manager for VRF - Listens for VRF changes in ConfigDB and programs the same in linux.
+	- intfmgrd - manager for interfaces - Listens for IP address changes and VRF name changes for the interfaces in ConfigDB and programs the same in linux using "/sbin/ip" command and writes into APP_DB.
+    - vlanmgrd - manager for VLAN - Listens for VLAN related changes in ConfigDB and programs the same in linux using "bridge" & "ip" commands and and writes into APP_DB
+    - vrfmgrd - manager for VRF - Listens for VRF changes in ConfigDB and programs the same in linux and writes into APP_DB.
 	
   - fpmsyncd - this folder contains the code to build the "fpmsynd" process that runs in bgp container. This process runs a TCP server and listens for messages from Zebra for route changes (in the form of netlink messages) and it writes the routes to APP_DB. It also waits for clients to connect to it and then provides the route updates to those clients.
   - neighsyncd - this folder contains the code to build the "neighsyncd" process. Listens for ARP/ND specific netlink messages from kernel for dynamically learnt ARP/ND and programs the same into APP_DB.
-  - portsyncd - this folder contains the code to build the "portsyncd" process. It first reads port list from configDB/ConfigFile and adds them to APP_DB. Once if the port init process is completed, this process receives netlink messages from linux and it programs the same in APP_DB/STATE_DB (TBD).
+  - portsyncd - this folder contains the code to build the "portsyncd" process. It first reads port list from configDB/ConfigFile and adds them to APP_DB. Once if the port init process is completed, this process receives netlink messages from linux and it programs the same in STATE_DB (state OK means port creation is successful in linux).
   - swssconfig - this folder creates two executables, viz, swssconfig and swssplayer. 
      - "swssconfig" runs during boot time only. It restores FDB and ARP table during fast reboot. It takes the port config, copp config, IP in IP (tunnel) config and switch (switch table) config from the ConfigDB and loads them into APP_DB.
 	 - "swssplayer" - this records all the programming that happens via the SWSS which can be played back to simulate the sequence of events for debugging or simulating an issue.
@@ -65,6 +65,21 @@
   - pfc folder contains script for configuring and showing the PFC parameters for the interface
   - pfcwd folder contains the PFC watch dog related configuration and show commands.
   - utilities-command folder contains the scripts that are internally used by other scripts.
+
+
+## sonic-platform-common  
+
+- This repo contains code which is to be shared among all platforms for interfacing with platform-specific peripheral hardware
+- It provides the base class for peripherals like EEPROM, LED, PSU, SFP, chassis, device, fan, module, platform, watchdog, etc., that are used for existing platform code as well as for the new platform API.
+- Platform specific code present in sonic-buildimage repo (device folder) uses the classes defined in this sonic-platform-common repository.
+
+## sonic-platform-daemons  
+
+- This repo contains code for python scripts that listens for events from Optics, LED & PSU.
+- xcvrd - 
+- ledd - 
+- psud - 
+
 
 	
 ## SAI  	
