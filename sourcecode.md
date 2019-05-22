@@ -16,8 +16,8 @@
 | 6   | [sonic-linux-kernel](https://github.com/Azure/sonic-linux-kernel/tree/69ba0c13f6b984b554dd83fadfaace4e856239ae) |  |
 | 7   | [sonic-platform-common](https://github.com/Azure/sonic-platform-common/tree/92b54b1984db0b71196e4fe68cc5a09796fd185c) | This repo contains code which is to be shared among all platforms for interfacing with platform-specific peripheral hardware |
 | 8   | [sonic-platform-daemons](https://github.com/Azure/sonic-platform-daemons/tree/c8931f30a0068e5f6c432ce5c428dbe0c8976c23) | Contains the python scripts xcvrd, ledd &  psud that listens for change events on optics, LED & PSU respectively and programs it in STATE_DB |
-| 9   | [sonic-py-swsssdk](https://github.com/Azure/sonic-py-swsssdk/tree/4cee38534919e34f407363ac3ab5f31b4d09be6d) |  |
-| 10  | [sonic-quagga](https://github.com/Azure/sonic-quagga/tree/2e192c06b8f526cab6fce710ab5da0223b0ba2b1) |  |
+| 9   | [sonic-py-swsssdk](https://github.com/Azure/sonic-py-swsssdk/tree/4cee38534919e34f407363ac3ab5f31b4d09be6d) | This repo contains python utility library for SWSS DB access |
+| 10  | [sonic-quagga](https://github.com/Azure/sonic-quagga/tree/2e192c06b8f526cab6fce710ab5da0223b0ba2b1) | This repo contains quagga routing software |
 | 11  | [sonic-snmpagent](https://github.com/Azure/sonic-snmpagent/tree/70a6c7dad4fcfa750fb4d4efbf267842d19ca8ef) |  |
 | 12  | [sonic-dbsyncd](https://github.com/Azure/sonic-dbsyncd/tree/fe60afa7e24a7053a7bd9d7084268c1bbd203208) |  |
 
@@ -75,11 +75,27 @@
 
 ## sonic-platform-daemons  
 
-- This repo contains code for python scripts that listens for events from Optics, LED & PSU.
-- xcvrd - 
-- ledd - 
-- psud - 
+- This repo contains code for python scripts that listens for events from Optics, LED & PSU and writes them in the STATE_DB
+- xcvrd - This listens for SFP events and writes the status to STATE_DB.
+- ledd - This listens for LED events and writes the status to STATE_DB.
+- psud - This listens for PSU events and writes the status to STATE_DB.
 
+
+## sonic-py-swsssdk  
+
+- This repo contains python utility library for SWSS DB access. 
+- configdb.py - This provides utilities like ConfigDBConnector, db_connect, connect, subscribe, listen, set_entry, mod_entry, get_entry, get_keys, get_table, delete_table, mod_config, get_config, etc.,
+- dbconnector.py - It contains utilities like SonicV1Connector, SonicV2Connector, etc.,
+- exceptions.py - It contains utilities like SwssQueryError, UnavailableDataError, MissingClientError, etc.,
+- interface.py - It contains utilities like DBRegistry, DBInterface, connect, close, get_redis-client, publish, expire, exists,  keys, get, get_all, set, delete, etc.,
+- port_util.py - It contains utilities like get_index, get_interface_oid_map, get_vlan_id_from_bvid, get_bridge_port_map, etc.,
+- util.py - It contains utilities like process_options, setup_logging, etc.,
+
+
+## sonic-quagga  
+
+This repo contains code for the Quagga routing software which is a free software that manages various IPv4 and IPv6 routing protocols. Currently Quagga supports BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2, and RIPng as well as very early support for IS-IS.
+  
 
 	
 ## SAI  	
