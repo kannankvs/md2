@@ -12,7 +12,7 @@
 | 2   | [sonic-utilities](https://github.com/Azure/sonic-utilities/tree/09806b861486091d9db5cb75bdd2cc9428e46844) | Use this for all CLI config commands, clear commands and show commands add/modify/delete. Most of the CLI commands uses the scripts present in the sub-directories present in this repository |
 | 3   | [sonic-swss](https://github.com/Azure/sonic-swss/tree/ee4992665b94566936340d32d8d96f8dd038ed75) | Use code inside "cfgmgr" for all applications to listen to configuration changes in ConfigDB and take action. Use code inside orchagent to sync up the application output into ASIC. Use code inside "ModulenameSyncd" to listen for output from application and program the same into APP_DB. Use "warmerestart-assist" for handling warmrestart restore functionality|
 | 4   | [sonic-swss-common](https://github.com/Azure/sonic-swss-common/tree/8af58ad80df531fc7fe1fa197a1caf2c5520dbb3) |  |
-| 5   | [sonic-sairedis](https://github.com/Azure/sonic-sairedis/tree/1b0d609c6f9acd1cb868898f019eaade071c85ee) |  |
+| 5   | [sonic-sairedis](https://github.com/Azure/sonic-sairedis/tree/1b0d609c6f9acd1cb868898f019eaade071c85ee) | contains code for SAI library that writes SAI objects into the ASIC_DB and a syncd process that takes the SAI objects and puts them into the ASIC. |
 | 6   | [sonic-linux-kernel](https://github.com/Azure/sonic-linux-kernel/tree/69ba0c13f6b984b554dd83fadfaace4e856239ae) |  |
 | 7   | [sonic-platform-common](https://github.com/Azure/sonic-platform-common/tree/92b54b1984db0b71196e4fe68cc5a09796fd185c) | This repo contains code which is to be shared among all platforms for interfacing with platform-specific peripheral hardware |
 | 8   | [sonic-platform-daemons](https://github.com/Azure/sonic-platform-daemons/tree/c8931f30a0068e5f6c432ce5c428dbe0c8976c23) | Contains the python scripts xcvrd, ledd &  psud that listens for change events on optics, LED & PSU respectively and programs it in STATE_DB |
@@ -98,11 +98,17 @@ This repo contains code for the Quagga routing software which is a free software
   
 
 	
-## SAI  	
+## sonic-sairedis (SAI)  
 - https://github.com/opencomputeproject/SAI
 	- Switch Abstraction Interface standard headers
 - https://github.com/Azure/sonic-sairedis
 	- C++ library for interfacing to SAI objects in Redis
+	
+	- The SAI Redis provides a SAI redis service that built on top of redis database. 
+	- It contains two major components 
+	   - a SAI library that puts SAI objects into the ASIC_DB and
+	   - a syncd process that takes the SAI objects and puts them into the ASIC.
+	- 
 	
 ## sonic-dbsyncd  
 

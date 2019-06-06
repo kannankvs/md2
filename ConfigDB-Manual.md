@@ -1,3 +1,53 @@
+# SONiC Configuration Database Manual
+
+Table of Contents
+=================
+
+   * [INTRODUCTION](#introduction)
+   * [Configuration](#configuration)
+   * [<strong>Config Load and Save</strong>](#config-load-and-save)
+         * [Incremental Configuration](#incremental-configuration)
+   * [<strong>Redis and Json Schema</strong>](#redis-and-json-schema)
+         * [ACL and Mirroring](#acl-and-mirroring)
+         * [BGP Sessions](#bgp-sessions)
+         * [BUFFER_PG](#buffer_pg)
+         * [Buffer pool](#buffer-pool)
+         * [Buffer profile](#buffer-profile)
+         * [Buffer queue](#buffer-queue)
+         * [Cable length](#cable-length)
+         * [COPP_TABLE](#copp_table)
+         * [CRM](#crm)
+         * [Data Plane L3 Interfaces](#data-plane-l3-interfaces)
+         * [Device Metadata](#device-metadata)
+         * [Device neighbor metada](#device-neighbor-metada)
+         * [DSCP_TO_TC_MAP](#dscp_to_tc_map)
+         * [FLEX_COUNTER_TABLE](#flex_counter_table)
+         * [L2 Neighbors](#l2-neighbors)
+         * [Loopback Interface](#loopback-interface)
+         * [Management Interface](#management-interface)
+         * [Management port](#management-port)
+         * [Management VRF](#management-vrf)
+         * [MAP_PFC_PRIORITY_TO_QUEUE](#map_pfc_priority_to_queue)
+         * [NTP and SYSLOG servers](#ntp-and-syslog-servers)
+         * [Port](#port)
+         * [Port Channel](#port-channel)
+         * [Portchannel member](#portchannel-member)
+         * [Port QoS Map](#port-qos-map)
+         * [Queue](#queue)
+         * [Tacplus Server](#tacplus-server)
+         * [TC to Priority group map](#tc-to-priority-group-map)
+         * [TC to Queue map](#tc-to-queue-map)
+         * [Versions](#versions)
+         * [VLAN](#vlan)
+         * [VLAN_MEMBER](#vlan_member)
+         * [Virtual router](#virtual-router)
+         * [WRED_PROFILE](#wred_profile)
+   * [For Developers](#for-developers)
+      * [Generating Application Config by Jinja2 Template](#generating-application-config-by-jinja2-template)
+      * [Incremental Configuration by Subscribing to ConfigDB](#incremental-configuration-by-subscribing-to-configdb)
+
+
+
 # INTRODUCTION																																									
 This document lists the configuration commands schema applied in the SONiC eco system. All these commands find relevance in collecting system information, analysis and even for trouble shooting. All the commands are categorized under relevant topics with corresponding examples.  																																																																					
 
