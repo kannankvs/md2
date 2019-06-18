@@ -24,11 +24,6 @@
 
 # SONiC Repositories Details  
 
-## sonic-buildimage  
-- https://github.com/Azure/sonic-buildimage
-    - Main repo that contains SONiC code,links to all sub-repos, build related files, platform/device specific files, etc.,
-	This repo has the following directories.
-	- device - 
 
 ## sonic-swss  
 - https://github.com/Azure/sonic-swss
@@ -102,6 +97,50 @@
 
 This repo contains code for the Quagga routing software which is a free software that manages various IPv4 and IPv6 routing protocols. Currently Quagga supports BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2, and RIPng as well as very early support for IS-IS.
   
+## sonic-buildimage  
+- https://github.com/Azure/sonic-buildimage
+    - Main repo that contains SONiC code,links to all sub-repos, build related files, platform/device specific files, etc.,
+	This repo has the following directories.
+	- device - It contains files specific to each vendor device. In general, it contains the python scripts for accessing EEPROM, SFP, PSU, LED,etc., specific to the device hardware.
+	- dockers - code related to all dockers running in the SONiC
+	- files
+	- installer
+	- rules
+	- platform
+	- sonic-slave
+	- sonic-slave-stretch
+	- src
+	  - bash
+	  - gobgp
+	  - hiredis
+	  - initramfs-tools
+	  - iproute2
+	  - isc-dscp
+	  - ixgbe
+	  - libnl3
+	  - libteam
+	  - libyang
+	  - lldpd
+	  - lm-sensors
+	  - mpdecimal
+	  - python-click
+	  - python3
+	  - radvd - Router advertisement for IPv6
+	  - redis-dump-load.patch
+	  - redis
+	  - smartmontools - 
+	  - snmpd - 
+	  - socat - 
+	  - sonic-config-engine
+	  - sonic-daemon-base
+	  - sonic-device-data
+	  - sonic-frr
+	  - supervisor
+	  - swig 
+	  - tacacs - 
+	  - telemetry - 
+	  - thrift - 
+
 
 	
 ## sonic-sairedis (SAI)  
