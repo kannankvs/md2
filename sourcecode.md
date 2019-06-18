@@ -8,7 +8,7 @@
 
 | # | Repository   | Information |
 |---: |---       |---       |
-| 1   | [sonic-buildimage](https://github.com/Azure/sonic-buildimage) |  |
+| 1   | [sonic-buildimage](https://github.com/Azure/sonic-buildimage) | Main repo that contains SONiC code, dockers,links to all sub-repos, build related files, platform/device specific files, etc.,  |
 | 2   | [sonic-utilities](https://github.com/Azure/sonic-utilities/tree/09806b861486091d9db5cb75bdd2cc9428e46844) | Use this for all CLI config commands, clear commands and show commands add/modify/delete. Most of the CLI commands uses the scripts present in the sub-directories present in this repository |
 | 3   | [sonic-swss](https://github.com/Azure/sonic-swss/tree/ee4992665b94566936340d32d8d96f8dd038ed75) | Use code inside "cfgmgr" for all applications to listen to configuration changes in ConfigDB and take action. Use code inside orchagent to sync up the application output into ASIC. Use code inside "ModulenameSyncd" to listen for output from application and program the same into APP_DB. Use "warmerestart-assist" for handling warmrestart restore functionality|
 | 4   | [sonic-swss-common](https://github.com/Azure/sonic-swss-common/tree/8af58ad80df531fc7fe1fa197a1caf2c5520dbb3) |  |
@@ -18,11 +18,17 @@
 | 8   | [sonic-platform-daemons](https://github.com/Azure/sonic-platform-daemons/tree/c8931f30a0068e5f6c432ce5c428dbe0c8976c23) | Contains the python scripts xcvrd, ledd &  psud that listens for change events on optics, LED & PSU respectively and programs it in STATE_DB |
 | 9   | [sonic-py-swsssdk](https://github.com/Azure/sonic-py-swsssdk/tree/4cee38534919e34f407363ac3ab5f31b4d09be6d) | This repo contains python utility library for SWSS DB access |
 | 10  | [sonic-quagga](https://github.com/Azure/sonic-quagga/tree/2e192c06b8f526cab6fce710ab5da0223b0ba2b1) | This repo contains quagga routing software |
-| 11  | [sonic-snmpagent](https://github.com/Azure/sonic-snmpagent/tree/70a6c7dad4fcfa750fb4d4efbf267842d19ca8ef) |  |
-| 12  | [sonic-dbsyncd](https://github.com/Azure/sonic-dbsyncd/tree/fe60afa7e24a7053a7bd9d7084268c1bbd203208) |  |
+| 11  | [sonic-snmpagent](https://github.com/Azure/sonic-snmpagent/tree/70a6c7dad4fcfa750fb4d4efbf267842d19ca8ef) | SNMP agent code |
+| 12  | [sonic-dbsyncd](https://github.com/Azure/sonic-dbsyncd/tree/fe60afa7e24a7053a7bd9d7084268c1bbd203208) | Database sync up repo |
 
 
 # SONiC Repositories Details  
+
+## sonic-buildimage  
+- https://github.com/Azure/sonic-buildimage
+    - Main repo that contains SONiC code,links to all sub-repos, build related files, platform/device specific files, etc.,
+	This repo has the following directories.
+	- device - 
 
 ## sonic-swss  
 - https://github.com/Azure/sonic-swss
