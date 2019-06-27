@@ -27,7 +27,7 @@
   - [SONiC-User-Manual.md](doc/SONiC-User-Manual.md)
   - [SONiC Configuration Modelv (2).docx](doc/SONiC Configuration Modelv (2).docx)
   - [network_telemetry_in_SONiC(2018-08).pdf](doc/network_telemetry_in_SONiC(2018-08).pdf)
-  - [2019-OCP-hackathon-Kubers.pdf](doc/2019-OCP-hackathon-Kubers.pdf)
+  - [2019-OCP-hackathon-Kubers.pdf](doc/2019--OCP--hackathon--Kubers.pdf)
   - [SONiC 201811 Release Note.pdf](doc/SONiC 201811 Release Note.pdf)
   - [SONiC_OCP_2018_Rodny.pdf](doc/SONiC_OCP_2018_Rodny.pdf)
   - [Using NBI Image for SONiC System - Cisco.pdf](doc/Using NBI Image for SONiC System - Cisco.pdf)
