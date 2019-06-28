@@ -4,7 +4,6 @@
   - [Self-Healing Network Linkedin Keynote.pdf](doc/Self-Healing%20Network%20Linkedin%20Keynote.pdf)
   - [Barefoot-SAI-Workshop-03-21-2018-v4.pdf](doc/Barefoot-SAI-Workshop-03-21-2018-v4.pdf)
   - [SONiC Architect adn Platform Management Service - MSFT.pdf](doc/SONiC Architect%20adn%20Platform Management%20Service%20-%20MSFT.pdf)
-  - [_Sidebar.md](doc/_Sidebar.md)
   - [sonic-port-name.md](doc/sonic-port-name.md)
   - [SONiC Powered by Programmable Dataplane - Barefoot.pdf](doc/SONiC%20Powered%20by%20Programmable%20Dataplane%20-%20Barefoot.pdf)
   - [SONiC OCP2018 WAN.pdf](doc/SONiC%20OCP2018%20WAN.pdf)
