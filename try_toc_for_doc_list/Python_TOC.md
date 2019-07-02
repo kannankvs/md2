@@ -56,6 +56,7 @@
   - [Sonic_ConfigDB_0926_community_talk.pdf](doc/Sonic_ConfigDB_0926_community_talk.pdf)
   - [VLAN trunk in SONiC_v0.5.docx](doc/VLAN%20trunk%20in%20SONiC_v0.5.docx)
   - media-settings
+    - [Media-based-Port-settings.md](doc/media-settings/Media-based-Port-settings.md)
   - system-telemetry
     - [dialout.md](doc/system-telemetry/dialout.md)
     - [grpc_telemetry.md](doc/system-telemetry/grpc_telemetry.md)
@@ -87,15 +88,20 @@
   - xrcvd
     - [xcvrd-snmp-testbed-test-plan.md](doc/xrcvd/xcvrd-snmp-testbed-test-plan.md)
     - [OIDsforSensorandTransciver.MD](doc/xrcvd/OIDsforSensorandTransciver.MD)
+    - [SensorMonitor.PNG](doc/xrcvd/SensorMonitor.PNG)
+    - [transceiver-monitor-hld.md](doc/xrcvd/transceiver-monitor-hld.md)
   - vxlan
     - [Vxlan_hld.md](doc/vxlan/Vxlan_hld.md)
   - barefoot_dtel
     - [Dtel-SONiC.md](doc/barefoot_dtel/Dtel-SONiC.md)
+    - [Dtel-test-plan.md](doc/barefoot_dtel/Dtel-test-plan.md)
   - crm
     - [CRM_requirements.md](doc/crm/CRM_requirements.md)
   - ztp
     - [ztp.md](doc/ztp/ztp.md)
     - images
+      - [ZTP_Block_Diagram.drawio.xml](doc/ztp/images/ZTP_Block_Diagram.drawio.xml)
+      - [ztp-states.xml](doc/ztp/images/ztp-states.xml)
   - lag
     - [LACP Fallback Test Plan.md](doc/lag/LACP%20Fallback%20Test%20Plan.md)
     - [LACP Fallback Feature for SONiC_v0.5.md](doc/lag/LACP%20Fallback%20Feature%20for%20SONiC_v0.5.md)
