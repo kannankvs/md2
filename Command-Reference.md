@@ -3647,6 +3647,15 @@ Resulting archive file is saved as `/var/dump/<DEVICE_HOST_NAME>_YYYYMMDD_HHMMSS
   admin@sonic:~$ show techsupport
   ```
 
+If the SONiC system was running for quite some time ```show techsupport``` will produce a large dump file. To reduce the amount of syslog and core files gathered during system dump use ```--since``` option:
+
+- Example:
+  ```
+  admin@sonic:~$ show techsupport --since=yesterday  # Will collect syslog and core files for the last 24 hours
+  admin@sonic:~$ show techsupport --since='hour ago' # Will collect syslog and core files for the last one hour
+  ```
+
+
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#Troubleshooting-commands)
 
 
