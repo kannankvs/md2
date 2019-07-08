@@ -3,10 +3,10 @@
 Table of Contents
 =================
 
-   * [INTRODUCTION](#introduction)
-   * [Configuration](#configuration)
-   * [<strong>Config Load and Save</strong>](#config-load-and-save)
-         * [Incremental Configuration](#incremental-configuration)
+   * [INTRODUCTION](#introduction)  
+   * [Configuration](#configuration)  
+   * [<strong>Config Load and Save</strong>](#config-load-and-save)  
+         * [Incremental Configuration](#incremental-configuration)  
    * [<strong>Redis and Json Schema</strong>](#redis-and-json-schema)  
          * [ACL and Mirroring](#acl-and-mirroring)  
          * [BGP Sessions](#bgp-sessions)  
