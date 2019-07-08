@@ -3,7 +3,7 @@
 Table of Contents
 =================
 
-   * [INTRODUCTION](#introduction)  
+   * [Introduction](#introduction)  
    * [Configuration](#configuration)  
    * [<strong>Config Load and Save</strong>](#config-load-and-save)  
          * [Incremental Configuration](#incremental-configuration)  
@@ -48,7 +48,7 @@ Table of Contents
 
 
 
-# INTRODUCTION																																									
+# Introduction																																									
 This document lists the configuration commands schema applied in the SONiC eco system. All these commands find relevance in collecting system information, analysis and even for trouble shooting. All the commands are categorized under relevant topics with corresponding examples.  																																																																					
 
 # Configuration
