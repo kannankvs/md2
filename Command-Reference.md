@@ -1283,7 +1283,7 @@ In order to get details for an IPv6 neigbor, use "show ipv6 bgp neighbor <ipv6_a
 
 **show ipv6 bgp summary**  
 
-This command displays the summary of all IPv4 bgp neighbors that are configured and the corresponding states.
+This command displays the summary of all IPv6 bgp neighbors that are configured and the corresponding states.
 
   - Usage:  
      show ipv6 bgp summary
