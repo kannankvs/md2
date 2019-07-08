@@ -913,7 +913,7 @@ When user has not configured server specific timeout, this global value shall be
 
 
    - Usage:  
-    config tacacs [default] timeout [\<timeout_value_in_seconds\>]
+    config tacacs [default] timeout [\<timeout_value_in_seconds\>]  
      valid values for timeout is 1 to 60 seconds. 
 	 When the optional keyword "default" is specified, timeout_value_in_seconds parameter wont be used; default value of 5 is used.
 	 Configuration using the keyword "default" is introduced in 201904 release.
