@@ -458,7 +458,7 @@ This file is saved in the path `/var/log` and can be viewed by giving the comman
 Individual process can also be viewed using the command `ps -ax | grep <\process name>
 
 - Usage:  
-  show logging ([<process-name>] [-l lines] | [-f])
+  show logging ([\<process-name\>] [-l lines] | [-f])
 
 - Example:
   ```
