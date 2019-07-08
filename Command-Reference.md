@@ -901,19 +901,6 @@ When user has not configured server specific passkey, this global value shall be
   root@T1-2:~#
   ```  
   
-**config tacacs default passkey (new for 201904+ version)**  
-This command will restore the passkey for tacacs to default value of empty string "".
-This command is not available in 201811- versions.
-
-   - Usage:  
-     config tacacs default passkey  
-
-- Example: To configure default passkey value
-  ```
-  root@T1-2:~# config tacacs default passkey
-  root@T1-2:~#
-  ```
-
 **config tacacs timeout**  
 
 This command is used to modify the global value for the TACACS+ timeout.
@@ -929,21 +916,6 @@ When user has not configured server specific timeout, this global value shall be
 - Example: To configure non-default timeout value  
   ```
   root@T1-2:~# config tacacs timeout 60
-  root@T1-2:~#
-  ```
-
-**config tacacs default timeout (for 201904+ version)**  
-
-This command is used to reset the tacacs timeout value to the default value of 5 seconds.
-This command is not available in 201811- versions.
-
-
-   - Usage:  
-    config tacacs [default] timeout
-
-- Example: To configure default timeout value
-  ```
-  root@T1-2:~# config tacacs default timeout
   root@T1-2:~#
   ```
 
@@ -1221,8 +1193,8 @@ Detailed show commands examples for Quagga are provided at the end of this docum
 ## BGP show commands  
 
 
-**show bgp summary (for default FRR in 201904+ version) **
-**show ip bgp summary (for Quagga in 201811- version) **
+**show bgp summary (for default FRR in 201904+ version) **  
+**show ip bgp summary (for Quagga in 201811- version) **  
 
 This command displays the summary of all IPv4 & IPv6 bgp neighbors that are configured and the corresponding states.  
 
@@ -1267,8 +1239,9 @@ This command displays the summary of all IPv4 & IPv6 bgp neighbors that are conf
   Click [here](#Quagga-BGP-Show-Commands) to see the example for "show ip bgp summary" for Quagga. 
 
 
-**show bgp neighbors (for default FRR in 201904+ version)**  
-**show ip bgp neighbors (for Quagga in 201811- version) **  
+
+**show bgp neighbors (for default FRR in 201904+ version)**   
+**show ip bgp neighbors (for Quagga in 201811- version)**   
 
 
 This command displays all the details of IPv4 & IPv6 BGP neighbors when no optional argument is specified. 
@@ -1358,6 +1331,7 @@ In order to get details for an IPv6 neigbor, use "show bgp ipv6 neighbor <ipv6_a
   Click [here](#Quagga-BGP-Show-Commands) to see the example for "show ip bgp neighbors" for Quagga. 
 
 
+
 **show bgp ipv6 summary (for default FRR in 201904+ version)**  
 **show ipv6 bgp summary (for Quagga in 201811- version)**  
 
@@ -1388,6 +1362,7 @@ This command displays the summary of all IPv6 bgp neighbors that are configured 
   Click [here](#Quagga-BGP-Show-Commands) to see the example for "show ipv6 bgp summary" for Quagga. 
 
 
+
 **show bgp ipv6 neighbors (for default FRR in 201904+ version)**  
 **show ipv6 bgp neighbors (for Quagga in 201811- version)**  
 
@@ -1409,6 +1384,7 @@ This command displays all the details of one particular IPv6 Border Gateway Prot
    
   ```
   Click [here](#Quagga-BGP-Show-Commands) to see the example for "show ip bgp summary" for Quagga. 
+
 
 
 **show route-map**  
@@ -1808,8 +1784,8 @@ The syntax for all such interface_subcommands are given below under each command
 NOTE: In older versions of SONiC until 201811 release, the command syntax was  
       "config interface <interface_name> interface_subcommand"
 
- **config interface ip add <interface-name> <ip_addr> (for 201904+ version)**  
- **config interface <interface-name> ip add <ip_addr> (for 201811- version)**  
+**config interface ip add <interface-name> <ip_addr> (for 201904+ version)**  
+**config interface <interface-name> ip add <ip_addr> (for 201811- version)**  
 
 This command is used for adding the IP address for an interface.  
 IP address for either physical interface or for portchannel or for VLAN interface can be configured using this command. 
@@ -1826,7 +1802,7 @@ IP address for either physical interface or for portchannel or for VLAN interfac
 NOTE: In SONiC versions until 201811, syntax was "config <interface_name> ip add <ip_addr>"
   
   
-** IP Address Configuration for Vlan Interface  **  
+**IP Address Configuration for Vlan Interface**  
 - Usage:  
     config interface ip add <ip_addr> <vlan_IDName>
 
@@ -1838,8 +1814,8 @@ NOTE: In versions until 201811, syntax was "config interface <vlan_IDName> ip ad
 
   
   
-** config interface ip remove <interface_name> <ip_addr> (for 201904+ version)**  
-** config interface <interface_name> ip remove <ip_addr> (for 201811- version)**  
+**config interface ip remove <interface_name> <ip_addr> (for 201904+ version)**  
+**config interface <interface_name> ip remove <ip_addr> (for 201811- version)**  
 
 - Usage:  
     config interface ip remove <interface_name> <ip_addr> (for 201904+ version)
@@ -1852,7 +1828,8 @@ NOTE: In versions until 201811, syntax was "config interface <vlan_IDName> ip ad
 NOTE: In versions until 201811, syntax is "config  interface <interface_name> ip remove <ip_addr>"
   
   
-** IP Address Removal for Vlan Interface  **  
+
+**IP Address Removal for Vlan Interface**  
 - Usage:  
     config interface ip remove <vlan_IDName> <ip_addr> 
 
@@ -1861,6 +1838,7 @@ NOTE: In versions until 201811, syntax is "config  interface <interface_name> ip
   admin@sonic:~$ sudo config interface ip remove vlan100 10.11.12.13/24 
   ```
 NOTE: In versions until 201811, syntax is "config interface <vlan_ID> ip remove <ip_addr>"
+
   
   
 **config interface pfc asymmetric <interface_name> (for 201904+ version)**  
@@ -1892,6 +1870,7 @@ This command is used to administratively shut down either the Physical interface
 NOTE: In versions until 201811, syntax is "config interface <interface_name> shutdown"
 
 
+
 **config interface startup <interface_name> (for 201904+ version)**  
 **config interface <interface_name> startup (for 201811- version)**  
 
@@ -1906,6 +1885,8 @@ This command is used for administratively bringing up the Physical interface or 
   admin@sonic:~$ sudo config interface startup Ethernet63
   ```
 NOTE: In versions until 201811, syntax is "config interface <interface_name> startup"
+
+
 
 **config interface speed <interface_name> (for 201904+ version)**  
 **config interface <interface_name> speed (for 201811- version)**  
@@ -1923,6 +1904,7 @@ Dynamic breakout feature is yet to be supported in SONiC and hence uses cannot c
   ```
 
 NOTE: In versions until 201811, syntax is "config interface <interface_name> speed <4000>"
+
 
 Go Back To [Beginning of the document](#SONiC-COMMAND-LINE-INTERFACE-GUIDE) or [Beginning of this section](#interface-configuration-and-show-commands)
 
