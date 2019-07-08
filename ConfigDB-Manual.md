@@ -887,7 +887,7 @@ optional attributes.
 ### Port Channel
 
 Port channels are defined in **PORTCHANNEL** table with port channel
-name as object key and member list as attribute.
+name as object key.
 
 ```
 {
@@ -895,17 +895,13 @@ name as object key and member list as attribute.
         "PortChannel0003": {
                 "admin_status": "up",
         "min_links": "1",
-        "members": [
-            "Ethernet54"
-        ],
+	"fallback": "true",
         "mtu": "9100"
     },
     "PortChannel0004": {
         "admin_status": "up",
         "min_links": "1",
-        "members": [
-            "Ethernet56"
-        ],
+	"fallback": "true",
         "mtu": "9100"
     }
   }
@@ -913,8 +909,8 @@ name as object key and member list as attribute.
 ```
 
 
-### Portchannel member
-
+### Portchannel member  
+Port channel members are defined in **PORTCHANNEL_MEMBER** table with port channel name plus port name as object key.
 ```
 {
 "PORTCHANNEL_MEMBER": {
@@ -1048,19 +1044,13 @@ the domain name or IP address of one or more DHCP servers.
 			"192.0.0.3",
 			"192.0.0.4"
 		],
-		"members": [
-			"Ethernet0",
-			"Ethernet4",
-			"Ethernet8",
-			"Ethernet12"
-		],
 		"vlanid": "1000"
 	}
   }
 }
 ```
 
-### VLAN_MEMBER
+### VLAN Member
 
 VLAN member table has Vlan name together with physical port or port
 channel name as object key, and tagging mode as attributes.
