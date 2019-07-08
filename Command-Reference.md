@@ -1863,7 +1863,7 @@ This sub-section explains the various IP protocol specific show commands that ar
 This command displays either all the route entries from the routing table or a specific route.
 
   - Usage:  
-    show ip route [<ip-address>]`
+    show ip route [\<ip-address\>]
 
 
 - Example:
@@ -1970,7 +1970,7 @@ This sub-section explains the various IPv6 protocol specific show commands that 
 This command displays either all the IPv6 route entries from the routing table or a specific IPv6 route.
 
   - Usage:  
-    show ipv6 route [<ipv6-address>]
+    show ipv6 route [\<ipv6-address\>]
 	 
 
 - Example:
