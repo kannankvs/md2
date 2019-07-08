@@ -1142,7 +1142,7 @@ This command displays the ARP entries in the device with following options.
 This command displays either all the IPv6 neighbor mac addresses, or for a particular IPv6 neighbor, or for all IPv6 neighbors reachable via a specific interface.
 
   - Usage:  
-    show ndp \[-if|--iface \<interface-name\>\] \[IP6ADDRESS\]
+    show ndp [-if|--iface \<interface-name\>] [IP6ADDRESS]
 
 
 - Example:
