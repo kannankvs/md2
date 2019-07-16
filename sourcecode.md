@@ -1,10 +1,8 @@
 # SONiC Source Repositories
 
+# SONiC Repositories Details 
+
 # Imaging and Building tools
-- https://github.com/Azure/sonic-buildimage
-	- Source to build an installable SONiC image
-	
-# SONiC Repositories Details  
 
 ## sonic-buildimage  
 - https://github.com/Azure/sonic-buildimage
@@ -29,17 +27,8 @@
 		snmpd, socat, sonic-config-engine, sonic-daemon-base, sonic-device-data, sonic-frr (routing software with patches), supervisor,
 		swig, tacacs, telemetry and thrift.
 
-## sonic-utilities   
-- https://github.com/Azure/sonic-utilities  
-  - This repository contains the code for Command Line Interfaces for SONiC. 
-  - Folders like "config", "show", "clear" contain the CLI commands 
-  - Folders like "scripts", "sfputil", "psuutil" & "acl_loader" contain the scripts that are used by the CLI commands. These scripts are not supposed to be directly called by user. All these scripts are wrapped under the "config" and "show" commands.
-  - "connect" folder and "consutil" folder is used for scripts to connec to other SONiC devices and manage them from this device.
-  - crm folder contains the scripts for CRM configuration and show commands. These commands are not wrapped under "config" and "show" commands. i.e. users can use the "crm" commands directly.
-  - pfc folder contains script for configuring and showing the PFC parameters for the interface
-  - pfcwd folder contains the PFC watch dog related configuration and show commands.
-  - utilities-command folder contains the scripts that are internally used by other scripts.
-	
+
+# SAI, Switch State Service
 
 ## sonic-swss  
 - https://github.com/Azure/sonic-swss
@@ -72,6 +61,72 @@
 - https://github.com/Azure/sonic-swss-common  
 	- Switch State Service common library - Common library for Switch State Service
 
+## Opencomputeproject//SAI
+- https://github.com/opencomputeproject/SAI (Switch Abstraction Interface standard headers)
+	- This repo refers/uses the SAI sub-repo from OCP github that includes the required SAI header files.
+
+## sonic-sairedis (SAI)  
+- https://github.com/Azure/sonic-sairedis
+	- This repo contains the C++ library code for interfacing to SAI objects in Redis
+	- The SAI Redis provides a SAI redis service that built on top of redis database. 
+	- It contains two major components 
+	   - a SAI library that puts SAI objects into the ASIC_DB and
+	   - a syncd process that takes the SAI objects and puts them into the ASIC.
+	- It also contains the sub-folders "saiplayer" (that records all the actions from orchagent that results in making the SAI API calls to ASIC), "saidump" ( tool to dump the ASIC contents)
+	- Note that the SAI library for the specific platform is not part of this repo. The SAI library is built using the sonic-buildimage/platform/<platformname>/*sai.mk (slave.mk includes the platform/<platformname>/rules.mk that in turn includes the *sai.mk that installs the required SAI debians).
+	   
+
+## sonic-dbsyncd  
+- https://github.com/Azure/sonic-dbsyncd
+	- Python Redis common functions for LLDP
+	- This repo contains the code for SONiC Switch State Service sync daemon for LLDP data. Scripts upload lldp information to Redis DB
+
+
+## sonic-py-swsssdk  
+- https://github.com/Azure/sonic-py-swsssdk 
+  - This repo contains python utility library for SWSS DB access. 
+  - configdb.py - This provides utilities like ConfigDBConnector, db_connect, connect, subscribe, listen, set_entry, mod_entry, get_entry, get_keys, get_table, delete_table, mod_config, get_config, etc.,
+  - dbconnector.py - It contains utilities like SonicV1Connector, SonicV2Connector, etc.,
+  - exceptions.py - It contains utilities like SwssQueryError, UnavailableDataError, MissingClientError, etc.,
+  - interface.py - It contains utilities like DBRegistry, DBInterface, connect, close, get_redis-client, publish, expire, exists,  keys, get, get_all, set, delete, etc.,
+  - port_util.py - It contains utilities like get_index, get_interface_oid_map, get_vlan_id_from_bvid, get_bridge_port_map, etc.,
+  - util.py - It contains utilities like process_options, setup_logging, etc.,
+
+
+## sonic-quagga  
+- https://github.com/Azure/sonic-quagga/tree/debian/0.99.24.1  
+  - This repo contains code for the Quagga routing software which is a free software that manages various IPv4 and IPv6 routing protocols. Currently Quagga supports BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2, and RIPng as well as very early support for IS-IS.
+
+	
+# Monitoring and management tools
+- https://github.com/Azure/sonic-mgmt
+	- Management and automation code used for build, test and deployment automation
+
+## sonic-utilities   
+- https://github.com/Azure/sonic-utilities  
+  - This repository contains the code for Command Line Interfaces for SONiC. 
+  - Folders like "config", "show", "clear" contain the CLI commands 
+  - Folders like "scripts", "sfputil", "psuutil" & "acl_loader" contain the scripts that are used by the CLI commands. These scripts are not supposed to be directly called by user. All these scripts are wrapped under the "config" and "show" commands.
+  - "connect" folder and "consutil" folder is used for scripts to connec to other SONiC devices and manage them from this device.
+  - crm folder contains the scripts for CRM configuration and show commands. These commands are not wrapped under "config" and "show" commands. i.e. users can use the "crm" commands directly.
+  - pfc folder contains script for configuring and showing the PFC parameters for the interface
+  - pfcwd folder contains the PFC watch dog related configuration and show commands.
+  - utilities-command folder contains the scripts that are internally used by other scripts.
+
+
+## sonic-snmpagent  
+- https://github.com/Azure/sonic-snmpagent
+  - This repo contains the net-snmpd AgentX SNMP subagent implementation for supporting the MIBs like MIB-II, Physical Table MIB, Interfaces MIB, Sensor Table MIB, ipCidrRouteDest table in IP Forwarding Table MIB, dot1qTpFdbPort in Q-BRIDGE-MIB & LLDP MIB.
+  - The python scripts present in this repo are used as part of the "snmp" docker that runs in SONiC.
+
+
+# Switch hardware drivers
+
+## sonic-linux-kernel  
+- https://github.com/Azure/sonic-linux-kernel
+- This repo contains the Kernel patches for various device drivers. 
+- This downloads the appropriate debian kernel code, applies the patches and builds the custom kernel for SONiC.
+
 
 ## sonic-platform-common  
 - https://github.com/Azure/sonic-platform-common
@@ -90,56 +145,7 @@
   - psud - This listens for PSU events and writes the status to STATE_DB.
 
 
-## sonic-py-swsssdk  
-- https://github.com/Azure/sonic-py-swsssdk 
-  - This repo contains python utility library for SWSS DB access. 
-  - configdb.py - This provides utilities like ConfigDBConnector, db_connect, connect, subscribe, listen, set_entry, mod_entry, get_entry, get_keys, get_table, delete_table, mod_config, get_config, etc.,
-  - dbconnector.py - It contains utilities like SonicV1Connector, SonicV2Connector, etc.,
-  - exceptions.py - It contains utilities like SwssQueryError, UnavailableDataError, MissingClientError, etc.,
-  - interface.py - It contains utilities like DBRegistry, DBInterface, connect, close, get_redis-client, publish, expire, exists,  keys, get, get_all, set, delete, etc.,
-  - port_util.py - It contains utilities like get_index, get_interface_oid_map, get_vlan_id_from_bvid, get_bridge_port_map, etc.,
-  - util.py - It contains utilities like process_options, setup_logging, etc.,
-
-## sonic-linux-kernel  
-- https://github.com/Azure/sonic-linux-kernel
-- This repo contains the Kernel patches for various device drivers. 
-- This downloads the appropriate debian kernel code, applies the patches and builds the custom kernel for SONiC.
-
-
-## sonic-quagga  
-- https://github.com/Azure/sonic-quagga/tree/debian/0.99.24.1  
-  - This repo contains code for the Quagga routing software which is a free software that manages various IPv4 and IPv6 routing protocols. Currently Quagga supports BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2, and RIPng as well as very early support for IS-IS.
-
-
-## sonic-sairedis (SAI)  
-- https://github.com/Azure/sonic-sairedis
-	- This repo contains the C++ library code for interfacing to SAI objects in Redis
-	- The SAI Redis provides a SAI redis service that built on top of redis database. 
-	- It contains two major components 
-	   - a SAI library that puts SAI objects into the ASIC_DB and
-	   - a syncd process that takes the SAI objects and puts them into the ASIC.
-	- It also contains the sub-folders "saiplayer" (that records all the actions from orchagent that results in making the SAI API calls to ASIC), "saidump" ( tool to dump the ASIC contents)
-	- Note that the SAI library for the specific platform is not part of this repo. The SAI library is built using the sonic-buildimage/platform/<platformname>/*sai.mk (slave.mk includes the platform/<platformname>/rules.mk that in turn includes the *sai.mk that installs the required SAI debians).
-	   
-    - This repo refers/uses the SAI sub-repo from OCP github that includes the required SAI header files.
-	- https://github.com/opencomputeproject/SAI (Switch Abstraction Interface standard headers)
-
-## sonic-snmpagent  
-- https://github.com/Azure/sonic-snmpagent
-  - This repo contains the net-snmpd AgentX SNMP subagent implementation for supporting the MIBs like MIB-II, Physical Table MIB, Interfaces MIB, Sensor Table MIB, ipCidrRouteDest table in IP Forwarding Table MIB, dot1qTpFdbPort in Q-BRIDGE-MIB & LLDP MIB.
-  - The python scripts present in this repo are used as part of the "snmp" docker that runs in SONiC.
-	
-## sonic-dbsyncd  
-- https://github.com/Azure/sonic-dbsyncd
-	- Python Redis common functions for LLDP
-	- This repo contains the code for SONiC Switch State Service sync daemon for LLDP data. Scripts upload lldp information to Redis DB
-	
-## Monitoring and management tools
-- https://github.com/Azure/sonic-mgmt
-	- Management and automation code used for build, test and deployment automation
-
-
-## Dockers Information  
+# Dockers Information  
 
 Following are the dockers that are running in SONiC. 
 
@@ -154,4 +160,3 @@ Following are the dockers that are running in SONiC.
 9) lldp - Runs the lldp process and lldpmgrd
 10) bgp (fpm-frr) - Runs bgpcfgd, zebra, staticd, bgpd & fpmsyncd
 11) database - Runs the REDIS server.
-
