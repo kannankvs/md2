@@ -20,8 +20,7 @@
 	- platform - contains sub-folders for all platforms like "barefoot", "broadcom", "cavium", "centec", "marvell", "mellanox", "nephos", "p4", "vs" (virtual switch).
 	  Each of those platform folder contains code specific to the hardware device from each vendors. It includes the required kernel drivers, platform sensors script for fetching data from hardware devices, etc.,
 	- sonic-slave, sonic-slave-stretch - Contains the main Dockerfile that lists the various debian packages that are required for various features.
-	- src
-	  Contains sub-folders for features like bash, gobgp, hiredis, initramfs-tools, iproute2, isc-dscp, ixgbe, libnl3, libteam, 
+	- src - contains sub-folders for features like bash, gobgp, hiredis, initramfs-tools, iproute2, isc-dscp, ixgbe, libnl3, libteam, 
 	  libyang, lldpd, lm-sensors, mpdecimal, python-click, python3, radvd - Router advertisement for IPv6, redis, smartmontools, 
 	  snmpd, socat, sonic-config-engine, sonic-daemon-base, sonic-device-data, sonic-frr (routing software with patches), supervisor,
 	  swig, tacacs, telemetry and thrift.
