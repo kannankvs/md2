@@ -1,20 +1,19 @@
 # SONiC Source Repositories
 
-# SONiC Repositories Details 
 
-# Imaging and Building tools
+## Imaging and Building tools
 
-## sonic-buildimage  
+### sonic-buildimage  
 - https://github.com/Azure/sonic-buildimage
     - Main repo that contains SONiC code,links to all sub-repos, build related files, platform/device specific files, etc.,
 	This repo has the following directories.
 	- device - It contains files specific to each vendor device. In general, it contains the python scripts for accessing EEPROM, SFP, PSU, LED,etc., specific to the device hardware.
 	- dockers - This folder contains sub-folders for all dockers running in the SONiC. Each of those sub-folders contains files that explains about the processes that need to run inside that docker. List of dockers and the processes running inside each docker is given at the end of this document.
 	- files - Contain multiple sub-folders required for building and running SONiC services. 
-		- (a) Aboot, (b) apt - few default files related to  for "apt-get" ,"apt-*" applications (c) build_templates - Contains the jinja2 template files to generate (as part of "build process") the systemd services files required for starting the various dockers. It also contains the file sonic_debian_extension.j2 is used in "build process"; it copies the required files and installs the required packages in the "/fsroot" which is built ass part of the SONiC image.
-		  (d) dhcp - Contains the config file for dhcp client & exit hook scripts, (e) docker - Contains the "docker" file (related to docker-engine) that is extracted from docker-ce 17.03.0~ce-0~debian-stretch to enable 'service docker start' in the build chroot env.
-		  (f) image_config - Contains sub-folders like apt (non debian packages related info), bash (for bashrc), caclmgrd (control plane ACL manager daemon), cron.d (logrotate), ebtables (filter), environment (vtysh,banner), fstrim, hostcfgd (tacacs+ config handler), hostname (service to handle hostname config), interfaces (service to handle interface related config changes), logrotate, ntp (ntp service with conf file j2 file), platform (rc.local file), rsyslog (service for syslog & j2 file),snmp (snmp.yml file), sudoers (sudo users & permissions),  systemd (journald.conf file), updategraph (script for getting minigraph and installing it), warmboot-finalizer (script used during warmreboot).
-		  (g) initramfs-tools - Contains files related to ramfs, (h) scripts - contains scripts for arp_update (gratuitous ARP/ND), swss, syncd, etc., (i) sshd - SSH service and keygen script
+		- (a) Aboot, (b) apt - few default files related to  for "apt-get" ,"apt-*" applications (c) build_templates - Contains the jinja2 template files to generate (as part of "build process") the systemd services files required for starting the various dockers. It also contains the file sonic_debian_extension.j2 is used in "build process"; it copies the required files and installs the required packages in the "/fsroot" which is built ass part of the SONiC image.  
+		  (d) dhcp - Contains the config file for dhcp client & exit hook scripts, (e) docker - Contains the "docker" file (related to docker-engine) that is extracted from docker-ce 17.03.0~ce-0~debian-stretch to enable 'service docker start' in the build chroot env.  
+		  (f) image_config - Contains sub-folders like apt (non debian packages related info), bash (for bashrc), caclmgrd (control plane ACL manager daemon), cron.d (logrotate), ebtables (filter), environment (vtysh,banner), fstrim, hostcfgd (tacacs+ config handler), hostname (service to handle hostname config), interfaces (service to handle interface related config changes), logrotate, ntp (ntp service with conf file j2 file), platform (rc.local file), rsyslog (service for syslog & j2 file),snmp (snmp.yml file), sudoers (sudo users & permissions),  systemd (journald.conf file), updategraph (script for getting minigraph and installing it), warmboot-finalizer (script used during warmreboot).  
+		  (g) initramfs-tools - Contains files related to ramfs, (h) scripts - contains scripts for arp_update (gratuitous ARP/ND), swss, syncd, etc., (i) sshd - SSH service and keygen script  
 		
 	- installer - contains scripts that are used by onie-mk-demo script that is called as part of build_image.sh
 	- rules - contains the "config" file where the build options can be modified, contains *.mk makefiles that contains the required marcros for building the image.
@@ -28,9 +27,9 @@
 		swig, tacacs, telemetry and thrift.
 
 
-# SAI, Switch State Service
+## SAI, Switch State Service
 
-## sonic-swss  
+### sonic-swss  
 - https://github.com/Azure/sonic-swss
 	- Switch State Service - Core component of SONiC which processes network switch data - The SWitch State Service (SWSS) is a collection of software that provides a database interface for communication with and state representation of network applications and network switch hardware.
 
@@ -57,15 +56,15 @@
   - orchagent - The most critical component in the Swss subsystem. Orchagent contains logic to extract all the relevant state injected by *syncd daemons, process and massage this information accordingly, and finally push it towards its south-bound interface. This south-bound interface is yet again another database within the redis-engine (ASIC_DB), so as we can see, Orchagent operates both as a consumer (for example for state coming from APPL_DB), and also as a producer (for state being pushed into ASIC_DB).
 
 	
-## sonic-swss-common  	
+### sonic-swss-common  	
 - https://github.com/Azure/sonic-swss-common  
 	- Switch State Service common library - Common library for Switch State Service
 
-## Opencomputeproject//SAI
+### Opencomputeproject/SAI  
 - https://github.com/opencomputeproject/SAI (Switch Abstraction Interface standard headers)
 	- This repo refers/uses the SAI sub-repo from OCP github that includes the required SAI header files.
 
-## sonic-sairedis (SAI)  
+### sonic-sairedis  
 - https://github.com/Azure/sonic-sairedis
 	- This repo contains the C++ library code for interfacing to SAI objects in Redis
 	- The SAI Redis provides a SAI redis service that built on top of redis database. 
@@ -76,13 +75,13 @@
 	- Note that the SAI library for the specific platform is not part of this repo. The SAI library is built using the sonic-buildimage/platform/<platformname>/*sai.mk (slave.mk includes the platform/<platformname>/rules.mk that in turn includes the *sai.mk that installs the required SAI debians).
 	   
 
-## sonic-dbsyncd  
+### sonic-dbsyncd  
 - https://github.com/Azure/sonic-dbsyncd
 	- Python Redis common functions for LLDP
 	- This repo contains the code for SONiC Switch State Service sync daemon for LLDP data. Scripts upload lldp information to Redis DB
 
 
-## sonic-py-swsssdk  
+### sonic-py-swsssdk  
 - https://github.com/Azure/sonic-py-swsssdk 
   - This repo contains python utility library for SWSS DB access. 
   - configdb.py - This provides utilities like ConfigDBConnector, db_connect, connect, subscribe, listen, set_entry, mod_entry, get_entry, get_keys, get_table, delete_table, mod_config, get_config, etc.,
@@ -93,16 +92,18 @@
   - util.py - It contains utilities like process_options, setup_logging, etc.,
 
 
-## sonic-quagga  
+### sonic-quagga  
 - https://github.com/Azure/sonic-quagga/tree/debian/0.99.24.1  
   - This repo contains code for the Quagga routing software which is a free software that manages various IPv4 and IPv6 routing protocols. Currently Quagga supports BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2, and RIPng as well as very early support for IS-IS.
 
 	
-# Monitoring and management tools
+## Monitoring and management tools  
+
+### sonic-mgmt  
 - https://github.com/Azure/sonic-mgmt
 	- Management and automation code used for build, test and deployment automation
 
-## sonic-utilities   
+### sonic-utilities   
 - https://github.com/Azure/sonic-utilities  
   - This repository contains the code for Command Line Interfaces for SONiC. 
   - Folders like "config", "show", "clear" contain the CLI commands 
@@ -114,21 +115,21 @@
   - utilities-command folder contains the scripts that are internally used by other scripts.
 
 
-## sonic-snmpagent  
+### sonic-snmpagent  
 - https://github.com/Azure/sonic-snmpagent
   - This repo contains the net-snmpd AgentX SNMP subagent implementation for supporting the MIBs like MIB-II, Physical Table MIB, Interfaces MIB, Sensor Table MIB, ipCidrRouteDest table in IP Forwarding Table MIB, dot1qTpFdbPort in Q-BRIDGE-MIB & LLDP MIB.
   - The python scripts present in this repo are used as part of the "snmp" docker that runs in SONiC.
 
 
-# Switch hardware drivers
+## Switch hardware drivers
 
-## sonic-linux-kernel  
+### sonic-linux-kernel  
 - https://github.com/Azure/sonic-linux-kernel
 - This repo contains the Kernel patches for various device drivers. 
 - This downloads the appropriate debian kernel code, applies the patches and builds the custom kernel for SONiC.
 
 
-## sonic-platform-common  
+### sonic-platform-common  
 - https://github.com/Azure/sonic-platform-common
   - This repo contains code which is to be shared among all platforms for interfacing with platform-specific peripheral hardware.
   - It contains the APIs for implementing platform-specific functionality in SONiC
@@ -136,7 +137,7 @@
   - Platform specific code present in sonic-buildimage repo (device folder) uses the classes defined in this sonic-platform-common repository.
   - New platform2.0 APIs are defined in the base classes inside "sonic_platform_base" folder. 
 
-## sonic-platform-daemons  
+### sonic-platform-daemons  
 - https://github.com/Azure/sonic-platform-daemons
   - This repo contains the daemons for controlling platform-specific functionality in SONiC
   - This repo contains python scripts for platform daemons that listens for events from Optics, LED & PSU and writes them in the STATE_DB
@@ -145,7 +146,16 @@
   - psud - This listens for PSU events and writes the status to STATE_DB.
 
 
-# Dockers Information  
+### Other Hardware Driver Repos (Deprecated)    
+- https://github.com/celestica-Inc/sonic-platform-modules-cel
+- https://github.com/edge-core/sonic-platform-modules-accton
+- https://github.com/Azure/sonic-platform-modules-s6000
+- https://github.com/Azure/sonic-platform-modules-dell
+- https://github.com/aristanetworks/sonic
+- https://github.com/Ingrasys-sonic/sonic-platform-modules-ingrasys
+
+
+## Dockers Information  
 
 Following are the dockers that are running in SONiC. 
 
