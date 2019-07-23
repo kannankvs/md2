@@ -1,31 +1,34 @@
 # SONiC Source Repositories
 
-# Imaging and Building tools
+
+## Imaging and Building tools
+
+### sonic-buildimage  
 - https://github.com/Azure/sonic-buildimage
-	- Source to build an installable SONiC image
-	
-# SONiC Repositories Summary  
-
-| # | Repository   | Information |
-|---: |---       |---       |
-| 1   | [sonic-buildimage](https://github.com/Azure/sonic-buildimage) | Main repo that contains SONiC code, dockers,links to all sub-repos, build related files, platform/device specific files, etc.,  |
-| 2   | [sonic-utilities](https://github.com/Azure/sonic-utilities/tree/09806b861486091d9db5cb75bdd2cc9428e46844) | Use this for all CLI config commands, clear commands and show commands add/modify/delete. Most of the CLI commands uses the scripts present in the sub-directories present in this repository |
-| 3   | [sonic-swss](https://github.com/Azure/sonic-swss/tree/ee4992665b94566936340d32d8d96f8dd038ed75) | Use code inside "cfgmgr" for all applications to listen to configuration changes in ConfigDB and take action. Use code inside orchagent to sync up the application output into ASIC. Use code inside "ModulenameSyncd" to listen for output from application and program the same into APP_DB. Use "warmerestart-assist" for handling warmrestart restore functionality|
-| 4   | [sonic-swss-common](https://github.com/Azure/sonic-swss-common/tree/8af58ad80df531fc7fe1fa197a1caf2c5520dbb3) | Common library for Switch State Service  (SWSS) repo|
-| 5   | [sonic-sairedis](https://github.com/Azure/sonic-sairedis/tree/1b0d609c6f9acd1cb868898f019eaade071c85ee) | contains code for SAI library that writes SAI objects into the ASIC_DB and a syncd process that takes the SAI objects and puts them into the ASIC. |
-| 6   | [sonic-linux-kernel](https://github.com/Azure/sonic-linux-kernel/tree/69ba0c13f6b984b554dd83fadfaace4e856239ae) | Repo related to linux kernel  |
-| 7   | [sonic-platform-common](https://github.com/Azure/sonic-platform-common/tree/92b54b1984db0b71196e4fe68cc5a09796fd185c) | This repo contains code which is to be shared among all platforms for interfacing with platform-specific peripheral hardware |
-| 8   | [sonic-platform-daemons](https://github.com/Azure/sonic-platform-daemons/tree/c8931f30a0068e5f6c432ce5c428dbe0c8976c23) | Contains the python scripts xcvrd, ledd &  psud that listens for change events on optics, LED & PSU respectively and programs it in STATE_DB |
-| 9   | [sonic-py-swsssdk](https://github.com/Azure/sonic-py-swsssdk/tree/4cee38534919e34f407363ac3ab5f31b4d09be6d) | This repo contains python utility library for SWSS DB access |
-| 10  | [sonic-quagga](https://github.com/Azure/sonic-quagga/tree/2e192c06b8f526cab6fce710ab5da0223b0ba2b1) | This repo contains quagga routing software |
-| 11  | [sonic-snmpagent](https://github.com/Azure/sonic-snmpagent/tree/70a6c7dad4fcfa750fb4d4efbf267842d19ca8ef) | SNMP agent code |
-| 12  | [sonic-dbsyncd](https://github.com/Azure/sonic-dbsyncd/tree/fe60afa7e24a7053a7bd9d7084268c1bbd203208) | Database sync up repo |
-
-
-# SONiC Repositories Details  
+    - Main repo that contains SONiC code,links to all sub-repos, build related files, platform/device specific files, etc.,
+	This repo has the following directories.
+	- device - It contains files specific to each vendor device. In general, it contains the python scripts for accessing EEPROM, SFP, PSU, LED,etc., specific to the device hardware.
+	- dockers - This folder contains sub-folders for all dockers running in the SONiC. Each of those sub-folders contains files that explains about the processes that need to run inside that docker. List of dockers and the processes running inside each docker is given at the end of this document.
+	- files - Contain multiple sub-folders required for building and running SONiC services.   
+		(a) Aboot, (b) apt - few default files related to  for "apt-get" ,"apt-*" applications (c) build_templates - Contains the jinja2 template files to generate (as part of "build process") the systemd services files required for starting the various dockers. It also contains the file sonic_debian_extension.j2 is used in "build process"; it copies the required files and installs the required packages in the "/fsroot" which is built ass part of the SONiC image.  
+		(d) dhcp - Contains the config file for dhcp client & exit hook scripts, (e) docker - Contains the "docker" file (related to docker-engine) that is extracted from docker-ce 17.03.0\~ce-0\~debian-stretch to enable 'service docker start' in the build chroot env.  
+		(f) image_config - Contains sub-folders like apt (non debian packages related info), bash (for bashrc), caclmgrd (control plane ACL manager daemon), cron.d (logrotate), ebtables (filter), environment (vtysh,banner), fstrim, hostcfgd (tacacs+ config handler), hostname (service to handle hostname config), interfaces (service to handle interface related config changes), logrotate, ntp (ntp service with conf file j2 file), platform (rc.local file), rsyslog (service for syslog & j2 file),snmp (snmp.yml file), sudoers (sudo users & permissions),  systemd (journald.conf file), updategraph (script for getting minigraph and installing it), warmboot-finalizer (script used during warmreboot).  
+		(g) initramfs-tools - Contains files related to ramfs, (h) scripts - contains scripts for arp_update (gratuitous ARP/ND), swss, syncd, etc., (i) sshd - SSH service and keygen script  
+		
+	- installer - contains scripts that are used by onie-mk-demo script that is called as part of build_image.sh
+	- rules - contains the "config" file where the build options can be modified, contains *.mk makefiles that contains the required marcros for building the image.
+	- platform - contains sub-folders for all platforms like "barefoot", "broadcom", "cavium", "centec", "marvell", "mellanox", "nephos", "p4", "vs" (virtual switch).
+	  Each of those platform folder contains code specific to the hardware device from each vendors. It includes the required kernel drivers, platform sensors script for fetching data from hardware devices, etc.,
+	- sonic-slave, sonic-slave-stretch - Contains the main Dockerfile that lists the various debian packages that are required for various features.
+	- src - contains sub-folders for features like bash, gobgp, hiredis, initramfs-tools, iproute2, isc-dscp, ixgbe, libnl3, libteam, 
+	  libyang, lldpd, lm-sensors, mpdecimal, python-click, python3, radvd - Router advertisement for IPv6, redis, smartmontools, 
+	  snmpd, socat, sonic-config-engine, sonic-daemon-base, sonic-device-data, sonic-frr (routing software with patches), supervisor,
+	  swig, tacacs, telemetry and thrift.
 
 
-## sonic-swss  
+## SAI, Switch State Service
+
+### sonic-swss  
 - https://github.com/Azure/sonic-swss
 	- Switch State Service - Core component of SONiC which processes network switch data - The SWitch State Service (SWSS) is a collection of software that provides a database interface for communication with and state representation of network applications and network switch hardware.
 
@@ -52,12 +55,55 @@
   - orchagent - The most critical component in the Swss subsystem. Orchagent contains logic to extract all the relevant state injected by *syncd daemons, process and massage this information accordingly, and finally push it towards its south-bound interface. This south-bound interface is yet again another database within the redis-engine (ASIC_DB), so as we can see, Orchagent operates both as a consumer (for example for state coming from APPL_DB), and also as a producer (for state being pushed into ASIC_DB).
 
 	
-## sonic-swss-common  	
-- https://github.com/Azure/sonic-swss-common
+### sonic-swss-common  	
+- https://github.com/Azure/sonic-swss-common  
 	- Switch State Service common library - Common library for Switch State Service
 
-## sonic-utilities  
-- https://github.com/Azure/sonic-utilities
+### Opencomputeproject/SAI  
+- https://github.com/opencomputeproject/SAI (Switch Abstraction Interface standard headers)
+	- This repo refers/uses the SAI sub-repo from OCP github that includes the required SAI header files.
+
+### sonic-sairedis  
+- https://github.com/Azure/sonic-sairedis
+	- This repo contains the C++ library code for interfacing to SAI objects in Redis
+	- The SAI Redis provides a SAI redis service that built on top of redis database. 
+	- It contains two major components 
+	   - a SAI library that puts SAI objects into the ASIC_DB and
+	   - a syncd process that takes the SAI objects and puts them into the ASIC.
+	- It also contains the sub-folders "saiplayer" (that records all the actions from orchagent that results in making the SAI API calls to ASIC), "saidump" ( tool to dump the ASIC contents)
+	- Note that the SAI library for the specific platform is not part of this repo. The SAI library is built using the sonic-buildimage/platform/<platformname>/*sai.mk (slave.mk includes the platform/<platformname>/rules.mk that in turn includes the *sai.mk that installs the required SAI debians).
+	   
+
+### sonic-dbsyncd  
+- https://github.com/Azure/sonic-dbsyncd
+	- Python Redis common functions for LLDP
+	- This repo contains the code for SONiC Switch State Service sync daemon for LLDP data. Scripts upload lldp information to Redis DB
+
+
+### sonic-py-swsssdk  
+- https://github.com/Azure/sonic-py-swsssdk 
+  - This repo contains python utility library for SWSS DB access. 
+  - configdb.py - This provides utilities like ConfigDBConnector, db_connect, connect, subscribe, listen, set_entry, mod_entry, get_entry, get_keys, get_table, delete_table, mod_config, get_config, etc.,
+  - dbconnector.py - It contains utilities like SonicV1Connector, SonicV2Connector, etc.,
+  - exceptions.py - It contains utilities like SwssQueryError, UnavailableDataError, MissingClientError, etc.,
+  - interface.py - It contains utilities like DBRegistry, DBInterface, connect, close, get_redis-client, publish, expire, exists,  keys, get, get_all, set, delete, etc.,
+  - port_util.py - It contains utilities like get_index, get_interface_oid_map, get_vlan_id_from_bvid, get_bridge_port_map, etc.,
+  - util.py - It contains utilities like process_options, setup_logging, etc.,
+
+
+### sonic-quagga  
+- https://github.com/Azure/sonic-quagga/tree/debian/0.99.24.1  
+  - This repo contains code for the Quagga routing software which is a free software that manages various IPv4 and IPv6 routing protocols. Currently Quagga supports BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2, and RIPng as well as very early support for IS-IS.
+
+	
+## Monitoring and management tools  
+
+### sonic-mgmt  
+- https://github.com/Azure/sonic-mgmt
+	- Management and automation code used for build, test and deployment automation
+
+### sonic-utilities   
+- https://github.com/Azure/sonic-utilities  
   - This repository contains the code for Command Line Interfaces for SONiC. 
   - Folders like "config", "show", "clear" contain the CLI commands 
   - Folders like "scripts", "sfputil", "psuutil" & "acl_loader" contain the scripts that are used by the CLI commands. These scripts are not supposed to be directly called by user. All these scripts are wrapped under the "config" and "show" commands.
@@ -68,117 +114,38 @@
   - utilities-command folder contains the scripts that are internally used by other scripts.
 
 
-## sonic-platform-common  
-
-- This repo contains code which is to be shared among all platforms for interfacing with platform-specific peripheral hardware
-- It provides the base class for peripherals like EEPROM, LED, PSU, SFP, chassis, device, fan, module, platform, watchdog, etc., that are used for existing platform code as well as for the new platform API.
-- Platform specific code present in sonic-buildimage repo (device folder) uses the classes defined in this sonic-platform-common repository.
-
-## sonic-platform-daemons  
-
-- This repo contains code for python scripts that listens for events from Optics, LED & PSU and writes them in the STATE_DB
-- xcvrd - This listens for SFP events and writes the status to STATE_DB.
-- ledd - This listens for LED events and writes the status to STATE_DB.
-- psud - This listens for PSU events and writes the status to STATE_DB.
-
-
-## sonic-py-swsssdk  
-
-- This repo contains python utility library for SWSS DB access. 
-- configdb.py - This provides utilities like ConfigDBConnector, db_connect, connect, subscribe, listen, set_entry, mod_entry, get_entry, get_keys, get_table, delete_table, mod_config, get_config, etc.,
-- dbconnector.py - It contains utilities like SonicV1Connector, SonicV2Connector, etc.,
-- exceptions.py - It contains utilities like SwssQueryError, UnavailableDataError, MissingClientError, etc.,
-- interface.py - It contains utilities like DBRegistry, DBInterface, connect, close, get_redis-client, publish, expire, exists,  keys, get, get_all, set, delete, etc.,
-- port_util.py - It contains utilities like get_index, get_interface_oid_map, get_vlan_id_from_bvid, get_bridge_port_map, etc.,
-- util.py - It contains utilities like process_options, setup_logging, etc.,
-
-
-## sonic-quagga  
-
-This repo contains code for the Quagga routing software which is a free software that manages various IPv4 and IPv6 routing protocols. Currently Quagga supports BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2, and RIPng as well as very early support for IS-IS.
-  
-## sonic-buildimage  
-- https://github.com/Azure/sonic-buildimage
-    - Main repo that contains SONiC code,links to all sub-repos, build related files, platform/device specific files, etc.,
-	This repo has the following directories.
-	- device - It contains files specific to each vendor device. In general, it contains the python scripts for accessing EEPROM, SFP, PSU, LED,etc., specific to the device hardware.
-	- dockers - code related to all dockers running in the SONiC
-	- files
-	- installer
-	- rules
-	- platform
-	- sonic-slave
-	- sonic-slave-stretch
-	- src
-	  - bash
-	  - gobgp
-	  - hiredis
-	  - initramfs-tools
-	  - iproute2
-	  - isc-dscp
-	  - ixgbe
-	  - libnl3
-	  - libteam
-	  - libyang
-	  - lldpd
-	  - lm-sensors
-	  - mpdecimal
-	  - python-click
-	  - python3
-	  - radvd - Router advertisement for IPv6
-	  - redis-dump-load.patch
-	  - redis
-	  - smartmontools - 
-	  - snmpd - 
-	  - socat - 
-	  - sonic-config-engine
-	  - sonic-daemon-base
-	  - sonic-device-data
-	  - sonic-frr
-	  - supervisor
-	  - swig 
-	  - tacacs - 
-	  - telemetry - 
-	  - thrift - 
-
-
-	
-## sonic-sairedis (SAI)  
-- https://github.com/opencomputeproject/SAI
-	- Switch Abstraction Interface standard headers
-- https://github.com/Azure/sonic-sairedis
-	- C++ library for interfacing to SAI objects in Redis
-	
-	- The SAI Redis provides a SAI redis service that built on top of redis database. 
-	- It contains two major components 
-	   - a SAI library that puts SAI objects into the ASIC_DB and
-	   - a syncd process that takes the SAI objects and puts them into the ASIC.
-	- 
-	
-## sonic-dbsyncd  
-
-- https://github.com/Azure/sonic-dbsyncd
-	- Python Redis common functions for LLDP
-- https://github.com/Azure/sonic-py-swsssdk
-	- Python switch state service library
-- https://github.com/Azure/sonic-quagga
-	- Fork of Quagga Software Routing Suite for use with SONiC
-	
-## Monitoring and management tools
-- https://github.com/Azure/sonic-mgmt
-	- Management and automation code used for build, test and deployment automation
-- https://github.com/Azure/sonic-utilities
-	- Various command line utilities used in SONiC
+### sonic-snmpagent  
 - https://github.com/Azure/sonic-snmpagent
-	- A net-snmpd agentx subagent
+  - This repo contains the net-snmpd AgentX SNMP subagent implementation for supporting the MIBs like MIB-II, Physical Table MIB, Interfaces MIB, Sensor Table MIB, ipCidrRouteDest table in IP Forwarding Table MIB, dot1qTpFdbPort in Q-BRIDGE-MIB & LLDP MIB.
+  - The python scripts present in this repo are used as part of the "snmp" docker that runs in SONiC.
+
 
 ## Switch hardware drivers
+
+### sonic-linux-kernel  
 - https://github.com/Azure/sonic-linux-kernel
-	- Kernel patches for various device drivers
+- This repo contains the Kernel patches for various device drivers. 
+- This downloads the appropriate debian kernel code, applies the patches and builds the custom kernel for SONiC.
+
+
+### sonic-platform-common  
 - https://github.com/Azure/sonic-platform-common
-	- API for implementing platform-specific functionality in SONiC
+  - This repo contains code which is to be shared among all platforms for interfacing with platform-specific peripheral hardware.
+  - It contains the APIs for implementing platform-specific functionality in SONiC
+  - It provides the base class for peripherals like EEPROM, LED, PSU, SFP, chassis, device, fan, module, platform, watchdog, etc., that are used for existing platform code as well as for the new platform API.
+  - Platform specific code present in sonic-buildimage repo (device folder) uses the classes defined in this sonic-platform-common repository.
+  - New platform2.0 APIs are defined in the base classes inside "sonic_platform_base" folder. 
+
+### sonic-platform-daemons  
 - https://github.com/Azure/sonic-platform-daemons
-	- Daemons for controlling platform-specific functionality in SONiC
+  - This repo contains the daemons for controlling platform-specific functionality in SONiC
+  - This repo contains python scripts for platform daemons that listens for events from Optics, LED & PSU and writes them in the STATE_DB
+  - xcvrd - This listens for SFP events and writes the status to STATE_DB.
+  - ledd - This listens for LED events and writes the status to STATE_DB.
+  - psud - This listens for PSU events and writes the status to STATE_DB.
+
+
+### Other Switch Hardware Drivers (Deprecated)    
 - https://github.com/celestica-Inc/sonic-platform-modules-cel
 - https://github.com/edge-core/sonic-platform-modules-accton
 - https://github.com/Azure/sonic-platform-modules-s6000
@@ -186,3 +153,19 @@ This repo contains code for the Quagga routing software which is a free software
 - https://github.com/aristanetworks/sonic
 - https://github.com/Ingrasys-sonic/sonic-platform-modules-ingrasys
 
+
+## Dockers Information  
+
+Following are the dockers that are running in SONiC. 
+
+1) telemetry - Runs processes like telemetry & dialout_client_cli
+2) syncd - Runs processes like syncd & dsserve which is used to sync the application data into the ASIC.
+3) dhcp_relay - Runs the DHCP relay agent process.
+4) teamd - Runs the teammgrd and teamsyncd processes.
+5) radv (router-advertise) - Runs the IPv6 router advertisement process
+6) snmp - Runs the SNMP agent daemon
+7) swss (orchagent) - Runs the orchagent, portsyncd, neighsyncd, vrfmgrd, vlanmgrd, intfmgrd, portmgrd, buffermgrd, nbrmgrd & vxlanmgrd.
+8) pmon (platform-monitor) - Runs the platform daemons xvrd (listens for SFP events) & psud (listens for power supply related events).
+9) lldp - Runs the lldp process and lldpmgrd
+10) bgp (fpm-frr) - Runs bgpcfgd, zebra, staticd, bgpd & fpmsyncd
+11) database - Runs the REDIS server.
