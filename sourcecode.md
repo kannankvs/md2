@@ -145,7 +145,7 @@
   - psud - This listens for PSU events and writes the status to STATE_DB.
 
 
-### Other Hardware Driver Repos (Deprecated)    
+### Other Switch Hardware Drivers (Deprecated)    
 - https://github.com/celestica-Inc/sonic-platform-modules-cel
 - https://github.com/edge-core/sonic-platform-modules-accton
 - https://github.com/Azure/sonic-platform-modules-s6000
