@@ -10,7 +10,7 @@ A new file "SAI-NAT-API.md" is created in "doc/NAT" and it proposes a set of API
 
 [Link to the PR](https://github.com/opencomputeproject/SAI/pull/937/commits)
 
-### Commits related to this PR
+### Files related to this PR
 
 [937](https://github.com/opencomputeproject/SAI/pull/937/files)  
 
