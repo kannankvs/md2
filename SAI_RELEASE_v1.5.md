@@ -25,7 +25,7 @@ New files "sai_tam_event.proto", "sai_tam_main.proto" & "sai_tam_port.proto" add
 
 [Link to the PR](https://github.com/opencomputeproject/SAI/pull/958/commits)
 
-### Commits related to this PR
+### Files related to this PR
 
 [958](https://github.com/opencomputeproject/SAI/pull/958/files)  
 
