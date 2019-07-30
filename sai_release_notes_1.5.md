@@ -18,7 +18,8 @@ More details about this feature enhancement is available at [TAM2.0 Spec](#https
 PRs related to this feature are [PR958](#https://github.com/opencomputeproject/SAI/pull/958) and [PR959](#https://github.com/opencomputeproject/SAI/pull/959) 
 
 ### NAT  
-To be filled.
+•	Creation of APIs to configure NAT feature. API set is generic to configure various types of NAT. Besides configuration these APIs can read the NAT table for aging and is achieved using the TAM GET API  
+•	Providing set of new definitions for SAI NAT specifications  
 
 ### sFlow  
 To be filled
