@@ -25,8 +25,11 @@ Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to provide a hi
 
 #### New TAM 2.0 APIs  
 
-    sai_create_tam_int_fn                     create_tam_int;
-    sai_remove_tam_int_fn                     remove_tam_int;
+1) **create_tam_int**
+   sai_status_t (*sai_create_tam_report_fn)( _Out_ sai_object_id_t *tam_report_id, _In_ sai_object_id_t switch_id, _In_ uint32_t attr_count, _In_ const sai_attribute_t *attr_list);
+	
+2) sai_remove_tam_int_fn                     remove_tam_int;
+
     sai_set_tam_int_attribute_fn              set_tam_int_attribute;
     sai_get_tam_int_attribute_fn              get_tam_int_attribute; 
 
