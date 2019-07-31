@@ -47,4 +47,13 @@ To be filled
 19) PR962: saiacl.h: Fixed SAI_ACL_ENTRY_ATTR_ACTION_PACKET_ACTION description
 20) PR961: SAITEST: Added SAI PTF tests for NeighborFdbAgeoutTest
 21) PR960: saibfd.h, saiswitch.h: Added capabilities for the SAI/BFD API to allow applications to query the list of supported offloads (SAI_BFD_SESSION_OFFLOAD_TYPE_FULL, SAI_BFD_SESSION_OFFLOAD_TYPE_SUSTENANCE & SAI_BFD_SESSION_OFFLOAD_TYPE_NONE)  and choose an offload while creating a BFD session.
-22) PR959, : TAM
+22) PR959: TAM: Added optional attribute in ACL to bind a TAM INT object. Enhanced sai_tam_int_type enum to distinguish between P4 INT v1 and v2 and added a codepoint for direct export  
+23) PR958: TAM: Added attributes to associate telemetry objects and probes. Created an object in the driver for tracking the buffer usage  
+24) PR956: SAITEST: Added enhancement for L2 VLAN broadcast, Unicat testing. After testing MAC "00:00:00:00:00:01" leared in the ingress port is removed and before testing only the testing ports from default vlan are removed  
+25) PR950: METAFILES: Metafiles 'saiserializetest.c', 'saisanitycheck.c', 'Makefile', 'test.pm' are updated to work on GCC & PERL  
+26) PR949: SAITEST: Tested the implementation of a buffer pool statistics counter in a broadcom DUT  
+27) PR948: saiport.h: Added an attribute for controlling Link Training on the ports, for improving interoperability among devices  
+28) PR947: saiswitch.h: Added a RO attribute for STP Max Instances on the switch object  
+29) PR946: saihostif.h: Added support for BFD packets to be trapped to CPU  
+30) PR945: 
+
