@@ -2,7 +2,7 @@
 
 This release notes explains the new APIs that are introduced & changes done for various features for SAI1.5 release.
 
-## NEW APIs Introduced In This Release  
+# 1. NEW APIs Introduced In This Release  
 
 1) TAM APIs  
 2) NAT APIs  
@@ -11,8 +11,8 @@ Details of all APIs are given in the appropriate sections given below.
 
 
 
-## Features And Enhancements  
-### TAM  
+# 2. Features And Enhancements  
+## 2.1 TAM  
 Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to provide a hierarchical API model designed with following goals:  
 •	Express top level Telemetry and Monitoring domain  
 •	Remain backward compatible for application with minimal or no change in the application code  
@@ -23,7 +23,7 @@ Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to provide a hi
 •	Provide flexibility to add new APIs for a given domain/sub domain  
 •	Support local mathematical functions for hierarchical analysis  
 
-#### New TAM 2.0 APIs  
+### 2.1.1 New TAM 2.0 APIs  
 
 1) **create_tam_int**  
    sai_status_t (*sai_create_tam_report_fn)( _Out_ sai_object_id_t *tam_report_id, _In_ sai_object_id_t switch_id, _In_ uint32_t attr_count, _In_ const sai_attribute_t *attr_list);
@@ -41,7 +41,7 @@ Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to provide a hi
 More details about this feature enhancement is available at [TAM2.0 Spec](https://github.com/opencomputeproject/SAI/blob/master/doc/TAM/SAI-Proposal-TAM2.0-v2.0.docx)
 PRs related to this feature are [PR958](https://github.com/opencomputeproject/SAI/pull/958) and [PR959](https://github.com/opencomputeproject/SAI/pull/959) 
 
-### NAT  
+## 2.2 NAT  
 •	Provisioning of APIs to configure NAT feature. API set is generic to configure various types of NAT. Besides configuration, these APIs can read the NAT table for aging and is achieved using the TAM GET API  
 •	Provisioning a set of new definitions for SAI NAT specifications  
 
@@ -52,7 +52,7 @@ New SAI APIs are introduced for configuring the following.
 2) **Enabling NAT**: 
 3) **Enable Traps for SNAT and DNAT Miss Packets**
 
-#### New NAT APIs  
+### 2.2.1 New NAT APIs  
 
 1) **create_nat_range**  
    sai_status_t (*sai_create_nat_range_fn) (_Out_ sai_object_id_t *nat_range_id, _In_ sai_object_id_t switch_id, _In_ uint32_t attr_count, _In_ const sai_attribute_t *attr_list);  
@@ -82,7 +82,7 @@ New SAI APIs are introduced for configuring the following.
 PRs related to this feature are [PR937](https://github.com/opencomputeproject/SAI/pull/937/commits/a682f3d550a5854ba9c71e5e51bd5cb708418482)
 
 
-### sFlow  
+## 2.3 sFlow  
 
 sFlow (defined in https://sflow.org/sflow_version_5.txt) is a standard-based sampling technology the meets the key requirements of network traffic monitoring on switches and routers. sFlow uses two types of sampling:
 
@@ -100,7 +100,7 @@ sFlow support in SAI requires both samplepacket proposal and host-if proposal ch
 PRs related to Host-if proposal changes are [936](https://github.com/opencomputeproject/SAI/pull/936)
 
 
-## Pull Request Details  
+# 3. Pull Request Details  
 1) PR983: Added additional fields for hashing -  inner ip protocol, inner ethertype, inner l4 src/dst port, inner src/dst mac that can be used for tunneled packets.  
 2) PR982: SAITEST: Default value of ACL entry fields is 'false'. Modified to enable ACL entry action and field when creating ACL entry in PTF client.  
 3) PR981: SAITEST: Bug fix: rif_id1 is created using lag_id1, modified to remove rif_id1 before removing lag_id1.  
