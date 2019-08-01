@@ -1,6 +1,15 @@
 # SAI RELEASE NOTES - SAI 1.5 RELEASE  
 
-This release notes explains the various features and changes done for SAI1.5 release.
+This release notes explains the new APIs that are introduced & changes done for various features for SAI1.5 release.
+
+## NEW APIs Introduced In This Release  
+
+1) TAM APIs  
+2) NAT APIs  
+3) sFlow APIs  
+Details of all APIs are given in the appropriate sections given below.
+
+
 
 ## Features And Enhancements  
 ### TAM  
@@ -14,6 +23,16 @@ Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to provide a hi
 •	Provide flexibility to add new APIs for a given domain/sub domain
 •	Support local mathematical functions for hierarchical analysis
 
+#### New TAM 2.0 APIs  
+
+1) **create_tam_int**
+   sai_status_t (*sai_create_tam_report_fn)( _Out_ sai_object_id_t *tam_report_id, _In_ sai_object_id_t switch_id, _In_ uint32_t attr_count, _In_ const sai_attribute_t *attr_list);
+	
+2) sai_remove_tam_int_fn                     remove_tam_int;
+
+    sai_set_tam_int_attribute_fn              set_tam_int_attribute;
+    sai_get_tam_int_attribute_fn              get_tam_int_attribute; 
+
 More details about this feature enhancement is available at [TAM2.0 Spec](#https://github.com/opencomputeproject/SAI/blob/master/doc/TAM/SAI-Proposal-TAM2.0-v2.0.docx)
 PRs related to this feature are [PR958](#https://github.com/opencomputeproject/SAI/pull/958) and [PR959](#https://github.com/opencomputeproject/SAI/pull/959) 
 
@@ -21,8 +40,44 @@ PRs related to this feature are [PR958](#https://github.com/opencomputeproject/S
 •	Provisioning of APIs to configure NAT feature. API set is generic to configure various types of NAT. Besides configuration, these APIs can read the NAT table for aging and is achieved using the TAM GET API  
 •	Provisioning a set of new definitions for SAI NAT specifications  
 
+**Features:** Basic NAT (SNAT, DNAT), subnet based NAT, NAPT, Double NAT, NAT Exceptions
+
+New SAI APIs are introduced for configuring the following. 
+1) **NAT Zones**: NAT Zones are configured for translation. Only when packet crosses across NAT zones then NAT translation is done. SONiC will configure interfaces as a member of the zones. Zone ID is passed in the API setting up NAT rules.
+2) **Enabling NAT**: 
+3) **Enable Traps for SNAT and DNAT Miss Packets**
+
+#### New NAT APIs  
+    sai_create_nat_entry_fn                   create_nat_entry;
+    sai_remove_nat_entry_fn                   remove_nat_entry;
+    sai_set_nat_entry_attribute_fn            set_nat_entry_attribute;
+    sai_get_nat_entry_attribute_fn            get_nat_entry_attribute;
+
+     sai_bulk_create_nat_entry_fn              create_nat_entries;
+    sai_bulk_remove_nat_entry_fn              remove_nat_entries;
+    sai_bulk_set_nat_entry_attribute_fn       set_nat_entries_attribute;
+    sai_bulk_get_nat_entry_attribute_fn       get_nat_entries_attribute;
+
+     sai_create_nat_zone_counter_fn            create_nat_zone_counter;
+    sai_remove_nat_zone_counter_fn            remove_nat_zone_counter;
+    sai_set_nat_zone_counter_attribute_fn     set_nat_zone_counter_attribute;
+    sai_get_nat_zone_counter_attribute_fn     get_nat_zone_counter_attribute;
+
+
 ### sFlow  
-To be filled
+
+sFlow (defined in https://sflow.org/sflow_version_5.txt) is a standard-based sampling technology the meets the key requirements of network traffic monitoring on switches and routers. sFlow uses two types of sampling:
+
+Statistical packet-based sampling of switched or routed packet flows to provide visibility into network usage and active routes
+Time-based sampling of interface counters.
+The sFlow monitoring system consists of:
+
+sFlow Agents that reside in network equipment which gather network traffic and port counters and combines the flow samples and interface counters into sFlow datagrams and forwards them to the sFlow collector at regular intervals over a UDP socket. The datagrams consist of information on, but not limited to, packet header, ingress and egress interfaces, sampling parameters, and interface counters. A single sFlow datagram may contain samples from many flows.
+sFlow collectors which receive and analyze the sFlow data.
+sFlow is an industry standard, low cost and scalable technique that enables a single analyzer to provide a network wide view.
+
+
+
 
 ## Pull Request Details  
 1) PR983: Added additional fields for hashing -  inner ip protocol, inner ethertype, inner l4 src/dst port, inner src/dst mac that can be used for tunneled packets.  
