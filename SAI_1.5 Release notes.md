@@ -1,4 +1,4 @@
-# SAI RELEASE NOTES - SAI 1.5 RELEASE  
+# SAI 1.5 RELEASE NOTES
 
 This release notes explains the new APIs that are introduced & changes done for various features for SAI1.5 release.
 
@@ -53,16 +53,6 @@ New SAI APIs are introduced for configuring the following.
 3) **Enable Traps for SNAT and DNAT Miss Packets**
 
 #### New NAT APIs  
-
-    sai_create_nat_range_fn			  create_nat_range
-	sai_remove_nat_range_fn			  remove_nat_range
-	sai_set_nat_range_attribute_fn	  set_nat_range_attribute
-	sai_get_nat_range_attribute_fn	  get_nat_range_attribute
-	sai_create_nat_fn			  	  create_nat
-	sai_remove_nat_fn			  	  remove_nat
-	sai_set_nat_attribute_fn		  set_nat_attribute
-	sai_get_nat_attribute_fn		  get_nat_attribute
-	
 
 1) **create_nat_range**  
    sai_status_t (*sai_create_nat_range_fn) (_Out_ sai_object_id_t *nat_range_id, _In_ sai_object_id_t switch_id, _In_ uint32_t attr_count, _In_ const sai_attribute_t *attr_list);  
