@@ -2,7 +2,7 @@
 
 This release notes explains the new APIs that are introduced & changes done for various features for SAI1.5 release.
 
-# 1. NEW APIs Introduced In This Release  
+# 1. New APIs Introduced In This Release  
 
 1) TAM APIs  
 2) NAT APIs  
