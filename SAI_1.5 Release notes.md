@@ -7,7 +7,8 @@ This release notes explains the new APIs that are introduced & changes done for 
 1) TAM APIs  
 2) NAT APIs  
 3) sFlow APIs  
-4) SAI 
+4) SAI  
+5) SAI counters  
 Details of all APIs are given in the appropriate sections given below.
 
 
@@ -55,8 +56,8 @@ PRs related to this feature are [PR958](https://github.com/opencomputeproject/SA
 
 New SAI APIs are introduced for configuring the following. 
 1) **NAT Zones**: NAT Zones are configured for translation. Only when packet crosses across NAT zones then NAT translation is done. SONiC will configure interfaces as a member of the zones. Zone ID is passed in the API setting up NAT rules.
-2) **Enabling NAT**: 
-3) **Enable Traps for SNAT and DNAT Miss Packets**
+2) **Enabling NAT**: This defines the SAI NAT specifications with attributes such as 'range', set', 'get', 'remove' etc  
+3) **Enable Traps for SNAT and DNAT Miss Packets**: Traps are configured to record the count of packets based on the source and destination Network Address Translation  
 
 
 ### 2.2.1 New NAT APIs  
