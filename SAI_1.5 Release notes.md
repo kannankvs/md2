@@ -111,7 +111,7 @@ PRs related to Host-if proposal changes are [936](https://github.com/opencompute
 
 ### 2.4.1 Generic Resource Monitoring API
 
-1) **sai_object_type_get_availability**: This API is used to check if the resource accounting is supported or not for the given object ID 
+1) **sai_object_type_get_availability**: This API is used to check if the resource accounting is supported or not for the given object ID  
    sai_status_t sai_object_type_get_availability(_In_ sai_object_id_t switch_id, _In_ sai_object_type_t object_type, _In_ uint32_t attr_count, _In_ const sai_attribute_t *attr_list);  
 
 
