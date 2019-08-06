@@ -102,7 +102,8 @@ The sFlow monitoring system consists of:
 - sFlow collectors which receive and analyze the sFlow data.  
 
 
-sFlow support in SAI requires both samplepacket proposal and host-if proposal changes. Host-if module defines SAI Host Interface which is responsible for creating/deleting Linux netdev corresponding to the host interface type. The samplepacket proposal hasn’t been changed recently and is used as-is   
+sFlow support in SAI requires both samplepacket proposal and host-if proposal changes. Host-if module defines SAI Host Interface which is responsible for creating/deleting Linux netdev corresponding to the host interface type. The samplepacket proposal hasn’t been changed recently and is used as-is.  
+
 PRs related to Host-if proposal changes are [936](https://github.com/opencomputeproject/SAI/pull/936)
 
 ## 2.4 Generic Resource Monitoring
