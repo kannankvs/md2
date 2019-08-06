@@ -151,50 +151,51 @@ PRs related to Resource monitoring function additiion are [939](https://github.c
 
 # 3. Pull Request Details
 
-1) [PR983](https://github.com/opencomputeproject/SAI/pull/983): Added additional fields for hashing -  inner ip protocol, inner ethertype, inner l4 src/dst port, inner src/dst mac that can be used for tunneled packets.  
-2) [PR980](https://github.com/opencomputeproject/SAI/pull/980): saibuffer: Added more explanation to include headroom pool in ingress buffer pool.
-3) [PR974](https://github.com/opencomputeproject/SAI/pull/974): saibfd.h: Added additional attributes for BFD Session like SAI_BFD_ENCAPSULATION_TYPE_NONE to sai_bfd_encapsulation_type_t, Negotiated Transmit interval, Negotiated Receive interval,  
-           Local Diagnostic code field, Remote Diagnostic code field and Remote time Multiplier to sai_bfd_session_attr_t, mostly for diagnostics purpose.
-4) [PR971](https://github.com/opencomputeproject/SAI/pull/971): saiport.h: added attribute SAI_PORT_ATTR_PTP_MODE to port-obj for timestamping for PTP packets.
-5) [PR970](https://github.com/opencomputeproject/SAI/pull/970): saihostif.h: Added a RO attribute to trap object, to count the packets trapped to CPU. 
-6) [PR969](https://github.com/opencomputeproject/SAI/pull/969): saiseraialize.c, saiseraializetest.c: Fixes for ARM32 bit in the usage of printf format specifiers.
-7) [PR964](https://github.com/opencomputeproject/SAI/pull/964): saitypes.h: Fixed qosmap comment in sai_attribute_value_t
-8) [PR962](https://github.com/opencomputeproject/SAI/pull/962): saiacl.h: Fixed SAI_ACL_ENTRY_ATTR_ACTION_PACKET_ACTION description
-9) [PR960](https://github.com/opencomputeproject/SAI/pull/960): saibfd.h, saiswitch.h: Added capabilities for the SAI/BFD API to allow applications to query the list of supported offloads (SAI_BFD_SESSION_OFFLOAD_TYPE_FULL, SAI_BFD_SESSION_OFFLOAD_TYPE_SUSTENANCE & SAI_BFD_SESSION_OFFLOAD_TYPE_NONE)  and choose an offload while creating a BFD session.
-10) [PR959](https://github.com/opencomputeproject/SAI/pull/959): TAM: Added optional attribute in ACL to bind a TAM INT object. Enhanced sai_tam_int_type enum to distinguish between P4 INT v1 and v2 and added a codepoint for direct export  
-11) [PR958](https://github.com/opencomputeproject/SAI/pull/958): TAM: Added attributes to associate telemetry objects and probes. Created an object in the driver for tracking the buffer usage  
-12) [PR948](https://github.com/opencomputeproject/SAI/pull/948): saiport.h: Added an attribute for controlling Link Training on the ports, for improving interoperability among devices  
-13) [PR947](https://github.com/opencomputeproject/SAI/pull/947): saiswitch.h: Added a RO attribute for STP Max Instances on the switch object  
-14) [PR946](https://github.com/opencomputeproject/SAI/pull/945): saihostif.h: Added support for BFD packets to be trapped to CPU  
-15) [PR942](https://github.com/opencomputeproject/SAI/pull/942): SAI.h: SAI generic resource monitoring. To help distibguish between different resource pools for the same object type, attributes that are annotated with `@isresourcetype` must be passed to the function with corresponding values  
-16) [PR939](https://github.com/opencomputeproject/SAI/pull/939): Generic counters are added for better visibility and debugging. Tx packet and byte count for statistics along with stats in custom range base are added. The behaviour of the counter is that it can be attached/detached multiple times during its lifetime. Attaching or detaching a counter from an object does not clear its stats values. Counter can be attached to multiple objects at the same time  
-17)	[PR938](https://github.com/opencomputeproject/SAI/pull/938): TAM:  Introduced a special data pull funtion in the existing API structure         
-18) [PR937](https://github.com/opencomputeproject/SAI/pull/937): sainat.h:  Added Network Address Translation (NAT) specific API definitions 
-19) [PR936](https://github.com/opencomputeproject/SAI/pull/936): saihostif.h: Added a generic netlink interface (over a loopback) to receive trapped packets/buffers from the SAI driver. This can be used as an alternative to callback/FD based mechanisms  
-20) [PR929](https://github.com/opencomputeproject/SAI/pull/929): Added bridge port type router to facilitate flooding to router or to a tunnel, on top of the regular behavior of flooding to all local ports, without needing to manage the list of local ports, by choosing the combined flood type. A sample use case for flooding to router, is VXLAN L3 peering use case, demonstrated in OCP, where unknown unicast traffic is sent to router  
+## SAI Pull Requests
 
-		   	
-21) [PR982](https://github.com/opencomputeproject/SAI/pull/982): SAITEST: Default value of ACL entry fields is 'false'. Modified to enable ACL entry action and field when creating ACL entry in PTF client.  
-22) [PR981](https://github.com/opencomputeproject/SAI/pull/981): SAITEST: Bug fix: rif_id1 is created using lag_id1, modified to remove rif_id1 before removing lag_id1.  
-23) [PR979](https://github.com/opencomputeproject/SAI/pull/979): SAITEST: Bug fix: Added object declaration so that the life time of the objects will be extended to cleanup stage. This is done to resolve the error message "ERROR: saiacl.L3AclTableGroupTestI" that appear in the final block if the traffic test failed.   
-24) [PR978](https://github.com/opencomputeproject/SAI/pull/978): SAITEST: Supported SAI_ACL_ENTRY_ATTR_FIELD_DST_IP in client.  
-25) [PR977](https://github.com/opencomputeproject/SAI/pull/977): SAITEST: Local routes that are needed in addition to neighbor and next hop are added.  
-26) [PR976](https://github.com/opencomputeproject/SAI/pull/976): SAITEST: Added new test scripts to SAI PTF tests for 3AclTableTest_II and L3AclTableTest_III
-27) [PR975](https://github.com/opencomputeproject/SAI/pull/975): SAITEST: Added new test script to SAI PTF test for L3AclTableGroupTestII
-28) [PR973](https://github.com/opencomputeproject/SAI/pull/973): SAITEST: Added new test scripts to SAI PTF tests for L3IPv4_32Test
-29) [PR972](https://github.com/opencomputeproject/SAI/pull/972): SAITEST: Added new test scripts to SAI PTF tests for L3LpbkSubnetTest
-30) [PR967](https://github.com/opencomputeproject/SAI/pull/967): SAITEST: Fixed SAI PTF Script error in L3IPv6EcmpGroupMemberTest  
-31) [PR963](https://github.com/opencomputeproject/SAI/pull/963): SAITEST: Fixed the wrong argument for api sai_thrift_flush_fdb_by_vlan
-32) [PR961](https://github.com/opencomputeproject/SAI/pull/961): SAITEST: Added SAI PTF tests for NeighborFdbAgeoutTest
-33) [PR956](https://github.com/opencomputeproject/SAI/pull/956): SAITEST: Added enhancements for L2 VLAN broadcast/Unicast. The enhancements are removing the MAC from the MAC table after testing and removing only the testing ports from default VLAN before the testing  
-34) [PR950](https://github.com/opencomputeproject/SAI/pull/950): SAITEST: Metafiles 'saiserializetest.c', 'saisanitycheck.c', 'Makefile', 'test.pm' are updated to work on GCC & PERL  
-35) [PR949](https://github.com/opencomputeproject/SAI/pull/949): SAITEST: Implementation of a buffer pool statistics counter in a broadcom DUT is executed  
-36) [PR935](https://github.com/opencomputeproject/SAI/pull/935): SAITEST: Added SAI PTF tests for BridgePortTest-I  
-37) [PR934](https://github.com/opencomputeproject/SAI/pull/934): SAITEST: Added SAI PTF Test for LAGHashseedTest  
-38) [PR925](https://github.com/opencomputeproject/SAI/pull/925): SAITEST: Added new test script SAI PTF tests for LAG ACL (L3AclTableTest, L3AclTableGroupTest)  
-39) [PR924](https://github.com/opencomputeproject/SAI/pull/924): SAITEST: Added new test script SAI PTF tests for IPv4/IPv6 ECMP Group member (L3IPv4EcmpGroupMemberTest-I,II,III), L3IPv6EcmpGroupMemberTest-I,II)   
-40) [PR922](https://github.com/opencomputeproject/SAI/pull/923): SAITEST: Added new test script SAI PTF tests for NeighborFdbAgeoutTest. Closed this PR and opened another PR-961 to resolve conflicts  
-41) [PR921](https://github.com/opencomputeproject/SAI/pull/921): SAITEST: Added L3 Directed Broadcast tests into SAI PTF tests for L3DirectedBroadcast-I,II  
-42) [PR916](https://github.com/opencomputeproject/SAI/pull/916): SAITEST: Added new test scripts SAI PTF tests for the below tests. Added sai_thrift_set_neighbor_attribute proc to update the MAC entry  
-           L2MtuTest, L3MtuTest, L2MacMoveTestI, L2MacMoveTestII, L2MacMoveTestIII, L3IPv4NeighborMacTest, L3IPv6NeighborMacTest  
-	   
+1) [PR929](https://github.com/opencomputeproject/SAI/pull/929): Added bridge port type router to facilitate flooding to router or to a tunnel, on top of the regular behavior of flooding to all local ports, without needing to manage the list of local ports, by choosing the combined flood type. A sample use case for flooding to router, is VXLAN L3 peering use case, demonstrated in OCP, where unknown unicast traffic is sent to router.  
+2) [PR936](https://github.com/opencomputeproject/SAI/pull/936): saihostif.h: Added a generic netlink interface (over a loopback) to receive trapped packets/buffers from the SAI driver. This can be used as an alternative to callback/FD based mechanisms.    
+3) [PR937](https://github.com/opencomputeproject/SAI/pull/937): sainat.h:  Added Network Address Translation (NAT) specific API definitions.   
+4) [PR938](https://github.com/opencomputeproject/SAI/pull/938): TAM:  Introduced a special data pull funtion in the existing API structure.           
+5) [PR939](https://github.com/opencomputeproject/SAI/pull/939): Generic counters are added for better visibility and debugging. Tx packet and byte count for statistics along with stats in custom range base are added. The behaviour of the counter is that it can be attached/detached multiple times during its lifetime. Attaching or detaching a counter from an object does not clear its stats values. Counter can be attached to multiple objects at the same time.  
+6) [PR942](https://github.com/opencomputeproject/SAI/pull/942): SAI.h: SAI generic resource monitoring. To help distibguish between different resource pools for the same object type, attributes that are annotated with `@isresourcetype` must be passed to the function with corresponding values  
+7) [PR946](https://github.com/opencomputeproject/SAI/pull/945): saihostif.h: Added support for BFD packets to be trapped to CPU  
+8) [PR947](https://github.com/opencomputeproject/SAI/pull/947): saiswitch.h: Added a RO attribute for STP Max Instances on the switch object.    
+9) [PR948](https://github.com/opencomputeproject/SAI/pull/948): saiport.h: Added an attribute for controlling Link Training on the ports, for improving interoperability among devices.    
+10) [PR958](https://github.com/opencomputeproject/SAI/pull/958): TAM: Added attributes to associate telemetry objects and probes. Created an object in the driver for tracking the buffer usage.    
+11) [PR959](https://github.com/opencomputeproject/SAI/pull/959): TAM: Added optional attribute in ACL to bind a TAM INT object. Enhanced sai_tam_int_type enum to distinguish between P4 INT v1 and v2 and added a codepoint for direct export.    
+12) [PR960](https://github.com/opencomputeproject/SAI/pull/960): saibfd.h, saiswitch.h: Added capabilities for the SAI/BFD API to allow applications to query the list of supported offloads (SAI_BFD_SESSION_OFFLOAD_TYPE_FULL, SAI_BFD_SESSION_OFFLOAD_TYPE_SUSTENANCE & SAI_BFD_SESSION_OFFLOAD_TYPE_NONE)  and choose an offload while creating a BFD session.  
+13) [PR962](https://github.com/opencomputeproject/SAI/pull/962): saiacl.h: Fixed SAI_ACL_ENTRY_ATTR_ACTION_PACKET_ACTION description.  
+14) [PR964](https://github.com/opencomputeproject/SAI/pull/964): saitypes.h: Fixed qosmap comment in sai_attribute_value_t.  
+15) [PR969](https://github.com/opencomputeproject/SAI/pull/969): saiseraialize.c, saiseraializetest.c: Fixes for ARM32 bit in the usage of printf format specifiers.  
+16) [PR970](https://github.com/opencomputeproject/SAI/pull/970): saihostif.h: Added a RO attribute to trap object, to count the packets trapped to CPU.   
+17) [PR971](https://github.com/opencomputeproject/SAI/pull/971): saiport.h: added attribute SAI_PORT_ATTR_PTP_MODE to port-obj for timestamping for PTP packets.  
+18) [PR974](https://github.com/opencomputeproject/SAI/pull/974): saibfd.h: Added additional attributes for BFD Session like SAI_BFD_ENCAPSULATION_TYPE_NONE to sai_bfd_encapsulation_type_t, Negotiated Transmit interval, Negotiated Receive interval, Local Diagnostic code field, Remote Diagnostic code field and Remote time Multiplier to sai_bfd_session_attr_t, mostly for diagnostics purpose.    
+19) [PR980](https://github.com/opencomputeproject/SAI/pull/980): saibuffer: Added more explanation to include headroom pool in ingress buffer pool.  
+20) [PR983](https://github.com/opencomputeproject/SAI/pull/983): Added additional fields for hashing -  inner ip protocol, inner ethertype, inner l4 src/dst port, inner src/dst mac that can be used for tunneled packets.  
+
+## SAI TEST Pull Requests
+
+21) [PR916](https://github.com/opencomputeproject/SAI/pull/916): SAITEST: Added new test scripts SAI PTF tests for the below tests. Added sai_thrift_set_neighbor_attribute proc to update the MAC entry.    
+           L2MtuTest, L3MtuTest, L2MacMoveTestI, L2MacMoveTestII, L2MacMoveTestIII, L3IPv4NeighborMacTest, L3IPv6NeighborMacTest.    
+22) [PR921](https://github.com/opencomputeproject/SAI/pull/921): SAITEST: Added L3 Directed Broadcast tests into SAI PTF tests for L3DirectedBroadcast-I,II.   
+23) [PR922](https://github.com/opencomputeproject/SAI/pull/923): SAITEST: Added new test script SAI PTF tests for NeighborFdbAgeoutTest. Closed this PR and opened another PR-961 to resolve conflicts.    
+24) [PR924](https://github.com/opencomputeproject/SAI/pull/924): SAITEST: Added new test script SAI PTF tests for IPv4/IPv6 ECMP Group member (L3IPv4EcmpGroupMemberTest-I,II,III), L3IPv6EcmpGroupMemberTest-I,II).     
+25) [PR925](https://github.com/opencomputeproject/SAI/pull/925): SAITEST: Added new test script SAI PTF tests for LAG ACL (L3AclTableTest, L3AclTableGroupTest).    
+26) [PR934](https://github.com/opencomputeproject/SAI/pull/934): SAITEST: Added SAI PTF Test for LAGHashseedTest.    
+27) [PR935](https://github.com/opencomputeproject/SAI/pull/935): SAITEST: Added SAI PTF tests for BridgePortTest-I.    
+28) [PR949](https://github.com/opencomputeproject/SAI/pull/949): SAITEST: Implementation of a buffer pool statistics counter in a broadcom DUT is executed.   
+29) [PR950](https://github.com/opencomputeproject/SAI/pull/950): SAITEST: Metafiles 'saiserializetest.c', 'saisanitycheck.c', 'Makefile', 'test.pm' are updated to work on GCC & PERL.    
+30) [PR956](https://github.com/opencomputeproject/SAI/pull/956): SAITEST: Added enhancements for L2 VLAN broadcast/Unicast. The enhancements are removing the MAC from the MAC table after testing and removing only the testing ports from default VLAN before the testing.  
+31) [PR961](https://github.com/opencomputeproject/SAI/pull/961): SAITEST: Added SAI PTF tests for NeighborFdbAgeoutTest.  
+32) [PR963](https://github.com/opencomputeproject/SAI/pull/963): SAITEST: Fixed the wrong argument for api sai_thrift_flush_fdb_by_vlan.  
+33) [PR967](https://github.com/opencomputeproject/SAI/pull/967): SAITEST: Fixed SAI PTF Script error in L3IPv6EcmpGroupMemberTest.    
+34) [PR972](https://github.com/opencomputeproject/SAI/pull/972): SAITEST: Added new test scripts to SAI PTF tests for L3LpbkSubnetTest.  
+35) [PR973](https://github.com/opencomputeproject/SAI/pull/973): SAITEST: Added new test scripts to SAI PTF tests for L3IPv4_32Test.  
+36) [PR975](https://github.com/opencomputeproject/SAI/pull/975): SAITEST: Added new test script to SAI PTF test for L3AclTableGroupTestII.  
+37) [PR976](https://github.com/opencomputeproject/SAI/pull/976): SAITEST: Added new test scripts to SAI PTF tests for 3AclTableTest_II and L3AclTableTest_III.  
+38) [PR977](https://github.com/opencomputeproject/SAI/pull/977): SAITEST: Local routes that are needed in addition to neighbor and next hop are added.  
+39) [PR978](https://github.com/opencomputeproject/SAI/pull/978): SAITEST: Supported SAI_ACL_ENTRY_ATTR_FIELD_DST_IP in client.  
+40) [PR979](https://github.com/opencomputeproject/SAI/pull/979): SAITEST: Bug fix: Added object declaration so that the life time of the objects will be extended to cleanup stage. This is done to resolve the error message "ERROR: saiacl.L3AclTableGroupTestI" that appear in the final block if the traffic test failed.   
+41) [PR981](https://github.com/opencomputeproject/SAI/pull/981): SAITEST: Bug fix: rif_id1 is created using lag_id1, modified to remove rif_id1 before removing lag_id1.  
+42) [PR982](https://github.com/opencomputeproject/SAI/pull/982): SAITEST: Default value of ACL entry fields is 'false'. Modified to enable ACL entry action and field when creating ACL entry in PTF client.  
