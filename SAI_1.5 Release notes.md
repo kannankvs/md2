@@ -4,7 +4,7 @@ This release notes explains the new APIs that are introduced & changes done for 
 
 # 1. New APIs Introduced In This Release  
 
-The Switch Abstraction Interface defines the APIs to provide a vendor-independent way of controlling forwarding elements, such as a switching ASIC, an NPU or a software switch in a uniform manner. Below mentioned are the new APIs created for specific purposes that are defined in this document  
+The Switch Abstraction Interface defines the APIs to provide a vendor-independent way of controlling forwarding elements, such as a switching ASIC, an NPU or a software switch in a uniform manner. Below mentioned are the new APIs created for specific purposes that are defined in this document.  
 
 1) TAM APIs  
 2) NAT APIs  
@@ -30,10 +30,10 @@ Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to provide a hi
 
 ### 2.1.1 New TAM 2.0 APIs  
 
-1) **create_tam_int**  This API is to create a TAM object. This will further be used to create a binding to the switch  
+1) **create_tam_int**: This API is to create a TAM object. This will further be used to create a binding to the switch  
    sai_status_t (*sai_create_tam_report_fn)( _Out_ sai_object_id_t *tam_report_id, _In_ sai_object_id_t switch_id, _In_ uint32_t attr_count, _In_ const sai_attribute_t *attr_list);
 	
-2) **remove_tam_int**  This API is to remove the TAM object that is already created  
+2) **remove_tam_int**: This API is to remove the TAM object that is already created  
    sai_status_t (*sai_remove_tam_int_fn) (_In_ sai_object_id_t tam_int_id);  
 
 3) **set_tam_int_attribute**: This API is used to set value for a specified interface object attribute    
@@ -42,7 +42,7 @@ Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to provide a hi
 4) **get_tam_int_attribute**: This API is used to get values for specified interface object attributes   
    sai_status_t (*sai_get_tam_int_attribute_fn) (_In_ sai_object_id_t tam_int_id, _In_ uint32_t attr_count, _Inout_ sai_attribute_t *attr_list);  
 
-5) **tam_telemetry_get_data**  This will return data of all the source objects bind’ed to the TAM object or data pertaining to the source only based on the option chosen in the attritube list  
+5) **tam_telemetry_get_data**: This will return data of all the source objects bind’ed to the TAM object or data pertaining to the source only based on the option chosen in the attritube list  
    sai_status_t (*sai_tam_telemetry_get_data_fn)(_In_ sai_object_id_t switch_id, _In_ uint32_t attr_count, _In_ const sai_attribute_t *attr_list);  
 
 
@@ -50,7 +50,7 @@ More details about this feature enhancement is available at [TAM2.0 Spec](https:
 PRs related to this feature are [PR958](https://github.com/opencomputeproject/SAI/pull/958) and [PR959](https://github.com/opencomputeproject/SAI/pull/959) 
 
 ## 2.2 NAT  
-•	Provisioning of APIs to configure NAT feature. API set is generic to configure various types of NAT. Besides configuration, these APIs can read the NAT table for aging and is achieved using the TAM GET API  
+•	Provisioning of APIs to configure NAT feature. API set is generic to configure various types of NAT. Besides configuration, these APIs can read the NAT table for aging and is achieved using the TAM GET API.  
 
 **Features:** Basic NAT (SNAT, DNAT), subnet based NAT, NAPT, Double NAT, NAT Exceptions
 
@@ -65,7 +65,7 @@ New SAI APIs are introduced for configuring the following.
 1) **create_nat_range**: This APi will create a NAT range that will include the start and end values  
    sai_status_t (*sai_create_nat_range_fn) (_Out_ sai_object_id_t *nat_range_id, _In_ sai_object_id_t switch_id, _In_ uint32_t attr_count, _In_ const sai_attribute_t *attr_list);  
    
-2) **remove_nat_range**:  This API deletes a specified NAT range_object and also single specified NAT range  
+2) **remove_nat_range**: This API deletes a specified NAT range_object and also single specified NAT range  
    sai_status_t (*sai_remove_nat_range_fn) (_In_ sai_object_id_t nat_range_id);  
 
 3) **set_nat_range_attribute**: This API sets the NAT range attribute values for adapter specific extensions  
@@ -86,7 +86,6 @@ New SAI APIs are introduced for configuring the following.
 8) **get_nat_attribute**: This API gets values for specified NAT attributes for adapter specific extensions  
    sai_status_t (*sai_get_nat_attribute_fn)(_In_ sai_object_id_t nat_id, _In_ uint32_t attr_count, _Inout_ sai_attribute_t *attr_list);  
 
-
 PRs related to this feature are [PR937](https://github.com/opencomputeproject/SAI/pull/937/commits/a682f3d550a5854ba9c71e5e51bd5cb708418482)
 
 
@@ -97,7 +96,7 @@ sFlow (defined in https://sflow.org/sflow_version_5.txt) is a standard-based sam
 - Statistical packet-based sampling of switched or routed packet flows to provide visibility into network usage and active routes
 - Time-based sampling of interface counters.  
 
-The sFlow monitoring system consists of:  
+The sFlow monitoring system consists of:
 
 - sFlow Agents that reside in network equipment which gather network traffic and port counters and combines the flow samples and interface counters into sFlow datagrams and forwards them to the sFlow collector at regular intervals over a UDP socket  
 - sFlow collectors which receive and analyze the sFlow data.  
@@ -111,7 +110,7 @@ PRs related to Host-if proposal changes are [936](https://github.com/opencompute
 
 ### 2.4.1 Generic Resource Monitoring API
 
-1) **sai_object_type_get_availability**: This API is used to check if the resource accounting is supported or not for the given object ID  
+1) **sai_object_type_get_availability**: This API is used to check if the resource accounting is supported or not for the given object ID 
    sai_status_t sai_object_type_get_availability(_In_ sai_object_id_t switch_id, _In_ sai_object_type_t object_type, _In_ uint32_t attr_count, _In_ const sai_attribute_t *attr_list);  
 
 
