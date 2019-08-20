@@ -1,19 +1,20 @@
 
-## SAI Release Notes v1.5
+# SAI Release Notes v1.5
 
 The Switch Abstraction Interface defines the APIs to provide a vendor-independent way of controlling forwarding elements, such as a switching ASIC, an NPU or a software switch in a uniform manner.
 
-This document describes the features enhancements of features and sub features along with bugfixes on known issues in SAI.
+This document describes the SAI changes done for new features, enhancements on existing features/sub-features and various bug fixes.
 
+List of new features is as follows.
 1) TAM APIs  
 2) NAT APIs  
 3) sFlow APIs  
 4) Generic Resource Monitoring  
 5) SAI counters  
 
-## 2. Features And Enhancements  
+# 2. Features And Enhancements  
 
-### 2.1 TAM  
+## 2.1 TAM  
 
 Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to achieve the following goals:
 1. Express top-level Telemetry and Monitoring domain 
@@ -25,7 +26,7 @@ Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to achieve the 
 7. Provide flexibility to add new APIs for a given domain/subdomain
 8. Support local mathematical functions for hierarchical analysis
 
-#### 2.1.1 New TAM 2.0 APIs
+### 2.1.1 New TAM 2.0 APIs
 1) **create_tam_int**: This API is to create a TAM object. This will further be used to create a binding to the switch  
    ```
    sai_status_t (*sai_create_tam_report_fn)(
@@ -62,7 +63,7 @@ Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to achieve the 
 More details about this feature enhancement are available at [TAM2.0 Spec](https://github.com/opencomputeproject/SAI/blob/master/doc/TAM/SAI-Proposal-TAM2.0-v2.0.docx)
 PRs related to this feature are [PR958](https://github.com/opencomputeproject/SAI/pull/958) and [PR959](https://github.com/opencomputeproject/SAI/pull/959)
 
-### 2.2 NAT  
+## 2.2 NAT  
 Provisioning of APIs to configure NAT feature. API set is generic to configure various types of NAT.  
 
 **Features:** 
@@ -79,7 +80,7 @@ New SAI APIs are introduced for configuring the following.
 4) **TAM GET API** : Besides configuration, this API can read the NAT table to get aging details. 
 
 
-#### 2.2.1 New NAT APIs  
+### 2.2.1 New NAT APIs  
 
 1) **create_nat_range**: This APi will create a NAT range that will include the start and end values  
    ```
@@ -138,7 +139,7 @@ New SAI APIs are introduced for configuring the following.
 PRs related to this feature are [PR937](https://github.com/opencomputeproject/SAI/pull/937/commits/a682f3d550a5854ba9c71e5e51bd5cb708418482)
 
 
-### 2.3 sFlow  
+## 2.3 sFlow  
 
 sFlow (defined in https://sflow.org/sflow_version_5.txt) is a standard-based sampling technology the meets the key requirements of network traffic monitoring on switches and routers. sFlow uses two types of sampling:
 
@@ -155,10 +156,10 @@ sFlow support in SAI requires both sample packet proposal and host-if proposal c
 
 PRs related to Host-if proposal changes are [936](https://github.com/opencomputeproject/SAI/pull/936)
 
-### 2.4 Generic Resource Monitoring
+## 2.4 Generic Resource Monitoring
 SAI manages ASIC resources. It is important for the user to query the current resources usage in the ASIC for different types of SAI objects. It is also importaint to make as much resources availability exposed as possible. 
 
-#### 2.4.1 Generic Resource Monitoring API
+### 2.4.1 Generic Resource Monitoring API
 
 1) **sai_object_type_get_availability**: This is a generic API for SAI recources monitoring. The function accepts an object type for which availability is queried. A new annotation is added to mark object attributes that are used to distibguish between different recource pools of the same object type.  
  ```
@@ -170,10 +171,10 @@ SAI manages ASIC resources. It is important for the user to query the current re
   ```
 PRs related to Resource monitoring function addition are [942](https://github.com/opencomputeproject/SAI/pull/942)
 
-### 2.5 SAI counter
+## 2.5 SAI counter
 Defining counters explicitly per object type imposes restrictions to their usage. Hence the new counters model introduces APIs to query which objects support which counters and create a counter object that can be dynamically attached to other objects  
 
-#### 2.5.1 New SAI counter APIs
+### 2.5.1 New SAI counter APIs
 
 1) **sai_create_counter**: This API creates a counter that can be attached to an object to collect the statistics. Attaching a counter to an object does not clear it's stats values.
 ```
@@ -188,7 +189,7 @@ Defining counters explicitly per object type imposes restrictions to their usage
    sai_status_t (*sai_remove_counter_fn)(
    	_In_ sai_object_id_t counter_id);
    ```
-   3) **sai_set_counter_attribute**: This API sets the attribute value for the given object ID
+3) **sai_set_counter_attribute**: This API sets the attribute value for the given object ID
    ```
    sai_status_t (*sai_set_counter_attribute_fn)(
    	_In_ sai_object_id_t counter_id, 
@@ -231,9 +232,9 @@ PRs related to Resource monitoring function addition are [939](https://github.co
 **NOTE**: The APIs that define certain attributes are Adapter-specific extensions to SAI, most typically to expose differentiated functionality in the underlying forwarding element. These are added to minimize compatibility issues with versioning of structures and to allow API extensibility  
 
 
-## 3. Pull Request Details
+## 2. Pull Request Details
 
-### SAI Pull Requests
+## SAI Pull Requests
 
 1) [PR929](https://github.com/opencomputeproject/SAI/pull/929): saibridge.h: Added bridge port type router to facilitate flooding to the router or a tunnel, on top of the regular behaviour  of flooding to all local ports, without needing to manage the list of local ports, by choosing the combined flood type. A sample use case for flooding to the router, is VXLAN L3 peering use case, demonstrated in OCP, where unknown unicast traffic is sent to the router.  
 2) [PR936](https://github.com/opencomputeproject/SAI/pull/936): saihostif.h: Added a generic Netlink interface (over a loopback) to receive trapped packets/buffers from the SAI driver. This can be used as an alternative to callback/FD based mechanisms.    
@@ -256,7 +257,7 @@ PRs related to Resource monitoring function addition are [939](https://github.co
 19) [PR980](https://github.com/opencomputeproject/SAI/pull/980): saibuffer: Added more explanation to include headroom pool in the ingress buffer pool.  
 20) [PR983](https://github.com/opencomputeproject/SAI/pull/983): Added additional fields for hashing -  inner ip protocol, inner ethertype, inner l4 src/dst port, inner src/dst mac that can be used for tunnelled packets.  
 
-### SAI TEST Pull Requests
+## SAI TEST Pull Requests
 
 1) [PR916](https://github.com/opencomputeproject/SAI/pull/916): SAITEST: Added new test scripts SAI PTF tests for the below tests. Added sai_thrift_set_neighbor_attribute proc to update the MAC entry.    
 ... L2MtuTest, L3MtuTest, L2MacMoveTestI, L2MacMoveTestII, L2MacMoveTestIII, L3IPv4NeighborMacTest, L3IPv6NeighborMacTest.    
