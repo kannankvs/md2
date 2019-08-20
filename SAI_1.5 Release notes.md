@@ -1,5 +1,5 @@
 
-# SAI Release Notes v1.5
+# SAI 1.5 Release Notes
 
 The Switch Abstraction Interface defines the APIs to provide a vendor-independent way of controlling forwarding elements, such as a switching ASIC, an NPU or a software switch in a uniform manner.
 
