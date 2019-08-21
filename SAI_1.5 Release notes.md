@@ -17,7 +17,7 @@ List of new features is as follows.
 ## 2.1 TAM  
 
 Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to achieve the following goals:
-1. Express top-level Telemetry and Monitoring domain 
+1. Express top-level Telemetry and Monitoring domain for Inband Telemetry
 2. Remain backwards compatible for application with minimal or no change in the application code
 3. Provide extensibility for new functions/capability in each domain/subdomain and always remain backward compatible
 4. Remove any hard coded assumptions about domain or domain’s capabilities
@@ -72,11 +72,12 @@ Provisioning of APIs to configure NAT feature. API set is generic to configure v
 3. NAPT
 4. Double NAT
 5. NAT Exceptions
+6. NAT Hairpin
 
 New SAI APIs are introduced for configuring the following. 
 1) **NAT Zones**: NAT Zones are configured for translation. Only when packet crosses across NAT zones then NAT translation is done. SONiC will configure interfaces as a member of the zones. Zone ID is passed in the API setting up NAT rules.
 2) **Enabling NAT**: This defines the SAI NAT specifications with attributes such as 'range', set', 'get', 'remove' etc  
-3) **Enable Traps for SNAT and DNAT Miss Packets**: Traps are configured to record the count of packets based on the source and destination Network Address Translation.
+3) **Enable Traps for SNAT, DNAT and HAIRPIN Miss Packets**: Traps are configured to record the count of packets based on the source and destination Network Address Translation.
 4) **TAM GET API** : Besides configuration, this API can read the NAT table to get aging details. 
 
 
