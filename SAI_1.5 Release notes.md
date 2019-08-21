@@ -151,10 +151,12 @@ The sFlow monitoring system consists of:
 - sFlow agents that reside in network equipment which gather network traffic and port counters and combines the flow samples and interface counters into sFlow datagrams and forwards them to the sFlow collector at regular intervals over a UDP socket  
 - sFlow collectors which receive and analyze the sFlow data.  
 
+sFlow support in SAI requires both sample packet proposal and host-if proposal changes. The sample packet APIs haven't changed and is used as-is. Host-if is updated to create a new Generic Netlink based interface to lift sFlow samples to the application (sFlow agents) using the following new attributes:
+•	SAI_HOSTIF_TYPE_GENETLINK
+•	SAI_HOSTIF_ATTR_GENETLINK_MCGRP_NAME
+•	SAI_HOSTIF_TABLE_ENTRY_CHANNEL_TYPE_GENETLINK
 
-sFlow support in SAI requires both sample packet proposal and host-if proposal changes. Host-if module defines SAI Host Interface which is responsible for creating/deleting Linux netdev corresponding to the host interface type. The sample packet proposal hasn’t been changed recently and is used as-is.  
-
-PRs related to Host-if proposal changes are [936](https://github.com/opencomputeproject/SAI/pull/936)
+PRs related to Host-if proposal changes are [936](https://github.com/opencomputeproject/SAI/pull/936) and 997[997](https://github.com/opencomputeproject/SAI/pull/997)
 
 ## 2.4 Generic Resource Monitoring
 SAI manages ASIC resources. It is important for the user to query the current resources usage in the ASIC for different types of SAI objects. It is also importaint to make as much resources availability exposed as possible. 
