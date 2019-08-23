@@ -202,9 +202,9 @@ Defining counters explicitly per object type imposes restrictions to their usage
 4) **sai_get_counter_attribute**: This API gets the counter's attribute values for the given object ID 
    ```
    sai_status_t (*sai_get_counter_attribute_fn)(
-   	_In_ sai_object_id_t counter_id, 
-	_In_ uint32_t attr_count, 
-	_Inout_ sai_attribute_t *attr_list);
+		_In_ sai_object_id_t counter_id, 
+		_In_ uint32_t attr_count, 
+		_Inout_ sai_attribute_t *attr_list);
    ```
 
 5) **sai_get_counter_stats**: This API gets the counter statistics values
@@ -227,57 +227,52 @@ Defining counters explicitly per object type imposes restrictions to their usage
 7) **sai_clear_counter_stats**: This API clears the statistics collected in the counters  
    ```
    sai_status_t (*sai_clear_counter_stats_fn)(
-   	_In_ sai_object_id_t counter_id, 
-	_In_ uint32_t number_of_counters, 
-	_In_ const sai_stat_id_t *counter_ids);  
+		_In_ sai_object_id_t counter_id, 
+		_In_ uint32_t number_of_counters, 
+		_In_ const sai_stat_id_t *counter_ids);  
    ```
 PRs related to Resource monitoring function addition is [939](https://github.com/opencomputeproject/SAI/pull/939)
 
 **NOTE**: The APIs that define certain attributes are Adapter-specific extensions to SAI, most typically to expose differentiated functionality in the underlying forwarding element. These are added to minimize compatibility issues with versioning of structures and to allow API extensibility  
 
 ## 2.6 Drop Counters  
-  ASICs can provide a set of debug counters for certain object types. Debug counters belong to certain families, each family is for certain object type. The content of a specific debug counter instance can be defined by the application. Counting every statistics of every family might be too resource intensive, therefore the debug counters provide an efficient way to count and aggregate only the needed information.
+  A new list of drop counters is added in the structure "sai_port_in_drop_reason_t", that includes dropping reasons like source mac being multicast, source mac same as destination mac etc. as given in the design document.
+  
+A new set of SAI API's is added as follows to support this feature. 
 
-Example :
- ```
-enum _sai_debug_counter_type_t {
-    /** Port in drop reasons. Base object : SAI_OBJECT_TYPE_PORT */
-    SAI_DEBUG_COUNTER_TYPE_PORT_IN_DROP_REASONS,
-     /** Port out drop reasons. Base object : SAI_OBJECT_TYPE_PORT */
-    SAI_DEBUG_COUNTER_TYPE_PORT_OUT_DROP_REASONS,
- } sai_debug_counter_type_t;
- ```
-Debug counter port in drop reason family can be expressed as shown below. 
-```
- enum _sai_port_in_drop_reason_t {
-    /* L2 reasons */
-    /* L3 reasons */
- } 
- ```
-### List of Drop counters 
+### 2.6.1 New Drop counter APIs
 
-#### Layer 2 drop counters
+1. **sai_create_debug_counter_fn**: This API is used to create debug counter
 
-    1.  SAI_PORT_IN_DROP_REASON_SMAC_MULTICAST - Source MAC is multicast  
-    2.  SAI_PORT_IN_DROP_REASON_SMAC_EQUALS_DMAC - Source MAC equals Destination MAC  
-    3.  SAI_PORT_IN_DROP_REASON_DMAC_RESERVED - Destination MAC is Reserved (DMAC=01-80-C2-00-00-0x)  
-    4.  SAI_PORT_IN_DROP_REASON_VLAN_TAG_NOT_ALLOWED - VLAN tag not allowed  
-    5.  SAI_PORT_IN_DROP_REASON_INGRESS_VLAN_FILTER Ingress VLAN filter - Frame tagged when a port is dropping tagged or untagged when dropping untagged  
-    6.  SAI_PORT_OUT_DROP_REASON_EGRESS_VLAN_FILTER - Egress VLAN filter  
-    7.  SAI_PORT_IN_DROP_REASON_INGRESS_STP_FILTER - Ingress STP filter   
-    8.  SAI_PORT_IN_DROP_REASON_FDB_UC_DISCARD -  Unicast FDB table action discard   
-    9.  SAI_PORT_IN_DROP_REASON_FDB_MC_DISCARD - Multicast FDB table empty tx list   
-    10. SAI_PORT_IN_DROP_REASON_LOOPBACK_FILTER - Port loopback filter   
-    
-#### Layer 3 drop counters        
-    
-    1.  SAI_PORT_IN_DROP_REASON_DIP_LINK_LOCAL - IPv4 Unicast Destination IP is link-local (Destination IP=169.254.0.0/16)
-    2.  SAI_PORT_IN_DROP_REASON_SIP_LINK_LOCAL - IPv4 Source IP is link-local (Source IP=169.254.0.0/16)
-    3.  SAI_PORT_IN_DROP_REASON_EXCEEDS_MTU - Packet size is larger than the MTU
-    4.  SAI_PORT_IN_DROP_REASON_ACL_DISCARD - Packet is dropped due to configured ACL rules
-    5.  SAI_PORT_OUT_DROP_REASON_L3_EGRESS_LINK_DOWN - Packet is destined for a neighboring device but neighbour device link is down
+     ```
+	sai_status_t (*sai_create_debug_counter_fn)(
+        	_Out_ sai_object_id_t *debug_counter_id,  
+        	_In_ sai_object_id_t switch_id,  
+        	_In_ uint32_t attr_count,  
+        	_In_ const sai_attribute_t *attr_list);  
+     ```
+2. **sai_remove_debug_counter_fn**: This API is used to remove debug counter
 
-PRs related to this feature is [PR985](https://github.com/opencomputeproject/SAI/pull/985)  
+     ```
+	sai_status_t (*sai_remove_debug_counter_fn)(
+        	_In_ sai_object_id_t debug_counter_id);  
+
+      ```
+3. **sai_set_debug_counter_attribute_fn**: This API is used to set debug counter attribute Value
+
+  	```
+	sai_status_t (*sai_set_debug_counter_attribute_fn)(
+		_In_ sai_object_id_t debug_counter_id,  
+		_In_ const sai_attribute_t *attr);  
+  	```		
+4. **sai_get_debug_counter_attribute_fn**: This API is used to get debug counter attribute Value
+	 ``` 
+	sai_status_t (*sai_get_debug_counter_attribute_fn)(
+        	_In_ sai_object_id_t debug_counter_id,  
+		_In_ uint32_t attr_count,  
+		_Inout_ sai_attribute_t *attr_list);  
+  	```		
+  PRs related to this feature is [PR985](https://github.com/opencomputeproject/SAI/pull/985)  
 
 ## 3. Pull Request Details
 
