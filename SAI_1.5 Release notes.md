@@ -11,6 +11,7 @@ List of new features is as follows.
 3) sFlow APIs  
 4) Generic Resource Monitoring  
 5) SAI counters  
+6) Drop Counters  
 
 # 2. Features And Enhancements  
 
@@ -78,12 +79,12 @@ New SAI APIs are introduced for configuring the following.
 1) **NAT Zones**: NAT Zones are configured for translation. Only when packet crosses across NAT zones then NAT translation is done. SONiC will configure interfaces as a member of the zones. Zone ID is passed in the API setting up NAT rules.
 2) **Enabling NAT**: This defines the SAI NAT specifications with attributes such as 'range', set', 'get', 'remove' etc  
 3) **Enable Traps for SNAT, DNAT and HAIRPIN Miss Packets**: Traps are configured to record the count of packets based on the source and destination Network Address Translation.
-4) **TAM GET API** : Besides configuration, this API can read the NAT table to get aging details. 
+4) **TAM GET API**: Besides configuration, this API can read the NAT table to get aging details. 
 
 
 ### 2.2.1 New NAT APIs  
 
-1) **create_nat_range**: This APi will create a NAT range that will include the start and end values  
+1) **create_nat_range**: This API will create a NAT range that will include the start and end values  
    ```
    sai_status_t (*sai_create_nat_range_fn)(
         _Out_ sai_object_id_t *nat_range_id,
@@ -137,15 +138,15 @@ New SAI APIs are introduced for configuring the following.
         _In_ uint32_t attr_count,
         _Inout_ sai_attribute_t *attr_list);
    ```
-PRs related to this feature are [PR937](https://github.com/opencomputeproject/SAI/pull/937/commits/a682f3d550a5854ba9c71e5e51bd5cb708418482)
+PRs related to this feature is [PR937](https://github.com/opencomputeproject/SAI/pull/937/commits/a682f3d550a5854ba9c71e5e51bd5cb708418482)
 
 
 ## 2.3 sFlow  
 
 sFlow (defined in https://sflow.org/sflow_version_5.txt) is a standard-based sampling technology the meets the key requirements of network traffic monitoring on switches and routers. sFlow uses two types of sampling:
 
-- Statistical packet-based sampling of switched or routed packet flows to provide visibility into network usage and active routes
-- Time-based sampling of interface counters.  
+- A statistical packet-based sampling of switched or routed packet flows to provide visibility into network usage and active routes
+- A time-based sampling of interface counters.  
 
 The sFlow monitoring system consists of:
 
@@ -160,11 +161,11 @@ sFlow support in SAI requires both sample packet proposal and host-if proposal c
 PRs related to Host-if proposal changes are [936](https://github.com/opencomputeproject/SAI/pull/936) and [997](https://github.com/opencomputeproject/SAI/pull/997)
 
 ## 2.4 Generic Resource Monitoring
-SAI manages ASIC resources. It is important for the user to query the current resources usage in the ASIC for different types of SAI objects. It is also importaint to make as much resources availability exposed as possible. 
+SAI manages ASIC resources. It is important for the user to query the current resources usage in the ASIC for different types of SAI objects. It is also essential to make as much resources availability exposed as possible. 
 
 ### 2.4.1 Generic Resource Monitoring API
 
-1) **sai_object_type_get_availability**: This is a generic API for SAI recources monitoring. The function accepts an object type for which availability is queried. A new annotation is added to mark object attributes that are used to distibguish between different recource pools of the same object type.  
+1) **sai_object_type_get_availability**: This is a generic API for SAI resource monitoring. The function accepts an object type for which availability is queried. A new annotation is added to mark object attributes that are used to distinguish between different resource pools of the same object type.  
  ```
    sai_status_t sai_object_type_get_availability(
         _In_ sai_object_type_t object_type,
@@ -172,10 +173,10 @@ SAI manages ASIC resources. It is important for the user to query the current re
         _In_ const sai_attribute_t *attr_list,
         _Out_ uint64_t *count);
   ```
-PRs related to Resource monitoring function addition are [942](https://github.com/opencomputeproject/SAI/pull/942)
+PRs related to Resource monitoring function addition is [942](https://github.com/opencomputeproject/SAI/pull/942)
 
 ## 2.5 SAI counter
-Defining counters explicitly per object type imposes restrictions to their usage. Hence the new counters model introduces APIs to query which objects support which counters and create a counter object that can be dynamically attached to other objects  
+Defining counters explicitly per object type imposes restrictions to their usage. Hence the new counter's model introduces APIs to query which objects support which counters and create a counter object that can be dynamically attached to other objects  
 
 ### 2.5.1 New SAI counter APIs
 
@@ -230,12 +231,55 @@ Defining counters explicitly per object type imposes restrictions to their usage
 	_In_ uint32_t number_of_counters, 
 	_In_ const sai_stat_id_t *counter_ids);  
    ```
-PRs related to Resource monitoring function addition are [939](https://github.com/opencomputeproject/SAI/pull/939)
+PRs related to Resource monitoring function addition is [939](https://github.com/opencomputeproject/SAI/pull/939)
 
 **NOTE**: The APIs that define certain attributes are Adapter-specific extensions to SAI, most typically to expose differentiated functionality in the underlying forwarding element. These are added to minimize compatibility issues with versioning of structures and to allow API extensibility  
 
+## 2.6 Drop Counters  
+       ASICs can provide a set of debug counters for certain object types. Debug counters belong to certain families, each family is for certain object type. The content of a specific debug counter instance can be defined by the application. Counting every statistics of every family might be too resource intensive, therefore the debug counters provide an efficient way to count and aggregate only the needed information.
 
-## 2. Pull Request Details
+Example :
+ ```
+enum _sai_debug_counter_type_t {
+    /** Port in drop reasons. Base object : SAI_OBJECT_TYPE_PORT */
+    SAI_DEBUG_COUNTER_TYPE_PORT_IN_DROP_REASONS,
+     /** Port out drop reasons. Base object : SAI_OBJECT_TYPE_PORT */
+    SAI_DEBUG_COUNTER_TYPE_PORT_OUT_DROP_REASONS,
+ } sai_debug_counter_type_t;
+ ```
+Debug counter port in drop reason family can be expressed as shown below. 
+```
+ enum _sai_port_in_drop_reason_t {
+    /* L2 reasons */
+    /* L3 reasons */
+ } 
+ ```
+List of Drop counters 
+
+#### Layer 2 drop counters
+
+    1.  SAI_PORT_IN_DROP_REASON_SMAC_MULTICAST - Source MAC is multicast  
+    2.  SAI_PORT_IN_DROP_REASON_SMAC_EQUALS_DMAC - Source MAC equals Destination MAC  
+    3.  SAI_PORT_IN_DROP_REASON_DMAC_RESERVED - Destination MAC is Reserved (DMAC=01-80-C2-00-00-0x)  
+    4.  SAI_PORT_IN_DROP_REASON_VLAN_TAG_NOT_ALLOWED - VLAN tag not allowed  
+    5.  SAI_PORT_IN_DROP_REASON_INGRESS_VLAN_FILTER Ingress VLAN filter - Frame tagged when a port is dropping tagged or untagged when dropping untagged  
+    6.  SAI_PORT_OUT_DROP_REASON_EGRESS_VLAN_FILTER - Egress VLAN filter  
+    7.  SAI_PORT_IN_DROP_REASON_INGRESS_STP_FILTER - Ingress STP filter   
+    8.  SAI_PORT_IN_DROP_REASON_FDB_UC_DISCARD -  Unicast FDB table action discard   
+    9.  SAI_PORT_IN_DROP_REASON_FDB_MC_DISCARD - Multicast FDB table empty tx list   
+    10. SAI_PORT_IN_DROP_REASON_LOOPBACK_FILTER - Port loopback filter   
+    
+#### Layer 3 drop counters        
+    
+    1.  SAI_PORT_IN_DROP_REASON_DIP_LINK_LOCAL - IPv4 Unicast Destination IP is link-local (Destination IP=169.254.0.0/16)
+    2.  SAI_PORT_IN_DROP_REASON_SIP_LINK_LOCAL - IPv4 Source IP is link-local (Source IP=169.254.0.0/16)
+    3.  SAI_PORT_IN_DROP_REASON_EXCEEDS_MTU - Packet size is larger than the MTU
+    4.  SAI_PORT_IN_DROP_REASON_ACL_DISCARD - Packet is dropped due to configured ACL rules
+    5.  SAI_PORT_OUT_DROP_REASON_L3_EGRESS_LINK_DOWN - Packet is destined for a neighboring device but neighbour device link is down
+
+PRs related to this feature is [PR985](https://github.com/opencomputeproject/SAI/pull/985)  
+
+## 3. Pull Request Details
 
 ## SAI Pull Requests
 
@@ -275,7 +319,7 @@ PRs related to Resource monitoring function addition are [939](https://github.co
 10) [PR956](https://github.com/opencomputeproject/SAI/pull/956): SAITEST: Added enhancements for L2 VLAN broadcast/Unicast. The enhancements are removing the MAC from the MAC table after testing and removing only the testing ports from default VLAN before the testing.  
 11) [PR961](https://github.com/opencomputeproject/SAI/pull/961): SAITEST: Added SAI PTF tests for NeighborFdbAgeoutTest.  
 12) [PR963](https://github.com/opencomputeproject/SAI/pull/963): SAITEST: Fixed the wrong argument for api sai_thrift_flush_fdb_by_vlan.  13) [PR967](https://github.com/opencomputeproject/SAI/pull/967): SAITEST: Fixed SAI PTF Script error in L3IPv6EcmpGroupMemberTest.    
-14) [PR972](https://github.com/opencomputeproject/SAI/pull/972): SAITEST: Added new test scripts to SAI PTF tests for L3LpbkSubnetTest.  15) [PR973](https://github.com/opencomputeproject/SAI/pull/973): SAITEST: Added new test scripts to SAI PTF tests for L3IPv4_32Test.  
+14) [PR972](https://github.com/opencomputeproject/SAI/pull/972): SAITEST: Added new test scripts to SAI PTF tests for L3LpbkSubnetTest.  15) [PR973](https://github.com/opencomputeproject/SAI/pull/973): SAITEST: Added a new test scripts to SAI PTF tests for L3IPv4_32Test.  
 16) [PR975](https://github.com/opencomputeproject/SAI/pull/975): SAITEST: Added new test script to SAI PTF test for L3AclTableGroupTestII.  
 17) [PR976](https://github.com/opencomputeproject/SAI/pull/976): SAITEST: Added new test scripts to SAI PTF tests for 3AclTableTest_II and L3AclTableTest_III.  
 18) [PR977](https://github.com/opencomputeproject/SAI/pull/977): SAITEST: Local routes that are needed in addition to a neighbour and next hop are added.  
