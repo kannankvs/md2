@@ -236,7 +236,7 @@ PRs related to Resource monitoring function addition is [939](https://github.com
 **NOTE**: The APIs that define certain attributes are Adapter-specific extensions to SAI, most typically to expose differentiated functionality in the underlying forwarding element. These are added to minimize compatibility issues with versioning of structures and to allow API extensibility  
 
 ## 2.6 Drop Counters  
-       ASICs can provide a set of debug counters for certain object types. Debug counters belong to certain families, each family is for certain object type. The content of a specific debug counter instance can be defined by the application. Counting every statistics of every family might be too resource intensive, therefore the debug counters provide an efficient way to count and aggregate only the needed information.
+  ASICs can provide a set of debug counters for certain object types. Debug counters belong to certain families, each family is for certain object type. The content of a specific debug counter instance can be defined by the application. Counting every statistics of every family might be too resource intensive, therefore the debug counters provide an efficient way to count and aggregate only the needed information.
 
 Example :
  ```
@@ -254,7 +254,7 @@ Debug counter port in drop reason family can be expressed as shown below.
     /* L3 reasons */
  } 
  ```
-List of Drop counters 
+### List of Drop counters 
 
 #### Layer 2 drop counters
 
