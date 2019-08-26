@@ -65,7 +65,7 @@ More details about this feature enhancement are available at [TAM2.0 Spec](https
 PRs related to this feature are [PR958](https://github.com/opencomputeproject/SAI/pull/958) and [PR959](https://github.com/opencomputeproject/SAI/pull/959)
 
 ## 2.2 NAT  
-Provisioning of APIs to configure NAT feature. API set is generic to configure various types of NAT.  
+Provisioning of APIs to configure NAT feature. API set is generic to configure various types of NAT. A SAI pipeline including NAT is added in this release.  
 
 **Features:** 
 1. Basic NAT (SNAT, DNAT)
