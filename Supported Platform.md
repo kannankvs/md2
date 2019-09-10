@@ -1,13 +1,13 @@
-```html
-<div id="text"></div>
-```
 
-```javascript
+<div id="text"></div>
+
+
+
 <script src="assets/sortable-0.8.0/js/sortable.min.js"></script>
 <link rel="stylesheet" href="assets\sortable-0.8.0\css\sortable-theme-finder.css" />
 
 <table class="sortable-theme-finder" data-sortable>
-```
+
 
 | Vendor        | Throughput | Platform        | ASIC Vendor | Switch ASIC | Port   Configuration      |
 | ------------- | ---------- | --------------- | ----------- | ----------- | ------------------------- |
@@ -106,7 +106,7 @@
 | quanta        | 12.8 Tbps  | T9032-IX9       | Broadcom    | Tomahawk 3  | 32x400G                   |
 | wnc           | 1.8 Tbps   | OSW1800         | Barefoot    | Tofino      | 48x25G + 6x100G           |
 
-```javascript
+
 </table>
-```
+
 
