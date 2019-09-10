@@ -95,3 +95,15 @@
 | quanta        | 3.2 Tbps   | T3032-IX7       | Broadcom    | Trident 3   | 32x100G                   | [SONiC-ONIE-Broadcom](https://sonic-jenkins.westus2.cloudapp.azure.com/job/broadcom/job/buildimage-brcm-all/lastSuccessfulBuild/artifact/target/sonic-broadcom.bin) |
 | quanta        | 12.8 Tbps  | T9032-IX9       | Broadcom    | Tomahawk 3  | 32x400G                   | [SONiC-ONIE-Broadcom](https://sonic-jenkins.westus2.cloudapp.azure.com/job/broadcom/job/buildimage-brcm-all/lastSuccessfulBuild/artifact/target/sonic-broadcom.bin) |
 | wnc           | 1.8 Tbps   | OSW1800         | Barefoot    | Tofino      | 48x25G + 6x100G           | [SONiC-ONIE-Barefoot](https://sonic-jenkins.westus2.cloudapp.azure.com/job/barefoot/job/buildimage-bf-all/lastSuccessfulBuild/artifact/target/sonic-barefoot.bin) |
+
+
+### Note:
+
+ 1. Dell S6100-ON is a modular switch that has different port configurations. Currently only the 64x40G port configuration is supported.
+ 2. Arista devices use the Aboot boot loader instead of ONIE. It is normally pre-installed. To learn more about Aboot, please refer to their documentation [here](https://www.arista.com/en/um-eos-4180f/eos-section-6-1-boot-loader--aboot).  
+ 3. ONIE images are normally pre-installed. For DELL switches, you can find their ONIE images and instructions on Dell's website, [S6000-ON](http://www.dell.com/support/home/us/en/19/Drivers/DriversDetails?driverId=H8TWD&fileId=3477666073&osCode=NAA&productCode=force10-s6000-on&languageCode=en&categoryId=SM), [S6100-ON](http://www.dell.com/support/home/us/en/19/Drivers/DriversDetails?driverId=XP77D&fileId=3538637982&osCode=NAA&productCode=networking-s6100-on&languageCode=en&categoryId=OS), [Z9100-ON](http://www.dell.com/support/home/us/en/19/Drivers/DriversDetails?driverId=4T5CJ&fileId=3500562904&osCode=NAA&productCode=networking-z9100&languageCode=en&categoryId=OS).
+ 4. Please contact Marvell for details of the SKU information.
+ 5. Please contact vendors for support and SKU information.  
+   - Inventec swsp@inventec.com
+   - Edgecore sales@edge-core.com
+ 6. SONiC currently only supports x86_64 CPU.
