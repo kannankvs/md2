@@ -3,10 +3,6 @@
 
 The Switch Abstraction Interface defines the APIs to provide a vendor-independent way of controlling forwarding elements, such as a switching ASIC, an NPU or a software switch in a uniform manner.
 
-
-[TOC]
-
-
 This document describes the SAI changes done for new features, enhancements on existing features/sub-features and various bug fixes.
 
 List of new features is as follows.
@@ -17,9 +13,9 @@ List of new features is as follows.
 5) SAI counters  
 6) Drop Counters  
 
-# 1. Features And Enhancements  
+# 2. Features And Enhancements  
 
-## 1.1 TAM  
+## 2.1 TAM  
 
 Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to achieve the following goals:
 1. Express top-level Telemetry and Monitoring domain for Inband Telemetry
@@ -31,7 +27,7 @@ Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to achieve the 
 7. Provide flexibility to add new APIs for a given domain/subdomain
 8. Support local mathematical functions for hierarchical analysis
 
-### 1.1.1 New TAM 2.0 APIs
+### 2.1.1 New TAM 2.0 APIs
 1) **create_tam_int**: This API is to create a TAM object. This will further be used to create a binding to the switch  
    ```
    sai_status_t (*sai_create_tam_report_fn)(
@@ -41,20 +37,17 @@ Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to achieve the 
         _In_ const sai_attribute_t *attr_list);
    ```
 2) **remove_tam_int**: This API is to remove the TAM object that is already created  
-
-   ```
+    ```
     sai_status_t (*sai_remove_tam_int_fn)(
         _In_ sai_object_id_t tam_int_id);
    ```
-
 3) **set_tam_int_attribute**: This API is used to set value for a specified interface object attribute    
    ```
-	  sai_status_t (*sai_set_tam_int_attribute_fn)(
-​         _In_ sai_object_id_t tam_int_id,
-​         _In_ const sai_attribute_t *attr);
-   ```
+   sai_status_t (*sai_set_tam_int_attribute_fn)(
+        _In_ sai_object_id_t tam_int_id,
+        _In_ const sai_attribute_t *attr);
+    ```
 4) **get_tam_int_attribute**: This API is used to get values for specified interface object attributes   
-
    ```
    sai_status_t (*sai_get_tam_int_attribute_fn)(
         _In_ sai_object_id_t tam_int_id,
@@ -62,16 +55,16 @@ Telemetry And Monitoring (TAM) has been enhanced from 1.0 to 2.0 to achieve the 
         _Inout_ sai_attribute_t *attr_list);
    ```
 5) **tam_telemetry_get_data**: This will return data of all the source objects bound to the TAM object or data pertaining to the source only based on the option chosen in the attribute list  
-   ```
+    ```
     sai_status_t (*sai_tam_telemetry_get_data_fn)(
    	_In_ sai_object_id_t switch_id, 
 	_In_ uint32_t attr_count, 
 	_In_ const sai_attribute_t *attr_list);  
    ```
-More details about this feature enhancement are available at [TAM2.0 Spec](https://github.com/opencomputeproject/SAI/blob/master/doc/TAM/SAI-Proposal-TAM2.0-v2.0.docx) 
+More details about this feature enhancement are available at [TAM2.0 Spec](https://github.com/opencomputeproject/SAI/blob/master/doc/TAM/SAI-Proposal-TAM2.0-v2.0.docx)
 PRs related to this feature are [PR958](https://github.com/opencomputeproject/SAI/pull/958) and [PR959](https://github.com/opencomputeproject/SAI/pull/959)
 
-## 1.2 NAT  
+## 2.2 NAT  
 Provisioning of APIs to configure NAT feature. API set is generic to configure various types of NAT. A SAI pipeline including NAT is added in this release.  
 
 **Features:** 
@@ -89,7 +82,7 @@ New SAI APIs are introduced for configuring the following.
 4) **TAM GET API**: Besides configuration, this API can read the NAT table to get aging details. 
 
 
-### 1.2.1 New NAT APIs  
+### 2.2.1 New NAT APIs  
 
 1) **create_nat_range**: This API will create a NAT range that will include the start and end values  
    ```
@@ -110,14 +103,14 @@ New SAI APIs are introduced for configuring the following.
         _In_ sai_object_id_t nat_range_id,
         _In_ uint32_t attr_count,
         _Inout_ sai_attribute_t *attr_list);
-   ```
+   ```	
 4) **get_nat_range_attribute**: This API gets values for specified NAT range attribute  
    ```
    sai_status_t (*sai_get_nat_range_attribute_fn)(
         _In_ sai_object_id_t nat_range_id,
         _In_ uint32_t attr_count,
         _Inout_ sai_attribute_t *attr_list);
-   ```
+   ```		
 5) **create_nat**: This API creates and returns a NAT range object  
    ```
    sai_status_t (*sai_create_nat_fn)(
@@ -125,7 +118,7 @@ New SAI APIs are introduced for configuring the following.
         _In_ sai_object_id_t switch_id,
         _In_ uint32_t attr_count,
         _In_ const sai_attribute_t *attr_list);
-   ```
+    ```
 6) **remove_nat**: This API deletes a specified NAT range_object and also single specified NAT range  
    ```
    sai_status_t (*sai_remove_nat_fn)(
@@ -137,7 +130,7 @@ New SAI APIs are introduced for configuring the following.
    sai_status_t (*sai_set_nat_attribute_fn)(
         _In_ sai_object_id_t nat_id,
         _In_ const sai_attribute_t *attr);  
-   ```
+   ```	
 8) **get_nat_attribute**: This API gets values for specified NAT attributes for adapter specific extensions  
    ```
    sai_status_t (*sai_get_nat_attribute_fn)(
@@ -148,7 +141,7 @@ New SAI APIs are introduced for configuring the following.
 PRs related to this feature is [PR937](https://github.com/opencomputeproject/SAI/pull/937/commits/a682f3d550a5854ba9c71e5e51bd5cb708418482)
 
 
-## 1.3 sFlow  
+## 2.3 sFlow  
 
 sFlow (defined in https://sflow.org/sflow_version_5.txt) is a standard-based sampling technology the meets the key requirements of network traffic monitoring on switches and routers. sFlow uses two types of sampling:
 
@@ -167,10 +160,10 @@ sFlow support in SAI requires both sample packet proposal and host-if proposal c
 
 PRs related to Host-if proposal changes are [936](https://github.com/opencomputeproject/SAI/pull/936) and [997](https://github.com/opencomputeproject/SAI/pull/997)
 
-## 1.4 Generic Resource Monitoring
+## 2.4 Generic Resource Monitoring
 SAI manages ASIC resources. It is important for the user to query the current resources usage in the ASIC for different types of SAI objects. It is also essential to make as much resources availability exposed as possible. 
 
-### 1.4.1 Generic Resource Monitoring API
+### 2.4.1 Generic Resource Monitoring API
 
 1) **sai_object_type_get_availability**: This is a generic API for SAI resource monitoring. The function accepts an object type for which availability is queried. A new annotation is added to mark object attributes that are used to distinguish between different resource pools of the same object type.  
  ```
@@ -179,13 +172,13 @@ SAI manages ASIC resources. It is important for the user to query the current re
         _In_ uint32_t attr_count,
         _In_ const sai_attribute_t *attr_list,
         _Out_ uint64_t *count);
- ```
+  ```
 PRs related to Resource monitoring function addition is [942](https://github.com/opencomputeproject/SAI/pull/942)
 
-## 1.5 SAI counter
+## 2.5 SAI counter
 Defining counters explicitly per object type imposes restrictions to their usage. Hence the new counter's model introduces APIs to query which objects support which counters and create a counter object that can be dynamically attached to other objects  
 
-### 1.5.1 New SAI counter APIs
+### 2.5.1 New SAI counter APIs
 
 1) **sai_create_counter**: This API creates a counter that can be attached to an object to collect the statistics. Attaching a counter to an object does not clear it's stats values.
 ```
@@ -194,21 +187,18 @@ Defining counters explicitly per object type imposes restrictions to their usage
 	_In_ sai_object_id_t switch_id, 
 	_In_ uint32_t attr_count, 
 	_In_ const sai_attribute_t *attr_list);  
-```
-
+ ```
 2) **sai_remove_counter**: This API removes a counter that is attached to an object to collect the statistics. Detaching a counter from an object does not clear it's stats values
 ```
    sai_status_t (*sai_remove_counter_fn)(
    	_In_ sai_object_id_t counter_id);
-```
-
+   ```
 3) **sai_set_counter_attribute**: This API sets the attribute value for the given object ID
    ```
    sai_status_t (*sai_set_counter_attribute_fn)(
    	_In_ sai_object_id_t counter_id, 
    	_In_ const sai_attribute_t *attr);
    ```
-
 4) **sai_get_counter_attribute**: This API gets the counter's attribute values for the given object ID 
    ```
    sai_status_t (*sai_get_counter_attribute_fn)(
@@ -224,7 +214,6 @@ Defining counters explicitly per object type imposes restrictions to their usage
    	_In_ uint32_t number_of_counters, 
    	_In_ const sai_stat_id_t *counter_ids, 
    	_Out_ uint64_t *counters);  
-   ```
 
 6) **sai_get_counter_stats_ext**: This API gets the statistics of the IP packets collected from the counters
    ```
@@ -235,7 +224,6 @@ Defining counters explicitly per object type imposes restrictions to their usage
    	_In_ sai_stats_mode_t mode, 
    	_Out_ uint64_t *counters);  
    ```
-
 7) **sai_clear_counter_stats**: This API clears the statistics collected in the counters  
    ```
    sai_status_t (*sai_clear_counter_stats_fn)(
@@ -247,49 +235,48 @@ PRs related to Resource monitoring function addition is [939](https://github.com
 
 **NOTE**: The APIs that define certain attributes are Adapter-specific extensions to SAI, most typically to expose differentiated functionality in the underlying forwarding element. These are added to minimize compatibility issues with versioning of structures and to allow API extensibility  
 
-## 1.6 Drop Counters  
+## 2.6 Drop Counters  
   A new list of drop counters is added in the structure "sai_port_in_drop_reason_t", that includes dropping reasons like source mac being multicast, source mac same as destination mac etc. as given in the design document.
-
+  
 A new set of SAI API's is added as follows to support this feature. 
 
-### 1.6.1 New Drop counter APIs
+### 2.6.1 New Drop counter APIs
 
 1. **sai_create_debug_counter_fn**: This API is used to create debug counter
 
-   ```
+     ```
 	sai_status_t (*sai_create_debug_counter_fn)(
-	    	_Out_ sai_object_id_t *debug_counter_id,  
-	    	_In_ sai_object_id_t switch_id,  
-	    	_In_ uint32_t attr_count,  
-	    	_In_ const sai_attribute_t *attr_list);  
-   ```
+        	_Out_ sai_object_id_t *debug_counter_id,  
+        	_In_ sai_object_id_t switch_id,  
+        	_In_ uint32_t attr_count,  
+        	_In_ const sai_attribute_t *attr_list);  
+     ```
 2. **sai_remove_debug_counter_fn**: This API is used to remove debug counter
 
      ```
 	sai_status_t (*sai_remove_debug_counter_fn)(
         	_In_ sai_object_id_t debug_counter_id);  
 
-     ```
+      ```
 3. **sai_set_debug_counter_attribute_fn**: This API is used to set debug counter attribute Value
 
-   ```
-	   sai_status_t (*sai_set_debug_counter_attribute_fn)(
-		  _In_ sai_object_id_t debug_counter_id,  
-		  _In_ const sai_attribute_t *attr);  
-   ```
+  	```
+	sai_status_t (*sai_set_debug_counter_attribute_fn)(
+		_In_ sai_object_id_t debug_counter_id,  
+		_In_ const sai_attribute_t *attr);  
+  	```		
 4. **sai_get_debug_counter_attribute_fn**: This API is used to get debug counter attribute Value
 	 ``` 
 	sai_status_t (*sai_get_debug_counter_attribute_fn)(
         	_In_ sai_object_id_t debug_counter_id,  
 		_In_ uint32_t attr_count,  
 		_Inout_ sai_attribute_t *attr_list);  
-	```
+  	```		
+  PRs related to this feature is [PR985](https://github.com/opencomputeproject/SAI/pull/985)  
 
-    PRs related to this feature is [PR985](https://github.com/opencomputeproject/SAI/pull/985)  
+## 3. Pull Request Details
 
-# 2. Pull Request Details
-
-## 2.1 SAI Pull Requests
+## SAI Pull Requests
 
 1) [PR929](https://github.com/opencomputeproject/SAI/pull/929): saibridge.h: Added bridge port type router to facilitate flooding to the router or a tunnel, on top of the regular behaviour  of flooding to all local ports, without needing to manage the list of local ports, by choosing the combined flood type. A sample use case for flooding to the router, is VXLAN L3 peering use case, demonstrated in OCP, where unknown unicast traffic is sent to the router.  
 2) [PR936](https://github.com/opencomputeproject/SAI/pull/936): saihostif.h: Added a generic Netlink interface (over a loopback) to receive trapped packets/buffers from the SAI driver. This can be used as an alternative to callback/FD based mechanisms.    
@@ -312,7 +299,7 @@ A new set of SAI API's is added as follows to support this feature.
 19) [PR980](https://github.com/opencomputeproject/SAI/pull/980): saibuffer: Added more explanation to include headroom pool in the ingress buffer pool.  
 20) [PR983](https://github.com/opencomputeproject/SAI/pull/983): Added additional fields for hashing -  inner ip protocol, inner ethertype, inner l4 src/dst port, inner src/dst mac that can be used for tunnelled packets.  
 
-## 2.2 SAI TEST Pull Requests
+## SAI TEST Pull Requests
 
 1) [PR916](https://github.com/opencomputeproject/SAI/pull/916): SAITEST: Added new test scripts SAI PTF tests for the below tests. Added sai_thrift_set_neighbor_attribute proc to update the MAC entry.    
 ... L2MtuTest, L3MtuTest, L2MacMoveTestI, L2MacMoveTestII, L2MacMoveTestIII, L3IPv4NeighborMacTest, L3IPv6NeighborMacTest.    
@@ -335,5 +322,3 @@ A new set of SAI API's is added as follows to support this feature.
 20) [PR979](https://github.com/opencomputeproject/SAI/pull/979): SAITEST: Bugfix: Added object declaration so that the lifetime of the objects will be extended to the cleanup stage. This is done to resolve the error message "ERROR: saiacl.L3AclTableGroupTestI" that appears in the final block if the traffic test is failed.   
 41) [PR981](https://github.com/opencomputeproject/SAI/pull/981): SAITEST: Bugfix: rif_id1 is created using lag_id1, modified to remove rif_id1 before removing lag_id1.  
 42) [PR982](https://github.com/opencomputeproject/SAI/pull/982): SAITEST: Default value of ACL entry fields is 'false'. Modified to enable ACL entry action and field when creating ACL entry in PTF client.  
-
-
