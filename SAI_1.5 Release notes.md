@@ -272,9 +272,10 @@ A new set of SAI API's is added as follows to support this feature.
 		_In_ uint32_t attr_count,  
 		_Inout_ sai_attribute_t *attr_list);  
 	```
-```
+
     PRs related to this feature is [PR985](https://github.com/opencomputeproject/SAI/pull/985)  
-```
+    
+    
 ## 2. Pull Request Details
 
 ## 2.1 SAI Pull Requests
