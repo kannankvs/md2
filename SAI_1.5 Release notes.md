@@ -297,12 +297,18 @@ A new set of SAI API's is added as follows to support this feature.
 17) [PR971](https://github.com/opencomputeproject/SAI/pull/971): saiport.h: added attribute SAI_PORT_ATTR_PTP_MODE to port-obj for timestamping for PTP packets.  
 18) [PR974](https://github.com/opencomputeproject/SAI/pull/974): saibfd.h: Added additional attributes for BFD Session like SAI_BFD_ENCAPSULATION_TYPE_NONE to sai_bfd_encapsulation_type_t, Negotiated Transmit interval, Negotiated Receive interval, Local Diagnostic code field, Remote Diagnostic code field and Remote time Multiplier to sai_bfd_session_attr_t, mostly for diagnostics purpose.    
 19) [PR980](https://github.com/opencomputeproject/SAI/pull/980): saibuffer: Added more explanation to include headroom pool in the ingress buffer pool.  
-20) [PR983](https://github.com/opencomputeproject/SAI/pull/983): Added additional fields for hashing -  inner ip protocol, inner ethertype, inner l4 src/dst port, inner src/dst mac that can be used for tunnelled packets.  
+20) [PR983](https://github.com/opencomputeproject/SAI/pull/983): Added additional fields for hashing -  inner ip protocol, inner ethertype, inner l4 src/dst port, inner src/dst mac that can be used for tunnelled packets.   
+21)[PR985](https://github.com/opencomputeproject/SAI/pull/985): As explained in section 1.6.1 of drop counters.  
+22)[PR988](https://github.com/opencomputeproject/SAI/pull/988): saitam.h: Add support for an INT type where the metadata (ingress and egress timestamps) are inserted at the end of the packet before the Ethernet CRC  
+23)[PR991](https://github.com/opencomputeproject/SAI/pull/991): saitam.h: Added an optional attribute to tam/report object to add support for Aggregate reporting for TAM Events. This is an optional attribute, the current functionality of reporting every event is unaffected. User can select 'aggregate' mode for the report mode attribute and specify an interval. When chosen, aggregate-reports are sent at the chosen interval.   
+24)[PR993](https://github.com/opencomputeproject/SAI/pull/993): saiserialize.c: Fix for Unsigned long usage in 32bit arch using ULL macro   
+25)[PR996](https://github.com/opencomputeproject/SAI/pull/996): saibuffer.h : The currently defined 32bit type can't hold large sizes for the buffers. Changed the buffer size data type from 32bit to 64bits.   
+26)[PR997](https://github.com/opencomputeproject/SAI/pull/997): saihostif.h: Changing the genetlink multicast sampling group attribute from ID to name.   
+27)[PR998](https://github.com/opencomputeproject/SAI/pull/998): sairouterinterface.h: While creating a sub port router interface the nessasity to create an object id for vlan has been removed.   
 
 ## 2.2 SAI TEST Pull Requests
 
-1) [PR916](https://github.com/opencomputeproject/SAI/pull/916): SAITEST: Added new test scripts SAI PTF tests for the below tests. Added sai_thrift_set_neighbor_attribute proc to update the MAC entry.    
-... L2MtuTest, L3MtuTest, L2MacMoveTestI, L2MacMoveTestII, L2MacMoveTestIII, L3IPv4NeighborMacTest, L3IPv6NeighborMacTest.    
+1) [PR916](https://github.com/opencomputeproject/SAI/pull/916): SAITEST: Added new test scripts SAI PTF tests for the below tests. Added sai_thrift_set_neighbor_attribute proc to update the MAC entry. L2MtuTest, L3MtuTest, L2MacMoveTestI, L2MacMoveTestII, L2MacMoveTestIII, L3IPv4NeighborMacTest, L3IPv6NeighborMacTest.    
 2) [PR921](https://github.com/opencomputeproject/SAI/pull/921): SAITEST: Added L3 Directed Broadcast tests into SAI PTF tests for L3DirectedBroadcast-I, II.   
 3) [PR922](https://github.com/opencomputeproject/SAI/pull/923): SAITEST: Added new test script SAI PTF tests for NeighborFdbAgeoutTest. Closed this PR and opened another PR-961 to resolve conflicts.    
 4) [PR924](https://github.com/opencomputeproject/SAI/pull/924): SAITEST: Added new test script SAI PTF tests for IPv4/IPv6 ECMP Group member (L3IPv4EcmpGroupMemberTest-I, II, III), L3IPv6EcmpGroupMemberTest-I, II).     
@@ -313,8 +319,10 @@ A new set of SAI API's is added as follows to support this feature.
 9) [PR950](https://github.com/opencomputeproject/SAI/pull/950): SAITEST: Metafiles 'saiserializetest.c', 'saisanitycheck.c', 'Makefile', 'test.pm' are updated to work on GCC & PERL.    
 10) [PR956](https://github.com/opencomputeproject/SAI/pull/956): SAITEST: Added enhancements for L2 VLAN broadcast/Unicast. The enhancements are removing the MAC from the MAC table after testing and removing only the testing ports from default VLAN before the testing.  
 11) [PR961](https://github.com/opencomputeproject/SAI/pull/961): SAITEST: Added SAI PTF tests for NeighborFdbAgeoutTest.  
-12) [PR963](https://github.com/opencomputeproject/SAI/pull/963): SAITEST: Fixed the wrong argument for api sai_thrift_flush_fdb_by_vlan.  13) [PR967](https://github.com/opencomputeproject/SAI/pull/967): SAITEST: Fixed SAI PTF Script error in L3IPv6EcmpGroupMemberTest.    
-14) [PR972](https://github.com/opencomputeproject/SAI/pull/972): SAITEST: Added new test scripts to SAI PTF tests for L3LpbkSubnetTest.  15) [PR973](https://github.com/opencomputeproject/SAI/pull/973): SAITEST: Added a new test scripts to SAI PTF tests for L3IPv4_32Test.  
+12) [PR963](https://github.com/opencomputeproject/SAI/pull/963): SAITEST: Fixed the wrong argument for api sai_thrift_flush_fdb_by_vlan. 
+13) [PR967](https://github.com/opencomputeproject/SAI/pull/967): SAITEST: Fixed SAI PTF Script error in L3IPv6EcmpGroupMemberTest.    
+14) [PR972](https://github.com/opencomputeproject/SAI/pull/972): SAITEST: Added new test scripts to SAI PTF tests for L3LpbkSubnetTest.
+15) [PR973](https://github.com/opencomputeproject/SAI/pull/973): SAITEST: Added a new test scripts to SAI PTF tests for L3IPv4_32Test.  
 16) [PR975](https://github.com/opencomputeproject/SAI/pull/975): SAITEST: Added new test script to SAI PTF test for L3AclTableGroupTestII.  
 17) [PR976](https://github.com/opencomputeproject/SAI/pull/976): SAITEST: Added new test scripts to SAI PTF tests for 3AclTableTest_II and L3AclTableTest_III.  
 18) [PR977](https://github.com/opencomputeproject/SAI/pull/977): SAITEST: Local routes that are needed in addition to a neighbour and next hop are added.  
