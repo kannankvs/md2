@@ -1,6 +1,6 @@
 # SONiC 201910 Release Notes
 
-
+This document describes the SONiC changes done for new features,  and enhancements on existing features/sub-features.
 
 
 
