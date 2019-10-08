@@ -6,15 +6,14 @@
 
 ## Table of Contents
 
-
-
-
-
-
-
-
-
-
+   * [SONiC 201910 Release Notes](#sonic-201910-release-notes)
+      * [Table of Contents](#table-of-contents)
+         * [BRANCH LOCATION](#branch-location)
+         * [DEPENDENCY VERSION](#dependency-version)
+         * [FEATURE LIST](#feature-list)
+         * [Security Updates](#security-updates)
+         * [SAI APIs](#sai-apis)
+         * [Enhancements](#enhancements)
 
 
 
@@ -130,3 +129,12 @@ Please find the list of API's classified along the newly added SAI features. For
    3. sai_set_debug_counter_attribute_fn
    4. sai_get_debug_counter_attribute_fn
 
+### Enhancements 
+
+| PR   | Description                                                  |
+| ---- | ------------------------------------------------------------ |
+| 411  | [Egress mirroring and ACL action support check via   SAI](https://github.com/Azure/SONiC/pull/411) |
+| 419  | [SONiC image build time   improvements](https://github.com/Azure/SONiC/pull/419) |
+| 428  | [everflow test plan to cover egress mirroring -   updated](https://github.com/Azure/SONiC/pull/428) |
+| 434  | [Configurable drop   counters](https://github.com/Azure/SONiC/pull/434) |
+| 439  | [Monitoring of hardware resources   consumed by a device](https://github.com/Azure/SONiC/pull/439) |
