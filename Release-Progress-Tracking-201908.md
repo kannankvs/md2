@@ -2,7 +2,7 @@
 
 We track the progress of 201908 release in detail here. 
 
-| Feature                                                 | HLD Review Date | Code PR ETA and Links | Contributor| Code Review Owner        | PR Link                                                      |
+| Feature                                                 | HLD <br>Review<br> Date | Code PR <br>ETA and Links | Contributor| Code Review Owner        | PR Link                                                      |
 | ------------------------------------------------------- | --------------- | --------------------- | -----------| ------------------------ | ------------------------------------------------------------ |
 | ZTP                                                     | 04/17/19        | 09/03/19              | Broadcom   | Dell                     | [3227](https://github.com/Azure/sonic-buildimage/pull/3227)   - ToResolveConflict<br>[3298](https://github.com/Azure/sonic-buildimage/pull/3298)  -   ToResolveConflict<br>[1000](https://github.com/Azure/sonic-swss/pull/1000)  -   NeedsUpdate<br>[3299](https://github.com/Azure/sonic-buildimage/pull/3299)  -   ReviewPending<br>[12](https://github.com/Azure/sonic-ztp/pull/12)  -  ReviewPending<br>[599](https://github.com/Azure/sonic-utilities/pull/599)  - NeedsUpdate |
 | BFD SW 100ms interval <br>from FRR                        | 05/21/19        | 08/26/19              | Broadcom   | Mellanox                 | [3385](https://github.com/Azure/sonic-buildimage/pull/3385)  -  ToResolveConflict |
