@@ -103,5 +103,3 @@ Note:
  5. Please contact vendors for support and SKU information.  
    - Inventec swsp@inventec.com
    - Edgecore sales@edge-core.com
-
- 6. SONiC currently only supports x86_64 CPU.
