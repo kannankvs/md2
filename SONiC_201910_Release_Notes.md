@@ -15,11 +15,11 @@ This document describes the SONiC changes done for new features,  and enhancemen
          * [SAI APIs](#sai-apis)
          * [Enhancements](#enhancements)
 
-
+<br><br>
 
 ### BRANCH LOCATION 
 
-
+<br><br><br><br>
 
 
 
@@ -39,7 +39,7 @@ This document describes the SONiC changes done for new features,  and enhancemen
 | sonic-telemetry           | :    |
 | redis-server/ redis-tools | :    |
 
-
+<br><br>
 
 ### FEATURE LIST
 
@@ -115,7 +115,7 @@ This document describes the SONiC changes done for new features,  and enhancemen
 - [VRF](https://github.com/Azure/SONiC/blob/master/doc/vrf/sonic-vrf-hld.md)<br>
   - [943](https://github.com/Azure/sonic-swss/pull/943) Changes in sonic-swss sub module to VRF implementation.<br>
   - [1065](https://github.com/Azure/sonic-mgmt/pull/1065) VRF testcases according to vrf test plan<br>
-  - [3044](https://github.com/Azure/sonic-buildimage/pull/3044) Sonic supports multiple loopback interfaces. Each loopback interfaces can belong to different VRF.<br><br>
+  - [3044](https://github.com/Azure/sonic-buildimage/pull/3044) Sonic supports multiple loopback interfaces. Each loopback interfaces can belong to different VRF.<br>
   - [3047](https://github.com/Azure/sonic-buildimage/pull/3047) Added support for BGP and static route. <br><br>			
 			
 - [ZTP](https://github.com/Azure/SONiC/blob/master/doc/ztp/ztp.md)<br> 
@@ -126,10 +126,11 @@ This document describes the SONiC changes done for new features,  and enhancemen
   - [3298](https://github.com/Azure/sonic-buildimage/pull/3298) ZTP infrastructure changes to support DHCP discovery provisioning data<br>
   - [3299](https://github.com/Azure/sonic-buildimage/pull/3299) Include make recipes for sonic-ztp package<br><br>
 
+<br><br>
 
 ### Security Updates  
 
-
+<br><br> <br><br>
 
 
 
@@ -189,6 +190,8 @@ Please find the list of API's classified along the newly added SAI features. For
    3. sai_set_debug_counter_attribute_fn
    4. sai_get_debug_counter_attribute_fn
 
+<br><br>
+
 ### List of PR's 
 
 
@@ -220,3 +223,5 @@ Please find the list of API's classified along the newly added SAI features. For
 | 3066 | [Update   redis to 5.0.3](https://github.com/Azure/sonic-buildimage/pull/3066) |
 | 3501 | [Threshold   feature changes](https://github.com/Azure/sonic-buildimage/pull/3501) |
 | PVST | [PVST   feature implementation](https://github.com/Azure/sonic-buildimage/pull/3463) |
+
+<br><br>
