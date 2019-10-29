@@ -25,7 +25,7 @@ https://github.com/Azure/sonic-buildimage/tree/201904
 | # | Big Feature List and Design Doc Link   | Comments |
 |---:     |---       |---       |
 | 1       | [FRR as default routing stack](http://docs.frrouting.org/en/latest/) |  |
-| Explanation about FRR dsfkjdkajfkdf dsafsfsdajfksdajf;k das dafkjsdklfjkdsajfkdsja fdfsaadsfdsafdf dsafdsjfkldjskfdsf dfadsfkdsjfkjdskf | | |
+| Explanation about FRR dsfkjdkajfkdf dsafsfsdajfksdajf;k das dafkjsdklfjkdsajfkdsja fdfsaadsfdsafdf dsafdsjfkldjskfdsf dfadsfkdsjfkjdskf |
 
 
 
