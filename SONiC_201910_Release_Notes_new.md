@@ -8,7 +8,7 @@ This document describes the SONiC changes done for new features,  and enhancemen
 
    * [SONiC 201910 Release Notes](#sonic-201910-release-notes)
       * [Table of Contents](#table-of-contents)
-         * [Branch Location (#branch-location)
+         * [Branch Location](#branch-location)
          * [Dependency Version](#dependency-version)
          * [Feature List](#feature-list)
          * [Security Updates](#security-updates)
