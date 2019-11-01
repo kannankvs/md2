@@ -13,14 +13,13 @@ This document describes the SONiC changes done for new features,  and enhancemen
          * [Feature List](#feature-list)
          * [Security Updates](#security-updates)
          * [SAI APIs](#sai-apis)
-         * [Enhancements](#enhancements)
+         * [List of Major PR's](#enhancements)
 
-<br>
 
 # Branch Location  
 
 https://github.com/Azure/sonic-buildimage/tree/201910
-<br>
+
 
 # Dependency Version
 
@@ -39,12 +38,12 @@ https://github.com/Azure/sonic-buildimage/tree/201910
 | redis-server/ redis-tools | :    |
 
 
-
 # Feature List
 
 | Feature                                                      | Pull Request                                                 |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [Bidirectional Forwarding Detection](https://github.com/Azure/SONiC/blob/master/doc/bfd/BFD_Enhancement_HLD.md) | [3385](https://github.com/Azure/sonic-buildimage/pull/3385)  |
+| [Bidirectional Forwarding Detection](https://github.com/Azure/SONiC/blob/master/doc/bfd/BFD_Enhancement_HLD.md) - BFD supports creation of single hop and multi hop session to monitor forwarding path failure.Single hop session are created for iBGP.             
+Multihop session are created usually for protocols like eBGP where the neighbors are multiple hop apart.| [3385](https://github.com/Azure/sonic-buildimage/pull/3385)  |
 | Build Improvements                                           | [3292](https://github.com/Azure/sonic-buildimage/pull/3292)  |
 | [Build system improvements](https://github.com/Azure/SONiC/blob/master/doc/sonic-build-system/build_system_improvements.md) | [911](https://github.com/Azure/sonic-swss/pull/911) ,[280](https://github.com/Azure/sonic-swss-common/pull/280)  ,  [461](https://github.com/Azure/sonic-sairedis/pull/461)  , [3048](https://github.com/Azure/sonic-buildimage/pull/3048)  ,  [3049](https://github.com/Azure/sonic-buildimage/pull/3049) |
 | [Configurable  drop counters](https://github.com/Azure/SONiC/blob/master/doc/drop_counters/drop_counters_HLD.md) | [308](https://github.com/Azure/sonic-swss-common/pull/308) ,  [520](https://github.com/Azure/sonic-sairedis/pull/520) ,   [1075](https://github.com/Azure/sonic-swss/pull/1075)  ,   [1093](https://github.com/Azure/sonic-swss/pull/1093)  ,   [688](https://github.com/Azure/sonic-utilities/pull/688) |
@@ -73,11 +72,11 @@ https://github.com/Azure/sonic-buildimage/tree/201910
 | [ZTP](https://github.com/Azure/SONiC/blob/master/doc/ztp/ztp.md) | [3227](https://github.com/Azure/sonic-buildimage/pull/3227) , [3298](https://github.com/Azure/sonic-buildimage/pull/3298)  , [1000](https://github.com/Azure/sonic-swss/pull/1000) , [3299](https://github.com/Azure/sonic-buildimage/pull/3299) , [12](https://github.com/Azure/sonic-ztp/pull/12), [599](https://github.com/Azure/sonic-utilities/pull/599) |
 
 
-<br><br>
+<br>
 
 ### Security Updates  
 
-<br><br> <br><br>
+<br>
 
 
 
@@ -96,9 +95,7 @@ Please find the list of API's classified along the newly added SAI features. For
 
 
 
-<br>
-
-### List of PR's 
+### List of Major PR's 
 
 
 | PR   | Description                                                  |
