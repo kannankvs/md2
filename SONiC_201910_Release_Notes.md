@@ -4,26 +4,24 @@ This document describes the SONiC changes done for new features,  and enhancemen
 
 
 
-## Table of Contents
+# Table of Contents
 
    * [SONiC 201910 Release Notes](#sonic-201910-release-notes)
       * [Table of Contents](#table-of-contents)
-         * [BRANCH LOCATION](#branch-location)
-         * [DEPENDENCY VERSION](#dependency-version)
-         * [FEATURE LIST](#feature-list)
+         * [Branch Location](#branch-location)
+         * [Dependency Version](#dependency-version)
+         * [Feature List](#feature-list)
          * [Security Updates](#security-updates)
          * [SAI APIs](#sai-apis)
-         * [Enhancements](#enhancements)
-
-<br><br>
-
-### Branch Location  
-
-<br><br><br><br>
+         * [List of Major PR's](#enhancements)
 
 
+# Branch Location  
 
-### Dependency Version
+https://github.com/Azure/sonic-buildimage/tree/201910
+
+
+# Dependency Version
 
 | Linux kernel version      | :    |
 | ------------------------- | ---- |
@@ -39,115 +37,45 @@ This document describes the SONiC changes done for new features,  and enhancemen
 | sonic-telemetry           | :    |
 | redis-server/ redis-tools | :    |
 
-<br><br>
 
-### Feature List
+# Feature List
 
-#### BFD Enhancement <br>
- - [HLD](https://github.com/Azure/SONiC/blob/master/doc/bfd/BFD_Enhancement_HLD.md) High level design document for Bidirectional Forwarding Detection
- - [PR 3385](https://github.com/Azure/sonic-buildimage/pull/3385)    To configure BFD timer values to have a timeout of atleast 600 msec<br><br>
+| Feature                                                      | Pull Request                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| <strong>Bidirectional Forwarding Detection</strong> - In this implementation, the BFD state machines and session termination happens on the Host CPU, specifically in FRR. <br>In cu/rrent FRR BFD implementation, for packet Tx BFD packet is constructed every time a packet has to be sent, this is an overhead considering BFD needs to send packet every few milliseconds. A better approach is to store the BFD packet in memory for each session and keep replaying the packet as per the BFD transmission interval.<br>  Please see the [HLD document](https://github.com/Azure/SONiC/blob/master/doc/bfd/BFD_Enhancement_HLD.md) for more details.| [3385](https://github.com/Azure/sonic-buildimage/pull/3385)  |
+| <strong>Build Improvements</strong> - The DPKG caching framework provides the infrastructure to save the module-specific deb file to be cached by tracking the module's dependency files.If the module's dependency files are not changed, it restores the module deb files from the cache storage. <br> Please check the given PR's for more details.  | [3292](https://github.com/Azure/sonic-buildimage/pull/3292)  |
+| <strong>Build system improvements</strong> - This document describes few options to improve SONiC build time. To split the work we will consider that SONiC has two stages: 1. debian/python packages compilation <- relatively fast 2. docker images build <- slower espessially when several users are building in parallel.<br>  Please see the [HLD document](https://github.com/Azure/SONiC/blob/master/doc/sonic-build-system/build_system_improvements.md) for more details. | [911](https://github.com/Azure/sonic-swss/pull/911) ,[280](https://github.com/Azure/sonic-swss-common/pull/280)  ,  [461](https://github.com/Azure/sonic-sairedis/pull/461)  , [3048](https://github.com/Azure/sonic-buildimage/pull/3048)  ,  [3049](https://github.com/Azure/sonic-buildimage/pull/3049) |
+| <strong>Configurable  drop counters</strong> - This feature is to provides better packet drop visibility in SONiC by providing a mechanism to count and classify packet drops that occur due to different reasons.This is done by adding support for SAI debug counters to SONiC. Supported counters are PORT_INGRESS_DROPS , PORT_EGRESS_DROPS, SWITCH_INGRESS_DROP & SWITCH_EGRESS_DROPS. A CLI tool will be provided for users to manage and configure their own drop counters.<br>  Please see the [HLD document](https://github.com/Azure/SONiC/blob/master/doc/drop_counters/drop_counters_HLD.md) for more details. | [308](https://github.com/Azure/sonic-swss-common/pull/308) ,  [520](https://github.com/Azure/sonic-sairedis/pull/520) ,   [1075](https://github.com/Azure/sonic-swss/pull/1075)  ,   [1093](https://github.com/Azure/sonic-swss/pull/1093)  ,   [688](https://github.com/Azure/sonic-utilities/pull/688) |
+| <strong>Core File Manager</strong> - The tech-support data is a piece of vital information for debugging. In this release we have added a new service called 'export service' which captures the tech-support data and export it to a remote server for better offline debugging. The export service is configured to monitors the coredump path for any new core file creation. Upon detection of a new core file, it triggers the tech-support data collection and export it to a remote server. In addition, export service can be configured to capture and upload the tech-support data periodically. <br> Please check the given PR's for more details.  | [3447](https://github.com/Azure/sonic-buildimage/pull/3447) , [643](https://github.com/Azure/sonic-utilities/pull/643) , [3499](https://github.com/Azure/sonic-buildimage/pull/3499)  , [663](https://github.com/Azure/sonic-utilities/pull/663) |
+| <strong>Debug Framework</strong> In an effort to enhance debug ability, A new debug framework is added with the following functionality:. It provides a framework that allows components to register and dump running snapshots of component internals using dump routines. It handles assert conditions to collect more info. It implements dump routines in OrchAgent using debug framework. Additionally, it has Enhanced existing show tech-support utility and added additional scripts to enforce policies on debug related files.<br> Please see the [HLD document](https://github.com/Azure/SONiC/blob/5ddfeb7919167d0ee8ec99cd8108ed2b91e006d8/doc/debug_framework_design_spec.md) for more details.| [300](https://github.com/Azure/sonic-swss-common/pull/300)  , [618](https://github.com/Azure/sonic-utilities/pull/618) |
+| <strong>Dynamic   Break Out</strong> |                                                              |
+| <strong>Egress mirroring support and ACL action capability check</strong> - Added support for egress mirror action. To query ACL action list supported by ASIC per stage and put this information in STATE DB SWITCH_CAPABILITY table and to perform secondary query for ACL action attributes which parameters are enum values (e.g. for PACKET_ACTION - DROP,FORWARD). Please see the [HLD document](https://github.com/Azure/SONiC/blob/master/doc/acl/acl_stage_capability.md) for more details.| [963](https://github.com/Azure/sonic-swss/pull/963)   , [1019](https://github.com/Azure/sonic-swss/pull/1019)  ,  [575](https://github.com/Azure/sonic-utilities/pull/575) ,  [481](https://github.com/Azure/sonic-sairedis/pull/481) |
+| <strong>HW resource monitor</strong> - This document describes the high level design of verification the hardware resources consumed by a device. The hardware resources which are currently verified are CPU, RAM and HDD. This implementation will be integrated in test cases written on Pytest framework. Please see the [HLD document](https://github.com/Azure/SONiC/blob/master/doc/DUT_monitor_HLD.md) for more details.| [1121](https://github.com/Azure/sonic-mgmt/pull/1121)        |
+| <strong>Layer 2 Forwarding Enhancements</strong> Some of the changes in the release are : Added support for per port, per vlan and per port-vlan fdb flush. Added new data structure in portsorch for mapping between OID and vlan/port/bridge port. Moved SAI Redis fdb handling to fdborch to have both the fdborch and sai redis reference count in sync.Added support for static fdb config and fdb aging time config. For more details please refer [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/layer2-forwarding-enhancements/SONiC%20Layer%202%20Forwarding%20Enhancements%20HLD.md) and the listed PR's. | [885 ](https://github.com/Azure/sonic-swss/pull/885) , [510  ](https://github.com/Azure/sonic-sairedis/pull/510),  [303](https://github.com/Azure/sonic-swss-common/pull/303)  ,  [529](https://github.com/Azure/sonic-utilities/pull/529) |
+| <strong>L3 performance and scaling enhancements</strong> - When sending a lot of ARP/ND requests in a burst, ARP entries are getting purged from the kernel while the later set of ARP entries was still getting added. The sequence of add/remove is in such a way that we were never able to cross ~2400 entries. Currently the max rate for ARP/ND is 600 packets, we will be increasing it to higher number(8000) in CoPP file to improve the learning time. For more details please refer [HLD Document](https://github.com/Azure/SONiC/blob/89abd4938d792215b75d801e87b47ccf2c22f111/doc/L3_performance_and_scaling_enchancements_HLD.md) and the listed PR's.| [1048](https://github.com/Azure/sonic-swss/pull/1048)        |
+| <strong> Log analyzer to pytest</strong> - Please find the [Loganalyzer API usage example](https://github.com/yvolynets-mlnx/sonic-mgmt/blob/78a71ebccdc44bd62e81ff4b12dd84cb2c0ea34d/tests/loganalyzer/README.md) in the listed PR. | [1048](https://github.com/Azure/sonic-mgmt/pull/1048)        |
+| <strong>Management Framework</strong> - Management framework is a SONiC application which is responsible for providing various common North Bound Interfaces (NBIs) for the purposes of managing configuration and status on SONiC switches. The application manages coordination of NBI’s to provide a coherent way to validate, apply and show configuration. Please find more details in [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/mgmt/Management%20Framework.md) | [18](https://github.com/Azure/sonic-mgmt-framework/pull/18)   , [23](https://github.com/Azure/sonic-telemetry/pull/23)  ,   [3488](https://github.com/Azure/sonic-buildimage/pull/3488)  , [659](https://github.com/Azure/sonic-utilities/pull/659) |
+| <strong>Management VRF</strong> -   | [2585](https://github.com/Azure/sonic-buildimage/pull/2585)  , [2608](https://github.com/Azure/sonic-buildimage/pull/2608)  ,  [3204](https://github.com/Azure/sonic-buildimage/pull/3204)  ,  [463](https://github.com/Azure/sonic-utilities/pull/463)  ,  [472](https://github.com/Azure/sonic-utilities/pull/472)  ,  [627](https://github.com/Azure/sonic-utilities/pull/627)  ,  [3586](https://github.com/Azure/sonic-buildimage/pull/3586) |
+| <strong>McLAG</strong>   - In MC-LAG scenario, two peer devices form one end point of a LAG, these two devices must have the same MAC address since it’s used for LACP. During warm-reboot, this MAC must not be changed. supported  mac update on fdborch and added support to change rif mac address. Please find more details in [HLD Document](https://github.com/Azure/SONiC/blob/f478fe7cbc03c144f3b147e9638f460f764ce4b7/doc/Sonic-mclag-hld.md)        | [2154](https://github.com/Azure/sonic-buildimage/pull/2514) , [1003](https://github.com/Azure/sonic-swss/pull/1003) , [877](https://github.com/Azure/sonic-swss/pull/877) , [814](https://github.com/Azure/sonic-swss/pull/814) , [811](https://github.com/Azure/sonic-swss/pull/811) , [810](https://github.com/Azure/sonic-swss/pull/810) , [809](https://github.com/Azure/sonic-swss/pull/809) ,  [275](https://github.com/Azure/sonic-swss-common/pull/275) , [453](https://github.com/Azure/sonic-utilities/pull/453) |
+| <strong>Multi-DB optimization</strong> - Creating multiple database instances help us to separate the databases based on their operation frequency or their role in the whole SONiC system, for example, like state database and loglevel database are not key features, we can avoid them affecting read and write APPL_DB or ASIC_DB via multiple database instances. Please find more details in [HLD Document](https://github.com/Azure/SONiC/blob/ed69d427dcf358299b2c1b812e59a1e26a4ef4a5/doc/database/multi_database_instances.md) | [52](https://github.com/Azure/sonic-py-swsssdk/pull/52)      |
+| <strong>NAT</strong> - Network Address Translation (NAT) router enables private IP networks to communicate to the public networks (internet) by translating the private IP address to globally unique IP address. It also provides security by hiding the identity of the host in private network. This feature supports Source NAT, Destination NAT ,Static NAT/NAPT, Dynamic NAT/NAPT, NAT zones, Twice NAT/NAPT nd support of VRF. For more details of NAT please check [HLD Document](https://github.com/kirankella/SONiC/blob/nat_doc_changes/doc/nat/nat_design_spec.md) | [3494](https://github.com/Azure/sonic-buildimage/pull/3494) , [1059](https://github.com/Azure/sonic-swss/pull/1059)  ,  [645](https://github.com/Azure/sonic-utilities/pull/645)  ,  [100 ](https://github.com/Azure/sonic-linux-kernel/pull/100) ,  [304](https://github.com/Azure/sonic-swss-common/pull/304)  ,  [519](https://github.com/Azure/sonic-sairedis/pull/519) |
+| <strong>Platform Development Environment</strong> The PDE does not target any type of feature deployment within SONiC. The primary use case is to enable an ODM or customer to quickly add new platform support and run a test suite to ensure that it is compatible with the full SONiC application. Please find design details in [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/platform/pde.md) | [3408](https://github.com/Azure/sonic-buildimage/pull/3408)  , [27](https://github.com/Azure/sonic-platform-pdk-pde/pull/27) |
+| <strong>Platform Driver Development Framework</strong> | [3387](https://github.com/Azure/sonic-buildimage/pull/3387)   , [62](https://github.com/Azure/sonic-platform-common/pull/62)  ,  [624](https://github.com/Azure/sonic-utilities/pull/624) |
+| <strong>Platform test </strong> - This test plan is to check the functionalities of platform related software components. These software components are for managing platform hardware, including FANs, thermal sensors, SFP, transceivers, pmon, etc.The software components for managing platform hardware on Mellanox platform is the hw-management package. [Platform testplan](https://github.com/Azure/SONiC/blob/master/doc/pmon/sonic_platform_test_plan.md)                                             | [915](https://github.com/Azure/sonic-mgmt/pull/915)   , [980](https://github.com/Azure/sonic-mgmt/pull/980)  , [1079](https://github.com/Azure/sonic-mgmt/pull/1079) |
+| <strong> sFlow</strong> - The CLI is enhanced to provide configuring and display of sFlow parameters including sflow collectors, agent IP, sampling rate for interfaces. The CLI configurations currently only interact with the CONFIG_DB. The newly introduced sflow container consists of an instantiation of the InMon's hsflowd daemon. Please find comple details of feature and implementation phase in [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/sflow/sflow_hld.md)   | [94](https://github.com/Azure/sonic-linux-kernel/pull/94)  , [299](https://github.com/Azure/sonic-swss-common/pull/299)  , [498](https://github.com/Azure/sonic-sairedis/pull/498)  ,  [1012](https://github.com/Azure/sonic-swss/pull/1012)  ,  [1011](https://github.com/Azure/sonic-swss/pull/1011)  ,  [3251](https://github.com/Azure/sonic-buildimage/pull/3251)  ,  [592 ](https://github.com/Azure/sonic-utilities/pull/592) |
+| <strong>SSD diagnostic tolling</strong> - Add to SONiC an ability to check storage health state. Basic functionality will be implemented as a CLI command. Optionally pmon daemon could be added for constant disk state monitoring. Please find more details in [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/ssdhealth_design.md) | [587](https://github.com/Azure/sonic-utilities/pull/587)  , [47](https://github.com/Azure/sonic-buildimage/pull/47) ,  [3218](https://github.com/Azure/sonic-buildimage/pull/3218) |
+| <strong>STP/PVST</strong> - PVST+ support allows the device to interoperate with IEEE STP and also tunnel the PVST+ BPDUs transparently across IEEE STP region to potentially connect other PVST+ switches across the IEEE STP region. For interop with IEEE STP, PVST+ will send untagged IEEE BPDUs (MAC - 01:80:C2:00:00:00) with information corresponding to VLAN 1. The STP port must be a member of VLAN 1 for interoperating with IEEE STP. More details can be seen in [HLD Document](https://github.com/Azure/SONiC/blob/631ab18211e7e396b138ace561b7a04e7f7b49a1/doc/stp/SONiC_PVST_HLD.md)          | [19](https://github.com/Azure/sonic-stp/pull/19)  , [305](https://github.com/Azure/sonic-swss-common/pull/305)  ,  [1058](https://github.com/Azure/sonic-swss/pull/1058)  ,  [648](https://github.com/Azure/sonic-utilities/pull/648)  ,  [3463](https://github.com/Azure/sonic-buildimage/pull/3463) |
+| <strong>Sub-port support</strong> - A sub port interface is a logical interface that can be created on a physical port or a port channel.A sub port interface serves as an interface to either a .1D bridge or a VRF, but not both. This design focuses on the use case of creating a sub port interface on a physical port or a port channel and using it as a router interface to a VRF. Please find more details in [HLD Document](https://github.com/wendani/SONiC/blob/a3e669e6778c272fc571a8bf3bd78e7eb75a8ec7/doc/sonic-sub-port-intf-hld.md) | [998](https://github.com/opencomputeproject/SAI/pull/998) , [284](https://github.com/Azure/sonic-swss-common/pull/284) , [969](https://github.com/Azure/sonic-swss/pull/969)  , [871](https://github.com/Azure/sonic-swss/pull/871) , [3412](https://github.com/Azure/sonic-buildimage/pull/3412) , [3422](https://github.com/Azure/sonic-buildimage/pull/3422) , [3413](https://github.com/Azure/sonic-buildimage/pull/3413) , [638](https://github.com/Azure/sonic-utilities/pull/638) , [642](https://github.com/Azure/sonic-utilities/pull/642) , [651](https://github.com/Azure/sonic-utilities/pull/651) |
+| <strong>Threshold(BST)</strong> - The threshold feature allows configuration of a threshold on supported buffers in ingress and egress. A threshold breach notification (entry update in COUNTERS\_DB) is generated on breach of the configured buffer threshold in ASIC. Please find more detaila in [HLD Document](https://github.com/Azure/SONiC/blob/ab31da072d0f92a3fb5e96c402d905afb93c443b/doc/threshold/SONiC%20Threshold%20feature%20spec.md)    | [3501](https://github.com/Azure/sonic-buildimage/pull/3501)   , [12](https://github.com/Azure/sonic-tam/pull/12) ,  [1067](https://github.com/Azure/sonic-swss/pull/1067) ,  [665](https://github.com/Azure/sonic-utilities/pull/665) ,  [310](https://github.com/Azure/sonic-swss-common/pull/310) |
+| <strong>VRF</strong> - Sonic supports multiple loopback interfaces. Each loopback interfaces can belong to different VRF instances. In this feature we also support BGP and VRF support for FRR config template. Please find more details in [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/vrf/sonic-vrf-hld.md) | [3044](https://github.com/Azure/sonic-buildimage/pull/3044) , [3047](https://github.com/Azure/sonic-buildimage/pull/3047) , [943](https://github.com/Azure/sonic-swss/pull/943) , [1065](https://github.com/Azure/sonic-mgmt/pull/1065) |
+| <strong>ZTP</strong> - Zero Touch Provisioning (ZTP) service can be used by users to configure a fleet of switches using common configuration templates. Switches booting from factory default state should be able to communicate with remote provisioning server and download relevant configuration files and scripts to kick start more complex configuration steps. ZTP service takes user input in JSON format. Some of the supported features are - Dynamically generate DHCP client configuration based on current ZTP state and Added support to request and process hostname when using DHCPv6. Further details can be seen in [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/ztp/ztp.md) | [3227](https://github.com/Azure/sonic-buildimage/pull/3227) , [3298](https://github.com/Azure/sonic-buildimage/pull/3298)  , [1000](https://github.com/Azure/sonic-swss/pull/1000) , [3299](https://github.com/Azure/sonic-buildimage/pull/3299) , [12](https://github.com/Azure/sonic-ztp/pull/12), [599](https://github.com/Azure/sonic-utilities/pull/599) |
 
-#### L2 functional and performance enhancements <br>
- - [PR 303](https://github.com/Azure/sonic-swss-common/pull/303)   Added FDB table in CONFIG_DB & Added lua script for FDB flush<br>
- - [PR 510](https://github.com/Azure/sonic-sairedis/pull/510)      Changes in sonic-sairedis repo to support Layer 2 Forwarding Enhancements<br>
- - [PR 529](https://github.com/Azure/sonic-utilities/pull/529) Changes in swss-utilities submodule to support Layer 2 Forwarding Enhancements<br>
- - [PR 885](https://github.com/Azure/sonic-swss/pull/885) Changes in sonic-swss sub module to supportLayer 2 Forwarding Enhancements<br><br> 
 
-#### L3 perf enhancement <br>
- - [PR 1048](https://github.com/Azure/sonic-swss/pull/1048) change in fpmsyncd to skip the lookup for the Master device name if the route object table value is zero.<br><br>
-
-#### Management Framework <br>
- - [PR 18](https://github.com/Azure/sonic-mgmt-framework/pull/18)  SONiC Management Framework Release <br>
- - [PR 23](https://github.com/Azure/sonic-telemetry/pull/23) updated sonic-telemetry for SONiC Management Framework Release <br>
- - [PR 3488](https://github.com/Azure/sonic-buildimage/pull/3488) updated sonic-buildimage for SONiC Management Framework  <br>
- - [PR 659](https://github.com/Azure/sonic-utilities/pull/659) updated sonic-utilitiesfor SONiC Management Framework  <br><br>
-			
-#### Manangement VRF <br>
- - [PR 463](https://github.com/Azure/sonic-utilities/pull/463) sonic-utilities - managementVRF cli support<br>
- - [PR 472](https://github.com/Azure/sonic-utilities/pull/472)  Management vrf snmp cli support<br>
- - [PR 627](https://github.com/Azure/sonic-utilities/pull/627)  updated "show ntp" to use cgexec when management vrf is enabled<br>
- - [PR 2585](https://github.com/Azure/sonic-buildimage/pull/2585) sonic-buildimage -  New feature managementVR<br>
- - [PR 2608](https://github.com/Azure/sonic-buildimage/pull/2608) SNMP -  management VRF SNMP support<br>
- - [PR 3204](https://github.com/Azure/sonic-buildimage/pull/3204) Management vrf ntp support<br>
- - [PR 3586](https://github.com/Azure/sonic-buildimage/pull/3586) changes to handle snmp configuration as per the modified CLI<br><br>
-
-#### Multi-DB optimization <br>
- - [HLD](https://github.com/Azure/SONiC/blob/ed69d427dcf358299b2c1b812e59a1e26a4ef4a5/doc/database/multi_database_instances.md) Design document for multiple user-defined redis database instances. <br>
- - [PR 52](https://github.com/Azure/sonic-py-swsssdk/pull/52) Python API changes for Multi-DB optimization<br><br>
-			
-#### NAT <br> 
- - [PR 100 ](https://github.com/Azure/sonic-linux-kernel/pull/100) Added support in the kernel for fullcone 3-tuple unique NAT.<br>
- - [PR 304](https://github.com/Azure/sonic-swss-common/pull/304) Changes in swss-common submodule to support NAT feature.<br> 
- - [PR 519](https://github.com/Azure/sonic-sairedis/pull/519) Changes in sonic-sairedis repo to support the NAT feature.<br>
- - [PR 645](https://github.com/Azure/sonic-utilities/pull/645)  NAT feature.<br>
- - [PR 1059](https://github.com/Azure/sonic-swss/pull/1059) Changes in sonic-swss sub module to support NAT feature.<br>
- - [PR 3494](https://github.com/Azure/sonic-buildimage/pull/3494) Changes in sonic-buildimage to support the NAT feature.<br><br>
-			
-#### Platform Driver Development Framework <br>
- - [PR 62](https://github.com/Azure/sonic-platform-common/pull/62) Added changes to psu_base class to support PDDF PSU cli utility. & Added fan_base class to support PDDF FAN cli utility.<br>
- - [PR 624](https://github.com/Azure/sonic-utilities/pull/624) Added PDDF CLI to sonic utilities.<br>
- - [PR 3387](https://github.com/Azure/sonic-buildimage/pull/3387) Generic drivers and plugins. PDDF generic platform drivers and utils are provided under sonic-buildimage/platform/pddf<br><br>
-			
-#### Platform test cases <br>
- - [Test plan](https://github.com/Azure/SONiC/blob/master/doc/pmon/sonic_platform_test_plan.md) Test plan to check the functionalities of platform related software components.
- - [PR 915](https://github.com/Azure/sonic-mgmt/pull/915) Phase 1 of sonic platform testcases.<br>
- - [PR 980](https://github.com/Azure/sonic-mgmt/pull/980) Phase 2 of sonic platform testcases.<br>
- - [PR 1079](https://github.com/Azure/sonic-mgmt/pull/1079) added testcases for reboot cause.<br><br>
-			
-#### sFlow <br>
- - [PR 94](https://github.com/Azure/sonic-linux-kernel/pull/94) Backport psample and act_sample drivers to sonic linux kernel 4.9<br>
- - [PR 299](https://github.com/Azure/sonic-swss-common/pull/299) Defining SFLOW Tables<br>
- - [PR 498](https://github.com/Azure/sonic-sairedis/pull/498) For sflow feature, SAI changes needed for sonic-vs platform<br>
- - [PR 592 ](https://github.com/Azure/sonic-utilities/pull/592) Added CLI to configure sFlow globally or per interface & Added CLI to show sFlow settings globally or per interface<br>
- - [PR 1011](https://github.com/Azure/sonic-swss/pull/1011) Copp orch changes for programming genetlink attributes defined in opencomputeproject/SAI#936 and also defining trap group for SFLOW<br>			
- - [PR 1012](https://github.com/Azure/sonic-swss/pull/1012) Added support in swss for SFLOW. It includes sfloworch and sflowmgr changes.<br>
- - [PR 3251](https://github.com/Azure/sonic-buildimage/pull/3251) Build infrastructure changes to support sflow docker and utilities<br><br>
-
-#### SSD diagnostic tolling <br> 
- - [PR 47](https://github.com/Azure/sonic-buildimage/pull/47)  Fixed docker-base image link, which is already expired.<br>
- - [PR 587](https://github.com/Azure/sonic-utilities/pull/587) Added SSD Health CLI utility<br>
- - [PR 3218](https://github.com/Azure/sonic-buildimage/pull/3218) Added SSD Health tools<br><br>
-
-#### STP/PVST <br>
- - [PR 19](https://github.com/Azure/sonic-stp/pull/19) Changes in sonic-stp to support PVST feature implementation<br>
- - [PR 305](https://github.com/Azure/sonic-swss-common/pull/305) Changes in swss-common to support PVSTP feature<br> implementation<br> 
- - [PR 648](https://github.com/Azure/sonic-utilities/pull/648) Changes in sonic-swss sub module to support PVSTP feature implementation <br>
- - [PR 1058](https://github.com/Azure/sonic-swss/pull/1058) Changes in swss-utilities submodule to support PVSTP feature implementation <br>
- - [PR 3463](https://github.com/Azure/sonic-buildimage/pull/3463) Changes in sonic-buildimage to support PVSTP feature implementation<br><br>
- 
-#### Sub-port support <br> 
- - [PR 1998](https://github.com/opencomputeproject/SAI/pull/998) <br> 
- - [PR 1284](https://github.com/Azure/sonic-swss-common/pull/284)<br>
- - [PR 1969](https://github.com/Azure/sonic-swss/pull/969)<br>
- - [PR 1871](https://github.com/Azure/sonic-swss/pull/871)<br>
- - [PR 13412](https://github.com/Azure/sonic-buildimage/pull/3412)<br>
- - [PR 13422](https://github.com/Azure/sonic-buildimage/pull/3422)<br>
- - [PR 13413](https://github.com/Azure/sonic-buildimage/pull/3413)<br>
- - [PR 1638](https://github.com/Azure/sonic-utilities/pull/638)<br>
- - [PR 1642](https://github.com/Azure/sonic-utilities/pull/642)<br>
- - [PR 1651](https://github.com/Azure/sonic-utilities/pull/651)  <br><br>                                                    
-
-#### VRF  <br>
- - [HLD](https://github.com/Azure/SONiC/blob/master/doc/vrf/sonic-vrf-hld.md) SONiC VRF design document. 
- - [PR 943](https://github.com/Azure/sonic-swss/pull/943) Changes in sonic-swss sub module to VRF implementation.<br>
- - [PR 1065](https://github.com/Azure/sonic-mgmt/pull/1065) VRF testcases according to vrf test plan<br>
- - [PR 3044](https://github.com/Azure/sonic-buildimage/pull/3044) Sonic supports multiple loopback interfaces. Each loopback interfaces can belong to different VRF.<br>
- - [PR 3047](https://github.com/Azure/sonic-buildimage/pull/3047) Added support for BGP and static route. <br><br>			
-			
-#### ZTP <br> 
- - [HLD](https://github.com/Azure/SONiC/blob/master/doc/ztp/ztp.md) Design document of Zero Touch Provisioning
- - [PR 12](https://github.com/Azure/sonic-ztp/pull/12) First release of SONiC Zero Touch Provisioning feature<br>
- - [PR 599](https://github.com/Azure/sonic-utilities/pull/599)  Implemented CLI commands to use Zero Touch Provisioning <br>
- - [PR 1000](https://github.com/Azure/sonic-swss/pull/1000) Increase incoming packet rate on in-band interfaces to support faster download of large files <br>
- - [PR 3227](https://github.com/Azure/sonic-buildimage/pull/3227) SONiC configuration management service <br>
- - [PR 3298](https://github.com/Azure/sonic-buildimage/pull/3298) ZTP infrastructure changes to support DHCP discovery provisioning data<br>
- - [PR 3299](https://github.com/Azure/sonic-buildimage/pull/3299) Include make recipes for sonic-ztp package<br><br>
-
-<br><br>
+<br>
 
 ### Security Updates  
 
-<br><br> <br><br>
+<br>
 
 
 
@@ -155,90 +83,24 @@ This document describes the SONiC changes done for new features,  and enhancemen
 
 Please find the list of API's classified along the newly added SAI features. For further details on SAI API please refer [SAI_1.5_Release_notes]([https://github.com/kannankvs/md2/blob/master/SAI_1.5%20Release%20notes.md](https://github.com/kannankvs/md2/blob/master/SAI_1.5 Release notes.md))
 
-1. TAM
+| S.No | Feature                     | API                                                          |
+| ---- | --------------------------- | ------------------------------------------------------------ |
+| 1    | TAM                         | 1. sai_create_tam_report_fn<br/>   2. sai_remove_tam_int_f<br/>   3. sai_set_tam_int_attribute_fn<br/>   4. sai_get_tam_int_attribute_fn<br/>   5. sai_tam_telemetry_get_data_fn |
+| 2    | NAT                         | 1. sai_create_nat_range_fn<br/>   2. sai_remove_nat_range_fn<br/>   3. sai_get_nat_range_attribute_fn<br/>   4. sai_get_nat_range_attribute_fn<br/>   5. sai_create_nat_fn<br/>   6. sai_remove_nat_fn<br/>   7. sai_set_nat_attribute_fn<br/>   8. sai_get_nat_attribute_fn |
+| 3    | sFLOW                       | 1. sai_hostif_type_genetlink<br/>   2. sai_hostif_attr_genetlink_mcgrp_name<br/>   3. sai_hostif_table_entr_channel_type_genetlink |
+| 4    | Generic Resource Monitoring | 1. sai_object_type_get_availability                          |
+| 5    | SAI counter                 | 1. sai_create_counter_fn<br/>   2. sai_remove_counter_fn<br/>   3. sai_set_counter_attribute_fn<br/>   4. sai_get_counter_attribute_fn<br/>   5. sai_get_counter_stats_fn<br/>   6. sai_get_counter_stats_ext_fn<br/>   7. sai_clear_counter_stats_fn |
+| 6    | Drop Counters               | 1. sai_create_debug_counter_fn<br/>   2. sai_remove_debug_counter_fn<br/>   3. sai_set_debug_counter_attribute_fn<br/>   4. sai_get_debug_counter_attribute_fn |
 
-   1. sai_create_tam_report_fn
-   2. sai_remove_tam_int_f
-   3. sai_set_tam_int_attribute_fn
-   4. sai_get_tam_int_attribute_fn
-   5. sai_tam_telemetry_get_data_fn
 
-2. NAT
 
-   1. sai_create_nat_range_fn
-   2. sai_remove_nat_range_fn
-   3. sai_get_nat_range_attribute_fn
-   4. sai_get_nat_range_attribute_fn
-   5. sai_create_nat_fn
-   6. sai_remove_nat_fn
-   7. sai_set_nat_attribute_fn
-   8. sai_get_nat_attribute_fn
-
-   
-
-3. SFLOW 
-
-   1. sai_hostif_type_genetlink
-   2. sai_hostif_attr_genetlink_mcgrp_name
-   3. sai_hostif_table_entr_channel_type_genetlink
-
-   
-
-4. Generic Resource Monitoring
-
-   1. sai_object_type_get_availability
-
-   
-
-5. SAI counter
-
-   1. sai_create_counter_fn
-   2. sai_remove_counter_fn
-   3. sai_set_counter_attribute_fn
-   4. sai_get_counter_attribute_fn
-   5. sai_get_counter_stats_fn
-   6. sai_get_counter_stats_ext_fn
-   7. sai_clear_counter_stats_fn
-
-6. Drop Counters 
-
-   1. sai_create_debug_counter_fn
-   2. sai_remove_debug_counter_fn
-   3. sai_set_debug_counter_attribute_fn
-   4. sai_get_debug_counter_attribute_fn
-
-<br><br>
-
-### List of PR's 
+### List of Major PR's 
 
 
 | PR   | Description                                                  |
 | ---- | ------------------------------------------------------------ |
-| 325  | [Mclag-HLD   document](https://github.com/Azure/SONiC/pull/325) |
-| 345  | [ZTP -   Zero Touch Provisioning design](https://github.com/Azure/SONiC/pull/345) |
-| 379  | [Layer 2   forwarding enhancements HLD](https://github.com/Azure/SONiC/pull/379) |
-| 385  | [pmon   enhancement suggestion](https://github.com/Azure/SONiC/issues/385) |
-| 386  | [SONiC   PVST feature HLD](https://github.com/Azure/SONiC/pull/386) |
-| 390  | [NAT   feature HLD](https://github.com/Azure/SONiC/pull/390) |
-| 392  | [Update   Sonic-Vrf-HLD](https://github.com/Azure/SONiC/pull/392) |
-| 399  | [L3   performance and scaling enhancements HLD initial version](https://github.com/Azure/SONiC/pull/399) |
-| 400  | [SONiC-Mclag](https://github.com/Azure/SONiC/pull/400)       |
-| 406  | [PDK   PDDF HLD PR request](https://github.com/Azure/SONiC/pull/406) |
-| 407  | [Pde doc](https://github.com/Azure/SONiC/pull/407)           |
-| 411  | [Egress mirroring and ACL action support check via   SAI](https://github.com/Azure/SONiC/pull/411) |
-| 419  | [SONiC image build time   improvements](https://github.com/Azure/SONiC/pull/419) |
-| 420  | [Sub   port interface high level design](https://github.com/Azure/SONiC/pull/420) |
-| 427  | [Inband   Flow Analyzer feature specification](https://github.com/Azure/SONiC/pull/427) |
-| 428  | [everflow test plan to cover egress mirroring -   updated](https://github.com/Azure/SONiC/pull/428) |
-| 429  | [Threshold   feature spec](https://github.com/Azure/SONiC/pull/429) |
 | 433  | [SONiC   Configuration Setup Service](https://github.com/Azure/SONiC/pull/433) |
-| 434  | [Configurable drop   counters](https://github.com/Azure/SONiC/pull/434) |
-| 435  | [SONIC   VRF HLD 1.2](https://github.com/Azure/SONiC/pull/435) |
-| 439  | [Monitoring of hardware resources   consumed by a device](https://github.com/Azure/SONiC/pull/439) |
-| 475  | [VRRP   HLD](https://github.com/Azure/SONiC/pull/475)        |
-| 2943 | [Pmon   docker Add ethtool to pmon docker](https://github.com/Azure/sonic-buildimage/pull/2943) |
 | 3066 | [Update   redis to 5.0.3](https://github.com/Azure/sonic-buildimage/pull/3066) |
-| 3501 | [Threshold   feature changes](https://github.com/Azure/sonic-buildimage/pull/3501) |
-| PVST | [PVST   feature implementation](https://github.com/Azure/sonic-buildimage/pull/3463) |
 
-<br><br>
+
+<br>
