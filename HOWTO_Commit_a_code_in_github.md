@@ -1,9 +1,37 @@
-# HOWTO Commit a code in github. 
+# HOWTO make changes in SONiC and commit.  
 
-## Steps to commit a code in github.
+Sonic code constitutes of multiple repositories like "sonic-buildimage" , "sonic-utilities", etc., that are explained in detail at [SONIC-repositories](https://github.com/Azure/SONiC/blob/master/sourcecode.md). 
+
+enancement - bugix - finst undertand . then in each repo then how to pull req - example . seperate PR for each chnge for any large chngem make minichanges diff PR .  before commit - change,  test , UT results capture. 
+
+Design document review 
+
+add to road map
+
+design review 
+
+code change commit . PR raise process. 
+
+Design process , code process , check in process. 
+
+
+
+
+
+
+
+if the feature or bugfix spans across multiple repositories and if the changes are related, do either one of the following 
+
+1. Raise a Pull Request (PR1)on the repository ( repo1) that does not have dependency  on other repository (repo2) and wait for the PR to be merged. Then raise the  Pull Request (PR2) on the other repository (repo2). 
+
+   (OR)
+
+2.  Rise both the pull request; explicitly explain the dependency in the PR and explain the order in which the PRs has to be merged. 
 
 1. **Fork the repository** 
-  Go to the master repository and click on "fork" to for the repository.
+  Go to the master repository and click on "fork" to for the repository. If the repository has been already forked, then either rebase or delete old fork and do a new fork for every change.  
+
+  1. ​	delete folk comand find - add fork command find. 
 
   
 
@@ -67,4 +95,12 @@
     
 
  11. **Raising the pull request.** 
-     Now goto your forked page in your repository list. A new button will be enables to create pull request. Click the button to create the pull request. Add the required commits in the description. This will help the reviewer to understand more about the change made. 
+     Now goto your forked page in your repository list. A new button will be enables to create pull request. Click the button to create the pull request. Add the required commits in the description. This will help the reviewer to understand more about the change made.  (make this more descriptive)
+
+ 12. Hint - some changes modify test files. and check in interfaces.j2  
+
+ 13. PR followup - build failed - review followup and update. 
+
+Command sequence 
+
+exampel sonic buildimage 
