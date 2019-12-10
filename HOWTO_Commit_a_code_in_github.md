@@ -55,16 +55,16 @@
 
 9. **Commit the changes**.   
    `git commit -m "<branch_name for reference>: <give your commnets here>"` 
-   Example :  git commit -m " rstp_build_image: addressed the comments in PR234"
+   Example :  *git commit -m " rstp_build_image: addressed the comments in PR234"*
 
    
 
  10. **Push your changes to the main repository.**
-    `git push --set-upstream origin <branch_name>` 
-    git push --set-upstream origin rstp_build_image
+    `git push --set-upstream origin <branch_name>`
+
+     Example : *git push --set-upstream origin rstp_build_image*
 
     
 
  11. **Raising the pull request.** 
-     Now goto your forked page in your repository list. A new button will be enables to create pull request. Click the button to create the pull request. 
-     Add the required commits in the description. This will help the reviewer to understand more about the change made. 
+     Now goto your forked page in your repository list. A new button will be enables to create pull request. Click the button to create the pull request. Add the required commits in the description. This will help the reviewer to understand more about the change made. 
