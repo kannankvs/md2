@@ -1,3 +1,7 @@
+<html>
+<head>
+</head>
+<body>
 <table style="width: 100%;">
     <thead>
         <tr>
@@ -363,3 +367,5 @@
         </tr>
     </tbody>
 </table>
+</body>
+</html>
