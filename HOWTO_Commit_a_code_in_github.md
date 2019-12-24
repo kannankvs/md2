@@ -26,7 +26,7 @@ Various steps related to making code changes and raising pull request is explain
 
 1. **Fork the repository** 
 Go to the master repository and click on "fork" for the repository. Refer the following picture on how to fork "sonic-buildimage".
-![ForkImg](https://github.com/kannankvs/md2/fork.png)
+![ForkImg](https://github.com/kannankvs/md2/blob/master/fork.png)
 
 If you had already forked the repository for previous changes, then either rebase your old forked repo or delete the old forked repo (go to your gi& create a new fork from master. 
 
