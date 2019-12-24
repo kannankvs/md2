@@ -46,6 +46,7 @@ Once if a repo is forked, all the changes should happen on the forked repo.
 3. **Create a new branch**   
 Each test-able sub-feature/enhancement/bugfix should happen in a separate branch within your repo.
 To create a branch, use the command "git-checkout". This command is used to switch to working tree files of existing branch or creates new branch using "-b". Specifying -b causes a new branch to be created. 
+
    `git checkout -b <branch_name>`
    Example : *git checkout -b SNMPAgent_cli_support*. This creates a branch named "SNMPAgent_cli_support" where you can make changes for SNMPAgent CLI.
 
@@ -70,7 +71,8 @@ After making changes, check the status of the files in git and verify your chang
 Next step is to add the files using "`git add <file name>`" to add each file individually or using "`git add .`" to add all the modified files. Use "git status" to verify that all your changes got added.
 
 9. **Commit the changes**  
-Next step is to commit the changes to your branch using the command  given below.
+Next step is to commit the changes to your branch using the command  given below.  
+
    `git commit -m "<branch_name for reference>: <give your commnets here>"` 
    Example :  *git commit -m "SNMPAgent_cli_support: Added snmp_agent address CLI command to add and delete the address"*
 
@@ -81,7 +83,9 @@ Next is to push the committed changes into upstream into the remote that was alr
     Example : *git push --set-upstream origin SNMPAgent_cli_support*    
 
  11. **Raising the pull request.** 
-The final step is to raise the pull request. Go to Azure github webpage https://github.com/Azure/sonic-buildimage (or your github webpage https://github.com/<your_github_username>/sonic-buildimage) where you will see a new line that says that you recently pushed some changes and it will show a link for "Compare & pull request". Click on that green colour button that takes to a new page for new PullRequest (PR). It will show the branch **from** which merging has to happen, it shows the default repo "master" **to** which merging should happen. Fill the required details, explain the change in detail, explain the testing that was done to validate the changes and raise the pull request.
+The final step is to raise the pull request. Go to Azure github webpage https://github.com/Azure/sonic-buildimage (or your github webpage https://github.com/<your_github_username>/sonic-buildimage) where you will see a new line that says that you recently pushed some changes and it will show a link for "Compare & pull request". Refer the following image for the example.
+![PullReqImg](https://github.com/kannankvs/md2/pull_request.png)
+Click on that green colour button that takes to a new page for new PullRequest (PR). It will show the branch **from** which merging has to happen, it shows the default repo "master" **to** which merging should happen. Fill the required details, explain the change in detail, explain the testing that was done to validate the changes and raise the pull request.
 After raising the PR, continue to follow the PR for comments from reviewer, keep addressing the review comments and track it for closure. 
      
      
