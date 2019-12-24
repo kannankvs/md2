@@ -1,18 +1,19 @@
-# HOWTO make changes in SONiC and commit.  
+# HOWTO make changes in SONiC and commit
 
+This document explains the basic points to ponder while making changes in SONiC and explains the steps to make changes.
 
+## Points to Ponder
 
-## Knowing your repositories. 
+### Knowing your repositories 
 
-To make the changes in your repository you need to understand different repositories present in SONiC. Some of the repositories are as below :
+SONiC shall be enhanced continuosly to add new features, to enhance existing features and to fix the bugs in the existing code. To make the changes in SONiC, developers need to understand the different repositories present in SONiC. Some of the repositories are given below. For more detailed information about repositories [click here](https://github.com/Azure/SONiC/blob/master/sourcecode.md).
 
 1. [sonic-buildimage](https://github.com/Azure/sonic-buildimage)
-2. SAI, Switch State Service [sonic-swss](https://github.com/Azure/sonic-swss)
-3. Switch State Service common library - Common library for Switch State Service [sonic-swss-common](https://github.com/Azure/sonic-swss-common)
+2. [sonic-swss](https://github.com/Azure/sonic-swss) - Switch State Service
+3. swss-common - Switch State Service common library -  [sonic-swss-common](https://github.com/Azure/sonic-swss-common) Common library for Switch State Service
 4. SAI sub-repo from OCP github that includes the required SAI header files. https://github.com/opencomputeproject/SAI (Switch Abstraction Interface standard headers)
 5. SAI objects in Redis [sonic-sairedis](https://github.com/Azure/sonic-sairedis)
 
-For more detailed information about repositories all the available repositories [click here](https://github.com/Azure/SONiC/blob/master/sourcecode.md)
 
 ## Types of code changes 
 
