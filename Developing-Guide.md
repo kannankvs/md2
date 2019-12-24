@@ -42,6 +42,7 @@ If you are developing new features for SONiC, or if you are adding further tests
 
 We also have some tutorials for common SONiC development tasks, and some debugging tips:
 
+  * [[ HOWTO Commit a code in SONiC  ]]
   * [[ HOWTO Compile and Run SAI Server Docker ]]
   * [[ HOWTO Reset syncd Docker ]]
   * [[ HOWTO Write a PTF Test ]]
