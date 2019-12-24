@@ -18,7 +18,7 @@ For more detailed information about repositories all the available repositories 
 
 Code changes can happen different reason most common is enhancement of the feature of bugfix on the existing feature. 
 
-
+## Procedure to make changes in SONiC & commit a code.
 
 if the feature or bugfix spans across multiple repositories and if the changes are related, do either one of the following 
 
