@@ -20,6 +20,7 @@ Table of Contents
 | #   | Date         |  Document Version | Details |
 | --- | ---          | ---               | ---     |
 | 1   |  Jul-26-2019 |Technical_FAQ_v1   | Collated the FAQs between 8th March-2016 and 25th July-2019. For further details refer [here](https://groups.google.com/forum/#!forum/sonicproject) |
+| 1   |  Dec-24-2019 |Technical_FAQ_v1   | Collated the FAQs between 8th March-2016 and 25th July-2019. For further details refer [here](https://groups.google.com/forum/#!forum/sonicproject) |
 
 
 ## ACL
