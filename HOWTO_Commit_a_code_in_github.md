@@ -84,7 +84,7 @@ Next is to push the committed changes into upstream into the remote that was alr
 
  11. **Raising the pull request.** 
 The final step is to raise the pull request. Go to Azure github webpage https://github.com/Azure/sonic-buildimage (or your github webpage https://github.com/<your_github_username>/sonic-buildimage) where you will see a new line that says that you recently pushed some changes and it will show a link for "Compare & pull request". Refer the following image for the example.
-![PullReqImg](https://github.com/kannankvs/md2/pull_request.png)
+![PullReqImg](https://github.com/kannankvs/md2/blob/master/pull_request.png)
 Click on that green colour button that takes to a new page for new PullRequest (PR). It will show the branch **from** which merging has to happen, it shows the default repo "master" **to** which merging should happen. Fill the required details, explain the change in detail, explain the testing that was done to validate the changes and raise the pull request.
 After raising the PR, continue to follow the PR for comments from reviewer, keep addressing the review comments and track it for closure. 
      
