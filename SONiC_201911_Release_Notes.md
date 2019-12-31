@@ -50,53 +50,53 @@ Image  : https://sonic-jenkins.westus2.cloudapp.azure.com/  (Example - Image for
 
 #### Bidirectional Forwarding Detection
  In this implementation, the BFD state machines and session termination happens on the Host CPU, specifically in FRR. <br>In current FRR BFD implementation, for packet Tx BFD packet is constructed every time a packet has to be sent, this is an overhead considering BFD needs to send packet every few milliseconds. A better approach is to store the BFD packet in memory for each session and keep replaying the packet as per the BFD transmission interval. <br>
-Refer [HLD document](https://github.com/Azure/SONiC/blob/master/doc/bfd/BFD_Enhancement_HLD.md) for more details. 
+Refer [HLD document](https://github.com/Azure/SONiC/blob/master/doc/bfd/BFD_Enhancement_HLD.md) and below PR for more details. 
 <br> **Pull Request** : [3385](https://github.com/Azure/sonic-buildimage/pull/3385)  
 
 #### Build Improvements 
 The DPKG caching framework provides the infrastructure to save the module-specific deb file to be cached by tracking the module's dependency files. If the module's dependency files are not changed, it restores the module deb files from the cache storage. <br>
-Refer the given PR's for more details.
+Refer the given PR for more details.
 <br> **Pull Request** :  [3292](https://github.com/Azure/sonic-buildimage/pull/3292)  
 
 #### Build system improvements 
 This document describes few options to improve SONiC build time. To split the work we will consider that SONiC has two stages: 1. debian/python packages compilation <- relatively fast 2. docker images build <- slower espessially when several users are building in parallel.
-<br> Refer [HLD document](https://github.com/Azure/SONiC/blob/master/doc/sonic-build-system/build_system_improvements.md) for more details. 
+<br> Refer [HLD document](https://github.com/Azure/SONiC/blob/master/doc/sonic-build-system/build_system_improvements.md) and below mentioned PR's for more details. 
 <br> **Pull Requests** : [911](https://github.com/Azure/sonic-swss/pull/911) ,[280](https://github.com/Azure/sonic-swss-common/pull/280)  ,  [461](https://github.com/Azure/sonic-sairedis/pull/461)  , [3048](https://github.com/Azure/sonic-buildimage/pull/3048)  ,  [3049](https://github.com/Azure/sonic-buildimage/pull/3049) 
 
 #### Configurable  drop counters 
 This feature is to provides better packet drop visibility in SONiC by providing a mechanism to count and classify packet drops that occur due to different reasons.This is done by adding support for SAI debug counters to SONiC. Supported counters are PORT_INGRESS_DROPS , PORT_EGRESS_DROPS, SWITCH_INGRESS_DROP & SWITCH_EGRESS_DROPS. A CLI tool will be provided for users to manage and configure their own drop counters.
-<br> Refer [HLD document](https://github.com/Azure/SONiC/blob/master/doc/drop_counters/drop_counters_HLD.md) for more details. 
+<br> Refer [HLD document](https://github.com/Azure/SONiC/blob/master/doc/drop_counters/drop_counters_HLD.md) and below mentioned PR's for more details. 
 <br> **Pull Requests** :  [308](https://github.com/Azure/sonic-swss-common/pull/308) ,  [520](https://github.com/Azure/sonic-sairedis/pull/520) ,   [1075](https://github.com/Azure/sonic-swss/pull/1075)  ,   [1093](https://github.com/Azure/sonic-swss/pull/1093)  ,   [688](https://github.com/Azure/sonic-utilities/pull/688) 
 
 #### Core File Manager 
 The tech-support data is a piece of vital information for debugging. In this release we have added a new service called 'export service' which captures the tech-support data and export it to a remote server for better offline debugging. The export service is configured to monitors the coredump path for any new core file creation. Upon detection of a new core file, it triggers the tech-support data collection and export it to a remote server. In addition, export service can be configured to capture and upload the tech-support data periodically. 
-<br> Refer given PR's for more details. 
+<br> Refer  below mentioned PR's for more details. 
 <br> **Pull Requests** :  [3447](https://github.com/Azure/sonic-buildimage/pull/3447) , [643](https://github.com/Azure/sonic-utilities/pull/643) , [3499](https://github.com/Azure/sonic-buildimage/pull/3499)  , [663](https://github.com/Azure/sonic-utilities/pull/663) 
 
 #### Debug Framework
 In an effort to enhance debug ability, A new debug framework is added with the following functionality:. It provides a framework that allows components to register and dump running snapshots of component internals using dump routines. It handles assert conditions to collect more info. It implements dump routines in OrchAgent using debug framework. Additionally, it has Enhanced existing show tech-support utility and added additional scripts to enforce policies on debug related files.
-<br> Refer [HLD document](https://github.com/Azure/SONiC/blob/5ddfeb7919167d0ee8ec99cd8108ed2b91e006d8/doc/debug_framework_design_spec.md) for more details. 
+<br> Refer [HLD document](https://github.com/Azure/SONiC/blob/5ddfeb7919167d0ee8ec99cd8108ed2b91e006d8/doc/debug_framework_design_spec.md) and below mentioned PR's for more details. 
 <br> **Pull Requests** :  [300](https://github.com/Azure/sonic-swss-common/pull/300)  , [618](https://github.com/Azure/sonic-utilities/pull/618) 
 
 #### Dynamic   Break Out                                                        
 #### Egress mirroring support and ACL action capability check 
 Added support for egress mirror action. To query ACL action list supported by ASIC per stage and put this information in STATE DB SWITCH_CAPABILITY table and to perform secondary query for ACL action attributes which parameters are enum values (e.g. for PACKET_ACTION - DROP,FORWARD). 
-<br> Refer [HLD document](https://github.com/Azure/SONiC/blob/master/doc/acl/acl_stage_capability.md) for more details. 
+<br> Refer [HLD document](https://github.com/Azure/SONiC/blob/master/doc/acl/acl_stage_capability.md) and below mentioned PR's for more details. 
 <br> **Pull Requests** :  [963](https://github.com/Azure/sonic-swss/pull/963)   , [1019](https://github.com/Azure/sonic-swss/pull/1019)  ,  [575](https://github.com/Azure/sonic-utilities/pull/575) ,  [481](https://github.com/Azure/sonic-sairedis/pull/481) 
 
 #### HW resource monitor 
 This document describes the high level design of verification the hardware resources consumed by a device. The hardware resources which are currently verified are CPU, RAM and HDD. This implementation will be integrated in test cases written on Pytest framework. 
-<br> Refer[HLD document](https://github.com/Azure/SONiC/blob/master/doc/DUT_monitor_HLD.md) for more details. 
+<br> Refer[HLD document](https://github.com/Azure/SONiC/blob/master/doc/DUT_monitor_HLD.md) and below mentioned PR for more details. 
 <br> **Pull Request** :  [1121](https://github.com/Azure/sonic-mgmt/pull/1121)        
 
 #### Layer 2 Forwarding Enhancements
 Some of the changes in the release are : Added support for per port, per vlan and per port-vlan fdb flush. Added new data structure in portsorch for mapping between OID and vlan/port/bridge port. Moved SAI Redis fdb handling to fdborch to have both the fdborch and sai redis reference count in sync.Added support for static fdb config and fdb aging time config. 
-<br> Refer [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/layer2-forwarding-enhancements/SONiC%20Layer%202%20Forwarding%20Enhancements%20HLD.md) and the listed PR's. 
+<br> Refer [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/layer2-forwarding-enhancements/SONiC%20Layer%202%20Forwarding%20Enhancements%20HLD.md) and and below mentioned PR's  for more details. 
 <br> **Pull Requests** :  [885 ](https://github.com/Azure/sonic-swss/pull/885) , [510  ](https://github.com/Azure/sonic-sairedis/pull/510),  [303](https://github.com/Azure/sonic-swss-common/pull/303)  ,  [529](https://github.com/Azure/sonic-utilities/pull/529) 
 
 #### L3 performance and scaling enhancements 
 When sending a lot of ARP/ND requests in a burst, ARP entries are getting purged from the kernel while the later set of ARP entries was still getting added. The sequence of add/remove is in such a way that we were never able to cross ~2400 entries. Currently the max rate for ARP/ND is 600 packets, we will be increasing it to higher number(8000) in CoPP file to improve the learning time.
-<br> Refer [HLD Document](https://github.com/Azure/SONiC/blob/89abd4938d792215b75d801e87b47ccf2c22f111/doc/L3_performance_and_scaling_enchancements_HLD.md) and the listed PR's. 
+<br> Refer [HLD Document](https://github.com/Azure/SONiC/blob/89abd4938d792215b75d801e87b47ccf2c22f111/doc/L3_performance_and_scaling_enchancements_HLD.md) and below mentioned PR's for more details. 
 <br> **Pull Request** :  [1048](https://github.com/Azure/sonic-swss/pull/1048)        
 
 ####  Log analyzer to pytest 
@@ -133,6 +133,8 @@ The PDE does not target any type of feature deployment within SONiC. The primary
 <br> **Pull Requests** :  [3408](https://github.com/Azure/sonic-buildimage/pull/3408)  , [27](https://github.com/Azure/sonic-platform-pdk-pde/pull/27) 
 
 #### Platform Driver Development Framework
+This document describes the high level design details of PDDF and its components. The PDDF consists of generic device drivers and user space platform API plugins which use the per platform specific data in the JSON descriptor files. This document describes the interaction between all the components and the tools used to support these drivers and plugins.
+<br> Refer [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/platform/brcm_pdk_pddf.md) for more details. 
 <br> **Pull Requests** :  [3387](https://github.com/Azure/sonic-buildimage/pull/3387)   , [62](https://github.com/Azure/sonic-platform-common/pull/62)  ,  [624](https://github.com/Azure/sonic-utilities/pull/624) 
 
 #### Platform test  
