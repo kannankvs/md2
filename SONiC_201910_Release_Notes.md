@@ -38,8 +38,7 @@ Image  : https://sonic-jenkins.westus2.cloudapp.azure.com/ (Example - Image for 
 | sonic-telemetry           | 0.1    |
 | redis-server/ redis-tools | 5.0.3-3~bpo9+2    |
 
-
-#Security Updates
+# Security Updates
 
 1. Kernal upgraded from 4.9.110-3deb9u6 (SONiC Release 201904) to 4.9.168-1+deb9u5 in this SONiC release. 
    Change log: https://tracker.debian.org/media/packages/l/linux/changelog-4.9.168-1deb9u5
