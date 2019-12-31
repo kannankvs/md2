@@ -186,16 +186,16 @@ Go Back To [Beginning of the document](#) or [Beginning of this section](#basic-
 The management interface (eth0) in SONiC is configured (by default) to use DHCP client to get the IP address from the DHCP server. Connect the management interface to the same network in which your DHCP server is connected and get the IP address from DHCP server.
 The IP address received from DHCP server can be verified using the `/sbin/ifconfig eth0` Linux command.
 
-SONiC does not provide a CLI to configure the static IP for the management interface. There are few alternate ways by which a static IP address can be configured for the management interface.
-  1. Use the `/sbin/ifconfig eth0 ...` Linux command. NOTE: This configuration **will not** be preserved across reboots.
+SONiC does provide a CLI to configure the static IP for the management interface. There are few ways by which a static IP address can be configured for the management interface.
+  1. Use the `config interface ip add eth0` click command.
   - Example:
   ```
-  admin@sonic:~$ /sbin/ifconfig eth0 10.11.12.13/24
+  admin@sonic:~$ sudo config interface ip add eth0 20.11.12.13/24 20.11.12.254
   ```
   2. Use config_db.json and configure the MGMT_INTERFACE key with the appropriate values. Refer [here](https://github.com/Azure/SONiC/wiki/Configuration#Management-Interface)
   3. Use minigraph.xml and configure "ManagementIPInterfaces" tag inside "DpgDesc" tag as given at the [page](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
 
-Once the IP address is configured, the same can be verified using "/sbin/ifconfig eth0" linux command.
+Once the IP address is configured, the same can be verified using either "show management_interface address" command or the "/sbin/ifconfig eth0" linux command.
 Users can SSH login to this management interface IP address from their management network.
 
 - Example:
@@ -2298,7 +2298,7 @@ While configuring the IP address for the management interface "eth0", users can 
   *Versions >= 201904*
   ```
   admin@sonic:~$ sudo config interface ip add Ethernet63 10.11.12.13/24
-  admin@sonic:~$ sudo config interface ip add eth0 20.11.12.13/24 10.11.12.254
+  admin@sonic:~$ sudo config interface ip add eth0 20.11.12.13/24 20.11.12.254
   ```
   *Versions <= 201811*
   ```
@@ -3039,7 +3039,7 @@ Go Back To [Beginning of the document](#) or [Beginning of this section](#loadin
 
 **show mgmt-vrf**
 
-This command displays the status of management VRF on whether it is enabled or disabled. It also displays the details about the the links (eth0, mgmt, lo-m) that are part of management VRF. The management interface "eth0" will show the "master" as "mgmt" as given in the below example.
+This command displays whether the management VRF is enabled or disabled. It also displays the details about the the links (eth0, mgmt, lo-m) that are related to management VRF. 
 
 - Usage:
   ```
@@ -3059,6 +3059,8 @@ This command displays the status of management VRF on whether it is enabled or d
         link/ether 4c:76:25:f4:f9:f3 brd ff:ff:ff:ff:ff:ff
     350: lo-m: <BROADCAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc noqueue master mgmt state UNKNOWN mode DEFAULT group default qlen 1000
         link/ether b2:4c:c6:f3:e9:92 brd ff:ff:ff:ff:ff:ff
+
+    NOTE: The management interface "eth0" shows the "master" as "mgmt" since it is part of management VRF.
   ```
 
 **show mgmt-vrf routes**
@@ -3102,7 +3104,6 @@ This command displays the IP address(es) configured for the management interface
     Management NetWork Default Gateway = 10.16.210.254
     Management IP address = FC00:2::32/64
     Management Network Default Gateway = fc00:2::1
-
   ```
 
 **show snmpagentaddress**
