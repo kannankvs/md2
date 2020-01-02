@@ -186,8 +186,8 @@ Go Back To [Beginning of the document](#) or [Beginning of this section](#basic-
 The management interface (eth0) in SONiC is configured (by default) to use DHCP client to get the IP address from the DHCP server. Connect the management interface to the same network in which your DHCP server is connected and get the IP address from DHCP server.
 The IP address received from DHCP server can be verified using the `/sbin/ifconfig eth0` Linux command.
 
-SONiC does provide a CLI to configure the static IP for the management interface. There are few ways by which a static IP address can be configured for the management interface.
-  1. Use the `config interface ip add eth0` click command.
+SONiC provides a CLI to configure the static IP for the management interface. There are few ways by which a static IP address can be configured for the management interface.
+  1. Use the `config interface ip add eth0` command.
   - Example:
   ```
   admin@sonic:~$ sudo config interface ip add eth0 20.11.12.13/24 20.11.12.254
@@ -195,7 +195,7 @@ SONiC does provide a CLI to configure the static IP for the management interface
   2. Use config_db.json and configure the MGMT_INTERFACE key with the appropriate values. Refer [here](https://github.com/Azure/SONiC/wiki/Configuration#Management-Interface)
   3. Use minigraph.xml and configure "ManagementIPInterfaces" tag inside "DpgDesc" tag as given at the [page](https://github.com/Azure/SONiC/wiki/Configuration-with-Minigraph-(~Sep-2017))
 
-Once the IP address is configured, the same can be verified using either "show management_interface address" command or the "/sbin/ifconfig eth0" linux command.
+Once the IP address is configured, the same can be verified using either `show management_interface address` command or the `/sbin/ifconfig eth0` linux command.
 Users can SSH login to this management interface IP address from their management network.
 
 - Example:
