@@ -50,8 +50,8 @@ Image  : https://sonic-jenkins.westus2.cloudapp.azure.com/  (Example - Image for
 
 #### Bidirectional Forwarding Detection
  In this implementation, the BFD state machines and session termination happens on the Host CPU, specifically in FRR. <br>In current FRR BFD implementation, for packet Tx BFD packet is constructed every time a packet has to be sent, this is an overhead considering BFD needs to send packet every few milliseconds. A better approach is to store the BFD packet in memory for each session and keep replaying the packet as per the BFD transmission interval. <br>
-Refer [HLD document](https://github.com/Azure/SONiC/blob/master/doc/bfd/BFD_Enhancement_HLD.md) and below PR for more details. 
-<br> **Pull Request** : [3385](https://github.com/Azure/sonic-buildimage/pull/3385)  
+Refer [HLD document](https://github.com/Azure/SONiC/blob/master/doc/bfd/BFD_Enhancement_HLD.md) and below PR's for more details. 
+<br> **Pull Requests** : [3385](https://github.com/Azure/sonic-buildimage/pull/3385) , [3838](https://github.com/Azure/sonic-buildimage/pull/3838)  
 
 #### Build Improvements 
 The DPKG caching framework provides the infrastructure to save the module-specific deb file to be cached by tracking the module's dependency files. If the module's dependency files are not changed, it restores the module deb files from the cache storage. <br>
@@ -100,7 +100,8 @@ When sending a lot of ARP/ND requests in a burst, ARP entries are getting purged
 <br> **Pull Request** :  [1048](https://github.com/Azure/sonic-swss/pull/1048)        
 
 ####  Log analyzer to pytest 
-Please find the [Loganalyzer API usage example](https://github.com/yvolynets-mlnx/sonic-mgmt/blob/78a71ebccdc44bd62e81ff4b12dd84cb2c0ea34d/tests/loganalyzer/README.md) in the listed PR. 
+In the root conftest there is implemented "loganalyzer" pytest fixture, which starts automatically for all test cases.If loganalyzer find specified messages which corresponds to defined regular expressions, it will display found messages and pytest will generate 'error'.
+Refer [Loganalyzer API usage example](https://github.com/yvolynets-mlnx/sonic-mgmt/blob/78a71ebccdc44bd62e81ff4b12dd84cb2c0ea34d/tests/loganalyzer/README.md) for more details. 
 <br> **Pull Request** :  [1048](https://github.com/Azure/sonic-mgmt/pull/1048) 
        
 #### Management Framework 
@@ -175,7 +176,7 @@ Sonic supports multiple loopback interfaces. Each loopback interfaces can belong
 #### ZTP 
 Zero Touch Provisioning (ZTP) service can be used by users to configure a fleet of switches using common configuration templates. Switches booting from factory default state should be able to communicate with remote provisioning server and download relevant configuration files and scripts to kick start more complex configuration steps. ZTP service takes user input in JSON format. Some of the supported features are - Dynamically generate DHCP client configuration based on current ZTP state and Added support to request and process hostname when using DHCPv6. 
 <br> Refer [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/ztp/ztp.md) for more details.
-<br> **Pull Requests** :  [3227](https://github.com/Azure/sonic-buildimage/pull/3227) , [3298](https://github.com/Azure/sonic-buildimage/pull/3298)  , [1000](https://github.com/Azure/sonic-swss/pull/1000) , [3299](https://github.com/Azure/sonic-buildimage/pull/3299) , [12](https://github.com/Azure/sonic-ztp/pull/12), [599](https://github.com/Azure/sonic-utilities/pull/599) 
+<br> **Pull Requests** :  [3227](https://github.com/Azure/sonic-buildimage/pull/3227) , [3298](https://github.com/Azure/sonic-buildimage/pull/3298)  , [1000](https://github.com/Azure/sonic-swss/pull/1000) , [3299](https://github.com/Azure/sonic-buildimage/pull/3299) , [12](https://github.com/Azure/sonic-ztp/pull/12), [599](https://github.com/Azure/sonic-utilities/pull/599) ,[715](https://github.com/Azure/sonic-utilities/pull/715)
 
 
 <br>
