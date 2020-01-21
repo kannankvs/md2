@@ -88,7 +88,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | SONiC.202006 | 06/30/2020   | TBD         | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-201911) |
 |            |            |            | [BFD - SW - 100ms interval from FRR](https://github.com/Azure/SONiC/pull/383) |
 |            |              |             | BroadView BST                                                |
-|           |              |             | Build Improvements                                           |
+|           |              |             | Build Improvements (TBD: is this different from "Build time improvements " done in 201911) |
 |           |           |           | Core File Manager |
 | | | | [Debug Framework](https://github.com/Azure/SONiC/pull/398) |
 |            |              |             | Dynamic Break Out                                            |
