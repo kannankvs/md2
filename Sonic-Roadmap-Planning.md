@@ -86,18 +86,26 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |              |              |             | [Log analyzer to pytest](https://github.com/Azure/SONiC/pull/421) |
 |              |              |             | [HW resource monitor](https://github.com/Azure/SONiC/pull/439) |
 | SONiC.202006 | 06/30/2020   | TBD         | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-201911) |
-|  |              |             | BroadView BST                                                |
-|  |              |             | [BFD - SW - 100ms interval from FRR](https://github.com/Azure/SONiC/pull/383) |
-|  |              |             | [STP/PVST](https://github.com/Azure/SONiC/pull/386)          |
+|            |            |            | [BFD - SW - 100ms interval from FRR](https://github.com/Azure/SONiC/pull/383) |
+|            |              |             | BroadView BST                                                |
+|           |              |             | Build Improvements                                           |
+|           |           |           | Core File Manager |
+| | | | [Debug Framework](https://github.com/Azure/SONiC/pull/398) |
+|            |              |             | Dynamic Break Out                                            |
+|            |              |             | Error handling enhancements |
+| | | | [Inband Flow<br/>Analyzer](https://github.com/Azure/SONiC/pull/427) |
+|            |              |             | [L2 functional and performance enhancements](https://github.com/Azure/SONiC/pull/379) |
+|           |           |           | [MLAG](https://github.com/Azure/SONiC/pull/325) |
 |  |              |             | [Multi-DB optimization](https://github.com/Azure/SONiC/blob/ed69d427dcf358299b2c1b812e59a1e26a4ef4a5/doc/database/multi_database_instances.md) |
 |  |              |             | [NAT](https://github.com/Azure/SONiC/pull/390)               |
-|  |              |             | Test to Pytest                                               |
-|  |              |             | Platform Driver Development Framework                        |
-|  |              |             | Error handling enhancements                                  |
-|  |              |             | [L2 functional and performance enhancements](https://github.com/Azure/SONiC/pull/379) |
-|  |              |             | Dynamic Break Out                                            |
-| | | | [MLAG](https://github.com/Azure/SONiC/pull/325) |
+|  |              |             | ONIE FW tools                                                |
 |  |              |             | Platform APIs move to new APIs *                             |
+|  |              |             | [Platform<br/>Development<br/>Environment](https://github.com/Azure/SONiC/pull/407) |
+|  |              |             | Platform Driver Development Framework                        |
+| | | | [STP/PVST](https://github.com/Azure/SONiC/pull/386) |
+| | | | Test to Pytest |
+| | | | [Threshold(BST)](https://github.com/Azure/SONiC/pull/429) |
+| | | |  |
 |  |              |             |                                                              |
 | Backlog      |              |             |                          |
 |              |              |             | CLI framework|
