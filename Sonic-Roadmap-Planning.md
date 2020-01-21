@@ -96,6 +96,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |  |              |             | Error handling enhancements                                  |
 |  |              |             | [L2 functional and performance enhancements](https://github.com/Azure/SONiC/pull/379) |
 |  |              |             | Dynamic Break Out                                            |
+| | | | [MLAG](https://github.com/Azure/SONiC/pull/325) |
 |  |              |             | Platform APIs move to new APIs *                             |
 |  |              |             |                                                              |
 | Backlog      |              |             |                          |
