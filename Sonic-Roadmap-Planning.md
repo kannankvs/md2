@@ -105,7 +105,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | | | | [STP/PVST](https://github.com/Azure/SONiC/pull/386) |
 | | | | Test to Pytest |
 | | | | [Threshold(BST)](https://github.com/Azure/SONiC/pull/429) |
-| | | |  |
+| | | |                                                            |
 |  |              |             |                                                              |
 | Backlog      |              |             |                          |
 |              |              |             | CLI framework|
