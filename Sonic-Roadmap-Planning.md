@@ -89,23 +89,23 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |            |            | [BFD - SW - 100ms interval from FRR](https://github.com/Azure/SONiC/pull/383) |
 |            |              |             | BroadView BST                                                |
 |           |              |             | Build Improvements (TBD: is this different from "Build time improvements " done in 201911) |
-|           |           |           | Core File Manager |
-| | | | [Debug Framework](https://github.com/Azure/SONiC/pull/398) |
+| | | | Configuration Validation (TBD: This was present in DEC 23 2019 roadmap planning sheet but missing in latest) |
+|           |           |           | Core File Manager (TBD : This was present in 201911 release tracking without "yes". Hence added here ) |
+| | | | [Debug Framework](https://github.com/Azure/SONiC/pull/398) (TBD : This was present in 201911 release tracking without "yes". Hence added here ) |
 |            |              |             | Dynamic Break Out                                            |
 |            |              |             | Error handling enhancements |
-| | | | [Inband Flow<br/>Analyzer](https://github.com/Azure/SONiC/pull/427) |
+| | | | [Inband Flow<br/>Analyzer](https://github.com/Azure/SONiC/pull/427) (TBD : This was present in 201911 release tracking without "yes". Hence added here ) |
 |            |              |             | [L2 functional and performance enhancements](https://github.com/Azure/SONiC/pull/379) |
 |           |           |           | [MLAG](https://github.com/Azure/SONiC/pull/325) |
 |  |              |             | [Multi-DB optimization](https://github.com/Azure/SONiC/blob/ed69d427dcf358299b2c1b812e59a1e26a4ef4a5/doc/database/multi_database_instances.md) |
 |  |              |             | [NAT](https://github.com/Azure/SONiC/pull/390)               |
-|  |              |             | ONIE FW tools                                                |
+|  |              |             | ONIE FW tools (TBD : This was present in 201911 release tracking without "yes". Hence added here ) |
 |  |              |             | Platform APIs move to new APIs *                             |
-|  |              |             | [Platform<br/>Development<br/>Environment](https://github.com/Azure/SONiC/pull/407) |
+|  |              |             | [Platform<br/>Development<br/>Environment](https://github.com/Azure/SONiC/pull/407) (TBD : This was present in 201911 release tracking without "yes". Hence added here ) |
 |  |              |             | Platform Driver Development Framework                        |
 | | | | [STP/PVST](https://github.com/Azure/SONiC/pull/386) |
 | | | | Test to Pytest |
-| | | | [Threshold(BST)](https://github.com/Azure/SONiC/pull/429) |
-| | | |                                                            |
+| | | | [Threshold(BST)](https://github.com/Azure/SONiC/pull/429) (TBD : This was present in 201911 release tracking without "yes". Hence added here ) |
 |  |              |             |                                                              |
 | Backlog      |              |             |                          |
 |              |              |             | CLI framework|
