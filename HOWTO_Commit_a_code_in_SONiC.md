@@ -59,7 +59,7 @@ The most common use of git push is to push your local changes to your public ups
 
 5. **Making changes**	
    Once if the origin is set, you can make changes in the code. You can also add new files in this repo and remove unwanted files from the repo.  
-NOTE1: In general, it is suggested to keep two directories in your environment, one for checkin process and other for complilation & testing. It is advised to make the changed in your compilation environment and complete the required testing before starting this checkin process. As part of this step, merge or copy your changes from complilation environment to this "checkin environment". This way, you can use the "git status" command to find the list of changes that you had done which will not include the unwanted generated files that are visible in compilation environment.
+NOTE1: In general, it is suggested to keep two directories in your environment, one for check-in process and other for compilation & testing. It is advised to make the changed in your compilation environment and complete the required testing before starting this check-in process. As part of this step, merge or copy your changes from compilation environment to this "check-in environment". This way, you can use the "git status" command to find the list of changes that you had done which will not include the unwanted generated files that are visible in compilation environment.
    
 6. **Verify the changes made** 
 After making changes, check the status of the files in git and verify your changes using the following commands.
@@ -70,11 +70,15 @@ After making changes, check the status of the files in git and verify your chang
 7. **Add the changes**  
 Next step is to add the files using "`git add <file name>`" to add each file individually or using "`git add .`" to add all the modified files. Use "git status" to verify that all your changes got added.
 
-9. **Commit the changes**  
-Next step is to commit the changes to your branch using the command  given below.  
+8. **Commit the changes**  
+  Next step is to commit the changes to your branch using the command  given below.  
 
-   `git commit -m "<branch_name for reference>: <give your commnets here>"` 
-   Example :  *git commit -m "SNMPAgent_cli_support: Added snmp_agent address CLI command to add and delete the address"*
+  `git commit -m "<branch_name for reference>: <give your commnets here>"` 
+  Example :  *git commit -m "SNMPAgent_cli_support: Added snmp_agent address CLI command to add and delete the address"*
+
+  Note : Regarding swss repository, the developer must write VS py tests for every feature that they contribute. This will run as part of every pull requests and helps ensure future changes by other develop is not breaking your feature.
+
+  
 
  10. **Push your changes to the main repository.**
 Next is to push the committed changes into upstream into the remote that was already set to "SNMPAgent_cli_support". 
@@ -86,12 +90,14 @@ Next is to push the committed changes into upstream into the remote that was alr
 The final step is to raise the pull request. Go to Azure github webpage https://github.com/Azure/sonic-buildimage (or your github webpage https://github.com/<your_github_username>/sonic-buildimage) where you will see a new line that says that you recently pushed some changes and it will show a link for "Compare & pull request". Refer the following image for the example.
 ![PullReqImg](https://github.com/kannankvs/md2/blob/master/pull_request.png)
 Click on that green colour button that takes to a new page for new PullRequest (PR). It will show the branch **from** which merging has to happen, it shows the default repo "master" **to** which merging should happen. Fill the required details, explain the change in detail, explain the testing that was done to validate the changes and raise the pull request.
-After raising the PR, continue to follow the PR for comments from reviewer, keep addressing the review comments and track it for closure. 
-     
+
+ 12. After raising the PR, continue to follow the PR for comments from reviewer, keep addressing the review comments and track it for closure. Once the PR is merged to individual repository, if you need the changes in image, the developer has to raise a pull request for “submodule” update. Ensure the description have all the commits using “git log --pretty=oneline --pretty=format:"%h - %ad : %s [%an]" --date=short”. Reference PR is https://github.com/Azure/sonic-buildimage/pull/3675
+
      
 ## Point to ponder to add a new feature or to enhance an existing feature
 
 1. First step is to inform the SONiC community about the need for such enhancement and add the commitment for development for a particular release. Roadmap document should have been updated with this information.
 2. Next step is to work out a development plan and update roadmap with Design Review Date, Code Review Date, etc.,
 3. Next is to do the design and plan for a design review meeting with community. Present the design to community, get feedback from community, update the design and get the final approval for design from the community.
-4. Do the required code changes, test it and raise pull request. Provide the test results as part of the pull request. Address the review comments and followup until the code is merged into the master branch and also on required release branches.
+4. Do the required code changes, test it and raise pull request. Provide the test results as part of the pull request. Address the review comments and follow-up until the code is merged into the master branch and also on required release branches.
+5. While fixing a bug, provide all the required reference to corresponding issue number. If the issue does not have a pull request for the issue, then raise a separate pull request with complete reproduction details and provide all relevant required details. 
