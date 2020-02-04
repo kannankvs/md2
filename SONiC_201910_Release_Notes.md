@@ -61,7 +61,7 @@ Image  : https://sonic-jenkins.westus2.cloudapp.azure.com/ (Example - Image for 
 | <strong>L3 performance and scaling enhancements</strong> - When sending a lot of ARP/ND requests in a burst, ARP entries are getting purged from the kernel while the later set of ARP entries was still getting added. The sequence of add/remove is in such a way that we were never able to cross ~2400 entries. Currently the max rate for ARP/ND is 600 packets, we will be increasing it to higher number(8000) in CoPP file to improve the learning time. For more details please refer [HLD Document](https://github.com/Azure/SONiC/blob/89abd4938d792215b75d801e87b47ccf2c22f111/doc/L3_performance_and_scaling_enchancements_HLD.md) and the listed PR's. | [1048](https://github.com/Azure/sonic-swss/pull/1048)        |
 | <strong> Log analyzer to pytest</strong> - Please find the [Loganalyzer API usage example](https://github.com/yvolynets-mlnx/sonic-mgmt/blob/78a71ebccdc44bd62e81ff4b12dd84cb2c0ea34d/tests/loganalyzer/README.md) in the listed PR. | [1048](https://github.com/Azure/sonic-mgmt/pull/1048)        |
 | <strong>Management Framework</strong> - Management framework is a SONiC application which is responsible for providing various common North Bound Interfaces (NBIs) for the purposes of managing configuration and status on SONiC switches. The application manages coordination of NBI’s to provide a coherent way to validate, apply and show configuration. Please find more details in [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/mgmt/Management%20Framework.md) | [18](https://github.com/Azure/sonic-mgmt-framework/pull/18)   , [23](https://github.com/Azure/sonic-telemetry/pull/23)  ,   [3488](https://github.com/Azure/sonic-buildimage/pull/3488)  , [659](https://github.com/Azure/sonic-utilities/pull/659) |
-| <strong>Management VRF</strong> -                            | [2585](https://github.com/Azure/sonic-buildimage/pull/2585)  , [2608](https://github.com/Azure/sonic-buildimage/pull/2608)  ,  [3204](https://github.com/Azure/sonic-buildimage/pull/3204)  ,  [463](https://github.com/Azure/sonic-utilities/pull/463)  ,  [472](https://github.com/Azure/sonic-utilities/pull/472)  ,  [627](https://github.com/Azure/sonic-utilities/pull/627)  ,  [3586](https://github.com/Azure/sonic-buildimage/pull/3586) |
+| <strong>Management VRF</strong> -  Management VRF (mvrf) feature provides a separation between the management network traffic and the data plane network traffic using the linux CGROUPS based on l3mdev. Management interface (eth0) shall be enslaved in l3mdev. Management applications like SSH shall use the enslaved eth0 and corresponding mvrf routing table for management traffic.                          | [2585](https://github.com/Azure/sonic-buildimage/pull/2585)  , [2608](https://github.com/Azure/sonic-buildimage/pull/2608)  ,  [3204](https://github.com/Azure/sonic-buildimage/pull/3204)  ,  [463](https://github.com/Azure/sonic-utilities/pull/463)  ,  [472](https://github.com/Azure/sonic-utilities/pull/472)  ,  [627](https://github.com/Azure/sonic-utilities/pull/627)  ,  [3586](https://github.com/Azure/sonic-buildimage/pull/3586) |
 | <strong>McLAG</strong>   - In MC-LAG scenario, two peer devices form one end point of a LAG, these two devices must have the same MAC address since it’s used for LACP. During warm-reboot, this MAC must not be changed. supported  mac update on fdborch and added support to change rif mac address. Please find more details in [HLD Document](https://github.com/Azure/SONiC/blob/f478fe7cbc03c144f3b147e9638f460f764ce4b7/doc/Sonic-mclag-hld.md) | [2154](https://github.com/Azure/sonic-buildimage/pull/2514) , [1003](https://github.com/Azure/sonic-swss/pull/1003) , [877](https://github.com/Azure/sonic-swss/pull/877) , [814](https://github.com/Azure/sonic-swss/pull/814) , [811](https://github.com/Azure/sonic-swss/pull/811) , [810](https://github.com/Azure/sonic-swss/pull/810) , [809](https://github.com/Azure/sonic-swss/pull/809) ,  [275](https://github.com/Azure/sonic-swss-common/pull/275) , [453](https://github.com/Azure/sonic-utilities/pull/453) |
 | <strong>Multi-DB optimization</strong> - Creating multiple database instances help us to separate the databases based on their operation frequency or their role in the whole SONiC system, for example, like state database and loglevel database are not key features, we can avoid them affecting read and write APPL_DB or ASIC_DB via multiple database instances. Please find more details in [HLD Document](https://github.com/Azure/SONiC/blob/ed69d427dcf358299b2c1b812e59a1e26a4ef4a5/doc/database/multi_database_instances.md) | [52](https://github.com/Azure/sonic-py-swsssdk/pull/52)      |
 | <strong>NAT</strong> - Network Address Translation (NAT) router enables private IP networks to communicate to the public networks (internet) by translating the private IP address to globally unique IP address. It also provides security by hiding the identity of the host in private network. This feature supports Source NAT, Destination NAT ,Static NAT/NAPT, Dynamic NAT/NAPT, NAT zones, Twice NAT/NAPT nd support of VRF. For more details of NAT please check [HLD Document](https://github.com/kirankella/SONiC/blob/nat_doc_changes/doc/nat/nat_design_spec.md) | [3494](https://github.com/Azure/sonic-buildimage/pull/3494) , [1059](https://github.com/Azure/sonic-swss/pull/1059)  ,  [645](https://github.com/Azure/sonic-utilities/pull/645)  ,  [100 ](https://github.com/Azure/sonic-linux-kernel/pull/100) ,  [304](https://github.com/Azure/sonic-swss-common/pull/304)  ,  [519](https://github.com/Azure/sonic-sairedis/pull/519) |
@@ -119,16 +119,16 @@ Please find the list of API's classified along the newly added SAI features. For
 | 3604 | [changes for making snmp socket non-blocking](https://github.com/Azure/sonic-buildimage/pull/3604) |
 
 
-# List of Contributors. 
+# List of Major Contributors and thanks for many individuals. 
 
-1. Alibaba
-2. Aviz
-3. Broadcom
-4. Dell
-5. Linkedin
-6. Mellanox
-7. Microsoft
-8. Nephos
+1. Microsoft
+2. Broadcom
+3. DellEMC
+4. Mellanox
+5. Alibaba
+6. Linkedin
+7. Nephos
+8. Aviz
 
 <br>
 
