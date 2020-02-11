@@ -119,16 +119,9 @@ Please find the list of API's classified along the newly added SAI features. For
 | 3604 | [changes for making snmp socket non-blocking](https://github.com/Azure/sonic-buildimage/pull/3604) |
 
 
-# List of Major Contributors and thanks for many individuals. 
+# Contributors 
 
-1. Microsoft
-2. Broadcom
-3. DellEMC
-4. Mellanox
-5. Alibaba
-6. Linkedin
-7. Nephos
-8. Aviz
+SONiC community would like to thank all the contributors from various companies and the individuals who has contributed for the release. Special thanks to the major contributors, viz, Microsoft, Broadcom, DellEMC, Mellanox, Alibaba, Linkedin, Nephos & Aviz. 
 
 <br>
 
