@@ -12,7 +12,7 @@ This document captures the new features added and enhancements done on existing 
  * [Feature List](#feature-list)
  * [Security Updates](#security-updates)
  * [SAI APIs](#sai-apis)
- * [List of Major PR's](#enhancements)
+
 
 
 # Branch and Image Location  
@@ -97,26 +97,6 @@ Please find the list of API's classified along the newly added SAI features. For
 | 4    | Generic Resource Monitoring | 1. sai_object_type_get_availability                          |
 | 5    | SAI counter                 | 1. sai_create_counter_fn<br/>   2. sai_remove_counter_fn<br/>   3. sai_set_counter_attribute_fn<br/>   4. sai_get_counter_attribute_fn<br/>   5. sai_get_counter_stats_fn<br/>   6. sai_get_counter_stats_ext_fn<br/>   7. sai_clear_counter_stats_fn |
 | 6    | Drop Counters               | 1. sai_create_debug_counter_fn<br/>   2. sai_remove_debug_counter_fn<br/>   3. sai_set_debug_counter_attribute_fn<br/>   4. sai_get_debug_counter_attribute_fn |
-
-
-
-# List of Major PR's 
-
-
-| PR   | Description                                                  |
-| ---- | ------------------------------------------------------------ |
-| 433  | [SONiC   Configuration Setup Service](https://github.com/Azure/SONiC/pull/433) |
-| 3066 | [Update   redis to 5.0.3](https://github.com/Azure/sonic-buildimage/pull/3066) |
-| 3728 | [barefoot_pmon Fixed pmon Docker failure](https://github.com/Azure/sonic-buildimage/pull/3728) |
-| 3705 | [LLDP changing the tx-interval parameter is not reflected on the peer device immediately](https://github.com/Azure/sonic-buildimage/pull/3705) |
-| 3695 | [Use default namespace for <Address>](https://github.com/Azure/sonic-buildimage/pull/3695) |
-| 3692 | [Fix the issue 'branch already exist' in rebuilds ](https://github.com/Azure/sonic-buildimage/pull/3692) |
-| 3672 | [Fpga crash fix ](https://github.com/Azure/sonic-buildimage/pull/3672) |
-| 3659 | [core_cleanup - Fix issue where core_cleanup job runs too frequently](https://github.com/Azure/sonic-buildimage/pull/3659) |
-| 3635 | [Remove the macros from 7170 buffer defaults files.](https://github.com/Azure/sonic-buildimage/pull/3635) |
-| 3614 | [Port a fix from FRR community](https://github.com/Azure/sonic-buildimage/pull/3614) |
-| 3610 | [Fixed return code processing in set_low_power_mode() for BFN platform](https://github.com/Azure/sonic-buildimage/pull/3610) |
-| 3604 | [changes for making snmp socket non-blocking](https://github.com/Azure/sonic-buildimage/pull/3604) |
 
 
 # Contributors 
