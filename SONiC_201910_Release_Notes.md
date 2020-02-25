@@ -42,7 +42,8 @@ Image  : https://sonic-jenkins.westus2.cloudapp.azure.com/ (Example - Image for 
 
 1. Kernal upgraded from 4.9.110-3deb9u6 (SONiC Release 201904) to 4.9.168-1+deb9u5 in this SONiC release. 
    Change log: https://tracker.debian.org/media/packages/l/linux/changelog-4.9.168-1deb9u5
-2. Docker upgrade - TBD : is there any security update w.r.t docker. 
+2. Docker upgraded from 18.09.2~3-0~debian-stretch to 18.09.8~3-0~debian-stretch. 
+   Change log: https://docs.docker.com/engine/release-notes/#18098 
 
 # Feature List
 
@@ -76,10 +77,6 @@ Image  : https://sonic-jenkins.westus2.cloudapp.azure.com/ (Example - Image for 
 | <strong>VRF</strong> - Sonic supports multiple loopback interfaces. Each loopback interfaces can belong to different VRF instances. In this feature we also support BGP and VRF support for FRR config template. Please find more details in [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/vrf/sonic-vrf-hld.md) | [3044](https://github.com/Azure/sonic-buildimage/pull/3044) , [3047](https://github.com/Azure/sonic-buildimage/pull/3047) , [943](https://github.com/Azure/sonic-swss/pull/943) , [1065](https://github.com/Azure/sonic-mgmt/pull/1065) |
 | <strong>ZTP</strong> - Zero Touch Provisioning (ZTP) service can be used by users to configure a fleet of switches using common configuration templates. Switches booting from factory default state should be able to communicate with remote provisioning server and download relevant configuration files and scripts to kick start more complex configuration steps. ZTP service takes user input in JSON format. Some of the supported features are - Dynamically generate DHCP client configuration based on current ZTP state and Added support to request and process hostname when using DHCPv6. Further details can be seen in [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/ztp/ztp.md) | [3227](https://github.com/Azure/sonic-buildimage/pull/3227) , [3298](https://github.com/Azure/sonic-buildimage/pull/3298)  , [1000](https://github.com/Azure/sonic-swss/pull/1000) , [3299](https://github.com/Azure/sonic-buildimage/pull/3299) , [12](https://github.com/Azure/sonic-ztp/pull/12), [599](https://github.com/Azure/sonic-utilities/pull/599) |
 
-
-<br>
-
-# Security Updates  
 
 <br>
 
