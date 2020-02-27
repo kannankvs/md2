@@ -10,7 +10,6 @@ This document captures the new features added and enhancements done on existing 
  * [Dependency Version](#dependency-version)
  * [Security Updates](#security-updates)
  * [Feature List](#feature-list)
- * [Security Updates](#security-updates)
  * [SAI APIs](#sai-apis)
  * [List of Major PR's](#enhancements)
 
@@ -41,9 +40,10 @@ Image  : https://sonic-jenkins.westus2.cloudapp.azure.com/  (Example - Image for
 
 # Security Updates
 
-1. Kernel upgraded from 4.9.110-3deb9u6 (SONiC Release 201904) to 4.9.168-1+deb9u5 in this SONiC release. 
+1. Kernal upgraded from 4.9.110-3deb9u6 (SONiC Release 201904) to 4.9.168-1+deb9u5 in this SONiC release. 
    Change log: https://tracker.debian.org/media/packages/l/linux/changelog-4.9.168-1deb9u5
-2. Docker upgrade - TBD : is there any security update w.r.t docker. 
+2. Docker upgraded from 18.09.2~3-0~debian-stretch to 18.09.8~3-0~debian-stretch. 
+   Change log: https://docs.docker.com/engine/release-notes/#18098 
 
 # Feature List
 
@@ -181,11 +181,6 @@ Zero Touch Provisioning (ZTP) service can be used by users to configure a fleet 
 
 <br>
 
-# Security Updates  
-
-<br>
-
-
 
 # SAI APIs
 
@@ -202,35 +197,11 @@ Please find the list of API's classified along the newly added SAI features. For
 
 
 
-# List of Major PR's 
+# Contributors 
 
-
-| PR   | Description                                                  |
-| ---- | ------------------------------------------------------------ |
-| 433  | [SONiC   Configuration Setup Service](https://github.com/Azure/SONiC/pull/433) |
-| 3066 | [Update   redis to 5.0.3](https://github.com/Azure/sonic-buildimage/pull/3066) |
-| 3728 | [barefoot_pmon Fixed pmon Docker failure](https://github.com/Azure/sonic-buildimage/pull/3728) |
-| 3705 | [LLDP changing the tx-interval parameter is not reflected on the peer device immediately](https://github.com/Azure/sonic-buildimage/pull/3705) |
-| 3695 | [Use default namespace for <Address>](https://github.com/Azure/sonic-buildimage/pull/3695) |
-| 3692 | [Fix the issue 'branch already exist' in rebuilds ](https://github.com/Azure/sonic-buildimage/pull/3692) |
-| 3672 | [Fpga crash fix ](https://github.com/Azure/sonic-buildimage/pull/3672) |
-| 3659 | [core_cleanup - Fix issue where core_cleanup job runs too frequently](https://github.com/Azure/sonic-buildimage/pull/3659) |
-| 3635 | [Remove the macros from 7170 buffer defaults files.](https://github.com/Azure/sonic-buildimage/pull/3635) |
-| 3614 | [Port a fix from FRR community](https://github.com/Azure/sonic-buildimage/pull/3614) |
-| 3610 | [Fixed return code processing in set_low_power_mode() for BFN platform](https://github.com/Azure/sonic-buildimage/pull/3610) |
-| 3604 | [changes for making snmp socket non-blocking](https://github.com/Azure/sonic-buildimage/pull/3604) |
-
-
-# List of Contributors. 
-
-1. Alibaba
-2. Aviz
-3. Broadcom
-4. Dell
-5. Linkedin
-6. Mellanox
-7. Microsoft
-8. Nephos
+SONiC community would like to thank all the contributors from various companies and the individuals who has contributed for the release. Special thanks to the major contributors, viz, Microsoft, Broadcom, DellEMC, Mellanox, Alibaba, Linkedin, Nephos & Aviz. 
 
 <br>
+
+
 
