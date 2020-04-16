@@ -171,7 +171,8 @@ iface eth0 inet static
    The loopback interface "lo" and management interface "eth0" are created.
    If a default route was already present in management VRF, it is added to the "default" routing table which is part of default VRF. This is done when the eth0 interface comes up. 
    When networking service is restarted, it will first bring down all existing interfaces. As part of "lo" down, previously created interface "lo-m" that was used as part of management VRF will be deleted.
-   
+
+These management VRF changes are implemented in the pull request [PR2585](https://github.com/Azure/sonic-buildimage/pull/2585) 
 
 #### Config Commands
 
@@ -234,6 +235,8 @@ Management IP address = 10.16.210.75/24
 Management NetWork Default Gateway = 10.16.210.254
 root@sonic:/etc/init.d#
 ```
+
+These CLI commands are implemented as part of the pull request [PR463](https://github.com/Azure/sonic-utilities/pull/463)
 
 ### IP Application Design
 This section explains the behavior of each application on the default VRF and management VRF. Application functionality differs based on whether the application is used to connect to the application daemons running in the device or the application is triggered from the device.
@@ -323,6 +326,25 @@ TACPLUS_SERVER address 10.11.55.41
 #### SNMP
 1. snmp to the device: SNMP being an UDP application, Linux netsmp 5.7.3 patch for VRF support is patched with SONiC sources. [PR2608](https://github.com/Azure/sonic-buildimage/pull/2608) and [PR472](https://github.com/Azure/sonic-utilities/pull/472) contains the changes done for SNMP.
 2. snmp traps from device: netsnmp 5.7.3 Linux patch has VRF support for traps. Conifuguration file needs to specify VRF name. Above mentioned PRs handle the required changes.
+
+#### NTP  
+When managmenet VRF is enabled, NTP application is restarted in the mvrf context by doing the following changes.
+Debian contains the NTP package that has got the NTP initialization script file /etc/init.d/ntp that calls "start-stop-daemon" command which in turn starts the "ntpd" daemon as follows.
+```
+start-stop-daemon --start --quiet --oknodo --pidfile $PIDFILE --startas $DAEMON -- -p $PIDFILE $NTPD_OPTS
+```
+When management VRF is enabled, this "ntpd" daemon should be started using "cgexec" as follows.
+```
+cgexec -g l3mdev:mgmt start-stop-daemon --start --quiet --oknodo --pidfile $PIDFILE --startas $DAEMON -- -p $PIDFILE $NTPD_OPTS
+```
+Since this file "/etc/init.d/ntp" is part of the default NTP package from debian, this file is manually copied into sonic-buildimage (at files/image_config/ntp/ntp) and modified to handle the mvrf enable status. It is then copied into /etc/init.d/ntp along with this mvrf changes. Whenever a new version of NTP is added to SONiC, care must be taken to repeat this change as required.
+
+In addtion to this change, NTP has got linux commands like "ntpq" which communicates with "ntpd" using the loopback IP address 127.0.0.1.
+Hence, a dummy interface "lo-m" is created and enslaved into "mgmt" and configured with the IP address 127.0.0.1
+
+These NTP changes are done as part of the pull request [PR3204](https://github.com/Azure/sonic-buildimage/pull/3204) 
+
+Similarly, the "show ntp" command is also enhanced to use "cgexec -g l3mdev:mgmt" as explained in the [PR627](https://github.com/Azure/sonic-utilities/pull/627)
  
 #### DHCP Client 
 DHCP client gets the IP address for the management ports from the DHCP server, since it is enabled on a per interface the IP address is received automatically. 
