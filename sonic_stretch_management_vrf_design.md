@@ -194,8 +194,9 @@ show mgmt-vrf route - This command displays the routes present in management VRF
 show management_interface address - This command displays the IP addresses configured for the management interface eth0.
 ```
 
-Examples:
-** show mgmt-vrf **  
+Examples:  
+
+** show mgmt-vrf **   
 ```
 root@sonic:/etc/init.d# show mgmt-vrf 
 
