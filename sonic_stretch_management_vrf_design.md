@@ -124,10 +124,10 @@ auto eth0
 iface eth0 inet static
     address 100.104.47.74
     netmask 255.255.255.0
-    ** vrf mgmt **  
+    vrf mgmt
     up ip -4 route add default via 100.104.47.254 dev eth0 table 5000 metric 201
-    ** up cgcreate -g l3mdev:mgmt  **  
-    ** up cgset -r l3mdev.master-device=mgmt mgmt  **  
+    up cgcreate -g l3mdev:mgmt
+    up cgset -r l3mdev.master-device=mgmt mgmt
 
 ```  
 
@@ -196,8 +196,6 @@ show management_interface address - This command displays the IP addresses confi
 
 Following are the example output from these show commands.
 
-** show mgmt-vrf **   
-
 ```
 root@sonic:/etc/init.d# show mgmt-vrf 
 
@@ -213,7 +211,6 @@ Management VRF interfaces in Linux:
 root@sonic:/etc/init.d#
 ```
 
-**  show mgmt-vrf routes **  
 
 ```
 root@sonic:/etc/init.d# show mgmt-vrf routes
@@ -231,7 +228,6 @@ broadcast 127.255.255.255 dev lo-m proto kernel scope link src 127.0.0.1
 root@sonic:/etc/init.d#
 ```
 
-** show management_interface address **  
 
 ```
 root@sonic:/etc/init.d# show management_interface address 
