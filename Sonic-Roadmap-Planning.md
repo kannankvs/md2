@@ -49,7 +49,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | SONiC.201807 | 07/30/18     | 1.3         |                   |
 |              |              |             | [gRPC](https://github.com/Azure/SONiC/pull/207)|
 |              |              |             | [Dtel support](https://github.com/Azure/SONiC/pull/182)|
-|              |              |             | SONiC Architecture and User Manual (Documentation)|
+|              |              |             | SONiC Architecture and User Manual (Documentation)| 
 |              |              |             | [Sensor transceiver monitoring](https://github.com/Azure/SONiC/pull/202)|
 |              |              |             |LLDP extended MIB: lldpremtable, lldplocporttable, lldpremmanaddrtable, lldplocmanaddrtable, lldplocporttable, lldpLocalSystemData|
 | SONiC.201811 | 11/30/18     | 1.3         | [Release Note](https://github.com/Azure/SONiC/blob/master/doc/SONiC%20201811%20Release%20Note.pdf)                                   |
@@ -182,6 +182,6 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 
 
 
-**NOTE**
 
-* Platform APIs will be backward compatible in 201908, will be cut over to new APIs in the next release
+**NOTE**
+* Platform APIs will be backwards compatible in 201908, will be cut over to new APIs in the next release
