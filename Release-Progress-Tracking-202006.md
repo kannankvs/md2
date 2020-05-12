@@ -1,4 +1,4 @@
-We track the progress of 202006 release in detail here. (Changed from 201912 to 202006)
+We track the progress of 202006 release in detail here. 
 
 | Feature                                                 | HLD<br/>Review<br/>Date | Contributor| Code Review Owner        | Code Review Date | 202006  Release | PR Link & Status of PR                                                     |
 | ------------------------------------------------------- | --------------------- | -----------|-----------| ------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
