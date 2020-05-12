@@ -10,7 +10,7 @@ We track the progress of 202006 release in detail here. (Changed from 201912 to 
 | Config Replace  | 7-Apr-20     | Broadcom   |  |   |   |  |
 | Consistent ECMP support  | 28-Apr-20     | Microsoft   |  |   |   |  |
 | Container warm restart (BGP/TeamD/SWSS/SyncD)    |      | Microsoft   |  |   |   |  |
-| [D-Bus to Host Communications] (https://github.com/Azure/SONiC/pull/541)  | 14-Apr-20     | Dell   |  |   |   |  |
+| [D-Bus to Host Communications](https://github.com/Azure/SONiC/pull/541)  | 14-Apr-20     | Dell   |  |   |   |  |
 | Debian 10 upgrade, base image,driver     |      | MSFT/MLNX/BRCM   |  |   |   |  |
 | Dynamic headroom calculation      |   Ready for review   |    |  |   |   |  |
 | Dynamic port break      |     |  LinkedIn  |  |   |   |  |
