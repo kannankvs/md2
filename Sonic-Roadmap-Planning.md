@@ -85,7 +85,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |              |              |             | [Configurable<br/>drop counters](https://github.com/Azure/SONiC/pull/434) |
 |              |              |             | [Log analyzer to pytest](https://github.com/Azure/SONiC/pull/421) |
 |              |              |             | [HW resource monitor](https://github.com/Azure/SONiC/pull/439) |
-| SONiC.202006 | 06/30/2020   | TBD         | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-201911) |
+| SONiC.202006 | 06/30/2020   | TBD         | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202006) |
 |            |            |            | [BFD - SW - 100ms interval from FRR](https://github.com/Azure/SONiC/pull/383) |
 |            |              |             | BroadView BST                                                |
 |           |              |             | Build Improvements |
