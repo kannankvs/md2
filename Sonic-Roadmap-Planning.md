@@ -86,25 +86,45 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |              |              |             | [Log analyzer to pytest](https://github.com/Azure/SONiC/pull/421) |
 |              |              |             | [HW resource monitor](https://github.com/Azure/SONiC/pull/439) |
 | SONiC.202006 | 06/30/2020   | TBD         | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202006) |
-|            |            |            | [BFD - SW - 100ms interval from FRR](https://github.com/Azure/SONiC/pull/383) |
-|            |              |             | BroadView BST                                                |
-|           |              |             | Build Improvements |
-|           |           |           | Core File Manager |
-| | | | [Debug Framework](https://github.com/Azure/SONiC/pull/398) |
-|            |              |             | Dynamic Break Out                                            |
-|            |              |             | Error handling enhancements |
-| | | | [Inband Flow<br/>Analyzer](https://github.com/Azure/SONiC/pull/427) |
-|            |              |             | [L2 functional and performance enhancements](https://github.com/Azure/SONiC/pull/379) |
-|           |           |           | [MLAG](https://github.com/Azure/SONiC/pull/325) |
-|  |              |             | [Multi-DB optimization](https://github.com/Azure/SONiC/blob/ed69d427dcf358299b2c1b812e59a1e26a4ef4a5/doc/database/multi_database_instances.md) |
-|  |              |             | [NAT](https://github.com/Azure/SONiC/pull/390)               |
-|  |              |             | ONIE FW tools |
-|  |              |             | Platform APIs move to new APIs *                             |
-|  |              |             | [Platform Development<br/>Environment](https://github.com/Azure/SONiC/pull/407) |
-|  |              |             | Platform Driver Development Framework                        |
-| | | | [STP/PVST](https://github.com/Azure/SONiC/pull/386) |
-| | | | Test to Pytest |
-| | | | [Threshold(BST)](https://github.com/Azure/SONiC/pull/429) |
+|            |            |            | [AAA improvement ](https://github.com/Azure/SONiC/pull/541/files#diff-0fe927c97d0445fd919a2316bd0c5aa7) |
+|            |              |             | ACL-based rate limiting, Mirroring, L2                                                |
+|           |              |             | [BFD SW 100ms interval from FRR](https://github.com/Azure/SONiC/pull/383/files#diff-93861062eace24add663831081adefc8) |
+|           |           |           | Build Improvements |
+| | | | Bulk API for route |
+|            |              |             | Config Replace                                            |
+|            |              |             | Consistent ECMP support |
+| | | | Container warm restart (BGP/TeamD/SWSS/SyncD) |
+|            |              |             | [D-Bus to Host Communications](https://github.com/Azure/SONiC/pull/541/files#diff-0fe927c97d0445fd919a2316bd0c5aa7) |
+|           |           |           | Debian 10 upgrade, base image,driver |
+|  |              |             | Dynamic headroom calculation               |
+|  |              |             | Dynamic port break |
+|  |              |             | Egress shaping (port, queue)                             |
+|  |              |             | EVPN/VXLAN |
+|  |              |             | Flow-based Services (incl. packet DSCP remark)                        |
+| | | | FRR BGP NBI (Dell) |
+| | | | FW utils extension: SSD upgrade |
+| | | | Gearbox |
+| | | | IP Helper |
+| | | | IPv6 Link Local and BGP Unnumbered |
+| | | | Kernel programming performance enhancement |
+| | | | Kubernetes (docker to be controlled by Kubernetes) |
+| | | | L2 Dot1Q tunneling support |
+| | | | Management Framework (Phase 2) |
+| | | | Management Framework RBAC (Dell) |
+| | | | MC-LAG (L2) |
+| | | | Multi-ASIC 202006 |
+| | | | Multi-DB enhancement |
+| | | | PDDF advance to SONiC Platform 2.0, BMC |
+| | | | PDK - Platform Development Environment |
+| | | | PDK - Platform Driver Development Framework |
+| | | | Port Mirroring |
+| | | | [Proxy ARP](https://github.com/Azure/SONiC/pull/579/files#diff-27f0a7d1396a80ae9bb361e779f14e8c) |
+| | | | Pytest 100% moved from ansible to Pytest |
+| | | | RADIUS AAA |
+| | | | SPytest |
+| | | | Static Anycast Gateway |
+| | | | System health and system LED |
+| | | | Thermal control |
 |  |              |             |                                                              |
 | Backlog      |              |             |                          |
 |              |              |             | CLI framework|
