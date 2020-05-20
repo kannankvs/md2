@@ -79,6 +79,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |              |              |             | Platform test                                                |
 |              |              |             | [SSD diagnostic<br/>tolling](https://github.com/Azure/SONiC/pull/378) |
 |              |              |             | [Management<br/>Framework](https://github.com/Azure/SONiC/pull/436) |
+|              |              |             | [Multi-DB optimization-Part 1](https://github.com/Azure/SONiC/blob/master/doc/database/multi_database_instances.md) |
 |              |              |  | [Sub-port support](https://github.com/Azure/SONiC/pull/420)  |
 |              |              |             | [Build time<br/>improvements](https://github.com/Azure/SONiC/pull/419) |
 |              |              |  | [Egress mirroring and<br/>ACL action support check via SAI](https://github.com/Azure/SONiC/pull/411) |
@@ -113,10 +114,12 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | | | | Management Framework RBAC (Dell) |
 | | | | MC-LAG (L2) |
 | | | | Multi-ASIC 202006 |
-| | | | Multi-DB enhancement |
+| | | | Multi-DB enhancement-Part 2 |
+| | | | ONIE FW tools |
 | | | | PDDF advance to SONiC Platform 2.0, BMC |
 | | | | PDK - Platform Development Environment |
 | | | | PDK - Platform Driver Development Framework |
+| | | | Platform APIs move to new APIs * - Continuation |
 | | | | Port Mirroring |
 | | | | [Proxy ARP](https://github.com/Azure/SONiC/pull/579/files#diff-27f0a7d1396a80ae9bb361e779f14e8c) |
 | | | | Pytest 100% moved from ansible to Pytest |
@@ -124,6 +127,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | | | | SPytest |
 | | | | Static Anycast Gateway |
 | | | | System health and system LED |
+| | | | Test to Pytest  |
 | | | | Thermal control |
 |  |              |             |                                                              |
 | Backlog      |              |             |                          |
@@ -186,6 +190,8 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | | | | SNMP Traps |
 | | | | SNMP IS-CLI |
 | | | | SNMP Bridge MIBs |
+| | | | BroadView BST |
+| | | | [Inband Flow Analyzer](https://github.com/Azure/SONiC/pull/427) |
 | | | |  |
 | | | | **Other** |
 | | | | LinuxPTP |
@@ -198,7 +204,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | | | | Kernel optimizations<br/>(smaller) |
 | | | | Kernel 4.9.189 |
 | | | | Erase System<br/>Configuration files |
-
+| | | | Core File Manager |
 
 
 
