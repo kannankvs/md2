@@ -29,10 +29,12 @@ We track the progress of 202006 release in detail here.
 | Management Framework RBAC (Dell)      | 04/21/20    |  Broadcom/Dell  |  |   |   |  |
 | MC-LAG (L2)      | 05/05/20    |  Broadcom  |  |   |   |  |
 | Multi-ASIC 202006       |     |  Microsoft  |  |   |   |  |
-| Multi-DB enhancement      |     |  Alibaba  |  |   |   |  |
+| Multi-DB enhancement-Part 2     |     |  Alibaba  |  |   |   |  |
+| ONIE FW tools     |     |  Mellanox  |  |   |   |  |
 | PDDF advance to SONiC Platform 2.0, BMC      | 04/07/20    |  Broadcom  |  |   |   |  |
 | PDK - Platform Development Environment      | Merged    |  Broadcom  |  |   |   |  |
 | PDK - Platform Driver Development Framework      | Merged    |  Broadcom  |  |   |   |  |
+| Platform APIs move to new APIs * - Continuation      |     |    |  |   |   |  |
 | Port Mirroring      | 03/24/20    |  Broadcom  |  |   |   |  |
 | [Proxy ARP](https://github.com/Azure/SONiC/pull/579/files#diff-27f0a7d1396a80ae9bb361e779f14e8c)       | Ready for review    |  Mellanox  |  |   |   |  |
 | Pytest 100% moved from ansible to Pytest       |     |  MSFT/MLNX  |  |   |   |  |
@@ -40,4 +42,5 @@ We track the progress of 202006 release in detail here.
 | SPytest      | 05/26/20    |  Broadcom  |  |   |   |  |
 | Static Anycast Gateway      | 04/21/20    |  Broadcom  |  |   |   |  |
 | System health and system LED      |  Ready in 2 weeks 5/26   |  Mellanox  |  |   |   |  |
+| Test to Pytest        |     |   |  |   |   |  |
 | Thermal control        |     |  Mellanox  |  |   |   |  |
