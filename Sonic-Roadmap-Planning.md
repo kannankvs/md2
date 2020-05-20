@@ -86,7 +86,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |              |              |             | [Configurable<br/>drop counters](https://github.com/Azure/SONiC/pull/434) |
 |              |              |             | [Log analyzer to pytest](https://github.com/Azure/SONiC/pull/421) |
 |              |              |             | [HW resource monitor](https://github.com/Azure/SONiC/pull/439) |
-| SONiC.202006 | 06/30/2020   | TBD         | [Progress Tracking](https://github.com/kannankvs/md2/blob/master/Release-Progress-Tracking-202006.md) |
+| SONiC.202006 | 06/30/2020   | TBD         | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202006) |
 |            |            |            | [AAA improvement ](https://github.com/Azure/SONiC/pull/541/files#diff-0fe927c97d0445fd919a2316bd0c5aa7) |
 |            |              |             | ACL-based rate limiting, Mirroring, L2                                                |
 |           |              |             | [BFD SW 100ms interval from FRR](https://github.com/Azure/SONiC/pull/383/files#diff-93861062eace24add663831081adefc8) |
