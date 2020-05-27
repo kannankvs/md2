@@ -127,7 +127,6 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | | | | SPytest |
 | | | | Static Anycast Gateway |
 | | | | System health and system LED |
-| | | | Test to Pytest  |
 | | | | Thermal control |
 |  |              |             |                                                              |
 | Backlog      |              |             |                          |
