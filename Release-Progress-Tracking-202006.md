@@ -42,5 +42,4 @@ We track the progress of 202006 release in detail here.
 | SPytest      | 05/26/20    |  Broadcom  |  |   |   |  |
 | Static Anycast Gateway      | 04/21/20    |  Broadcom  |  |   |   |  |
 | System health and system LED      |  Ready in 2 weeks 5/26   |  Mellanox  |  |   |   |  |
-| Test to Pytest        |     |   |  |   |   |  |
 | Thermal control        |     |  Mellanox  |  |   |   |  |
