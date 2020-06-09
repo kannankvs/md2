@@ -121,7 +121,7 @@ A sub port interface is a logical interface that can be created on a physical po
 #### VRF 
 Sonic supports multiple loopback interfaces. Each loopback interfaces can belong to different VRF instances. In this feature we also support BGP and VRF support for FRR config template. 
 <br> Refer  [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/vrf/sonic-vrf-hld.md) for more details.
-<br> **Pull Requests** :  [3044](https://github.com/Azure/sonic-buildimage/pull/3044) , [3047](https://github.com/Azure/sonic-buildimage/pull/3047) , [943](https://github.com/Azure/sonic-swss/pull/943) , [1065](https://github.com/Azure/sonic-mgmt/pull/1065) 
+<br> **Pull Requests** :  [3952](https://github.com/Azure/sonic-buildimage/pull/3952) , [943](https://github.com/Azure/sonic-swss/pull/943) , [1065](https://github.com/Azure/sonic-mgmt/pull/1065) 
 
 #### ZTP 
 Zero Touch Provisioning (ZTP) service can be used by users to configure a fleet of switches using common configuration templates. Switches booting from factory default state should be able to communicate with remote provisioning server and download relevant configuration files and scripts to kick start more complex configuration steps. ZTP service takes user input in JSON format. Some of the supported features are - Dynamically generate DHCP client configuration based on current ZTP state and Added support to request and process hostname when using DHCPv6. 
