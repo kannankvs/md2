@@ -86,10 +86,7 @@ Management VRF (mvrf) feature provides a separation between the management netwo
 <br> Refer below PR's for more details. 
 <br> **Pull Requests** :  [2585](https://github.com/Azure/sonic-buildimage/pull/2585)  , [2608](https://github.com/Azure/sonic-buildimage/pull/2608)  ,  [3204](https://github.com/Azure/sonic-buildimage/pull/3204)  ,  [463](https://github.com/Azure/sonic-utilities/pull/463)  ,  [472](https://github.com/Azure/sonic-utilities/pull/472)  ,  [627](https://github.com/Azure/sonic-utilities/pull/627)  ,  [3586](https://github.com/Azure/sonic-buildimage/pull/3586) 
 
-#### MLAG
-In MC-LAG scenario, two peer devices form one end point of a LAG, these two devices must have the same MAC address since it’s used for LACP. During warm-reboot, this MAC must not be changed. supported  mac update on fdborch and added support to change rif mac address. 
-<br> Refer  [HLD Document](https://github.com/Azure/SONiC/blob/f478fe7cbc03c144f3b147e9638f460f764ce4b7/doc/Sonic-mclag-hld.md) 
-<br> **Pull Requests** :  [2154](https://github.com/Azure/sonic-buildimage/pull/2514) , [1003](https://github.com/Azure/sonic-swss/pull/1003) , [877](https://github.com/Azure/sonic-swss/pull/877) , [814](https://github.com/Azure/sonic-swss/pull/814) , [811](https://github.com/Azure/sonic-swss/pull/811) , [810](https://github.com/Azure/sonic-swss/pull/810) , [809](https://github.com/Azure/sonic-swss/pull/809) ,  [275](https://github.com/Azure/sonic-swss-common/pull/275) , [453](https://github.com/Azure/sonic-utilities/pull/453) 
+
 
 #### Multi-DB optimization 
 Creating multiple database instances help us to separate the databases based on their operation frequency or their role in the whole SONiC system, for example, like state database and loglevel database are not key features, we can avoid them affecting read and write APPL_DB or ASIC_DB via multiple database instances. 
