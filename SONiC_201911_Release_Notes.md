@@ -11,7 +11,7 @@ This document captures the new features added and enhancements done on existing 
  * [Security Updates](#security-updates)
  * [Feature List](#feature-list)
  * [SAI APIs](#sai-apis)
- * [List of Major PR's](#enhancements)
+ * [Contributors](#contributors)
 
 
 # Branch and Image Location  
