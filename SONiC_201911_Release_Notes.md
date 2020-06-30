@@ -104,7 +104,7 @@ This test plan is to check the functionalities of platform related software comp
 <br> **Pull Requests** :  [915](https://github.com/Azure/sonic-mgmt/pull/915)   , [980](https://github.com/Azure/sonic-mgmt/pull/980)  , [1079](https://github.com/Azure/sonic-mgmt/pull/1079) 
 
 #### Proxy ARP  
-The design is intended to have a generic approach for proxy-arp feature. A user can set an attribute "proxy_arp" to the config_db entry for INTERFACE table entry. In addition, for "Vnet" interfaces, this is implicitely "enabled".The default value if not specified would be "disabled"
+When an interface is enabled with "proxy_arp", the same is enabled in the kernel. ASIC ARP packet action is also updated to trap these packets to CPU in those interfaces.
 <br> Refer [HLD Document](https://github.com/Azure/SONiC/blob/master/doc/arp/Proxy%20Arp.md) for more details. 
 <br> **Pull Requests** :  [617](https://github.com/Azure/SONiC/pull/617) 
 
@@ -124,7 +124,7 @@ A sub port interface is a logical interface that can be created on a physical po
 <br> **Pull Requests** :   [998](https://github.com/opencomputeproject/SAI/pull/998) , [284](https://github.com/Azure/sonic-swss-common/pull/284) , [969](https://github.com/Azure/sonic-swss/pull/969)  , [871](https://github.com/Azure/sonic-swss/pull/871) , [3412](https://github.com/Azure/sonic-buildimage/pull/3412) , [3422](https://github.com/Azure/sonic-buildimage/pull/3422) , [3413](https://github.com/Azure/sonic-buildimage/pull/3413) , [638](https://github.com/Azure/sonic-utilities/pull/638) , [642](https://github.com/Azure/sonic-utilities/pull/642) , [651](https://github.com/Azure/sonic-utilities/pull/651) |
 
 #### Thermal control 
-The purpose of Thermal Control is to keep the switch at a proper temperature by using cooling devices,Thermal control daemon need to monitor the temperature of devices and the running status of fan.It store temperature values fetched from sensors and thermal device running status to the DB, to make these data available to CLI and SNMP or other apps which interested.
+Thermal control daemon has been added to monitor the temperature of devices (CPU, ASIC, optical modules, etc) and the running status of fan. It retrieves the switch device temperatures via platform APIs and raises alarms when the high/low thresholds are hit.It also stores temperature values fetched from sensors and thermal device running status to the DB.
 <br> Refer  [HLD Document](https://github.com/Azure/SONiC/blob/master/thermal-control-design.md) for more details.
 <br> **Pull Requests** :  [73](https://github.com/Azure/sonic-platform-common/pull/73), [777](https://github.com/Azure/sonic-utilities/pull/777), [49](https://github.com/Azure/sonic-platform-daemons/pull/49), [3949](https://github.com/Azure/sonic-buildimage/pull/3949),[832](https://github.com/Azure/sonic-utilities/pull/832) 
 
