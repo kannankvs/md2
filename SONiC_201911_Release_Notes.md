@@ -23,7 +23,7 @@ Image  : https://sonic-jenkins.westus2.cloudapp.azure.com/  (Example - Image for
 
 |Feature                    | Version  |
 | ------------------------- | --------------- |
-| Linux kernel version      | linux_4.9.168-1+deb9u5   |
+| Linux kernel version      | linux_4.9.0-11-2 (4.9.189-3+deb9u2)   |
 | SAI   version             | SAI v1.5.1    |
 | FRR                       | 7.2    |
 | LLDPD                     | 0.9.6-1    |
