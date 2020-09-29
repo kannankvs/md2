@@ -1,4 +1,4 @@
-This document provides general information about the ways of contribution to the SONiC Community.
+TEST1 - This document provides general information about the ways of contribution to the SONiC Community.
 ## Joining the SONiC Community
  A member can contribute the community by signing in Github and can access the SONiC contribution. A member can join the various SONiC groups
  and can start attending actively over the weekly discussion on the ongoing activities. You can find SONiC mailing list [here](https://azure.github.io/SONiC/contact.html).
