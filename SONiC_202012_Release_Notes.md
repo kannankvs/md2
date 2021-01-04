@@ -55,8 +55,10 @@ Image  : https://sonic-jenkins.westus2.cloudapp.azure.com/  (Example - Image for
 The goal of SONiC warm reboot is to be able restart and upgrade SONiC software without impacting the data plane. Warm restart of each individual process/docker is also part of the goal. Except for syncd and database docker, it is desired for all other network applications and dockers to support un-planned warm restart.
 
 <br> **Pull Requests** :  [392](https://github.com/Azure/sonic-buildimage/pull/3992), [1036](https://github.com/Azure/sonic-utilities/pull/1036/files), [5223](https://github.com/Azure/sonic-buildimage/pull/5233),[5163](https://github.com/Azure/sonic-buildimage/pull/5163/files), [5108](https://github.com/Azure/sonic-buildimage/pull/5108/files) & [1036](https://github.com/Azure/sonic-utilities/pull/1036/files).
+
 #### CoPP Config/Management
-<br> **Pull Requests** :
+During SWSS start, the prebuilt copp.json file is loaded as part of start script swssconfig.sh and written to APP DB. CoppOrch then translates it to Host trap/policer tables and programmed to SAI. With this enhancement, the CoPP tables shall be loaded to Config DB instead of APP DB. The default CoPP json file shall be prebuilt to the image and loaded during initialization. Any Config DB entries present shall be configured overwriting the default CoPP tables. This also ensures backward compatibility. 
+<br> **Pull Requests** : [358](https://github.com/Azure/sonic-swss-common/pull/358), [1333](https://github.com/Azure/sonic-swss/pull/1333), [4861](https://github.com/Azure/sonic-buildimage/pull/4861) & [1004](https://github.com/Azure/sonic-utilities/pull/1004)
 
 #### Console Support for SONiC (Hardware)
 <br> **Pull Requests** :
