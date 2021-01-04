@@ -74,13 +74,16 @@ This feature enables the synchronous mode for a closed-loop execution if SAI API
 <br> **Pull Requests** : [5237](https://github.com/Azure/sonic-buildimage/pull/5237) , [650](https://github.com/Azure/sonic-buildimage/pull/650) , [652](https://github.com/Azure/sonic-buildimage/pull/652) , [653](https://github.com/Azure/sonic-buildimage/pull/653), [1094](https://github.com/Azure/sonic-utilities/pull/1094) & [5308](https://github.com/Azure/sonic-buildimage/pull/5308).
 
 #### EVPN/VXLAN
-<br> **Pull Requests** :
+This feature provides general information about the EVPN VXLAN feature implementation based on RFC 7432 and 8365 in SONiC. This feature covers the aspects of the SONiC software components for L2 & L3 EVPN support, including Orchestration agent submodules (FdbOrch, VXLANOrch, VrfOrch, RouteOrch, etc.), SAI objects, SwSS managers (VXLAN, VRF managers), interactions with Linux kernel, FRR (BGP, Zebra), and syncd modules (fpmsyncd, fdbsyncd, neighsyncd).
+<br> **Pull Requests** : [339](https://github.com/Azure/sonic-swss-common/pull/339) ,[350](https://github.com/Azure/sonic-swss-common/pull/350) , [1264](https://github.com/Azure/sonic-swss/pull/1264) , [1266](https://github.com/Azure/sonic-swss/pull/1266) , [1318](https://github.com/Azure/sonic-swss/pull/1318) , [1267](https://github.com/Azure/sonic-swss/pull/1267) & [870](https://github.com/Azure/sonic-utilities/pull/870).
 
 #### SONiC entity MIB extensions
-<br> **Pull Requests** :
+The Entity MIB contains several groups of MIB objects: entityPhysical group, entityLogical group and so on. Currently SONiC only implemented part of the entityPhysical group following RFC2737. Since entityPhysical group is mostly common used, this extension will focus on entityPhysical group and leave other groups for future implementation. The group entityPhysical contains a single table called "entPhysicalTable" to identify the physical components of the system. 
+<br> **Pull Requests** :  [134](https://github.com/Azure/sonic-platform-common/pull/134), [102](https://github.com/Azure/sonic-platform-daemons/pull/102), [5645](https://github.com/Azure/sonic-buildimage/pull/5645), [168](https://github.com/Azure/sonic-snmpagent/pull/168)  & [2379](https://github.com/Azure/sonic-mgmt/pull/2379)
 
 #### FRR BGP NBI
-<br> **Pull Requests** :
+This feature extends and provides unified configuration and management capability for FRR-BGP features used in SONiC. This allows the user to configure & manage FRR-BGP using SONiC Management Framework with Open Config data models via REST, gNMI and also provides access via SONiC Management Framework CLI as well.
+<br> **Pull Requests** : [5142](https://github.com/Azure/sonic-buildimage/pull/5142)
 
 #### Gearbox
 <br> **Pull Requests** :
