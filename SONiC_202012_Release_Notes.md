@@ -48,12 +48,10 @@ Image  : https://sonic-jenkins.westus2.cloudapp.azure.com/  (Example - Image for
 # Feature List
 
 #### Consistent ECMP support (fine grain ECMP)
-
 <br> **Pull Requests** :  [1315](https://github.com/Azure/sonic-swss/pull/1315), [623](https://github.com/Azure/SONiC/pull/623), [1788](https://github.com/Azure/sonic-mgmt/pull/1788), [4985](https://github.com/Azure/sonic-buildimage/pull/4985), [374](https://github.com/Azure/sonic-swss-common/pull/374), [659](https://github.com/Azure/SONiC/pull/659), [1056](https://github.com/Azure/sonic-utilities/pull/1056), [5518](https://github.com/Azure/sonic-buildimage/pull/5518), [5198](https://github.com/Azure/sonic-buildimage/pull/5198), [693](https://github.com/Azure/SONiC/pull/693). 
 
 #### Container warm restart (BGP/TeamD/SWSS/SyncD)
 The goal of SONiC warm reboot is to be able restart and upgrade SONiC software without impacting the data plane. Warm restart of each individual process/docker is also part of the goal. Except for syncd and database docker, it is desired for all other network applications and dockers to support un-planned warm restart.
-
 <br> **Pull Requests** :  [392](https://github.com/Azure/sonic-buildimage/pull/3992), [1036](https://github.com/Azure/sonic-utilities/pull/1036/files), [5223](https://github.com/Azure/sonic-buildimage/pull/5233),[5163](https://github.com/Azure/sonic-buildimage/pull/5163/files), [5108](https://github.com/Azure/sonic-buildimage/pull/5108/files) & [1036](https://github.com/Azure/sonic-utilities/pull/1036/files).
 
 #### CoPP Config/Management
@@ -61,16 +59,19 @@ During SWSS start, the prebuilt copp.json file is loaded as part of start script
 <br> **Pull Requests** : [358](https://github.com/Azure/sonic-swss-common/pull/358), [1333](https://github.com/Azure/sonic-swss/pull/1333), [4861](https://github.com/Azure/sonic-buildimage/pull/4861) & [1004](https://github.com/Azure/sonic-utilities/pull/1004)
 
 #### Console Support for SONiC (Hardware)
-<br> **Pull Requests** :
+<br> **Pull Requests** :[5571](https://github.com/Azure/sonic-buildimage/pull/5571) & [1155](https://github.com/Azure/sonic-utilities/pull/1155) 
 
 #### Console Support for SONiC (SSH forwarding)
-<br> **Pull Requests** :
+This feature describes the persist console configurations to control how to view/connect to a device via serial link.
+<br> **Pull Requests** : [664](https://github.com/Azure/SONiC/pull/664), [673](https://github.com/Azure/SONiC/pull/673) ,[1117](https://github.com/Azure/sonic-utilities/pull/1117) , [1120](https://github.com/Azure/sonic-utilities/pull/1120), [1130](https://github.com/Azure/sonic-utilities/pull/1130) ,[1136](https://github.com/Azure/sonic-utilities/pull/1136) , [1166](https://github.com/Azure/sonic-utilities/pull/1166) , [1173](https://github.com/Azure/sonic-utilities/pull/1173), [1176](https://github.com/Azure/sonic-utilities/pull/1176) , [5438](https://github.com/Azure/sonic-buildimage/pull/5438) & [5717](https://github.com/Azure/sonic-buildimage/pull/5717).
 
 #### Dynamic headroom calculation
-<br> **Pull Requests** :
+This feature defines the solution on how the headroom is calculated by the well known formula based with the cable length and speed as input. Arbitrary cable length will be supported or dynamically calculation for short.
+<br> **Pull Requests** : [1338](https://github.com/Azure/sonic-swss/pull/1338), [973](https://github.com/Azure/sonic-utilities/pull/973), [4881](https://github.com/Azure/sonic-buildimage/pull/4881), [1971](https://github.com/Azure/sonic-mgmt/pull/1971), [361](https://github.com/Azure/sonic-swss-common/pull/361)
 
 #### Enable synchornous SAI APIs (error handling)
-<br> **Pull Requests** :
+This feature enables the synchronous mode for a closed-loop execution if SAI APIs from orchagent. In contrast to the previous asynchronous mode which cannot properly handle SAI API failures, the synchronous mode can gracefully handle SAI API failures by conducting the proper actions in orchagent. Therefore, the synchronous mode can substantially improve the reliability of SONiC.
+<br> **Pull Requests** : [5237](https://github.com/Azure/sonic-buildimage/pull/5237) , [650](https://github.com/Azure/sonic-buildimage/pull/650) , [652](https://github.com/Azure/sonic-buildimage/pull/652) , [653](https://github.com/Azure/sonic-buildimage/pull/653), [1094](https://github.com/Azure/sonic-utilities/pull/1094) & [5308](https://github.com/Azure/sonic-buildimage/pull/5308).
 
 #### EVPN/VXLAN
 <br> **Pull Requests** :
