@@ -9,7 +9,24 @@ This document provides general information about the ways of contribution to the
 
 # Legal
 We welcome everyone to contribute to SONiC project. A [Contribution License Agreement](https://www.1eswiki.com/wiki/Automating_Contribution_License_Agreements) is required before you making a contribution to the open source project. 
-I am in <span style="font-family:Papyrus; font-size:50em;">TROUBLE!</span>
+<sub><sup>KVSKcombining the two tags</sup></sub>
+<sub>KVSKcombining the only sub tags</sub>
+<sup>KVSKcombining the only sup tags</sup>
+ <font size="1"> This is my text number1</font> 
+
+ <font size="2"> This is my text number 2 </font>
+ 
+ <font size="3"> This is my text number 3</font> 
+ 
+ <p style="font-family: times, serif; font-size:11pt; font-style:italic">
+    Why did we use these specific parameters during the calculation of the fingerprints?
+</p>
+
+ <font size="4"> This is my text number 4</font> 
+ 
+ <font size="5"> This is my text number 5</font> 
+ 
+ <font size="6"> This is my text number 6</font>
 
 Please follow the process and sign the CLA [here](https://cla.microsoft.com). Thanks for your support.
 
