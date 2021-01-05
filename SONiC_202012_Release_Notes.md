@@ -1,4 +1,4 @@
-# SONiC 202006 Release Notes
+# SONiC 202012 Release Notes
 
 This document captures the new features added and enhancements done on existing features/sub-features for the SONiC 202012 release.
 
