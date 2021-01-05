@@ -10,6 +10,17 @@ This document provides general information about the ways of contribution to the
 # Legal
 We welcome everyone to contribute to SONiC project. A [Contribution License Agreement](https://www.1eswiki.com/wiki/Automating_Contribution_License_Agreements) is required before you making a contribution to the open source project. 
 <sub><sup>KVSKcombining the two tags</sup></sub>
+ <font size="1"> This is my text number1</font> 
+
+ <font size="2"> This is my text number 2 </font>
+ 
+ <font size="3"> This is my text number 3</font> 
+ 
+ <font size="4"> This is my text number 4</font> 
+ 
+ <font size="5"> This is my text number 5</font> 
+ 
+ <font size="6"> This is my text number 6</font>
 
 Please follow the process and sign the CLA [here](https://cla.microsoft.com). Thanks for your support.
 
