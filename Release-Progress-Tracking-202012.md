@@ -1,4 +1,4 @@
-<sub><sup> 202012 Features Tracking 
+<sub> 202012 Features Tracking 
 
 | Feature| HLD<br/>Review<br/>Date | Owner| Code<br>Review<br>Owner| Code<br>Review<br>Date |Feature Complete|CLI,Config DB|Code PR Status   |
 | ------ | ------- | -----|---------| --------|----|-------- | ---------- | 
