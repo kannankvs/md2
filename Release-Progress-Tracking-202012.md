@@ -1,4 +1,4 @@
-<sub><sup> 202012 Features Tracking </sup></sub>
+<sub><sup> 202012 Features Tracking 
 
 | Feature| HLD<br/>Review<br/>Date | Owner| Code<br>Review<br>Owner| Code<br>Review<br>Date |Feature Complete|CLI,Config DB|Code PR Status   |
 | ------ | ------- | -----|---------| --------|----|-------- | ---------- | 
@@ -38,4 +38,4 @@
 | [LAG Support for Chassis](https://github.com/Azure/SONiC/blob/332ca53d938e0df24c78d76bcf1117d896ed2683/doc/voq/lag_hld.md)<br> [HLD PR](https://github.com/Azure/SONiC/pull/697) - Open | Reviewed | Nokia   | MSFT,<br> Arista | 11/30/2020 | | | **Will be deferred to 202106** <br> |
 | [Chassis infrastructure, T2 topologies and sample Testcases converted](https://github.com/Azure/sonic-mgmt/blob/master/ansible/library/multi-asic_aware_module_requirements.md)<br>[HLD PR](https://github.com/Azure/sonic-mgmt/pull/2511)<br>[Supporting HLD PR](https://github.com/Azure/sonic-mgmt/pull/2347)| Reviewed | Nokia/<br>MSFT  | Cisco,<br> Arista | 10/30/2020| |  | [2245](https://github.com/Azure/sonic-mgmt/pull/2245) - Merged<br>[2417](https://github.com/Azure/sonic-mgmt/pull/2417) - Merged <br>[2638](https://github.com/Azure/sonic-mgmt/pull/2638/) - Merged |
 | Inband port support for Chassis <br>[HLD PR](https://github.com/Azure/SONiC/pull/639)-Merged <br>[HLD PR](https://github.com/Azure/SONiC/pull/689) - Open<br>[HLD PR](https://github.com/Azure/SONiC/pull/694) - Merged  |  11/25/2020 | Nokia  | MSFT,<br> Arista | TBD | | |**Will be deferred to 202106** <br>  |
-| [Everflow Support](https://github.com/Azure/SONiC/blob/9c08b2f3f77230017c7035ceaf880746cb590d49/doc/voq/everflow.md)<br>[HLD PR](https://github.com/Azure/SONiC/pull/716/files) - Open | Reviewed | Arista | MSFT,<br> Nokia | | | |**Will be deferred to 202106** <br> [1530](https://github.com/Azure/sonic-swss/pull/1530) - Open|
+| [Everflow Support](https://github.com/Azure/SONiC/blob/9c08b2f3f77230017c7035ceaf880746cb590d49/doc/voq/everflow.md)<br>[HLD PR](https://github.com/Azure/SONiC/pull/716/files) - Open | Reviewed | Arista | MSFT,<br> Nokia | | | |**Will be deferred to 202106** <br> [1530](https://github.com/Azure/sonic-swss/pull/1530) - Open| </sup></sub>
