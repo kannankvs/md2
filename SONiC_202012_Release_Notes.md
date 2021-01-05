@@ -59,7 +59,7 @@ During SWSS start, the prebuilt copp.json file is loaded as part of start script
 <br> **Pull Requests** : [358](https://github.com/Azure/sonic-swss-common/pull/358), [1333](https://github.com/Azure/sonic-swss/pull/1333), [4861](https://github.com/Azure/sonic-buildimage/pull/4861) & [1004](https://github.com/Azure/sonic-utilities/pull/1004)
 
 #### Console Support for SONiC (Hardware)
-<br> **Pull Requests** :[5571](https://github.com/Azure/sonic-buildimage/pull/5571) & [1155](https://github.com/Azure/sonic-utilities/pull/1155) 
+ **Pull Requests** :[5571](https://github.com/Azure/sonic-buildimage/pull/5571) & [1155](https://github.com/Azure/sonic-utilities/pull/1155) 
 
 #### Console Support for SONiC (SSH forwarding)
 This feature describes the persist console configurations to control how to view/connect to a device via serial link.
@@ -91,10 +91,10 @@ This feature deals in depth with kubernetes-support. With this feature, an image
 <br> **Pull Requests** : [5421](https://github.com/Azure/sonic-buildimage/pull/5421), [1133](https://github.com/Azure/sonic-utilities/pull/1133) 
 
 #### Merge common lib for C++ and python (SWSS common lib)
-<br> **Pull Requests** : [378](https://github.com/Azure/sonic-swss-common/pull/378) 
+**Pull Requests** : [378](https://github.com/Azure/sonic-swss-common/pull/378) 
 
 #### Move from Python2->python3
-<br> **Pull Requests** : [5886](https://github.com/Azure/sonic-buildimage/pull/5886), [6038](https://github.com/Azure/sonic-buildimage/pull/6038), [6162](https://github.com/Azure/sonic-buildimage/pull/6162), [6176](https://github.com/Azure/sonic-buildimage/pull/6176), [1542](https://github.com/Azure/sonic-swss/pull/1542)
+**Pull Requests** : [5886](https://github.com/Azure/sonic-buildimage/pull/5886), [6038](https://github.com/Azure/sonic-buildimage/pull/6038), [6162](https://github.com/Azure/sonic-buildimage/pull/6162), [6176](https://github.com/Azure/sonic-buildimage/pull/6176), [1542](https://github.com/Azure/sonic-swss/pull/1542)
 
 #### Multi-ASIC 202006
 This feature is for a platform with more than one ASIC present on it, which is defined as a multi ASIC platform. SONiC so far supports platforms with single ASIC, we are enhancing SONiC to support multiple ASIC platforms.
