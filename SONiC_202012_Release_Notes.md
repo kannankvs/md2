@@ -81,10 +81,6 @@ This feature provides general information about the EVPN VXLAN feature implement
 The Entity MIB contains several groups of MIB objects: entityPhysical group, entityLogical group and so on. Currently SONiC only implemented part of the entityPhysical group following RFC2737. Since entityPhysical group is mostly common used, this extension will focus on entityPhysical group and leave other groups for future implementation. The group entityPhysical contains a single table called "entPhysicalTable" to identify the physical components of the system. 
 <br> **Pull Requests** :  [134](https://github.com/Azure/sonic-platform-common/pull/134), [102](https://github.com/Azure/sonic-platform-daemons/pull/102), [5645](https://github.com/Azure/sonic-buildimage/pull/5645), [168](https://github.com/Azure/sonic-snmpagent/pull/168)  & [2379](https://github.com/Azure/sonic-mgmt/pull/2379)
 
-#### FRR BGP NBI
-This feature extends and provides unified configuration and management capability for FRR-BGP features used in SONiC. This allows the user to configure & manage FRR-BGP using SONiC Management Framework with Open Config data models via REST, gNMI and also provides access via SONiC Management Framework CLI as well.
-<br> **Pull Requests** : [5142](https://github.com/Azure/sonic-buildimage/pull/5142)
-
 #### Gearbox
 The purpose of this feature is to describe PHY functionality and common interface to manage PHY. PHY support the physical layer functionality.  Which is connector between MAC(SerDes) to physical medium such as optical fiber or copper transceivers.  Necessity of PHY depends on platform/hardware design.  Some platforms may be supported without an PHY(PHY Less) or PHY supports as part of ASIC (Internal PHY) and some cases it might be External PHY. External PHY will be used to serve different purposes like gearbox, retimer, MACSEC  and multi gigabit ethernet phy transceivers etc. 
 The PHY has interfaces to connect/communicate with peripherals such as MII interface, SPI interface, power supply, clock and reset, system side interface, and line side interface.
@@ -94,14 +90,6 @@ The PHY has interfaces to connect/communicate with peripherals such as MII inter
 This feature deals in depth with kubernetes-support. With this feature, an image could be downloaded from external repositaries and kubernetes does the deployment. The external Kubernetes masters could be used to deploy container image updates at a massive scale, through manifests. This new mode is referred as "kubernetes mode". 
 <br> **Pull Requests** : [5421](https://github.com/Azure/sonic-buildimage/pull/5421), [1133](https://github.com/Azure/sonic-utilities/pull/1133) 
 
-#### MACSec support in Chassis
-The switching hardware consists of network interfaces connected to a forwarding element, such as a switching ASIC.  Some switching hardware also include Phy ASIC(s) that interconnect network interfaces and forwarding element interfaces.  Each Phy ASIC supports one or more network interfaces. This feature provides a software interface for 802.1ae MACSec Entities (SecY) associated with some or all ports of a sai_switch object. 
-<br> **Pull Requests** : [5700](https://github.com/Azure/sonic-buildimage/pull/5700),[1475](https://github.com/Azure/sonic-swss/pull/1475),[1474](https://github.com/Azure/sonic-swss/pull/1474),[677](https://github.com/Azure/sonic-sairedis/pull/677), [16](https://github.com/Azure/sonic-wpa-supplicant/pull/16), [691](https://github.com/Azure/sonic-sairedis/pull/691), [684](https://github.com/Azure/sonic-sairedis/pull/684), [403](https://github.com/Azure/sonic-swss-common/pull/403)
-
-#### MC-LAG (L2)
-This feature is an enhancements of SONiC ICCP MCLAG. This includes MCLAG configuration support, data structure changes, MAC event handling optimizations for scaling performance, support of static MAC address over MCLAG, support bridge-port isolation group for BUM control to MCLAG, and traffic recovery sequencing for traffic loop prevention.
-<br> **Pull Requests** :  [596](https://github.com/Azure/SONiC/pull/596), [885](https://github.com/Azure/sonic-swss/pull/885), [4819](https://github.com/Azure/sonic-buildimage/pull/4819), [1331](https://github.com/Azure/sonic-swss/pull/1331), [1349](https://github.com/Azure/sonic-swss/pull/1349), [529](https://github.com/Azure/sonic-utilities/pull/529), [405](https://github.com/Azure/sonic-swss-common/pull/405), [59](https://github.com/Azure/sonic-mgmt-framework/pull/59), [25](https://github.com/Azure/sonic-mgmt-common/pull/25)
-
 #### Merge common lib for C++ and python (SWSS common lib)
 <br> **Pull Requests** : [378](https://github.com/Azure/sonic-swss-common/pull/378) 
 
@@ -109,6 +97,7 @@ This feature is an enhancements of SONiC ICCP MCLAG. This includes MCLAG configu
 <br> **Pull Requests** : [5886](https://github.com/Azure/sonic-buildimage/pull/5886), [6038](https://github.com/Azure/sonic-buildimage/pull/6038), [6162](https://github.com/Azure/sonic-buildimage/pull/6162), [6176](https://github.com/Azure/sonic-buildimage/pull/6176), [1542](https://github.com/Azure/sonic-swss/pull/1542)
 
 #### Multi-ASIC 202006
+This feature is for a platform with more than one ASIC present on it, which is defined as a multi ASIC platform. SONiC so far supports platforms with single ASIC, we are enhancing SONiC to support multiple ASIC platforms.
 <br> **Pull Requests** : [4825](https://github.com/Azure/sonic-buildimage/pull/4825), [4895](https://github.com/Azure/sonic-buildimage/pull/4895), [4926](https://github.com/Azure/sonic-buildimage/pull/4926), [4932](https://github.com/Azure/sonic-buildimage/pull/4932), [4959](https://github.com/Azure/sonic-buildimage/pull/4959), [4973](https://github.com/Azure/sonic-buildimage/pull/4973), [5022](https://github.com/Azure/sonic-buildimage/pull/5022), [5113](https://github.com/Azure/sonic-buildimage/pull/5113), [5121](https://github.com/Azure/sonic-buildimage/pull/5121), [5122](https://github.com/Azure/sonic-buildimage/pull/5122), [5202](https://github.com/Azure/sonic-buildimage/pull/5202), [5221](https://github.com/Azure/sonic-buildimage/pull/5221), [5224](https://github.com/Azure/sonic-buildimage/pull/5224), [5235](https://github.com/Azure/sonic-buildimage/pull/5235), [5316](https://github.com/Azure/sonic-buildimage/pull/5316), [5329](https://github.com/Azure/sonic-buildimage/pull/5329), [5357](https://github.com/Azure/sonic-buildimage/pull/5357), [5358](https://github.com/Azure/sonic-buildimage/pull/5358), [5364](https://github.com/Azure/sonic-buildimage/pull/5364), [5418](https://github.com/Azure/sonic-buildimage/pull/5418), [5420](https://github.com/Azure/sonic-buildimage/pull/5420), [5436](https://github.com/Azure/sonic-buildimage/pull/5436), [5437](https://github.com/Azure/sonic-buildimage/pull/5437), [5446](https://github.com/Azure/sonic-buildimage/pull/5446), [5460](https://github.com/Azure/sonic-buildimage/pull/5460), [5479](https://github.com/Azure/sonic-buildimage/pull/5479), [5503](https://github.com/Azure/sonic-buildimage/pull/5503), [5548](https://github.com/Azure/sonic-buildimage/pull/5548), [87](https://github.com/Azure/sonic-platform-daemons/pull/87), [81](https://github.com/Azure/sonic-py-swsssdk/pull/81), [138](https://github.com/Azure/sonic-snmpagent/pull/138), [140](https://github.com/Azure/sonic-snmpagent/pull/140), [141](https://github.com/Azure/sonic-snmpagent/pull/141), [145](https://github.com/Azure/sonic-snmpagent/pull/145), [154](https://github.com/Azure/sonic-snmpagent/pull/154), [155](https://github.com/Azure/sonic-snmpagent/pull/155), [158](https://github.com/Azure/sonic-snmpagent/pull/158), [161](https://github.com/Azure/sonic-snmpagent/pull/161), [166](https://github.com/Azure/sonic-snmpagent/pull/166), [376](https://github.com/Azure/sonic-swss-common/pull/376), [856](https://github.com/Azure/sonic-utilities/pull/856), [917](https://github.com/Azure/sonic-utilities/pull/917), [978](https://github.com/Azure/sonic-utilities/pull/978), [999](https://github.com/Azure/sonic-utilities/pull/999), [1005](https://github.com/Azure/sonic-utilities/pull/1005), [1006](https://github.com/Azure/sonic-utilities/pull/1006), [1013](https://github.com/Azure/sonic-utilities/pull/1013), [1057](https://github.com/Azure/sonic-utilities/pull/1057), [1064](https://github.com/Azure/sonic-utilities/pull/1064), [1079](https://github.com/Azure/sonic-utilities/pull/1079), [1080](https://github.com/Azure/sonic-utilities/pull/1080), [1081](https://github.com/Azure/sonic-utilities/pull/1081), [1123](https://github.com/Azure/sonic-utilities/pull/1123), [1137](https://github.com/Azure/sonic-utilities/pull/1137) & [1127](https://github.com/Azure/sonic-utilities/pull/1127)
 
 #### Multi-DB enhancement-Part 2
@@ -118,49 +107,27 @@ This feature is an enhancements of SONiC ICCP MCLAG. This includes MCLAG configu
 <br> **Pull Requests** : [1165](https://github.com/Azure/sonic-utilities/pull/1165), [106](https://github.com/Azure/sonic-platform-common/pull/106)
 
 #### PDDF advance to SONiC Platform 2.0, BMC
+SONiC OS is portable across different network devices with supported ASIC via Switch Abstraction Interface (SAI). These devices primarily differ in the way various device specific hardware components are accessed, and thus require custom device drivers and python plugins. Each platform vendor implements these custom device drivers and plugins. The feature requirement is to support a SONiC platform driver development framework to enable rapid development of custom device drivers and plugins.
 <br> **Pull Requests** : [4756](https://github.com/Azure/sonic-buildimage/pull/4756), [940](https://github.com/Azure/sonic-utilities/pull/940), [92](https://github.com/Azure/sonic-platform-common/pull/92), [3387](https://github.com/Azure/sonic-buildimage/pull/3387), [624](https://github.com/Azure/sonic-utilities/pull/624), [62](https://github.com/Azure/sonic-platform-common/pull/62) 
 
-#### PDK - Platform Development Environment
-<br> **Pull Requests** : [3778](https://github.com/Azure/sonic-buildimage/pull/3778) [28](https://github.com/Azure/sonic-platform-pdk-pde/pull/28), [107](https://github.com/Azure/sonic-build-tools/pull/107).
-
-#### SONiC app extension (w/o orchagent)
-<br> **Pull Requests** : [5705](https://github.com/Azure/sonic-buildimage/pull/5705), [1199](https://github.com/Azure/sonic-utilities/pull/1199), [5744](https://github.com/Azure/sonic-buildimage/pull/5744), [5939](https://github.com/Azure/sonic-buildimage/pull/5939), [5938](https://github.com/Azure/sonic-buildimage/pull/5938), [5937](https://github.com/Azure/sonic-buildimage/pull/5937), [5935](https://github.com/Azure/sonic-buildimage/pull/5935), [1186](https://github.com/Azure/sonic-utilities/pull/1186), [5936](https://github.com/Azure/sonic-buildimage/pull/5936), [6076](https://github.com/Azure/sonic-buildimage/pull/6076) 
-
 #### Support hardware reboot/reload reason (Streaming Telemetry)
+This feature enables sonic streaming telemetry agent to send Reboot-cause information. During the boot, the determine-reboot-cause service ( previously process-reboot-cause) determines the last reboot-cause based on the hardware reboot-cause and the software reboot-cause information and determine-reboot-cause service will save the JSON-formatted last previous reboot cause information to "/host/reboot-cause/history/" with adding timestamp at the end of file name. 
 <br> **Pull Requests** : [5562](https://github.com/Azure/sonic-buildimage/pull/5562), [1154](https://github.com/Azure/sonic-utilities/pull/1154) 
 
 #### System health and system LED
+System health monitor is intended to monitor both critical services and peripheral device status and leverage system log, system status LED to and CLI command output to indicate the system status.In current SONiC implementation, we already have Monit which is monitoring the critical services status and also have a set of daemons.System health monitoring service will not monitor the critical services or devices directly, it will reuse the result of Monit and PMON daemons to summary the current status and decide the color of the system health LED.
 <br> **Pull Requests** : [4835](https://github.com/Azure/sonic-buildimage/pull/4835) & [4829](https://github.com/Azure/sonic-buildimage/pull/4829)
 
 #### PCIe Monitoring
+This feature is intended to give the idea of how to monitor the platform PCIe devices and alert of any problems on PCIe buses and devices on SONiC using pcie-check service and pcied on PMON container.New PCIe Monitor service is designed to use the PcieUtil utility to check the current status of PCIe devices and buses and alert if there is any missing devices or any error while communicating on the PCIe buses.PCIe device monitoring will be done in two separate services, pcie-check.service which is a systemd service, will check the PCIe device during the boot time and pcied which is a daemon in PMON container will monitor during the runtime.
 <br> **Pull Requests** : [5000](https://github.com/Azure/sonic-buildimage/pull/5000), [60](https://github.com/Azure/sonic-platform-daemons/pull/60), [1169](https://github.com/Azure/sonic-utilities/pull/1169), [100](https://github.com/Azure/sonic-platform-daemons/pull/100), [144](https://github.com/Azure/sonic-platform-common/pull/144)
 
 #### Distributed forwarding in a VOQ architecture HLD
+This feature provides the implementation of SONiC support for distributed packet forwarding across a set of devices that have a VOQ (Virtual Output Queue) architecture interconnected by an internal fabric. Support for distributed forwarding encompasses the following aspects such as Physical interfaces and VOQs, Logical interfaces such as link aggregation groups (LAGs), The internal interconnection fabric, The packet forwarding data plane, The control plane, both internal (within the devices in the system) and with external devices.
 <br> **Pull Requests** : [5283](https://github.com/Azure/sonic-buildimage/pull/5283)
-
-#### Distributed VOQ architecture HLD
-<br> **Pull Requests** : [380](https://github.com/Azure/sonic-swss-common/pull/380), [657](https://github.com/Azure/sonic-sairedis/pull/657), [725](https://github.com/Azure/sonic-sairedis/pull/725), [1431](https://github.com/Azure/sonic-swss/pull/1431), [5862](https://github.com/Azure/sonic-buildimage/pull/5862), [2659](https://github.com/Azure/sonic-mgmt/pull/2659)
-
-#### Platform Monitoring for Chassis systems
-<br> **Pull Requests** : [388](https://github.com/Azure/sonic-swss-common/pull/388), [1145](https://github.com/Azure/sonic-utilities/pull/1145), [124](https://github.com/Azure/sonic-platform-common/pull/124), [97](https://github.com/Azure/sonic-platform-daemons/pull/97) , [5523](https://github.com/Azure/sonic-buildimage/pull/5523), [395](https://github.com/Azure/sonic-swss-common/pull/395), [131](https://github.com/Azure/sonic-platform-common/pull/131), [101](https://github.com/Azure/sonic-platform-daemons/pull/101), [5624](https://github.com/Azure/sonic-buildimage/pull/5624), [104](https://github.com/Azure/sonic-platform-daemons/pull/104), [136](https://github.com/Azure/sonic-platform-common/pull/136), [1267](https://github.com/Azure/sonic-utilities/pull/1267), [148](https://github.com/Azure/sonic-platform-common/pull/148), [127](https://github.com/Azure/sonic-platform-daemons/pull/127)
-
-#### Routing/BGP for Chassis
-<br> **Pull Requests** : [5622](https://github.com/Azure/sonic-buildimage/pull/5622), [5629](https://github.com/Azure/sonic-buildimage/pull/5629) 
-
-#### Fabric Port support for SONiC
-<br> **Pull Requests** : [1459](https://github.com/Azure/sonic-swss/pull/1459)
-
-#### LAG Support for Chassis
-<br> **Pull Requests** : [697](https://github.com/Azure/SONiC/pull/697)
 
 #### Chassis infrastructure, T2 topologies and sample Testcases converted
 <br> **Pull Requests** : [2245](https://github.com/Azure/sonic-mgmt/pull/2245), [2417](https://github.com/Azure/sonic-mgmt/pull/2417), [2638](https://github.com/Azure/sonic-mgmt/pull/2638/)
-
-#### Inband port support for Chassis
-<br> **Pull Requests** : [639](https://github.com/Azure/SONiC/pull/639), [689](https://github.com/Azure/SONiC/pull/689), [694](https://github.com/Azure/SONiC/pull/694) 
-
-#### Everflow Support
-<br> **Pull Requests** : [1530](https://github.com/Azure/sonic-swss/pull/1530)
 
 
 
