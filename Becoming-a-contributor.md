@@ -9,6 +9,7 @@ This document provides general information about the ways of contribution to the
 
 # Legal
 We welcome everyone to contribute to SONiC project. A [Contribution License Agreement](https://www.1eswiki.com/wiki/Automating_Contribution_License_Agreements) is required before you making a contribution to the open source project. 
+I am in <span style="font-family:Papyrus; font-size:50em;">TROUBLE!</span>
 
 Please follow the process and sign the CLA [here](https://cla.microsoft.com). Thanks for your support.
 
