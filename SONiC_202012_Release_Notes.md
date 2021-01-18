@@ -24,7 +24,7 @@ Image  : https://sonic-jenkins.westus2.cloudapp.azure.com/  (Example - Image for
 |Feature                    | Version  |
 | ------------------------- | --------------- |
 | Linux kernel version      | linux_4.9.0-11-2 (4.9.189-3+deb9u2)   |
-| SAI   version             | SAI v1.6.3    |
+| SAI   version             | SAI v1.7.1    |
 | FRR                       | 7.2    |
 | LLDPD                     | 0.9.6-1    |
 | TeamD                     | 1.28-1    |
@@ -140,7 +140,7 @@ This feature provides the implementation of SONiC support for distributed packet
 
 # SAI APIs
 
-Please find the list of API's classified along the newly added SAI features. For further details on SAI API please refer [SAI_1.6.3 Release Notes](https://github.com/opencomputeproject/SAI/blob/master/doc/SAI_1.6.3_ReleaseNotes.md)
+Please find the list of API's classified along the newly added SAI features. For further details on SAI API please refer [SAI_1.7.1 Release Notes](https://github.com/opencomputeproject/SAI/blob/master/doc/SAI_1.7.1_ReleaseNotes.md)
 
 | S.No | Feature                     | 
 | ---- | --------------------------- |
