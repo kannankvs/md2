@@ -142,11 +142,6 @@ This feature provides the implementation of SONiC support for distributed packet
 
 Please find the list of API's classified along the newly added SAI features. For further details on SAI API please refer [SAI_1.7.1 Release Notes](https://github.com/opencomputeproject/SAI/blob/master/doc/SAI_1.7.1_ReleaseNotes.md)
 
-| S.No | Feature                     | 
-| ---- | --------------------------- |
-| 1    | MACSEC                      |
-| 2    | System Port API             |
-
 
 # Contributors 
 
