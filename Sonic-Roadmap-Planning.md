@@ -105,7 +105,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | SPytest |
 |            |              |               | [Thermal control](https://github.com/Azure/SONiC/blob/master/thermal-control-design.md) |
 |SONiC.202012| 12/31/2020   |       TBD     | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202012) |
-|            |              |               | [AAA improvement ](https://github.com/Azure/SONiC/blob/a46aa68b3a3ca57fea28c3d139fcef437e0cf0e6/doc/aaa/AAA20Improvements/AAA%20Improvements.md) |
+|			 |				|				| [Chassis infrastructure, T2 topologies and sample Testcases converted](https://github.com/Azure/sonic-mgmt/blob/master/ansible/library/multi-asic_aware_module_requirements.md) |
 |            |              |               | Consistent ECMP support (fine grain ECMP) |
 |            |              |               | Console Support for SONiC (Hardware)|
 |            |              |               | Console Support for SONiC (SSH forwarding)|
@@ -113,8 +113,9 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | [CoPP Config/Management](https://github.com/Azure/SONiC/blob/262e2581c3360e971c370e347c608d081d7e1c49/doc/copp/CoPP%20Config%20and%20Management.md) |
 |            |              |               | CPLD, BIOS, SSD, Firmware upgrade [Uniform Tool] |
 |            |              |               | Distributed VoQ Forwarding for Chassis |
+|            |              |               | [Distributed forwarding in a VOQ architecture HLD](https://github.com/Azure/SONiC/blob/e607a9f3e8e0cc77687acf7913b559210804cc65/doc/chassis/system-ports.md) |
 |            |              |               | [Dynamic headroom calculation](https://github.com/Azure/SONiC/blob/415f19931bccd900ac528b100aafffa6000e82e9/doc/qos/dynamically-headroom-calculation.md)               |
-|            |              |               | Enable synchornous SAI APIs (error handling)|
+|            |              |               | [Enable synchornous SAI APIs (error handling)](https://github.com/shi-su/SONiC/blob/61762c8e709ead5f8ee7df83facea6ceee9de6f5/doc/synchronous-mode/synchronous-mode-cfg.md)|
 |            |              |               | Extending Entphysicaltable MIB table |
 |            |              |               | Extend FW debug info in sysdump |
 |            |              |               | [EVPN/VXLAN](https://github.com/Azure/SONiC/blob/7fbda34ee3315960c164a0c202f39c2ec515cfc3/doc/vxlan/EVPN/EVPN_VXLAN_HLD.md) |
@@ -122,10 +123,9 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | [FRR BGP NBI](https://github.com/Azure/SONiC/blob/48e9012c548528b6528745bda9d75b4164e785eb/doc/mgmt/SONiC_Design_Doc_Unified_FRR_Mgmt_Interface.md) |
 |            |              |               | [Gearbox](https://github.com/Azure/SONiC/blob/master/doc/gearbox/gearbox_mgr_design.md) |
 |            |              |               | [Kernel programming performance enhancement](https://github.com/Azure/SONiC/blob/f39c72147209aab8fec5deebb965bf4c91a1f876/doc/platform/nlapi/netlink_api_kernel_programming.md) |
-|            |              |               | Kubernetes (docker to be controlled by Kubernetes) |
+|            |              |               | [Kubernetes (docker to be controlled by Kubernetes)](https://github.com/renukamanavalan/SONiC/blob/kube_systemd/doc/kubernetes/Kubernetes-support.md) |
 |            |              |               | L2 Dot1Q tunneling support |
 |            |              |               | [L2 functional and performance enhancements](https://github.com/Azure/SONiC/pull/379)|
-|            |              |               | MACSec support in Chassis |
 |            |              |               | Management Framework (Phase 2) |
 |            |              |               | MC-LAG (L2) |
 |            |              |               | Merge common lib for C++ and python (SWSS common lib)  |
@@ -137,14 +137,12 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | [PDK - Platform Development Environment](https://github.com/Azure/SONiC/blob/master/doc/platform/pde.md) |
 |            |              |               | [PDK - Platform Driver Development Framework](https://github.com/Azure/SONiC/blob/master/doc/platform/brcm_pdk_pddf.md) |
 |            |              |               | [RADIUS AAA](https://github.com/Azure/SONiC/blob/3edad287edc79ea7e227648cba566a6ce347bf49/doc/aaa/radius_authentication.md) |
-|            |              |               | SONiC app extension (w/o orchagent)|
-|            |              |               | SONiC new polling counters for counters which has extend CPU req.|
-|            |              |               | SONiC shared headroom - enhanced configuration |
+|            |              |               | [SONiC entity MIB extensions](https://github.com/Azure/SONiC/blob/0e53548a8f1023d1be2a1dffd62737c7a1b18a2e/doc/snmp/extension-to-physical-entity-mib.md) |
 |            |              |               | Support hardware reboot/reload reason (Streaming Telemetry)|
 |            |              |               | [System health and system LED](https://github.com/Azure/SONiC/blob/master/doc/system_health_monitoring/system-health-HLD.md) |
-|            |              |               | VoQ Chassis Support in SONiC |
 |            |              |               |                 |
 |SONiC.202106| 06/30/2021   |       TBD     | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202106) |
+|            |              |               | [AAA improvement ](https://github.com/Azure/SONiC/blob/a46aa68b3a3ca57fea28c3d139fcef437e0cf0e6/doc/aaa/AAA20Improvements/AAA%20Improvements.md) |
 |			 |				|				| Telemetry for Multi-ASIC |
 | 			 |              |               | Telemetry for Chassis |
 | 			 |              |               | IPv6 Link Local/ BGP Unnumbered |
@@ -158,7 +156,16 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | 			 |              |               | PVST/RPVST+  |  
 | 			 |              |               | Port Channel enhancements | 
 | 			 |              |               | MC-LAG enhancements |
+|            |              |               | [MACSec support in Chassis](https://github.com/Pterosaur/SONiC/blob/fdbaa116fdc4579c67974e70efcce3c882801fcf/doc/macsec/MACsec_hld.md) |
 | 			 |              |               | UDLD | 
+| 			 |              |               | PCIe Monitoring<br>[HLD PR](https://github.com/Azure/SONiC/pull/634) 
+| 			 |              |               | [Distributed VOQ architecture HLD](https://github.com/Azure/SONiC/blob/a9b221e3252e5ef3a45d18f615c23d3794f39a5b/doc/voq/voq_hld.md)
+| 			 |              |               | [Platform Monitoring for Chassis systems](https://github.com/Azure/SONiC/blob/4206c5420c4b63f1d2ec40b10d54adb27fc9d42a/doc/pmon/pmon-chassis-design.md)
+| 			 |              |               | [Routing/BGP for Chassis](https://github.com/Azure/SONiC/blob/35d6f8d1a88a8f8b08237d6ec9f719e9c06a6758/doc/voq/bgp_voq_chassis.md)
+| 			 |              |               | [Fabric Port support for SONiC](https://github.com/Azure/SONiC/blob/2e1f699a3ba1dbf88abeecb192f6bb5e390b8b8a/doc/chassis/fabric.md)
+| 			 |              |               | [LAG Support for Chassis](https://github.com/Azure/SONiC/blob/332ca53d938e0df24c78d76bcf1117d896ed2683/doc/voq/lag_hld.md)
+| 			 |              |               | [Inband port support for Chassis](https://github.com/Azure/SONiC/pull/639)
+| 			 |              |               | [Everflow Support](https://github.com/Azure/SONiC/blob/9c08b2f3f77230017c7035ceaf880746cb590d49/doc/voq/everflow.md)
 | 			 |              |               | DHCP relay IPv6 support | 
 | 			 |              |               | App extension with Orchagent/SWSS | 
 | 			 |              |               | App extension CLI generation tool | 
@@ -174,6 +181,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | 			 |              |               | Testcase/Testbed Infrastructure |
 | 			 |              |               | New branch creation for Debian11 | 
 | 			 |              |               | SONiC fanout support |
+|            |              |               | SONiC app extension (w/o orchagent)|
 | 			 |              |               | Dynamic hash policy |
 | 			 |              |               | Telemetry for BGP | 
 | 			 |              |               | Inband mgmt VRF |
@@ -191,7 +199,9 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |		     |			    | 				| BGP Link bandwidth ExtComm: https://tools.ietf.org/pdf/draft-ietf-idr-link-bandwidth-07.pdf |
 |            |              |               | [Kernel programming performance enhancement](https://github.com/Azure/SONiC/blob/f39c72147209aab8fec5deebb965bf4c91a1f876/doc/platform/nlapi/netlink_api_kernel_programming.md) |
 |            |              |               | SONiC shared headroom - enhanced configuration | 
+|            |              |               | SONiC new polling counters for counters which has extend CPU req.|
 |            |              |               | ACL enhancements: Policing, DHCP/PCP remark, L2 | 
+|            |              |               | VoQ Chassis Support in SONiC |
 |            |              |               | [SONiC TPID Configuration](https://github.com/Azure/SONiC/pull/681) | 
 |            |              |               | [BFD SW 100ms interval from FRR](https://github.com/Azure/SONiC/blob/master/doc/bfd/BFD_Enhancement_HLD.md)| 
 |            |              |               | [IPv6 Link Local and BGP Unnumbered](https://github.com/Azure/SONiC/blob/3d2e5e66e05bcce0a64f5ad077b96ae2006527fd/doc/ipv6/ipv6_link_local.md)| 
