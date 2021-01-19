@@ -158,7 +158,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | 			 |              |               | MC-LAG enhancements |
 |            |              |               | [MACSec support in Chassis](https://github.com/Pterosaur/SONiC/blob/fdbaa116fdc4579c67974e70efcce3c882801fcf/doc/macsec/MACsec_hld.md) |
 | 			 |              |               | UDLD | 
-| 			 |              |               | PCIe Monitoring<br>[HLD PR](https://github.com/Azure/SONiC/pull/634) 
+| 			 |              |               | [PCIe Monitoring](https://github.com/Azure/SONiC/pull/634) 
 | 			 |              |               | [Distributed VOQ architecture HLD](https://github.com/Azure/SONiC/blob/a9b221e3252e5ef3a45d18f615c23d3794f39a5b/doc/voq/voq_hld.md)
 | 			 |              |               | [Platform Monitoring for Chassis systems](https://github.com/Azure/SONiC/blob/4206c5420c4b63f1d2ec40b10d54adb27fc9d42a/doc/pmon/pmon-chassis-design.md)
 | 			 |              |               | [Routing/BGP for Chassis](https://github.com/Azure/SONiC/blob/35d6f8d1a88a8f8b08237d6ec9f719e9c06a6758/doc/voq/bgp_voq_chassis.md)
