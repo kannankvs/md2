@@ -106,39 +106,29 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | [Thermal control](https://github.com/Azure/SONiC/blob/master/thermal-control-design.md) |
 |SONiC.202012| 12/31/2020   |       TBD     | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202012) |
 |			 |				|				| [Chassis infrastructure, T2 topologies and sample Testcases converted](https://github.com/Azure/sonic-mgmt/blob/master/ansible/library/multi-asic_aware_module_requirements.md) |
-|            |              |               | Consistent ECMP support (fine grain ECMP) |
+|            |              |               | [Consistent ECMP support (fine grain ECMP)](https://github.com/anish-n/SONiC/blob/e5cdb3d9337026a98d6be5d558126926a4e959e4/doc/ecmp/fine_grained_next_hop_hld.md) |
 |            |              |               | Console Support for SONiC (Hardware)|
 |            |              |               | Console Support for SONiC (SSH forwarding)|
 |            |              |               | Container warm restart (BGP/TeamD/SWSS/SyncD) |
 |            |              |               | [CoPP Config/Management](https://github.com/Azure/SONiC/blob/262e2581c3360e971c370e347c608d081d7e1c49/doc/copp/CoPP%20Config%20and%20Management.md) |
-|            |              |               | CPLD, BIOS, SSD, Firmware upgrade [Uniform Tool] |
-|            |              |               | Distributed VoQ Forwarding for Chassis |
 |            |              |               | [Distributed forwarding in a VOQ architecture HLD](https://github.com/Azure/SONiC/blob/e607a9f3e8e0cc77687acf7913b559210804cc65/doc/chassis/system-ports.md) |
 |            |              |               | [Dynamic headroom calculation](https://github.com/Azure/SONiC/blob/415f19931bccd900ac528b100aafffa6000e82e9/doc/qos/dynamically-headroom-calculation.md)               |
 |            |              |               | [Enable synchornous SAI APIs (error handling)](https://github.com/shi-su/SONiC/blob/61762c8e709ead5f8ee7df83facea6ceee9de6f5/doc/synchronous-mode/synchronous-mode-cfg.md)|
-|            |              |               | Extending Entphysicaltable MIB table |
-|            |              |               | Extend FW debug info in sysdump |
 |            |              |               | [EVPN/VXLAN](https://github.com/Azure/SONiC/blob/7fbda34ee3315960c164a0c202f39c2ec515cfc3/doc/vxlan/EVPN/EVPN_VXLAN_HLD.md) |
-|            |              |               | Flow-based Services (incl. packet DSCP remark) |
 |            |              |               | [FRR BGP NBI](https://github.com/Azure/SONiC/blob/48e9012c548528b6528745bda9d75b4164e785eb/doc/mgmt/SONiC_Design_Doc_Unified_FRR_Mgmt_Interface.md) |
 |            |              |               | [Gearbox](https://github.com/Azure/SONiC/blob/master/doc/gearbox/gearbox_mgr_design.md) |
-|            |              |               | [Kernel programming performance enhancement](https://github.com/Azure/SONiC/blob/f39c72147209aab8fec5deebb965bf4c91a1f876/doc/platform/nlapi/netlink_api_kernel_programming.md) |
 |            |              |               | [Kubernetes (docker to be controlled by Kubernetes)](https://github.com/renukamanavalan/SONiC/blob/kube_systemd/doc/kubernetes/Kubernetes-support.md) |
-|            |              |               | L2 Dot1Q tunneling support |
-|            |              |               | [L2 functional and performance enhancements](https://github.com/Azure/SONiC/pull/379)|
 |            |              |               | Management Framework (Phase 2) |
-|            |              |               | MC-LAG (L2) |
 |            |              |               | Merge common lib for C++ and python (SWSS common lib)  |
 |            |              |               | Move from Python2->python3 |
 |            |              |               | [Multi-ASIC](https://github.com/Azure/SONiC/blob/ebe4f4b695af5d2dbd23756d3cff03aef0a0c880/doc/multi_asic/SONiC_multi_asic_hld.md) |
 |            |              |               | Multi-DB enhancement-Part 2 |
-|            |              |               | ONIE FW tools |
+|            |              |               | ONIE FW tools CPLD, BIOS, SSD, Firmware upgrade [Uniform Tool] |
 |            |              |               | [PDDF advance to SONiC Platform 2.0, BMC](https://github.com/Azure/SONiC/blob/master/doc/platform/brcm_pdk_pddf.md) |
 |            |              |               | [PDK - Platform Development Environment](https://github.com/Azure/SONiC/blob/master/doc/platform/pde.md) |
-|            |              |               | [PDK - Platform Driver Development Framework](https://github.com/Azure/SONiC/blob/master/doc/platform/brcm_pdk_pddf.md) |
 |            |              |               | [RADIUS AAA](https://github.com/Azure/SONiC/blob/3edad287edc79ea7e227648cba566a6ce347bf49/doc/aaa/radius_authentication.md) |
 |            |              |               | [SONiC entity MIB extensions](https://github.com/Azure/SONiC/blob/0e53548a8f1023d1be2a1dffd62737c7a1b18a2e/doc/snmp/extension-to-physical-entity-mib.md) |
-|            |              |               | Support hardware reboot/reload reason (Streaming Telemetry)|
+|            |              |               | [Support hardware reboot/reload reason (Streaming Telemetry)](https://github.com/sujinmkang/SONiC/blob/6ed19e88c6f7aac74640d3d343210d840af70a23/doc/system-telemetry/reboot-cause.md)|
 |            |              |               | [System health and system LED](https://github.com/Azure/SONiC/blob/master/doc/system_health_monitoring/system-health-HLD.md) |
 |            |              |               |    |
 |SONiC.202106| 06/30/2021   |       TBD     | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202106) |
@@ -202,6 +192,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | [Media Enhancements<br>(Media Information & Settings)](https://github.com/Azure/SONiC/blob/a6e9636552149829e39a82705d1ad2b48a17b3f0/doc/media-info-enhancements/media-info.md) | 
 |          	 |              |               | [AAA improvement ](https://github.com/Azure/SONiC/blob/a46aa68b3a3ca57fea28c3d139fcef437e0cf0e6/doc/aaa/AAA20Improvements/AAA%20Improvements.md) |
 |          	 |              |               | [MACSec support in Chassis](https://github.com/Pterosaur/SONiC/blob/fdbaa116fdc4579c67974e70efcce3c882801fcf/doc/macsec/MACsec_hld.md) |
+|            |              |               | [MC-LAG (L2)](https://github.com/Azure/SONiC/blob/176cf4f5a8ee6ecfd8a478573ffc92f0eb23b4e6/doc/mclag/MCLAG_Enhancements_HLD.md) |
 | 			 |              |               | [PCIe Monitoring](https://github.com/Azure/SONiC/pull/634) 
 | 			 |              |               | [Distributed VOQ architecture HLD](https://github.com/Azure/SONiC/blob/a9b221e3252e5ef3a45d18f615c23d3794f39a5b/doc/voq/voq_hld.md)
 | 			 |              |               | [Platform Monitoring for Chassis systems](https://github.com/Azure/SONiC/blob/4206c5420c4b63f1d2ec40b10d54adb27fc9d42a/doc/pmon/pmon-chassis-design.md)
@@ -213,7 +204,12 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | 			 |              |               | VNET ping tool to debug VNET configuration |
 |          	 |              |               | SONiC app extension (w/o orchagent)|
 | 			 |              |               | Segment Routing support in SONiC | 
-
+|            |              |               | Extending Entphysicaltable MIB table |
+|            |              |               | Extend FW debug info in sysdump |
+|            |              |               | Flow-based Services (incl. packet DSCP remark) |
+|            |              |               | L2 Dot1Q tunneling support |
+|            |              |               | [L2 functional and performance enhancements](https://github.com/Azure/SONiC/pull/379)|
+|            |              |               | [PDK - Platform Driver Development Framework](https://github.com/Azure/SONiC/blob/master/doc/platform/brcm_pdk_pddf.md) |
 
   
 

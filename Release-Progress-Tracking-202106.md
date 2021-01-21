@@ -1,7 +1,7 @@
 # 202106 Features Tracking
 
 | Feature| HLD<br/>Review<br/>Date | Owner| Code<br>Review<br>Owner| Code<br>Review<br>Date | Code PR Status   |
-| ------ | ------- | -----|---------| ------------ | ---------- | 
+| ------ | ------- | -----|---------| ------------ | ------- | 
 | | | |  | | |
 | Telemetry for Multi-ASIC | |	MSFT  |  | | |
 | Telemetry for Chassis | |	TBD | |  |To be discussed in Chassis workgroup | 
