@@ -140,9 +140,8 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | [SONiC entity MIB extensions](https://github.com/Azure/SONiC/blob/0e53548a8f1023d1be2a1dffd62737c7a1b18a2e/doc/snmp/extension-to-physical-entity-mib.md) |
 |            |              |               | Support hardware reboot/reload reason (Streaming Telemetry)|
 |            |              |               | [System health and system LED](https://github.com/Azure/SONiC/blob/master/doc/system_health_monitoring/system-health-HLD.md) |
-|            |              |               |                 |
+|            |              |               |    |
 |SONiC.202106| 06/30/2021   |       TBD     | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202106) |
-
 |			 |				|				| Telemetry for Multi-ASIC |
 | 			 |              |               | Telemetry for Chassis |
 | 			 |              |               | IPv6 Link Local/ BGP Unnumbered |
