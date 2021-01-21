@@ -23,17 +23,17 @@ Image  : https://sonic-jenkins.westus2.cloudapp.azure.com/  (Example - Image for
 
 |Feature                    | Version  |
 | ------------------------- | --------------- |
-| Linux kernel version      | linux_4.9.0-11-2 (4.9.189-3+deb9u2)   |
+| Linux kernel version      | linux_4.19.0-9-2 (4.19.118-2+deb10u1)   |
 | SAI   version             | SAI v1.7.1    |
-| FRR                       | 7.2    |
-| LLDPD                     | 0.9.6-1    |
+| FRR                       | 7.5    |
+| LLDPD                     | 1.0.4-1    |
 | TeamD                     | 1.28-1    |
 | SNMPD                     | 5.7.3+dfsg-1.5    |
 | Python                    | 3.6.0-1    |
 | syncd                     | 1.0.0    |
 | swss                      | 1.0.0    |
 | radvd                     | 2.17-2~bpo9+1    |
-| isc-dhcp                  | 4.3.5-2 ([PR2946](https://github.com/Azure/sonic-buildimage/pull/2946) )   |
+| isc-dhcp                  |  4.4.1-2   |
 | sonic-telemetry           | 0.1    |
 | redis-server/ redis-tools | 5.0.3-3~bpo9+2    |
 
@@ -81,6 +81,10 @@ This feature provides general information about the EVPN VXLAN feature implement
 The Entity MIB contains several groups of MIB objects: entityPhysical group, entityLogical group and so on. Currently SONiC only implemented part of the entityPhysical group following RFC2737. Since entityPhysical group is mostly common used, this extension will focus on entityPhysical group and leave other groups for future implementation. The group entityPhysical contains a single table called "entPhysicalTable" to identify the physical components of the system. 
 <br> **Pull Requests** :  [134](https://github.com/Azure/sonic-platform-common/pull/134), [102](https://github.com/Azure/sonic-platform-daemons/pull/102), [5645](https://github.com/Azure/sonic-buildimage/pull/5645), [168](https://github.com/Azure/sonic-snmpagent/pull/168)  & [2379](https://github.com/Azure/sonic-mgmt/pull/2379)
 
+#### FRR BGP NBI
+This feature extends and provides unified configuration and management capability for FRR-BGP features used in SONiC. This allows the user to configure & manage FRR-BGP using SONiC Management Framework with Open Config data models via REST, gNMI and also provides access via SONiC Management Framework CLI as well.
+<br> **Pull Requests** : [5142](https://github.com/Azure/sonic-buildimage/pull/5142)
+
 #### Gearbox
 The purpose of this feature is to describe PHY functionality and common interface to manage PHY. PHY support the physical layer functionality.  Which is connector between MAC(SerDes) to physical medium such as optical fiber or copper transceivers.  Necessity of PHY depends on platform/hardware design.  Some platforms may be supported without an PHY(PHY Less) or PHY supports as part of ASIC (Internal PHY) and some cases it might be External PHY. External PHY will be used to serve different purposes like gearbox, retimer, MACSEC  and multi gigabit ethernet phy transceivers etc. 
 The PHY has interfaces to connect/communicate with peripherals such as MII interface, SPI interface, power supply, clock and reset, system side interface, and line side interface.
@@ -89,6 +93,10 @@ The PHY has interfaces to connect/communicate with peripherals such as MII inter
 #### Kubernetes (docker to be controlled by Kubernetes)
 This feature deals in depth with kubernetes-support. With this feature, an image could be downloaded from external repositaries and kubernetes does the deployment. The external Kubernetes masters could be used to deploy container image updates at a massive scale, through manifests. This new mode is referred as "kubernetes mode". 
 <br> **Pull Requests** : [5421](https://github.com/Azure/sonic-buildimage/pull/5421), [1133](https://github.com/Azure/sonic-utilities/pull/1133) 
+
+#### Management Framework (Phase 2)
+Management framework makes use of the translation library (Translib) written in golang to convert the data models exposed to the management clients into the Redis ABNF schema format. Supported management servers can make use of the Translib to convert the incoming payload to SONiC ABNF schema and vice versa depending on the incoming request. Translib will cater to the needs of REST and gNMI servers. Later the Translib can be enhanced to support other management servers if needed. This framework will support both standard and custom YANG models for communication with the corresponding management servers. 
+<br> **Pull Requests** : [4799](https://github.com/Azure/sonic-buildimage/pull/4799),[4765](https://github.com/Azure/sonic-buildimage/pull/4765),[4840](https://github.com/Azure/sonic-buildimage/pull/4840),[35](https://github.com/Azure/sonic-telemetry/pull/35), [38](https://github.com/Azure/sonic-telemetry/pull/38),[126](https://github.com/Azure/sonic-build-tools/pull/126), [170](https://github.com/Azure/sonic-build-tools/pull/170), [10](https://github.com/Azure/sonic-mgmt-common/pull/10),[11](https://github.com/Azure/sonic-mgmt-common/pull/11), [12](https://github.com/Azure/sonic-mgmt-common/pull/12), [13](https://github.com/Azure/sonic-mgmt-common/pull/13), [15](https://github.com/Azure/sonic-mgmt-common/pull/15), [16](https://github.com/Azure/sonic-mgmt-common/pull/16), [18](https://github.com/Azure/sonic-mgmt-common/pull/18), [19](https://github.com/Azure/sonic-mgmt-common/pull/19), [20](https://github.com/Azure/sonic-mgmt-common/pull/20), [21](https://github.com/Azure/sonic-mgmt-common/pull/21), [22](https://github.com/Azure/sonic-mgmt-common/pull/22), [23](https://github.com/Azure/sonic-mgmt-common/pull/23), [26](https://github.com/Azure/sonic-mgmt-common/pull/26), [27](https://github.com/Azure/sonic-mgmt-common/pull/27), [28](https://github.com/Azure/sonic-mgmt-common/pull/28), [31](https://github.com/Azure/sonic-mgmt-common/pull/31), [32](https://github.com/Azure/sonic-mgmt-common/pull/32), [34](https://github.com/Azure/sonic-mgmt-common/pull/34), [35](https://github.com/Azure/sonic-mgmt-common/pull/35), [50](https://github.com/Azure/sonic-mgmt-framework/pull/50), [51](https://github.com/Azure/sonic-mgmt-framework/pull/51),[52](https://github.com/Azure/sonic-mgmt-framework/pull/52), [53](https://github.com/Azure/sonic-mgmt-framework/pull/65), [57](https://github.com/Azure/sonic-mgmt-framework/pull/57), [60](https://github.com/Azure/sonic-mgmt-framework/pull/60),[65](https://github.com/Azure/sonic-mgmt-framework/pull/65), [66](https://github.com/Azure/sonic-mgmt-framework/pull/66),  [67](https://github.com/Azure/sonic-mgmt-framework/pull/67), [68](https://github.com/Azure/sonic-mgmt-framework/pull/68), [69](https://github.com/Azure/sonic-mgmt-framework/pull/69),[71](https://github.com/Azure/sonic-mgmt-framework/pull/71), [5810](https://github.com/Azure/sonic-buildimage/pull/5810),[5920](https://github.com/Azure/sonic-buildimage/pull/5920),[72](https://github.com/Azure/sonic-mgmt-framework/pull/72), [73](https://github.com/Azure/sonic-mgmt-framework/pull/73), [5714](https://github.com/Azure/sonic-buildimage/pull/5714) [5553](https://github.com/Azure/sonic-buildimage/pull/5553), [390](https://github.com/Azure/sonic-swss-common/pull/390), [6148](https://github.com/Azure/sonic-buildimage/pull/6148),[61](https://github.com/Azure/sonic-telemetry/pull/61)
 
 #### Merge common lib for C++ and python (SWSS common lib)
 **Pull Requests** : [378](https://github.com/Azure/sonic-swss-common/pull/378) 
@@ -104,6 +112,7 @@ This feature is for a platform with more than one ASIC present on it, which is d
 **Pull Requests** : [5773](https://github.com/Azure/sonic-buildimage/pull/5773) & [1205](https://github.com/Azure/sonic-utilities/pull/1205)
 
 #### ONIE FW tools
+SONiC FW utility uses platform API to interact with the various platform components. SONiC FW utility extends to support for the automatic firmware update based on "platform_components.json" under platform directory and next reboot option which is passed as a option for fwutil update all fw command. SONiC FW utility also extends to support for the automatic firmware update with a custom firmware package that can include any firmware update tool and the firmware update tool will be used for the firmware update if it's specified in the "platform_components.json".
 **Pull Requests** : [1165](https://github.com/Azure/sonic-utilities/pull/1165), [106](https://github.com/Azure/sonic-platform-common/pull/106)
 
 #### PDDF advance to SONiC Platform 2.0, BMC
@@ -117,10 +126,6 @@ This feature enables sonic streaming telemetry agent to send Reboot-cause inform
 #### System health and system LED
 System health monitor is intended to monitor both critical services and peripheral device status and leverage system log, system status LED to and CLI command output to indicate the system status.In current SONiC implementation, we already have Monit which is monitoring the critical services status and also have a set of daemons.System health monitoring service will not monitor the critical services or devices directly, it will reuse the result of Monit and PMON daemons to summary the current status and decide the color of the system health LED.
 <br> **Pull Requests** : [4835](https://github.com/Azure/sonic-buildimage/pull/4835) & [4829](https://github.com/Azure/sonic-buildimage/pull/4829)
-
-#### PCIe Monitoring
-This feature is intended to give the idea of how to monitor the platform PCIe devices and alert of any problems on PCIe buses and devices on SONiC using pcie-check service and pcied on PMON container.New PCIe Monitor service is designed to use the PcieUtil utility to check the current status of PCIe devices and buses and alert if there is any missing devices or any error while communicating on the PCIe buses.PCIe device monitoring will be done in two separate services, pcie-check.service which is a systemd service, will check the PCIe device during the boot time and pcied which is a daemon in PMON container will monitor during the runtime.
-<br> **Pull Requests** : [5000](https://github.com/Azure/sonic-buildimage/pull/5000), [60](https://github.com/Azure/sonic-platform-daemons/pull/60), [1169](https://github.com/Azure/sonic-utilities/pull/1169), [100](https://github.com/Azure/sonic-platform-daemons/pull/100), [144](https://github.com/Azure/sonic-platform-common/pull/144)
 
 #### Distributed forwarding in a VOQ architecture HLD
 This feature provides the implementation of SONiC support for distributed packet forwarding across a set of devices that have a VOQ (Virtual Output Queue) architecture interconnected by an internal fabric. Support for distributed forwarding encompasses the following aspects such as Physical interfaces and VOQs, Logical interfaces such as link aggregation groups (LAGs), The internal interconnection fabric, The packet forwarding data plane, The control plane, both internal (within the devices in the system) and with external devices.
