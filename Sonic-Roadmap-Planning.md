@@ -142,7 +142,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | [System health and system LED](https://github.com/Azure/SONiC/blob/master/doc/system_health_monitoring/system-health-HLD.md) |
 |            |              |               |                 |
 |SONiC.202106| 06/30/2021   |       TBD     | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202106) |
-|            |              |               | [AAA improvement ](https://github.com/Azure/SONiC/blob/a46aa68b3a3ca57fea28c3d139fcef437e0cf0e6/doc/aaa/AAA20Improvements/AAA%20Improvements.md) |
+
 |			 |				|				| Telemetry for Multi-ASIC |
 | 			 |              |               | Telemetry for Chassis |
 | 			 |              |               | IPv6 Link Local/ BGP Unnumbered |
@@ -156,23 +156,16 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | 			 |              |               | PVST/RPVST+  |  
 | 			 |              |               | Port Channel enhancements | 
 | 			 |              |               | MC-LAG enhancements |
-|            |              |               | [MACSec support in Chassis](https://github.com/Pterosaur/SONiC/blob/fdbaa116fdc4579c67974e70efcce3c882801fcf/doc/macsec/MACsec_hld.md) |
 | 			 |              |               | UDLD | 
-| 			 |              |               | [PCIe Monitoring](https://github.com/Azure/SONiC/pull/634) 
-| 			 |              |               | [Distributed VOQ architecture HLD](https://github.com/Azure/SONiC/blob/a9b221e3252e5ef3a45d18f615c23d3794f39a5b/doc/voq/voq_hld.md)
-| 			 |              |               | [Platform Monitoring for Chassis systems](https://github.com/Azure/SONiC/blob/4206c5420c4b63f1d2ec40b10d54adb27fc9d42a/doc/pmon/pmon-chassis-design.md)
-| 			 |              |               | [Routing/BGP for Chassis](https://github.com/Azure/SONiC/blob/35d6f8d1a88a8f8b08237d6ec9f719e9c06a6758/doc/voq/bgp_voq_chassis.md)
-| 			 |              |               | [Fabric Port support for SONiC](https://github.com/Azure/SONiC/blob/2e1f699a3ba1dbf88abeecb192f6bb5e390b8b8a/doc/chassis/fabric.md)
-| 			 |              |               | [LAG Support for Chassis](https://github.com/Azure/SONiC/blob/332ca53d938e0df24c78d76bcf1117d896ed2683/doc/voq/lag_hld.md)
-| 			 |              |               | [Inband port support for Chassis](https://github.com/Azure/SONiC/pull/639)
-| 			 |              |               | [Everflow Support](https://github.com/Azure/SONiC/blob/9c08b2f3f77230017c7035ceaf880746cb590d49/doc/voq/everflow.md)
 | 			 |              |               | DHCP relay IPv6 support | 
 | 			 |              |               | App extension with Orchagent/SWSS | 
 | 			 |              |               | App extension CLI generation tool | 
-| 			 |              |               | VNET ping tool to debug VNET configuration |
+|			 |				|				| App extension with warmboot awareness |
+|			 |				|				| [Enable/Disable auto negotiation and speed setting with number of lanes](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2FAzure%2FSONiC%2Fblob%2F9b58ef06ab49b489e3aed287659100ce7be8c76a%2Fdoc%2Fport_auto_neg%2Fport-auto-negotiation-design.md%23cli-enhancements&data=04%7C01%7Cxinxliu%40microsoft.com%7Ce7ab50e42bab4524213308d8bca05843%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C637466744147146102%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=AD9apkj5U5YYYzQ%2BLp9PAh4V4dk8HU5JU15zlmpXv3k%3D&reserved=0) |
+|			 |				|				| (Test) Upgrade to Python3 compliance for SONiC mgmt repo Ansible 2.10 upgrade Testbed v2 |
 | 			 |              |               | Dynamic Policy Based Hashing | 
 | 			 |              |               | Add FRR running configuration to techsupport |	
-| 			 |              |               | TPID config suppor | 
+| 			 |              |               | TPID config support | 
 | 			 |              |               | Kubernetes enhancements | 
 | 			 |              |               | (Test) Deprecating Python2 platform daemons |
 | 			 |              |               | MACSEC enhancement: primary & fallback case |
@@ -181,17 +174,18 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | 			 |              |               | Testcase/Testbed Infrastructure |
 | 			 |              |               | New branch creation for Debian11 | 
 | 			 |              |               | SONiC fanout support |
-|            |              |               | SONiC app extension (w/o orchagent)|
 | 			 |              |               | Dynamic hash policy |
 | 			 |              |               | Telemetry for BGP | 
 | 			 |              |               | Inband mgmt VRF |
 | 			 |              |               | Sample Rate on mirror	|
 | 			 |              |               | Sflow with remote collector |	
 | 			 |              |               | V4/V6 L3 ACL optimization | 
-| 			 |              |               | SONiC for MPLS | 
+| 			 |              |               | SONiC for MPLS Dataplane | 
 | 			 |              |               | 6to4 NAT | 
 | 			 |              |               | MPLS SRv6 |  
-| 			 |              |               | Segment Routing support in SONiC | 
+|			 |				|				| Better route scalability with multiple next-hops |
+|			 |				|				| Enabling IS-IS in the dataplane |
+|			 |				|				| Class-based forwarding |
 |			 |				|				|				  | 
 | Backlog    |              |               |                 |
 |		     |			    | 				| BGP Add Path: https://tools.ietf.org/rfc/rfc7911.txt |
@@ -207,6 +201,20 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | [IPv6 Link Local and BGP Unnumbered](https://github.com/Azure/SONiC/blob/3d2e5e66e05bcce0a64f5ad077b96ae2006527fd/doc/ipv6/ipv6_link_local.md)| 
 |            |              |               | [Management Framework RBAC](https://github.com/Azure/SONiC/blob/48fab9db4f090c5beaea5f7a8fdcb9474d23a4e9/doc/aaa/SONiC%20RBAC.md) | 
 |            |              |               | [Media Enhancements<br>(Media Information & Settings)](https://github.com/Azure/SONiC/blob/a6e9636552149829e39a82705d1ad2b48a17b3f0/doc/media-info-enhancements/media-info.md) | 
+|          	 |              |               | [AAA improvement ](https://github.com/Azure/SONiC/blob/a46aa68b3a3ca57fea28c3d139fcef437e0cf0e6/doc/aaa/AAA20Improvements/AAA%20Improvements.md) |
+|          	 |              |               | [MACSec support in Chassis](https://github.com/Pterosaur/SONiC/blob/fdbaa116fdc4579c67974e70efcce3c882801fcf/doc/macsec/MACsec_hld.md) |
+| 			 |              |               | [PCIe Monitoring](https://github.com/Azure/SONiC/pull/634) 
+| 			 |              |               | [Distributed VOQ architecture HLD](https://github.com/Azure/SONiC/blob/a9b221e3252e5ef3a45d18f615c23d3794f39a5b/doc/voq/voq_hld.md)
+| 			 |              |               | [Platform Monitoring for Chassis systems](https://github.com/Azure/SONiC/blob/4206c5420c4b63f1d2ec40b10d54adb27fc9d42a/doc/pmon/pmon-chassis-design.md)
+| 			 |              |               | [Routing/BGP for Chassis](https://github.com/Azure/SONiC/blob/35d6f8d1a88a8f8b08237d6ec9f719e9c06a6758/doc/voq/bgp_voq_chassis.md)
+| 			 |              |               | [Fabric Port support for SONiC](https://github.com/Azure/SONiC/blob/2e1f699a3ba1dbf88abeecb192f6bb5e390b8b8a/doc/chassis/fabric.md)
+| 			 |              |               | [LAG Support for Chassis](https://github.com/Azure/SONiC/blob/332ca53d938e0df24c78d76bcf1117d896ed2683/doc/voq/lag_hld.md)
+| 			 |              |               | [Inband port support for Chassis](https://github.com/Azure/SONiC/pull/639)
+| 			 |              |               | [Everflow Support](https://github.com/Azure/SONiC/blob/9c08b2f3f77230017c7035ceaf880746cb590d49/doc/voq/everflow.md)
+| 			 |              |               | VNET ping tool to debug VNET configuration |
+|          	 |              |               | SONiC app extension (w/o orchagent)|
+| 			 |              |               | Segment Routing support in SONiC | 
+
 
   
 
