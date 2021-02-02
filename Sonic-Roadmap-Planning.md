@@ -104,8 +104,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | Pytest 100% moved from ansible to Pytest |
 |            |              |               | SPytest |
 |            |              |               | [Thermal control](https://github.com/Azure/SONiC/blob/master/thermal-control-design.md) |
-|SONiC.202012| 12/31/2020   |       TBD     | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202012) |
-|			 |				|				| [Chassis infrastructure, T2 topologies and sample Testcases converted](https://github.com/Azure/sonic-mgmt/blob/master/ansible/library/multi-asic_aware_module_requirements.md) |
+|SONiC.202012| 12/31/2020   |     SAI 1.7.1 | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202012) |
 |            |              |               | [Consistent ECMP support (fine grain ECMP)](https://github.com/anish-n/SONiC/blob/e5cdb3d9337026a98d6be5d558126926a4e959e4/doc/ecmp/fine_grained_next_hop_hld.md) |
 |            |              |               | Console Support for SONiC (Hardware)|
 |            |              |               | Console Support for SONiC (SSH forwarding)|
@@ -134,7 +133,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |SONiC.202106| 06/30/2021   |       TBD     | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202106) |
 |			 |				|				| Telemetry for Multi-ASIC |
 | 			 |              |               | Telemetry for Chassis |
-| 			 |              |               | IPv6 Link Local/ BGP Unnumbered |
+| 			 |              |               | [IPv6 Link Local/ BGP Unnumbered](https://github.com/Azure/SONiC/blob/3d2e5e66e05bcce0a64f5ad077b96ae2006527fd/doc/ipv6/ipv6_link_local.md) |
 | 			 |              |               | Radius AAA |
 | 			 |              |               | ACL enhancements | 
 | 			 |              |               | QoS enhancements |
@@ -177,9 +176,9 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |			 |				|				| Class-based forwarding |
 |			 |				|				|				  | 
 | Backlog    |              |               |                 |
-|		     |			    | 				| BGP Add Path: https://tools.ietf.org/rfc/rfc7911.txt |
-|		     |			    | 				| BGP ExtComm: https://tools.ietf.org/rfc/rfc4360.txt |
-|		     |			    | 				| BGP Link bandwidth ExtComm: https://tools.ietf.org/pdf/draft-ietf-idr-link-bandwidth-07.pdf |
+|		     |			    | 				| [BGP Add Path] (https://tools.ietf.org/rfc/rfc7911.txt) |
+|		     |			    | 				| [BGP ExtComm](https://tools.ietf.org/rfc/rfc4360.txt) |
+|		     |			    | 				| [BGP Link bandwidth ExtComm](https://tools.ietf.org/pdf/draft-ietf-idr-link-bandwidth-07.pdf) |
 |            |              |               | [Kernel programming performance enhancement](https://github.com/Azure/SONiC/blob/f39c72147209aab8fec5deebb965bf4c91a1f876/doc/platform/nlapi/netlink_api_kernel_programming.md) |
 |            |              |               | SONiC shared headroom - enhanced configuration | 
 |            |              |               | SONiC new polling counters for counters which has extend CPU req.|
@@ -187,7 +186,6 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | VoQ Chassis Support in SONiC |
 |            |              |               | [SONiC TPID Configuration](https://github.com/Azure/SONiC/pull/681) | 
 |            |              |               | [BFD SW 100ms interval from FRR](https://github.com/Azure/SONiC/blob/master/doc/bfd/BFD_Enhancement_HLD.md)| 
-|            |              |               | [IPv6 Link Local and BGP Unnumbered](https://github.com/Azure/SONiC/blob/3d2e5e66e05bcce0a64f5ad077b96ae2006527fd/doc/ipv6/ipv6_link_local.md)| 
 |            |              |               | [Management Framework RBAC](https://github.com/Azure/SONiC/blob/48fab9db4f090c5beaea5f7a8fdcb9474d23a4e9/doc/aaa/SONiC%20RBAC.md) | 
 |            |              |               | [Media Enhancements<br>(Media Information & Settings)](https://github.com/Azure/SONiC/blob/a6e9636552149829e39a82705d1ad2b48a17b3f0/doc/media-info-enhancements/media-info.md) | 
 |          	 |              |               | [AAA improvement ](https://github.com/Azure/SONiC/blob/a46aa68b3a3ca57fea28c3d139fcef437e0cf0e6/doc/aaa/AAA20Improvements/AAA%20Improvements.md) |
@@ -201,6 +199,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | 			 |              |               | [LAG Support for Chassis](https://github.com/Azure/SONiC/blob/332ca53d938e0df24c78d76bcf1117d896ed2683/doc/voq/lag_hld.md)
 | 			 |              |               | [Inband port support for Chassis](https://github.com/Azure/SONiC/pull/639)
 | 			 |              |               | [Everflow Support](https://github.com/Azure/SONiC/blob/9c08b2f3f77230017c7035ceaf880746cb590d49/doc/voq/everflow.md)
+|			 |				|				| [Chassis infrastructure, T2 topologies and sample Testcases converted](https://github.com/Azure/sonic-mgmt/blob/master/ansible/library/multi-asic_aware_module_requirements.md) |
 | 			 |              |               | VNET ping tool to debug VNET configuration |
 |          	 |              |               | SONiC app extension (w/o orchagent)|
 | 			 |              |               | Segment Routing support in SONiC | 
