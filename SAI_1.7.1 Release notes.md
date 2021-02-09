@@ -12,43 +12,44 @@ This commit contains following non-backward compatible changes
 Reason:
 IEEE standards 802.1AE-2018 and 802.1X-2020 both state that SSCI is a property of the SA not the SC. SSCI can only be assigned once the full Live Peer List has been exchanged via EAPOL between peers, which will occur after the KaY has already created the transmit SC for the actor.
 
-/**
+`````
  * @brief SSCI value for this Secure Association
  *
  * Valid when SAI_MACSEC_SC_ATTR_MACSEC_CIPHER_SUITE == SAI_MACSEC_CIPHER_SUITE_GCM_AES_XPN_128 or SAI_MACSEC_SC_ATTR_MACSEC_CIPHER_SUITE == SAI_MACSEC_CIPHER_SUITE_GCM_AES_XPN_256.
  *
  * @type sai_uint32_t
  * @flags MANDATORY_ON_CREATE | CREATE_ONLY
- */
+`````
 SAI_MACSEC_SA_ATTR_MACSEC_SSCI,
        Replace attribute SAI_MACSEC_SA_ATTR_ENCRYPTION_ENABLE with SAI_MACSEC_SC_ATTR_ENCRYPTION_ENABLE
 Reason:
 As seen from both the open source KaY (wpa-supplicant) and SecY (Linux MACsec driver), the encryption attribute is typically an attribute of the SC, not the SA. This alignment can be retained by shifting the SAI MACsec definition of the encryption attribute from the SA to the SC. This should allow for a cleaner, more direct translation between the SAI MACsec layer and the underlying platform driver.
 
-/**
+`````
  * @brief True means encryption is enabled.  False means encryption is disabled.
  *
  * @type bool
  * @flags CREATE_AND_SET
  * @default true
- */
+`````
 SAI_MACSEC_SC_ATTR_ENCRYPTION_ENABLE,
        Replace attribute SAI_MACSEC_SC_ATTR_MACSEC_XPN64_ENABLE and SAI_MACSEC_SA_ATTR_SAK_256_BITS with SAI_MACSEC_SC_ATTR_MACSEC_CIPHER_SUITE
 Reason:
 As seen from both the open source KaY (wpa-supplicant) and SecY (Linux MACsec driver), the MACsec cipher suite is typically a single attribute of the SC. This alignment can be retained by combining the two properties of the MACsec cipher suite (SAK length and XPN enable) of the SAI MACsec definition into a single attribute of the SC. This should allow for a cleaner, more direct translation between the SAI MACsec layer and the underlying platform driver.
 
-/**
+`````
  * @brief Cipher suite for this Secure Channel.
  *
  * @type sai_macsec_cipher_suite_t
  * @flags MANDATORY_ON_CREATE | CREATE_AND_SET
- */
+`````
 SAI_MACSEC_SC_ATTR_MACSEC_CIPHER_SUITE,
 
 The PR related to this feature is available at [PR#1156](https://github.com/opencomputeproject/SAI/pull/1156) ;[PR#1172](https://github.com/opencomputeproject/SAI/pull/1172)
 
 ### Tunnel loopback packet action as resource	
 SAI_TUNNEL_ATTR_LOOPBACK_PACKET_ACTION is marked as resource and can be queried using the sai_object_type_get_availability API.
+`````
 Example
 sai_attribute_t *attr;
 sai_status_t status;
@@ -61,6 +62,7 @@ attr[1].id = SAI_TUNNEL_ATTR_LOOPBACK_PACKET_ACTION;
 attr[1].value.s32 = SAI_PACKET_ACTION_DROP;
 
 status = sai_object_type_get_availability(g_switch_id, SAI_OBJECT_TYPE_TUNNEL, 2, &attr, &count);
+`````
 
 This API will return number of vxlan tunnels which can further with packet action as drop.
 SONiC when invokes this API with out any tunnels configured
@@ -96,10 +98,11 @@ Renamed ingress set-and-clear attribute MINIMUM_XPN to MINIMUM_INGRESS_XPN.
 
 The PR related to this feature is available at	[PR#1169](https://github.com/opencomputeproject/SAI/pull/1169)
 
-### UDF Field Qualifier in ACL 	
-This feature brings in change to be able to specify field extracted by UDF group as a qualifier in ACL Table for typedef enum _sai_acl_table_attr_t 
+### Add packet allocate, free function to allow for 0 copy packet TX  
+This PR is to add more attribute for querying available packet DMA pool size. This can be used for accounting for and debugging allocations from packet DMA pool.Sending a packet requires allocating it first. Typically, this requires allocating from a special pool of DMAed memory. For this a ASIC vendor SDK may support custom allocate and free functions. So mirror those in the SAI spec.Without such a ability we are left to allocate heap memory, pass it to send_hostif_packet_fn, which then allocates from the afore mentioned DMA memory, copies the contents of heap memory and sends the packet along. This causes us to have a extra allocation and copy.
+This is achieved by adding SAI_HOSTIF_PACKET_ATTR_ZERO_COPY_TX in sai_hostif_packet_attr_t and adding a type def sai_allocate_hostif_packet_fn for saihostif.h and adding SAI_SWITCH_ATTR_PACKET_DMA_MEMORY_POOL_SIZE in sai_switch_attr_t for saiswitch.h
 
-The PR related to this feature is available at [PR#1122](https://github.com/opencomputeproject/SAI/pull/1122)
+The PR related to this feature is available at [PR#1137](https://github.com/opencomputeproject/SAI/pull/1137)
 
 ### Add label attribute for LAG and virtual router 
 Since LAG and virtual router can be created without any unique mandatory attributes, anchor attribute can be used to uniquely identify specified objects. This will be very useful in SONiC warm boot scenario, for example to identify 2 empty LAGs which are present on the device after reboot.
@@ -107,29 +110,25 @@ This attribute doesn't correspond to any internal SAI vendor device resources, a
 
 The PR related to this feature is available at [PR#1158](https://github.com/opencomputeproject/SAI/pull/1158)
 
-### Create SAI-Proposal-Generic-Counters.md 
+### Add neighbor and tunnel term ip addr family for CRM 
+Generic resource monitoring, done by API sai_object_type_get_availability, introduced the ability to query avaialble resources per object type, and provide additional attributes as query params. This introduces 2 such params - neighbor entry IP address family, to be able to query avaialble IPv4 and IPv6 neigbor entries, and tunnel termination table entry IP address family, to be able to query available IPv4 and IPv6 tunnel termination table entries. Introduced attributes are read only, marked as resourcetype, and used only for this query by adding attribute SAI_NEIGHBOR_ENTRY_ATTR_IP_ADDR_FAMILY in enum sai_neighbor_entry_attr_t for saineighbor.h and attribute SAI_TUNNEL_TERM_TABLE_ENTRY_ATTR_IP_ADDR_FAMILY in enum sai_tunnel_term_table_entry_attr_t for saitunnel.h
 
-The PR related to this feature is available at [PR#939](https://github.com/opencomputeproject/SAI/pull/939)
+The PR related to this feature is available at [PR#1151](https://github.com/opencomputeproject/SAI/pull/1151)
+
+### UDF Field Qualifier in ACL 	
+This feature brings in change to be able to specify field extracted by UDF group as a qualifier in ACL Table for typedef enum _sai_acl_table_attr_t 
+
+The PR related to this feature is available at [PR#1122](https://github.com/opencomputeproject/SAI/pull/1122)
 
 ### Packet loopback action for tunnels 
 Added loopback action as switch attribute: This will apply to all the tunnels configured and as a tunnel specific action. Added SAI_OUT_DROP_REASON_TUNNEL_LOOPBACK_PACKET_DROP under typedef enum _sai_out_drop_reason_t for saidebugcounter.h and  SAI_SWITCH_ATTR_TUNNEL_LOOPBACK_PACKET_ACTION, under typedef enum _sai_switch_attr_t for saiswitch.h and SAI_TUNNEL_ATTR_LOOPBACK_PACKET_ACTION under typedef enum _sai_tunnel_attr_t for saitunnel.h 
 
 The PR related to this feature is available at [PR#1152](https://github.com/opencomputeproject/SAI/pull/1152)
 
-### Masked hash with optional ordering 
-
-The PR related to this feature is available at [PR#1075](https://github.com/opencomputeproject/SAI/pull/1075)
-
 ### Allow for multiple interface types  
 This allows for provisioning and advertising a list of multiple IEEE ethernet protocols on a port, by adding SAI_PORT_ATTR_ADVERTISED_INTERFACE_TYPE in enum sai_port_attr_t for saiport.h
 
 The PR related to this feature is available at [PR#1135](https://github.com/opencomputeproject/SAI/pull/1135)
-
-### Add packet allocate, free function to allow for 0 copy packet TX  
-This PR is to add more attribute for querying available packet DMA pool size. This can be used for accounting for and debugging allocations from packet DMA pool.Sending a packet requires allocating it first. Typically, this requires allocating from a special pool of DMAed memory. For this a ASIC vendor SDK may support custom allocate and free functions. So mirror those in the SAI spec.Without such a ability we are left to allocate heap memory, pass it to send_hostif_packet_fn, which then allocates from the afore mentioned DMA memory, copies the contents of heap memory and sends the packet along. This causes us to have a extra allocation and copy.
-This is achieved by adding SAI_HOSTIF_PACKET_ATTR_ZERO_COPY_TX in sai_hostif_packet_attr_t and adding a type def sai_allocate_hostif_packet_fn for saihostif.h and adding SAI_SWITCH_ATTR_PACKET_DMA_MEMORY_POOL_SIZE in sai_switch_attr_t for saiswitch.h
-
-The PR related to this feature is available at [PR#1137](https://github.com/opencomputeproject/SAI/pull/1137)
 
 ### New Interface type based on transceivers variants  
 New interface types as been added for saiport.h under enum sai_port_interface_type_t 
@@ -141,12 +140,13 @@ This features adds the counter to attach a SAI counter to next hop group member,
 
 The PR related to this feature is available at [PR#1150](https://github.com/opencomputeproject/SAI/pull/1150)
 
-### Add neighbor and tunnel term ip addr family for CRM 
-Generic resource monitoring, done by API sai_object_type_get_availability, introduced the ability to query avaialble resources per object type, and provide additional attributes as query params. This introduces 2 such params - neighbor entry IP address family, to be able to query avaialble IPv4 and IPv6 neigbor entries, and tunnel termination table entry IP address family, to be able to query available IPv4 and IPv6 tunnel termination table entries. Introduced attributes are read only, marked as resourcetype, and used only for this query by adding attribute SAI_NEIGHBOR_ENTRY_ATTR_IP_ADDR_FAMILY in enum sai_neighbor_entry_attr_t for saineighbor.h and attribute SAI_TUNNEL_TERM_TABLE_ENTRY_ATTR_IP_ADDR_FAMILY in enum sai_tunnel_term_table_entry_attr_t for saitunnel.h
+### Create SAI-Proposal-Generic-Counters.md 
 
-The PR related to this feature is available at [PR#1151](https://github.com/opencomputeproject/SAI/pull/1151)
+The PR related to this feature is available at [PR#939](https://github.com/opencomputeproject/SAI/pull/939)
 
+### Masked hash with optional ordering 
 
+The PR related to this feature is available at [PR#1075](https://github.com/opencomputeproject/SAI/pull/1075)
 
 
 
