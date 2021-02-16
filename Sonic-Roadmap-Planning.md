@@ -125,17 +125,15 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | ONIE FW tools CPLD, BIOS, SSD, Firmware upgrade [Uniform Tool] |
 |            |              |               | [PDDF advance to SONiC Platform 2.0, BMC](https://github.com/Azure/SONiC/blob/master/doc/platform/brcm_pdk_pddf.md) |
 |            |              |               | [PDK - Platform Development Environment](https://github.com/Azure/SONiC/blob/master/doc/platform/pde.md) |
-|            |              |               | [RADIUS AAA](https://github.com/Azure/SONiC/blob/3edad287edc79ea7e227648cba566a6ce347bf49/doc/aaa/radius_authentication.md) |
 |            |              |               | [SONiC entity MIB extensions](https://github.com/Azure/SONiC/blob/0e53548a8f1023d1be2a1dffd62737c7a1b18a2e/doc/snmp/extension-to-physical-entity-mib.md) |
 |            |              |               | [Support hardware reboot/reload reason (Streaming Telemetry)](https://github.com/sujinmkang/SONiC/blob/6ed19e88c6f7aac74640d3d343210d840af70a23/doc/system-telemetry/reboot-cause.md)|
 |            |              |               | [System health and system LED](https://github.com/Azure/SONiC/blob/master/doc/system_health_monitoring/system-health-HLD.md) |
 |            |              |               |    |
 |SONiC.202106| 06/30/2021   |       TBD     | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202106) |
 |			 |				|				| Telemetry for Multi-ASIC |
-| 			 |              |               | Telemetry for Chassis |
 | 			 |              |               | [IPv6 Link Local/ BGP Unnumbered](https://github.com/Azure/SONiC/blob/3d2e5e66e05bcce0a64f5ad077b96ae2006527fd/doc/ipv6/ipv6_link_local.md) |
-| 			 |              |               | Radius AAA |
-| 			 |              |               | ACL enhancements | 
+|            |              |               | [RADIUS AAA](https://github.com/Azure/SONiC/blob/3edad287edc79ea7e227648cba566a6ce347bf49/doc/aaa/radius_authentication.md) |
+|            |              |               | ACL enhancements: Policing, DHCP/PCP remark, L2 | 
 | 			 |              |               | QoS enhancements |
 | 			 |              |               | DHCP relay enhancements |
 | 			 |              |               | IP Helper |
@@ -143,7 +141,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | 			 |              |               | IGMP Snooping | 
 | 			 |              |               | PVST/RPVST+  |  
 | 			 |              |               | Port Channel enhancements | 
-| 			 |              |               | MC-LAG enhancements |
+|            |              |               | [MC-LAG enhancements](https://github.com/Azure/SONiC/blob/176cf4f5a8ee6ecfd8a478573ffc92f0eb23b4e6/doc/mclag/MCLAG_Enhancements_HLD.md) |
 | 			 |              |               | UDLD | 
 | 			 |              |               | DHCP relay IPv6 support | 
 | 			 |              |               | App extension with Orchagent/SWSS | 
@@ -162,8 +160,6 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | 			 |              |               | Testcase/Testbed Infrastructure |
 | 			 |              |               | New branch creation for Debian11 | 
 | 			 |              |               | SONiC fanout support |
-| 			 |              |               | Dynamic hash policy |
-| 			 |              |               | Telemetry for BGP | 
 | 			 |              |               | Inband mgmt VRF |
 | 			 |              |               | Sample Rate on mirror	|
 | 			 |              |               | Sflow with remote collector |	
@@ -182,7 +178,6 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | [Kernel programming performance enhancement](https://github.com/Azure/SONiC/blob/f39c72147209aab8fec5deebb965bf4c91a1f876/doc/platform/nlapi/netlink_api_kernel_programming.md) |
 |            |              |               | SONiC shared headroom - enhanced configuration | 
 |            |              |               | SONiC new polling counters for counters which has extend CPU req.|
-|            |              |               | ACL enhancements: Policing, DHCP/PCP remark, L2 | 
 |            |              |               | VoQ Chassis Support in SONiC |
 |            |              |               | [SONiC TPID Configuration](https://github.com/Azure/SONiC/pull/681) | 
 |            |              |               | [BFD SW 100ms interval from FRR](https://github.com/Azure/SONiC/blob/master/doc/bfd/BFD_Enhancement_HLD.md)| 
@@ -190,7 +185,6 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | [Media Enhancements<br>(Media Information & Settings)](https://github.com/Azure/SONiC/blob/a6e9636552149829e39a82705d1ad2b48a17b3f0/doc/media-info-enhancements/media-info.md) | 
 |          	 |              |               | [AAA improvement ](https://github.com/Azure/SONiC/blob/a46aa68b3a3ca57fea28c3d139fcef437e0cf0e6/doc/aaa/AAA20Improvements/AAA%20Improvements.md) |
 |          	 |              |               | [MACSec support in Chassis](https://github.com/Pterosaur/SONiC/blob/fdbaa116fdc4579c67974e70efcce3c882801fcf/doc/macsec/MACsec_hld.md) |
-|            |              |               | [MC-LAG (L2)](https://github.com/Azure/SONiC/blob/176cf4f5a8ee6ecfd8a478573ffc92f0eb23b4e6/doc/mclag/MCLAG_Enhancements_HLD.md) |
 | 			 |              |               | [PCIe Monitoring](https://github.com/Azure/SONiC/pull/634) 
 | 			 |              |               | [Distributed VOQ architecture HLD](https://github.com/Azure/SONiC/blob/a9b221e3252e5ef3a45d18f615c23d3794f39a5b/doc/voq/voq_hld.md)
 | 			 |              |               | [Platform Monitoring for Chassis systems](https://github.com/Azure/SONiC/blob/4206c5420c4b63f1d2ec40b10d54adb27fc9d42a/doc/pmon/pmon-chassis-design.md)
@@ -209,7 +203,8 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | L2 Dot1Q tunneling support |
 |            |              |               | [L2 functional and performance enhancements](https://github.com/Azure/SONiC/pull/379)|
 |            |              |               | [PDK - Platform Driver Development Framework](https://github.com/Azure/SONiC/blob/master/doc/platform/brcm_pdk_pddf.md) |
-
+| 			 |              |               | Telemetry for Chassis |
+| 			 |              |               | Telemetry for BGP | 
   
 
 
