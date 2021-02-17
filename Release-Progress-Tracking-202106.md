@@ -2,47 +2,57 @@
 
 | Feature| HLD<br/>Review<br/>Date | Owner| Code<br>Review<br>Owner| Code<br>Review<br>Date | Code PR Status   |
 | ------ | ------- | -----|---------| ------------ | ------- | 
-| | | |  | | |
-| Telemetry for Multi-ASIC | |	MSFT  |  | | |
-| Telemetry for Chassis | |	TBD | |  |To be discussed in Chassis workgroup | 
-| IPv6 Link Local/ BGP Unnumbered | |	BRCM | |  |Deferred from 202012 release  | 
-| Radius AAA	| | BRCM | |  |Deferred from 202012 release  | 
-| ACL enhancements	| | BRCM | |  | | 
-| QoS enhancements	 || BRCM | |  | | 
-| DHCP relay enhancements|	 | BRCM | |  |Ben to share details on the feature | 
-| IP Helper	| | BRCM | |  | | 
-| BUM storm control	| | BRCM | |  | | 
-| IGMP Snooping	| | BRCM | |  | | 
-| PVST/RPVST+	| | BRCM | |  | | 
-| Port Channel enhancements	| | BRCM | |  | | 
-| MC-LAG enhancements	| | BRCM | |  | | 
-| UDLD	| | BRCM | |  | | 
-| DHCP relay IPv6 support	| | Nvidia | |  | Currently DHCP relay supports only IPv4. The idea is to extend the support to IPv6 and it should work for both as the same time. Also, currently DHCP relay is enabled only based on the Type in the METADATA and it must be ‘ToRRouter’. We will remove this restriction and will integrate it with copp manager so user can decide if to have DHCP relay or not regardless of the device type | 
-| App extension with Orchagent/SWSS	| | Nvidia | |  | 2nd phase of the application extension: dynamically adds logic to swss/orchagent so additional use applications can be developers developed based on SONiC application extension infrastructure. For example: dynamic policy based hashing | 
-| App extension CLI generation tool	| | Nvidia | |  | 2nd phase of the application extension: a CLI generation tool for application extension programs. An improvements following the current infra available  | 
-| App extension with warmboot awareness	| | Nvidia | |  | 2nd phase of the application extension: warmboot awareness and integration of an application extension that requires warmboot support | 
-| [Enable/Disable auto negotiation <br> and speed setting with number of lanes](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2FAzure%2FSONiC%2Fblob%2F9b58ef06ab49b489e3aed287659100ce7be8c76a%2Fdoc%2Fport_auto_neg%2Fport-auto-negotiation-design.md%23cli-enhancements&data=04%7C01%7Cxinxliu%40microsoft.com%7Ce7ab50e42bab4524213308d8bca05843%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C637466744147146102%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=AD9apkj5U5YYYzQ%2BLp9PAh4V4dk8HU5JU15zlmpXv3k%3D&reserved=0) | | Nvidia | |  | Add new CLIs to enable/disable auto negotiation per interface as well as setting the number of lanes per requested speed. | 
-| (Test) Upgrade to Python3 compliance <br> for SONiC mgmt repo Ansible <br> 2.10 upgrade Testbed v2 | | MSFT | |  | |
-| Dynamic Policy Based Hashing	| | Nvidia | |  | | 
-| Add FRR running configuration to techsupport|	 | Nvidia | |  | Improve the FRR information in the tech support following the below github issue [5067](https://github.com/Azure/sonic-buildimage/issues/5067) | 
-| TPID config support 	| | MSFT | |  | Deferred from 202012 release SAI 1.6.x supports this; Vendor support required | 
-| Kubernetes enhancements	| | MSFT | |  | | 
-| (Test) Deprecating Python2 platform daemons	| | MSFT | |  | | 
-| MACSEC enhancement: primary & fallback case	| | MSFT | |  | | 
-| Error handling (swss)	| | MSFT | |  | | 
-| 100% SONiC YANG model	 | | MSFT | |  | New Working group: To be discussed in sonic-yang-subgroup@googlegroups.com, please join subgroup to learn more.  | 
-| Testcase/Testbed Infrastructure|	 | MSFT | |  | | 
-| New branch creation for Debian11	| | MSFT | |  | | 
-| SONiC fanout support	| | MSFT | |  | | 
-| Dynamic hash policy|	 | MSFT | |  | | 
-| Telemetry for BGP	| | MSFT | |  | | 
-| Inband mgmt VRF |	 | DELL | |  |  HLD pending for review (#638) | 
-| Sample Rate on mirror	| | Innovium | |  | Ability to sample on a mirror. i.e, instead of mirroring all the packets, just send 1 out of n packets. This involves adding SONiC support  for Mirror session attribute SAI_MIRROR_SESSION_ATTR_SAMPLE_RATE. | 
-| Sflow with remote collector |	 | Innovium | |  |  Currently, SONiC supports sending sFlow samples to local CPU. Add support to send the samples to a remote collector  using a mirror session of type (SAI_SAMPLEPACKET_TYPE_MIRROR_SESSION).| 
-| V4/V6 L3 ACL optimization	| | Innovium | |  | Currently SONiC uses separate ACL tables for L3 and L3v6 RACLs. In some ASICs, if a user wants both v4 and v6 rules, they would end up using two hardware ACL tables instead of one. The proposal is to give the platform the ability to mention if they want to support L3 and L3V6 ACLs in the same hardware ACL Table. This approach has been taken in the community for Mirror ACL tables but not for L3 ACLs. We are extending this to L3 ACLs as well. | 
-| SONiC for MPLS Dataplane	| | Juniper | |  | New Working group: To be discussed in sonic-mpls-workgroup@googlegroups.com. Please join the subgroup to learn more and contributions.  | 
-| 6to4 NAT	| | Intel | |  | Will be in 202112 (Remove from list) | 
-| MPLS SRv6	| | Intel | |  | SONiC/SAI support for linux static route+SRV6 encapsulation;To be discussed in sonic-mpls-workgroup | 
-| Better route scalability with multiple<br> next-hops | |	Metaswitch  | |  | Split next hop groups out of routing table (back-compatibly). To be discussed in sonic-mpls-workgroup | 
-| Enabling IS-IS in the dataplane | | Metaswitch | |  | Getting IS-IS PDUs to the control plane. To be discussed in sonic-mpls-workgroup | 
-| Class-based forwarding | | Metaswitch | |  | Policy-based tunnel selection. To be discussed in sonic-mpls-workgroup | 
+| Telemetry for Multi-ASIC | |	MSFT  |  |Intel - tbd |Single telemetry sever to aggregate data from multiple Redis DB |
+| Dynamic policy based hashing| 3/5/2021 |Nvidia/MSFT |	MSFT | | Hash packets on custom fields|
+| DHCP relay IPv6 support | 2/28/2021 | Nvidia | | BRCM	| | Currently DHCP relay supports only IPv4. The idea is to extend the support to IPv6 and it should work for both as the same time. Also, currently DHCP relay is enabled only based on the Type in the METADATA and it must be ‘ToRRouter’. We will remove this restriction and will integrate it with copp manager so user can decide if to have DHCP relay or not regardless of the device type |
+| App extension with Orchagent/SWSS | |	Nvidia | | BRCM/<br>MSFT | | 2nd phase of the application extension: dynamically adds logic to swss/orchagent so additional use applications can be developers developed based on SONiC application extension infrastructure. For example: dynamic policy based hashing |
+| App extension CLI generation tool | |	Nvidia | | BRCM/<br>MSFT | | 2nd phase of the application extension: a CLI generation tool for application extension programs. An improvements following the current infra available |
+| App extension with warmboot awareness | | Nvidia | Included in [#682](https://github.com/Azure/SONiC/pull/682) | BRCM | 2nd phase of the application extension: warmboot awareness and integration of an application extension that requires warmboot support |
+| Add FRR running configuration to tech support	Nvidia| N/A(email update) | BRCM | | Improve the FRR information in the tech support following the below github issue #5067(https://github.com/Azure/sonic-buildimage/issues/5067) |	
+| [Enable/Disable auto negotiation and speed setting with number of lanes](https://github.com/Azure/SONiC/blob/9b58ef06ab49b489e3aed287659100ce7be8c76a/doc/port_auto_neg/port-auto-negotiation-design.md#cli-enhancements)| 1/19/2021 | Nvidia | BRCM/<br>Dell/<br>Intel<br>[Need platform vendor reviewers] | March | Add new CLIs to enable/disable auto negotiation per interface as well as setting the number of lanes per requested speed.|
+| TPID config support<br>[SONiC TPID Configuration Support by gechiang · Pull Request #681](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2FAzure%2FSONiC%2Fpull%2F681&data=04%7C01%7Cansverm%40microsoft.com%7C6115223650e94054737908d8c213a0d0%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C637472736862362218%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=uMnmWCp8HCRJdmEhEncb9uOTzfHOrv9C5S%2BGahgKqWg%3D&reserved=0) | Oct-20 | MSFT | Nvidia- tbd | | Allow us to covert our PTF fanout switches to run SONiC OS |	
+| Kubernetes enhancements | | MSFT | BRCM - tbd	|	
+| Deprecating Python2 platform daemons | | MSFT | Nvidia-tbd | | All platform daemons will run using Python 3. Python 2 support  will be removed. Vendors must build and install Python 3 sonic-platform packages. <br> N/A – No HLD. Some vendors are already building/installing Python 3 sonic-platform packages, so there are a number of examples|
+| MACSEC enhancement: primary & fallback case| 3/30/2021 | MSFT	| BRCM | | MACsec can enable primary and fallback Connectivity Association Keys(CAK) at a same time. Meanwhile the primary and fallback key can be switched or replaced without any outage.|
+| Error handling (swss) | | MSFT/<br>BRCM | Nvidia | | Handle SAI failures in orchagent.<br> [Ques: feature was discussed before, will we have new HLD or existing HLD?]|
+| 100% SONiC YANG model | [Update HLD template to include YANG model] | MSFT | Confirm with YANG WG | | Build a full and complete YANG model for SONiC configDB <br> New Working group: To be discussed in sonic-yang-subgroup@googlegroups.com, please join subgroup to learn more. |
+| New branch creation for Debian11 | 3/30/2021 | MSFT | | Create initial testing image and Debian 11 branch for community to integrate with respective platform drivers, SAI etc. Debian11 support is targeted for 202112 release.<br> [Will be continued in 202112] |
+| (Test) Upgrade to Python3 compliance | Not required |	MSFT | Confirm with Test subgroup| | Pytest to use python3 as python2 is at end of life. |
+| (Test) Ansible 2.10 upgrade | Not required | MSFT | Confirm with Test subgroup | | Pick up new features in ansible 2.10. |
+| (Test) Testbed v2 | Reviewed | MSFT |	Confirm with Test subgroup | | Improve testbed and deployment management |
+| Testcase/Testbed Infrastructure | TBD	| MSFT | Confirm with Test subgroup | | New test cases and infrastructure improvement<br> [Define scope ] |
+| SONiC fanout support | | MSFT | TBD | Define scope | Change fanout switch o.s to SONiC.|
+| Link Training	MSFT | | Nvidia - tbd<br>BRCM- tbd<br>DELL - tbd | | Enable and disable link training per port.|
+| Inband mgmt VRF | | DELL | MSFT/<br>Intel - tbd | | HLD pending for review (#638) |
+| Sample Rate on mirror	| | Innovium | BRCM | | Ability to sample on a mirror. i.e, instead of mirroring all the packets, just send 1 out of n packets.<br>This involves adding SONiC support  for Mirror session attribute SAI_MIRROR_SESSION_ATTR_SAMPLE_RATE.|
+| Sflow with remote collector | | Innovium | BRCM/<br>Nvidia | | Currently, SONiC supports sending sFlow samples to local CPU. Add support to send the samples to a remote collector  using a mirror session of type (SAI_SAMPLEPACKET_TYPE_MIRROR_SESSION).
+| V4/V6 L3 ACL optimization | | Innovium | BRCM	| | Currently SONiC uses separate ACL tables for L3 and L3v6 RACLs. In some ASICs, if a user wants both v4 and v6 rules, they would end up using two hardware ACL tables instead of one.<br>The proposal is to give the platform the ability to mention if they want to support L3 and L3V6 ACLs in the same hardware ACL Table. <br>This approach has been taken in the community for Mirror ACL tables but not for L3 ACLs. We are extending this to L3 ACLs as well.
+| SRv6 support | 3/5/2021 | Intel/<br>Alibaba | Juniper- tbd/<br>Cisco- tbd | | SONiC/SAI support for linux static route+SRV6 encapsulation.<br>To be discussed in sonic-mpls-workgroup.<br>Intel will contribute dataplane support; Alibaba will contribute control plane support
+| SONiC for MPLS Dataplane | | Juniper | Intel/<br>Metaswitch- tbd/<br>Confirm with MPLS WG | |SONiC support for MPLS dataplane.|
+| [Better route scalability with multiple next-hops](https://github.com/Azure/SONiC/pull/712) | 1/26/2021 | Metaswitch | BRCM | | Split next hop groups out of routing table (back-compatibly).|
+| Enabling IS-IS in the dataplane | | Metaswitch | Confirm with MPLS WG	| | Getting IS-IS PDUs to the control plane.<br>To be discussed in sonic-mpls-workgroup |
+| Class-based forwarding | | Metaswitch	| Confirm with MPLS WG | | Policy-based tunnel selection.To be discussed in sonic-mpls-workgroup(Might move to 202112 release) |
+| [IPv6 Link Local and BGP Unnumbered](https://github.com/Azure/SONiC/pull/625) | 6/2/2020 | BRCM | MSFT/<br>DELL | Correct operation of manually and automatically generated IPv6 link-local addresses on routing interfaces, including routing operation across them. Includes support for RFC 5549, allowing IPv4 routes to be advertized through an IPv6 next hop. |
+| [MC-LAG (L2)](https://github.com/Azure/SONiC/pull/596) | 5/5/2020 | BRCM	| Intel/<br>MSFT/<br>Innovium/<br>DELL | | Full L2 support. Also support for L3 protocols (e.g. BGP, BFD) across an MC-LAG. Dependency upon "L2 functional and performance enhancements" item.<br>202012 carry-over item - Code PRs in review
+| [RPVST+](https://github.com/Azure/SONiC/pull/499) | TBD | BRCM | TBD | | Best Effort - 202106.<br>Rapid traffic re-convergence per vlan (< 500 ms) following the failure of a bridge or bridge port. Incl BPDU and Root Guard functions, and IS-CLI support (PVST+ also) | 
+| [Storm Control (BUM)](https://github.com/Azure/SONiC/pull/441) | TBD | BRCM | MSFT/<br>Innovium | | Independently rate limit ingress Broadcast, Multicast and Unknown Unicast traffic on a bits-per-second basis. IS-CLI configuration |
+| [RADIUS AAA](https://github.com/Azure/SONiC/pull/500) | 10/29/2019 | BRCM | Dell - tbd | | Support Authentication services for SONiC, similar to those offered by TACACS+ today. Can also get the privilege level of an authenticated management user from the RADIUS server response. Can operate in the Mgmt VRF |
+| [Kernel programming performance enhancement](https://github.com/Azure/SONiC/pull/493) |4/28/20 -> rejected<br> New ETA: TBD |	BRCM | MSFT/<br>DELL - tbd/<br>MSFT- tbd | Replace system() calls with netlink calls (nlapi -> libnl3) <br> (HLD needs some re-work and re-review)|
+| Static Anycast Gateway | TBD | BRCM | Intel - tbd/<br>MSFT- tbd | | L3 MC-LAG feature to configure the gateway address on both peers |
+| BFD (SW - 100ms interval from FRR) | TBD | BRCM/<br>Nvidia - tbd | | Bidirectional Forwarding Detection - routing OAM feature, linked to BGP neighbor detection. This was submitted before (HLD, code), but needs to change to reflect FRR 7.5 and bgpcfgd changes |
+| [STP/PVST](https://github.com/Azure/SONiC/blob/master/doc/stp/SONiC_PVST_HLD.md) | 6/4/2019 |	BRCM | TBD | | Spanning tree; Pre-requisite for RPVST+ |
+| [L2 functional and performance enhancements](https://github.com/Azure/SONiC/pull/379) | 5/21/2019 | BRCM | MSFT- tbd<br>DELL - tbd (related to MC-LAG) | | FDB flush, MAC move, FDB aging time configuration, Static FDB configuration and VLAN Range configuration <br>Existing code PRs: <br> -[885](https://github.com/Azure/sonic-swss/pull/885) <br> [529](https://github.com/Azure/sonic-utilities/pull/529) |
+| [Thresholds (statistics)](https://github.com/Azure/SONiC/blob/master/doc/threshold/SONiC%20Threshold%20feature%20spec.md) | 7/30/2019 | BRCM | TBD | Best Effort - 202106<br>Configure a threshold on supported buffers in ingress and egress. A threshold breach notification (entry update in COUNTERS_DB) is generated accordingly. | 
+| [PDK - Platform Development Environment](https://github.com/Azure/SONiC/blob/master/doc/platform/pde.md) | 7/9/2019 |	BRCM | MSFT | | Optimizes platform driver and plugin development along with static platform configuration data testing.<br> 202012 carry-over item; Code PRs are done and well-advanced, but remaining comment needs to be resolved on [PR3778](https://github.com/Azure/sonic-buildimage/pull/3778)
+| UI Content (UMF client) | TBD | BRCM | Nvidia - tbd | | Big catch-up of UI's using the Management Framework - incremental work (i.e. not all or nothing) |
+| [Broadcom silicon common config](https://github.com/Azure/SONiC/pull/699) | TBD | BRCM | DELL - tbd | Per-switching silicon Common config for Broadcom Supported Platforms - this is totally Broadcom specific |
+| DPB Reconcile | TBD | BRCM | LinkedIn - tbd<br>Need to confirm with DPB WG | | Broadcom has an internal parallel implementation of DPB. This is based upon the Community design and code, but has diverged. We need a catch-up reconcile. |
+| Dynamic CoPP reconcile | TBD | BRCM | MSFT/DELL | Broadcom has an internal parallel implementation of Dynamic CoPP. This is based upon the Community design and code, but has diverged. We need a catch-up reconcile. |
+| Mgmt FW Phase 3 | TBD| BRCM | MSFT/<br>BRCM/<br>DELL | | Next set of infra enhancements to the Management Framework, including (but not limited to): -<br>- Standard interface-naming<br> - gNMI subscriptions (ON_CHANGE etc)<br> - OC-YANG versioning<br> - Show running<br> - Audit logging<br> - Memory/performance enhancements<br> - RBAC with AAA
+| Routed sub-interface reconcile | TBD | BRCM | Alibaba/<br>MSFT-tbd | | Broadcom has an internal parallel implementation of Routed sub-interfaces. This is based upon the Community design and code, but has diverged. We need a catch-up reconcile.|
+| MultiDB reconcile | TBD | BRCM | Alibaba/<br>MSFT-tbd | | Broadcom has an internal parallel implementation of Multi-DB. This is based upon the Community design and code, but has diverged. We need a catch-up reconcile. |
+| [CPU Queues](https://github.com/Azure/SONiC/pull/743) | 2/16/2021 (30mins) | BRCM | Intel-tbd	| | Ability for manage/view CPU egress queues on the CPU port - basis for other monitoring features/enhancements (Threshold/Snapshot) |
+| ACL enhancements: Policing, DHCP/PCP remark, L2 | TBD | BRCM | MSFT | | Best Effort - 202106<br> Use Flow-based Services framework to add ACL enhancements, including L2 ACLs, QoS re-marking and policing, and mirroring match enhancements. Included FBS Framework Comprises: -<br> - ACL match extensions (e.g. L2 fields)<br> - MQC equivalent config framework<br> - DSCP, COS Remarking and Policing QoS actions<br> - Flow-based forwarding (e.g. PBR)<br> - ACL-based CoPP rules<br> - Reconcile rules from different policies on the same interfaces (port, PO, VLAN)<br> - Ingress vs. egress binding<br> - Re-factored code to use Flow-based services<br> - etc |
+| ARP Refresh | TBD | BRCM | MSFT<br>Dell - tbd | | More performant alternative to the current ARP Refresh script, implemented in SWSS. Initial design discussed with MSFT - based upon this reworked to move some functions to nbrmgrd (from neighsyncd) |
+| Gearbox part 2 | | BRCM | MSFT<br>(confirm with MACSEC/gearbox WG) | | Best Effort - 202106<br> We found deficiencies in part 1 during the AS5835 bring-up - these need fixes in both SONiC and SAI. MSFT (Guohan) is aware of these, but we need to close on the details |
+| libebpf support and usage | TBD | BRCM | MSFT - tbd/<br>Alibaba | | Best Effort - 202106<br> Scaling enhancement - filters/reduces netlink processing load by: <br> - kernel extensions<br> - user-space access library<br> - Client application usage (e.g. teamd) |
