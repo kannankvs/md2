@@ -64,7 +64,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |              |              |             | FRR as default routing stack      |
 |              |              |             | Upgrade each docker to stretch version   |
 |              |              |             | Upgrade docker engine to 18.09    |
-|              |              |             | [Everflow enhancement](https://github.com/Azure/SONiC/blob/bb4f4a3a85935a38ec7f9625ef62cbe58c0998b4/doc/SONiC_EVERFLOW_IPv6.pdf)              |
+|              |              |             | [Everflow V2 - IPV4/IPv6 Portion 2.0](https://github.com/Azure/SONiC/blob/bb4f4a3a85935a38ec7f9625ef62cbe58c0998b4/doc/SONiC_EVERFLOW_IPv6.pdf)              |
 |              |              |             | [Egress ACL bug fix and ACL CLI enhancement](https://github.com/Azure/SONiC/blob/dfa7e58292deb4d7b10d1e0ca73f296cd206e9d2/doc/acl/egress-acl-bug-fix-description.md)|
 |              |              |             | [L3 RIF counter support](https://github.com/Azure/SONiC/pull/310 ) |
 |              |              |             | [PMon Refactoring](https://github.com/Azure/SONiC/tree/master/doc/pmon)|
@@ -124,75 +124,86 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | Multi-DB enhancement-Part 2 |
 |            |              |               | ONIE FW tools CPLD, BIOS, SSD, Firmware upgrade [Uniform Tool] |
 |            |              |               | [PDDF advance to SONiC Platform 2.0, BMC](https://github.com/Azure/SONiC/blob/master/doc/platform/brcm_pdk_pddf.md) |
-|            |              |               | [PDK - Platform Development Environment](https://github.com/Azure/SONiC/blob/master/doc/platform/pde.md) |
 |            |              |               | [SONiC entity MIB extensions](https://github.com/Azure/SONiC/blob/0e53548a8f1023d1be2a1dffd62737c7a1b18a2e/doc/snmp/extension-to-physical-entity-mib.md) |
 |            |              |               | [Support hardware reboot/reload reason (Streaming Telemetry)](https://github.com/sujinmkang/SONiC/blob/6ed19e88c6f7aac74640d3d343210d840af70a23/doc/system-telemetry/reboot-cause.md)|
 |            |              |               | [System health and system LED](https://github.com/Azure/SONiC/blob/master/doc/system_health_monitoring/system-health-HLD.md) |
 |            |              |               |    |
 |SONiC.202106| 06/30/2021   |       TBD     | [Progress Tracking](https://github.com/Azure/SONiC/wiki/Release-Progress-Tracking-202106) |
-|			 |				|				| Telemetry for Multi-ASIC |
-| 			 |              |               | [IPv6 Link Local/ BGP Unnumbered](https://github.com/Azure/SONiC/blob/3d2e5e66e05bcce0a64f5ad077b96ae2006527fd/doc/ipv6/ipv6_link_local.md) |
-|            |              |               | [RADIUS AAA](https://github.com/Azure/SONiC/blob/3edad287edc79ea7e227648cba566a6ce347bf49/doc/aaa/radius_authentication.md) |
-|            |              |               | ACL enhancements: Policing, DHCP/PCP remark, L2 | 
-| 			 |              |               | QoS enhancements |
-| 			 |              |               | DHCP relay enhancements |
-| 			 |              |               | IP Helper |
-| 			 |              |               | BUM storm control | 
-| 			 |              |               | IGMP Snooping | 
-| 			 |              |               | PVST/RPVST+  |  
-| 			 |              |               | Port Channel enhancements | 
-|            |              |               | [MC-LAG enhancements](https://github.com/Azure/SONiC/blob/176cf4f5a8ee6ecfd8a478573ffc92f0eb23b4e6/doc/mclag/MCLAG_Enhancements_HLD.md) |
-| 			 |              |               | UDLD | 
+| 			 |              |               | Telemetry for Multi-ASIC |
+| 			 |              |               | Dynamic policy based hashing| 
 | 			 |              |               | DHCP relay IPv6 support | 
-| 			 |              |               | App extension with Orchagent/SWSS | 
-| 			 |              |               | App extension CLI generation tool | 
-|			 |				|				| App extension with warmboot awareness |
-|			 |				|				| [Enable/Disable auto negotiation and speed setting with number of lanes](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2FAzure%2FSONiC%2Fblob%2F9b58ef06ab49b489e3aed287659100ce7be8c76a%2Fdoc%2Fport_auto_neg%2Fport-auto-negotiation-design.md%23cli-enhancements&data=04%7C01%7Cxinxliu%40microsoft.com%7Ce7ab50e42bab4524213308d8bca05843%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C637466744147146102%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=AD9apkj5U5YYYzQ%2BLp9PAh4V4dk8HU5JU15zlmpXv3k%3D&reserved=0) |
-|			 |				|				| (Test) Upgrade to Python3 compliance for SONiC mgmt repo Ansible 2.10 upgrade Testbed v2 |
-| 			 |              |               | Dynamic Policy Based Hashing | 
-| 			 |              |               | Add FRR running configuration to techsupport |	
-| 			 |              |               | TPID config support | 
-| 			 |              |               | Kubernetes enhancements | 
-| 			 |              |               | (Test) Deprecating Python2 platform daemons |
-| 			 |              |               | MACSEC enhancement: primary & fallback case |
-| 			 |              |               | Error handling (swss)	| 
-| 			 |              |               | 100% SONiC YANG model	 |  
-| 			 |              |               | Testcase/Testbed Infrastructure |
+| 			 |              |               | App extension with Orchagent/SWSS |
+| 			 |              |               | App extension CLI generation tool |
+| 			 |              |               | App extension with warmboot awareness |
+| 			 |              |               | Add FRR running configuration to tech support |
+| 			 |              |               | [Enable/Disable auto negotiation and speed setting with number of lanes](https://github.com/Azure/SONiC/blob/9b58ef06ab49b489e3aed287659100ce7be8c76a/doc/port_auto_neg/port-auto-negotiation-design.md#cli-enhancements)| 
+| 			 |              |               | TPID config support<br>[SONiC TPID Configuration Support by gechiang #681](https://github.com/Azure/SONiC/pull/681) | Oct-20 | MSFT | Nvidia- tbd | | Allow us to covert our PTF fanout switches to run SONiC OS |	
+| 			 |              |               | Kubernetes enhancements |
+| 			 |              |               | Deprecating Python2 platform daemons | 
+| 			 |              |               | MACSEC enhancement: primary & fallback case| 
+| 			 |              |               | Error handling (swss) | 
+| 			 |              |               | 100% SONiC YANG model |
 | 			 |              |               | New branch creation for Debian11 | 
-| 			 |              |               | SONiC fanout support |
+| 			 |              |               | (Test) Upgrade to Python3 compliance | 
+| 			 |              |               | (Test) Ansible 2.10 upgrade | 
+| 			 |              |               | (Test) Testbed v2 |                
+| 			 |              |               | Testcase/Testbed Infrastructure |
+| 			 |              |               | SONiC fanout support | 
+| 			 |              |               | Link Training	| 
 | 			 |              |               | Inband mgmt VRF |
 | 			 |              |               | Sample Rate on mirror	|
-| 			 |              |               | Sflow with remote collector |	
+| 			 |              |               | Sflow with remote collector | 
 | 			 |              |               | V4/V6 L3 ACL optimization | 
-| 			 |              |               | SONiC for MPLS Dataplane | 
-| 			 |              |               | 6to4 NAT | 
-| 			 |              |               | MPLS SRv6 |  
-|			 |				|				| Better route scalability with multiple next-hops |
-|			 |				|				| Enabling IS-IS in the dataplane |
-|			 |				|				| Class-based forwarding |
-|			 |				|				|				  | 
+| 			 |              |               | SRv6 support |
+| 			 |              |               | SONiC for MPLS Dataplane |
+| 			 |              |               | [Better route scalability with multiple next-hops](https://github.com/Azure/SONiC/pull/712) |
+| 			 |              |               | Enabling IS-IS in the dataplane |
+| 			 |              |               | Class-based forwarding |
+| 			 |              |               | [IPv6 Link Local and BGP Unnumbered](https://github.com/Azure/SONiC/pull/625) |
+| 			 |              |               | [MC-LAG (L2)](https://github.com/Azure/SONiC/pull/596) |
+| 			 |              |               | [RPVST+](https://github.com/Azure/SONiC/pull/499) |
+| 			 |              |               | [Storm Control (BUM)](https://github.com/Azure/SONiC/pull/441) |
+| 			 |              |               | [RADIUS AAA](https://github.com/Azure/SONiC/pull/500) | 
+| 			 |              |               | [Kernel programming performance enhancement](https://github.com/Azure/SONiC/pull/493) |
+| 			 |              |               | Static Anycast Gateway | 
+| 			 |              |               | BFD (SW - 100ms interval from FRR) |
+| 			 |              |               | [STP/PVST](https://github.com/Azure/SONiC/blob/master/doc/stp/SONiC_PVST_HLD.md) |
+| 			 |              |               | [L2 functional and performance enhancements](https://github.com/Azure/SONiC/pull/379) |
+| 			 |              |               | [Thresholds (statistics)](https://github.com/Azure/SONiC/blob/master/doc/threshold/SONiC%20Threshold%20feature%20spec.md) |
+| 			 |              |               | [PDK - Platform Development Environment](https://github.com/Azure/SONiC/blob/master/doc/platform/pde.md) | 
+| 			 |              |               | UI Content (UMF client) |
+| 			 |              |               | [Broadcom silicon common config](https://github.com/Azure/SONiC/pull/699) |
+| 			 |              |               | DPB Reconcile |
+| 			 |              |               | Dynamic CoPP reconcile |
+| 			 |              |               | Mgmt FW Phase 3 |
+| 			 |              |               | Routed sub-interface reconcile |
+| 			 |              |               | MultiDB reconcile |
+| 			 |              |               | [CPU Queues](https://github.com/Azure/SONiC/pull/743) |
+| 			 |              |               | ACL enhancements: Policing, DHCP/PCP remark, L2 |
+| 			 |              |               | ARP Refresh |
+| 			 |              |               | Gearbox part 2 |
+| 			 |              |               | libebpf support and usage | 
+| 			 |              |               | [PCIe Monitoring](https://github.com/Azure/SONiC/pull/634) 
+|			 |				|				|				  |
 | Backlog    |              |               |                 |
 |		     |			    | 				| [BGP Add Path] (https://tools.ietf.org/rfc/rfc7911.txt) |
 |		     |			    | 				| [BGP ExtComm](https://tools.ietf.org/rfc/rfc4360.txt) |
 |		     |			    | 				| [BGP Link bandwidth ExtComm](https://tools.ietf.org/pdf/draft-ietf-idr-link-bandwidth-07.pdf) |
-|            |              |               | [Kernel programming performance enhancement](https://github.com/Azure/SONiC/blob/f39c72147209aab8fec5deebb965bf4c91a1f876/doc/platform/nlapi/netlink_api_kernel_programming.md) |
 |            |              |               | SONiC shared headroom - enhanced configuration | 
 |            |              |               | SONiC new polling counters for counters which has extend CPU req.|
 |            |              |               | VoQ Chassis Support in SONiC |
-|            |              |               | [SONiC TPID Configuration](https://github.com/Azure/SONiC/pull/681) | 
 |            |              |               | [BFD SW 100ms interval from FRR](https://github.com/Azure/SONiC/blob/master/doc/bfd/BFD_Enhancement_HLD.md)| 
 |            |              |               | [Management Framework RBAC](https://github.com/Azure/SONiC/blob/48fab9db4f090c5beaea5f7a8fdcb9474d23a4e9/doc/aaa/SONiC%20RBAC.md) | 
 |            |              |               | [Media Enhancements<br>(Media Information & Settings)](https://github.com/Azure/SONiC/blob/a6e9636552149829e39a82705d1ad2b48a17b3f0/doc/media-info-enhancements/media-info.md) | 
 |          	 |              |               | [AAA improvement ](https://github.com/Azure/SONiC/blob/a46aa68b3a3ca57fea28c3d139fcef437e0cf0e6/doc/aaa/AAA20Improvements/AAA%20Improvements.md) |
 |          	 |              |               | [MACSec support in Chassis](https://github.com/Pterosaur/SONiC/blob/fdbaa116fdc4579c67974e70efcce3c882801fcf/doc/macsec/MACsec_hld.md) |
-| 			 |              |               | [PCIe Monitoring](https://github.com/Azure/SONiC/pull/634) 
 | 			 |              |               | [Distributed VOQ architecture HLD](https://github.com/Azure/SONiC/blob/a9b221e3252e5ef3a45d18f615c23d3794f39a5b/doc/voq/voq_hld.md)
 | 			 |              |               | [Platform Monitoring for Chassis systems](https://github.com/Azure/SONiC/blob/4206c5420c4b63f1d2ec40b10d54adb27fc9d42a/doc/pmon/pmon-chassis-design.md)
 | 			 |              |               | [Routing/BGP for Chassis](https://github.com/Azure/SONiC/blob/35d6f8d1a88a8f8b08237d6ec9f719e9c06a6758/doc/voq/bgp_voq_chassis.md)
 | 			 |              |               | [Fabric Port support for SONiC](https://github.com/Azure/SONiC/blob/2e1f699a3ba1dbf88abeecb192f6bb5e390b8b8a/doc/chassis/fabric.md)
 | 			 |              |               | [LAG Support for Chassis](https://github.com/Azure/SONiC/blob/332ca53d938e0df24c78d76bcf1117d896ed2683/doc/voq/lag_hld.md)
 | 			 |              |               | [Inband port support for Chassis](https://github.com/Azure/SONiC/pull/639)
-| 			 |              |               | [Everflow Support](https://github.com/Azure/SONiC/blob/9c08b2f3f77230017c7035ceaf880746cb590d49/doc/voq/everflow.md)
+| 			 |              |               | [Everflow Support on VOQ Chassis](https://github.com/Azure/SONiC/blob/9c08b2f3f77230017c7035ceaf880746cb590d49/doc/voq/everflow.md)
 |			 |				|				| [Chassis infrastructure, T2 topologies and sample Testcases converted](https://github.com/Azure/sonic-mgmt/blob/master/ansible/library/multi-asic_aware_module_requirements.md) |
 | 			 |              |               | VNET ping tool to debug VNET configuration |
 |          	 |              |               | SONiC app extension (w/o orchagent)|
@@ -202,7 +213,6 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | Flow-based Services (incl. packet DSCP remark) |
 |            |              |               | L2 Dot1Q tunneling support |
 |            |              |               | [L2 functional and performance enhancements](https://github.com/Azure/SONiC/pull/379)|
-|            |              |               | [PDK - Platform Driver Development Framework](https://github.com/Azure/SONiC/blob/master/doc/platform/brcm_pdk_pddf.md) |
 | 			 |              |               | Telemetry for Chassis |
 | 			 |              |               | Telemetry for BGP | 
   
