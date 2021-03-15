@@ -140,6 +140,7 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 | 			 |              |               | TPID config support<br>[SONiC TPID Configuration Support by gechiang #681](https://github.com/Azure/SONiC/pull/681) | Oct-20 | MSFT | Nvidia- tbd | | Allow us to covert our PTF fanout switches to run SONiC OS |	
 | 			 |              |               | Kubernetes enhancements |
 | 			 |              |               | Deprecating Python2 platform daemons | 
+|          	 |              |               | [MACSec support in Chassis](https://github.com/Pterosaur/SONiC/blob/fdbaa116fdc4579c67974e70efcce3c882801fcf/doc/macsec/MACsec_hld.md) |
 | 			 |              |               | MACSEC enhancement: primary & fallback case| 
 | 			 |              |               | Error handling (swss) | 
 | 			 |              |               | 100% SONiC YANG model |
@@ -196,7 +197,6 @@ Pull requests for features that are not in the roadmap may not be accepted into 
 |            |              |               | [Management Framework RBAC](https://github.com/Azure/SONiC/blob/48fab9db4f090c5beaea5f7a8fdcb9474d23a4e9/doc/aaa/SONiC%20RBAC.md) | 
 |            |              |               | [Media Enhancements<br>(Media Information & Settings)](https://github.com/Azure/SONiC/blob/a6e9636552149829e39a82705d1ad2b48a17b3f0/doc/media-info-enhancements/media-info.md) | 
 |          	 |              |               | [AAA improvement ](https://github.com/Azure/SONiC/blob/a46aa68b3a3ca57fea28c3d139fcef437e0cf0e6/doc/aaa/AAA20Improvements/AAA%20Improvements.md) |
-|          	 |              |               | [MACSec support in Chassis](https://github.com/Pterosaur/SONiC/blob/fdbaa116fdc4579c67974e70efcce3c882801fcf/doc/macsec/MACsec_hld.md) |
 | 			 |              |               | [Distributed VOQ architecture HLD](https://github.com/Azure/SONiC/blob/a9b221e3252e5ef3a45d18f615c23d3794f39a5b/doc/voq/voq_hld.md)
 | 			 |              |               | [Platform Monitoring for Chassis systems](https://github.com/Azure/SONiC/blob/4206c5420c4b63f1d2ec40b10d54adb27fc9d42a/doc/pmon/pmon-chassis-design.md)
 | 			 |              |               | [Routing/BGP for Chassis](https://github.com/Azure/SONiC/blob/35d6f8d1a88a8f8b08237d6ec9f719e9c06a6758/doc/voq/bgp_voq_chassis.md)
