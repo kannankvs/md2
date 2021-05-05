@@ -2,7 +2,7 @@
 Please scroll right to see additional information (SAI & Priority)
 
 | Feature| HLD<br/>Review<br/>Date | Owner| Code<br>Review<br>Owner| Code<br>Review<br>Date | Code PR Status   | SAI Change | Priority/Conf<br>(High/Low) |
-| ------ | ------- | -----|---------| ------------ | ------- |------- |------- | 
+| ------ | ------- | -----|------| ------ | ------- |------- |------- | 
 | Telemetry for Multi-ASIC | |	MSFT |Intel | |Single telemetry sever to aggregate data from multiple Redis DB |TBD| |
 | Dynamic policy based hashing| 04/13/2021 |Nvidia/MSFT | MSFT/Aviz | 5/15/21 | Hash packets on custom fields|Yes|High|
 | DHCP relay IPv6 support | 03/30/2021 | Nvidia | BRCM | Update by 4/20 | Currently DHCP relay supports only IPv4. The idea is to extend the support to IPv6 and it should work for both as the same time. Also, currently DHCP relay is enabled only based on the Type in the METADATA and it must be ‘ToRRouter’. We will remove this restriction and will integrate it with copp manager so user can decide if to have DHCP relay or not regardless of the device type |No|High|
