@@ -58,6 +58,7 @@ no shutdown
 exit
 
 ## PortChannel show command
+** Show interface Example ** 
 ```
 show interface PortChannel <PortChannel_number>
 show interface status
