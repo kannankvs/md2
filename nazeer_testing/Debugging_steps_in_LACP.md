@@ -34,7 +34,9 @@ LACP interval can be FAST or SLOW. By default LACP interval is SLOW.
 Command - show interface PortChannel <port-channel-number>
 LACP interval can be changed to FAST using the following command:
 configure terminal
-interface PortChannel 1 fast_rate
+interface PortChannel 1 fast_rate  
+
+** Show interface Example ** 
 
 
 ## PortChannel configuration commands
