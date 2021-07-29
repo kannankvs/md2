@@ -1,5 +1,7 @@
 # Steps in debugging LACP issue
 
+**KVSK LOCAL CHANGED TESTING** 
+
 ## Step 1 - General Steps
 1) Verify the OS version running on the switch.
 Command - show version
@@ -87,10 +89,7 @@ show interface status
   
   
   
-  
-  fsda
-  f
-  dasf
+
   asd
   fdsa
   fasd
