@@ -63,29 +63,41 @@ show interface PortChannel <PortChannel_number>
 show interface status
 ```
 
-  
+ 
   sdfs
+  
   
   s
   adfdsaf
   a
+  
+  
+  
   
   cfgsaf
   d
   fdf
   fdsa
   fs
+  
+  
+  
+  
   fsda
   f
   dasf
   asd
   fdsa
   fasd
+  
+  
   f
   sadfd
   saf
   dasf
   dsa
+  
+  
   f
   dasf
   das
@@ -93,6 +105,9 @@ show interface status
   f
   asdf
   asd
+  
+  
+  
   f
   asdf
   asd
@@ -101,9 +116,41 @@ show interface status
   asf
   asd
   f
+  
+  
+  
   af
   asd
   fasd
   f
+  
+  
+  
   asf
+  
+  
+  dfdasfasdfa
+  
+  
+  sdafdsaf
+  asdfasdfd
+  
+  
+  
+  fgfsdgdsfg
+  
+  
+  
+  dsfadsafdasfasd
+  
+  
+  
+  sadfasd
+  
+  
+  
+  adfsaf
+  
+  
+  
   
