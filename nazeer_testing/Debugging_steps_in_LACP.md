@@ -57,8 +57,10 @@ interface PortChannel <PortChannel_number> mode <active/on> min-links <1..255> f
 no shutdown
 exit
 
-## PortChannel show command
+## PortChannel show command 
+ 
 ** Show interface Example ** 
+
 ```
 show interface PortChannel <PortChannel_number>
 show interface status
