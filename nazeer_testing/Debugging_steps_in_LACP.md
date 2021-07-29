@@ -36,7 +36,7 @@ LACP interval can be changed to FAST using the following command:
 configure terminal
 interface PortChannel 1 fast_rate  
 
-** Show interface Example ** 
+**Show interface Example** 
 
 
 ## PortChannel configuration commands
