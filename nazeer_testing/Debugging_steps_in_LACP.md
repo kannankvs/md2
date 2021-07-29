@@ -1,4 +1,4 @@
-#Steps in debugging LACP issue
+# Steps in debugging LACP issue
 
 ## Step 1 - General Steps
 1) Verify the OS version running on the switch.
@@ -6,6 +6,8 @@ Command - show version
 2) Ensure that the "Admin" and "Oper" status of the ports used in a port-channel are UP.
 Command - show interface status
 3) Check if the peer end of the link is also UP.
+
+[Test Link To Step1](#Step-1-\--General-Steps)
 
 ## Step 2 - Verify the LACP configuration
 1) Verify if the member interfaces of port-channel are of same speed and type.
