@@ -58,5 +58,52 @@ no shutdown
 exit
 
 ## PortChannel show command
+```
 show interface PortChannel <PortChannel_number>
 show interface status
+```
+
+  
+  sdfs
+  
+  s
+  adfdsaf
+  a
+  
+  cfgsaf
+  d
+  fdf
+  fdsa
+  fs
+  fsda
+  f
+  dasf
+  asd
+  fdsa
+  fasd
+  f
+  sadfd
+  saf
+  dasf
+  dsa
+  f
+  dasf
+  das
+  fasd
+  f
+  asdf
+  asd
+  f
+  asdf
+  asd
+  fas
+  f
+  asf
+  asd
+  f
+  af
+  asd
+  fasd
+  f
+  asf
+  
