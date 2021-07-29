@@ -7,7 +7,7 @@ Command - show version
 Command - show interface status
 3) Check if the peer end of the link is also UP.
 
-[Test Link To Step1](#Step-1-\--General-Steps)
+[Test Link To Step1](#PortChannel-show-command)
 
 ## Step 2 - Verify the LACP configuration
 1) Verify if the member interfaces of port-channel are of same speed and type.
