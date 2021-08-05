@@ -11,7 +11,7 @@ This page provides the required links related to Vxlan feature
 {{% /pageinfo %}}
 
 
-# Steps in debugging VXLAN issue 
+# Steps in debugging VXLAN issue  
 
 ## Step 1 – General Steps 
 1)	Ensure that the esonic version running on the device supports that feature. 
