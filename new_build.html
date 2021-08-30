@@ -1,0 +1,93 @@
+<html>
+<head>
+<link href="https://getbootstrap.com/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/luxon@2.0.1/build/global/luxon.min.js" integrity="sha256-BdqBGuaawDzMtW2Wn9ISUuYKUY/A7d5NVcj6Ix3jwv8=" crossorigin="anonymous"></script>
+<title>SONiC installation images</title>
+<style>
+.list-group {
+  width: auto;
+  max-width: 760px;
+  margin: 4rem auto;
+  margin-top:0;
+  margin-bottom:0;
+}
+</style>
+<link rel="icon" type="image/png" href="sonic-ico.png">
+<script>
+// From https://github.com/moment/luxon/issues/274
+const units = [
+  'year',
+  'month',
+  'week',
+  'day',
+  'hour',
+  'minute',
+  'second',
+];
+const timeAgo = (date) => {
+  let dateTime = luxon.DateTime.fromISO(date)
+  const diff = dateTime.diffNow().shiftTo(...units);
+  const unit = units.find((unit) => diff.get(unit) !== 0) || 'second';
+
+  const relativeFormatter = new Intl.RelativeTimeFormat('en', {
+    numeric: 'auto',
+  });
+  return relativeFormatter.format(Math.trunc(diff.as(unit)), unit);
+};
+</script>
+</head>
+<body>
+<div class="px-4 py-5 text-center">
+<img class="d-block mx-auto mb-4" src="sonic-logo.png" alt="SONiC logo">
+<div class="col-lg-6 mx-auto">
+<p class="lead mb-4">
+An unofficial automatic index of the latest SONiC installation images.
+</p>
+</div>
+</div>
+</div>
+<div class="list-group" id="builds">
+</div>
+<div class="px-4 text-center">
+<div class="col-lg-6 mx-auto">
+<p class="lead mt-4">
+Want to use SONiC in GNS3? Try <a href="download-gns3a.sh">this download script</a>.
+</p>
+<p class="mt-4">
+Contact: <a href="https://github.com/kannankvs/md2">GitHub</a>
+</p>
+<i>SONiC and the SONiC logo are trademarks of the Microsoft group of companies</i>
+</p>
+</div>
+</div>
+</div>
+<script>
+fetch('builds.json')
+    .then(res => res.json())
+    .then((out) => {
+	 let d = document.getElementById('builds');
+	 for (var key in out) {
+	    content = ''
+	    for (var file in out[key]) {
+		    let ta = timeAgo(out[key][file]['date']);
+		    content += '<div class="d-flex gap-2 w-100 justify-content-between">';
+		    content += '<div>';
+		    content += '<li><a href="' + out[key][file]['url'] + '">' + file + '</a></li></div><span class="opacity-25 text-nowrap"><a href="' + out[key][file]['build-url'] + '">' + ta + '</a></span>'
+		    content += '</div>';
+	    }
+	    d.innerHTML += `
+<span class="list-group-item d-flex gap-3 py-3" aria-current="true">
+<img src="package.png" alt="package" width="64" height="47" class="rounded-circle flex-shrink-0">
+<div class="d-flex gap-2 w-100 justify-content-between">
+<div class="w-100">
+<h6 class="mb-3">Branch ` + key + `</h6>
+<p class="mb-0 opacity-75"><ul>` + content + `</ul></p>
+</div>
+</div>
+</span>`;
+	 }
+}).catch(err => console.error(err));
+</script>
+
+</body>
+</html>
