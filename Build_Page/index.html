@@ -8,12 +8,28 @@
 <style>
 .list-group {
   width: auto;
-  max-width: 760px;
+  max-width: 1200px;
   margin: 4rem auto;
   margin-top:0;
   margin-bottom:0;
 }
 </style>
+    <style>
+        table,
+        th,
+        td {
+            border: 2px solid blue;
+            text-align: center;
+			width:1100px
+        }
+        
+        th,
+        td {
+            padding: 10px;
+            background-color: none;
+        }
+    </style>	
+
 <link rel="icon" type="image/png" href="sonic-ico.png">
 <script>
 // From https://github.com/moment/luxon/issues/274
@@ -40,25 +56,160 @@ const timeAgo = (date) => {
 </head>
 <body>
 <div class="px-4 py-5 text-center">
-<img class="d-block mx-auto mb-4" src="sonic-ico.png" alt="SONiC logo">
+<img class="d-block mx-auto mb-4" src="https://azure.github.io/SONiC/pdf/newsletters/newsletter_images/sonic-logo_40percentage.png" alt="SONiC logo">
 <div class="col-lg-6 mx-auto">
 <p class="lead mb-4">
-An unofficial automatic index of the latest SONiC installation images.
+<td style=" text-align: left;"><strong>Index of the latest SONiC installation images.</strong> </td>
 </p>
 </div>
 </div>
-</div>
+
 <div class="list-group" id="builds">
+            <table style="width:1200px" border="2" align="center" >
+    <section id="mu-page-breadcrumb">
+        <div class="container">
+            <div class="row">
+				<div style="text-align: center;">
+					<div style="background-color: lightblue;  " >
+						<div class="col-md-12">
+							<div class="mu-page-breadcrumb-area">
+								<h2> SONiC Platform Builds </h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </section>
+
+</tr>
+<tr>
+<td style="width: 20%; text-align: center; padding-left: 0.5em; background-color: lightblue; height: 45px; align: center;">
+<span style="letter-spacing: 0.15em;  font-weight: bold; font-size: calc(11px + 0.6vw); ">Platform</span></td>
+<td style="background-color: lightblue; padding-left: 0.5em; height: 45px;" >
+ <span style="letter-spacing: 0.15em;  font-weight: bold; font-size: calc(11px + 0.6vw); ">Master</span>
+</td>
+<td style="background-color: lightblue; padding-left: 0.5em; height: 45px;" >
+ <span style="letter-spacing: 0.15em;  font-weight: bold; font-size: calc(11px + 0.6vw); ">202106</span>
+</td>
+<td style="background-color: lightblue; padding-left: 0.5em; height: 45px;" >
+ <span style="letter-spacing: 0.15em;  font-weight: bold; font-size: calc(11px + 0.6vw); ">202012</span>
+</td>
+<td style="background-color: lightblue; padding-left: 0.5em; height: 45px;" >
+ <span style="letter-spacing: 0.15em;  font-weight: bold; font-size: calc(11px + 0.6vw); ">201911</span>
+</td>
+<td style="background-color: lightblue; padding-left: 0.5em; height: 45px;" colspan="6">
+ <span style="letter-spacing: 0.15em;  font-weight: bold; font-size: calc(11px + 0.6vw); ">201811</span>
+</td>
+
+                <tr>
+                    <td style=" text-align: left; "><strong>Barefoot</strong></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-barefoot-master.bin</a></span></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-barefoot-202106.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-barefoot-202012.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-barefoot-201911.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-barefoot-201811.bin</a></span></td>
+                </tr>
+                <tr>
+                    <td style=" text-align: left; "><strong>Broadcom</strong></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="' + out[key][file]['url'] + '">' + file + '</a></li></div><span class="opacity-25 text-nowrap"><a href="' + out[key][file]['build-url']">sonic-broadcom-master.bin</a></span></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://artprodcus3.artifacts.visualstudio.com/Af91412a5-a906-4990-9d7c-f697b81fc04d/be1b070f-be15-4154-aade-b1d3bfb17054/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL21zc29uaWMvcHJvamVjdElkL2JlMWIwNzBmLWJlMTUtNDE1NC1hYWRlLWIxZDNiZmIxNzA1NC9idWlsZElkLzM2MTE0L2FydGlmYWN0TmFtZS9zb25pYy1idWlsZGltYWdlLmJyb2FkY29t0/content?format=file&subpath=/target/sonic-broadcom.bin">sonic-broadcom-202106.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://artprodcus3.artifacts.visualstudio.com/Af91412a5-a906-4990-9d7c-f697b81fc04d/be1b070f-be15-4154-aade-b1d3bfb17054/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL21zc29uaWMvcHJvamVjdElkL2JlMWIwNzBmLWJlMTUtNDE1NC1hYWRlLWIxZDNiZmIxNzA1NC9idWlsZElkLzM2MTE1L2FydGlmYWN0TmFtZS9zb25pYy1idWlsZGltYWdlLmJyb2FkY29t0/content?format=file&subpath=/target/sonic-broadcom.bin">sonic-broadcom-202012.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-broadcom-201911.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-broadcom-201811.bin</a></span></td>
+                </tr>
+                <tr>
+                    <td style=" text-align: left; "><strong>Cache</strong></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-cache-master.bin</a></span></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">None</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">None</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">None</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">None</a></span></td>
+                </tr>
+                <tr>
+                    <td style=" text-align: left; "><strong>Centec</strong></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-centec-master.bin</a></span></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-centec-202106.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-centec-202012.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-centec-201911.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-centec-201811.bin</a></span></td>
+                </tr>
+                <tr>
+                    <td style=" text-align: left; "><strong>Centec-arm64</strong></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-centec-arm64-master.bin</a></span></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-centec-arm64-202106.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-centec-arm64-202012.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-centec-arm64-201911.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-centec-arm64-201811.bin</a></span></td>
+                </tr>
+                <tr>
+                    <td style=" text-align: left; "><strong>Generic</strong></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-generic-master.bin</a></span></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-generic-202106.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-generic-202012.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-generic-201911.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-generic-201811.bin</a></span></td>
+                </tr>
+                <tr>
+                    <td style=" text-align: left; "><strong>Innovium</strong></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-innovium-master.bin</a></span></td>
+                    <td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-innovium-202106.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-innovium-202012.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-innovium-201911.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-innovium-201811.bin</a></span></td>
+                </tr>
+                <tr>
+                    <td style=" text-align: left; "><strong>Marvell-armhf</strong></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-marvell-master.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-marvell-202106.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-marvell-202012.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-marvell-201911.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-marvell-201811.bin</a></span></td>
+                </tr>
+                <tr>
+                    <td style=" text-align: left; "><strong>Mellanox</strong></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://artprodcus3.artifacts.visualstudio.com/Af91412a5-a906-4990-9d7c-f697b81fc04d/be1b070f-be15-4154-aade-b1d3bfb17054/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL21zc29uaWMvcHJvamVjdElkL2JlMWIwNzBmLWJlMTUtNDE1NC1hYWRlLWIxZDNiZmIxNzA1NC9idWlsZElkLzM2MTMxL2FydGlmYWN0TmFtZS9zb25pYy1idWlsZGltYWdlLm1lbGxhbm940/content?format=file&subpath=/target/sonic-mellanox.bin">sonic-mellanox-master.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://artprodcus3.artifacts.visualstudio.com/Af91412a5-a906-4990-9d7c-f697b81fc04d/be1b070f-be15-4154-aade-b1d3bfb17054/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL21zc29uaWMvcHJvamVjdElkL2JlMWIwNzBmLWJlMTUtNDE1NC1hYWRlLWIxZDNiZmIxNzA1NC9idWlsZElkLzM2MTM2L2FydGlmYWN0TmFtZS9zb25pYy1idWlsZGltYWdlLm1lbGxhbm940/content?format=file&subpath=/target/sonic-mellanox.bin">sonic-mellanox-202106.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://artprodcus3.artifacts.visualstudio.com/Af91412a5-a906-4990-9d7c-f697b81fc04d/be1b070f-be15-4154-aade-b1d3bfb17054/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL21zc29uaWMvcHJvamVjdElkL2JlMWIwNzBmLWJlMTUtNDE1NC1hYWRlLWIxZDNiZmIxNzA1NC9idWlsZElkLzM2MTE2L2FydGlmYWN0TmFtZS9zb25pYy1idWlsZGltYWdlLm1lbGxhbm940/content?format=file&subpath=/target/sonic-mellanox.bin">sonic-mellanox-202012.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-mellanox-201911.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-mellanox-201811.bin</a></span></td>
+                </tr>
+                <tr>
+                    <td style=" text-align: left; "><strong>Nephos</strong></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-nephos-master.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-nephos-202106.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-nephos-202012.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-nephos-201911.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-nephos-201811.bin</a></span></td>
+                </tr>	
+                <tr>
+                    <td style=" text-align: left; "><strong>vs</strong></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://artprodcus3.artifacts.visualstudio.com/Af91412a5-a906-4990-9d7c-f697b81fc04d/be1b070f-be15-4154-aade-b1d3bfb17054/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL21zc29uaWMvcHJvamVjdElkL2JlMWIwNzBmLWJlMTUtNDE1NC1hYWRlLWIxZDNiZmIxNzA1NC9idWlsZElkLzM2MTIxL2FydGlmYWN0TmFtZS9zb25pYy1idWlsZGltYWdlLnZz0/content?format=file&subpath=/target/sonic-vs.img.gz">sonic-vs-master.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://artprodcus3.artifacts.visualstudio.com/Af91412a5-a906-4990-9d7c-f697b81fc04d/be1b070f-be15-4154-aade-b1d3bfb17054/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL21zc29uaWMvcHJvamVjdElkL2JlMWIwNzBmLWJlMTUtNDE1NC1hYWRlLWIxZDNiZmIxNzA1NC9idWlsZElkLzM2MTExL2FydGlmYWN0TmFtZS9zb25pYy1idWlsZGltYWdlLnZz0/content?format=file&subpath=/target/sonic-vs.img.gz">sonic-vs-202106.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://artprodcus3.artifacts.visualstudio.com/Af91412a5-a906-4990-9d7c-f697b81fc04d/be1b070f-be15-4154-aade-b1d3bfb17054/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL21zc29uaWMvcHJvamVjdElkL2JlMWIwNzBmLWJlMTUtNDE1NC1hYWRlLWIxZDNiZmIxNzA1NC9idWlsZElkLzM2MTI2L2FydGlmYWN0TmFtZS9zb25pYy1idWlsZGltYWdlLnZz0/content?format=file&subpath=/target/sonic-vs.img.gz">sonic-vs-202012.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-vs-201911.bin</a></span></td>
+					<td style=" text-align: center; "><span style="color: #0000ff;"><a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">sonic-vs-201811.bin</a></span></td>
+                </tr>				
+
+
+</tr>
+
+
+<div class="list-group" id="builds">
+            <table style="width:1100px" border="2" align="center" >
 </div>
+
 <div class="px-4 text-center">
 <div class="col-lg-6 mx-auto">
 <p class="lead mt-4">
-Want to use SONiC in GNS3? Try <a href="download-gns3a.sh">this download script</a>.
+
 </p>
 <p class="mt-4">
+<a href="https://sonic-build.azurewebsites.net/ui/sonic/Pipelines">click here</a></span></td> for previous builds <br>
 Contact: <a href="https://github.com/bluecmd/sonic-builds">GitHub</a>
+
 </p>
-<i>SONiC and the SONiC logo are trademarks of the Microsoft group of companies</i>
+
 </p>
 </div>
 </div>
